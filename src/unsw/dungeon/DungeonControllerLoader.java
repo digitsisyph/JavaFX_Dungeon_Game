@@ -35,15 +35,20 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     @Override
     public void onLoad(Entity player) {
-        ImageView view = new ImageView(playerImage);
+    	ImageView view = null;
+    	if (player instanceof Wall) {
+    		view = new ImageView(wallImage);
+    	} else {
+    		view = new ImageView(playerImage);
+    	}
         addEntity(player, view);
     }
 
-    @Override
-    public void onLoad(Wall wall) {
-        ImageView view = new ImageView(wallImage);
-        addEntity(wall, view);
-    }
+//    @Override
+//    public void onLoad(Wall wall) {
+//        ImageView view = new ImageView(wallImage);
+//        addEntity(wall, view);
+//    }
 
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
