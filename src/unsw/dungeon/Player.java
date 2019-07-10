@@ -1,7 +1,6 @@
 package unsw.dungeon;
 
-import javafx.geometry.Bounds;
-import javafx.scene.shape.Rectangle;
+import javafx.geometry.Rectangle2D;
 
 /**
  * The player entity
@@ -28,8 +27,8 @@ public class Player extends Entity {
 
 		if (getY() > 0) {
 			int newY = getY() - 1;
-			checkCollision(getX(), newY);
-			y().set(newY);
+			if (checkCollision(getX(), newY))
+				y().set(newY);
 		}
 		for (Entity e : dungeon.getEntities()) {
 			if (e != null && e instanceof Player) {
@@ -41,8 +40,8 @@ public class Player extends Entity {
 	public void moveDown() {
 		if (getY() < dungeon.getHeight() - 1) {
 			int newY = getY() + 1;
-			checkCollision(getX(), newY);
-			y().set(newY);
+			if (checkCollision(getX(), newY))
+				y().set(newY);
 		}
 		for (Entity e : dungeon.getEntities()) {
 			if (e != null && e instanceof Player) {
@@ -54,8 +53,8 @@ public class Player extends Entity {
 	public void moveLeft() {
 		if (getX() > 0) {
 			int newX = getX() - 1;
-			checkCollision(newX, getY());
-			x().set(newX);
+			if (checkCollision(newX, getY()))
+				x().set(newX);
 		}
 		for (Entity e : dungeon.getEntities()) {
 			if (e != null && e instanceof Player) {
@@ -67,8 +66,8 @@ public class Player extends Entity {
 	public void moveRight() {
 		if (getX() < dungeon.getWidth() - 1) {
 			int newX = getX() + 1;
-			checkCollision(newX, getY());
-			x().set(newX);
+			if (checkCollision(newX, getY()))
+				x().set(newX);
 		}
 		for (Entity e : dungeon.getEntities()) {
 			if (e != null && e instanceof Player) {
@@ -83,20 +82,12 @@ public class Player extends Entity {
 	}
 
 	private boolean checkCollision(int x, int y) {
-		Rectangle rec = new Rectangle(x, y, 1, 1);
-		Bounds player = rec.getBoundsInParent();
-		System.out.println(rec);
-		System.out.println(player);
+		Rectangle2D rec = new Rectangle2D(x, y, 1, 1);
 		for (Entity e : dungeon.getEntities()) {
 			if (e instanceof Wall) {
-				// System.out.println(e.toString());
-				Rectangle rec1 = new Rectangle(e.getX(), e.getY(), 1, 1);
-				Bounds wall = rec1.getBoundsInParent();
-				System.out.println(rec1);
-				System.out.println(wall);
-				if (player.intersects(wall)) {
-					// System.out.println("Collision");
-					// return false;
+				if (rec.intersects(e.getX(), e.getY(), 1, 1)) {
+					System.out.println("Collision");
+					return false;
 				}
 			}
 		}
