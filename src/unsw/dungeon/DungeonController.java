@@ -50,7 +50,7 @@ public class DungeonController {
 
 	@FXML
 	public void handleKeyPress(KeyEvent event) {
-		//System.out.println(player.toString());
+
 		switch (event.getCode()) {
 		case UP:
 			player.moveUp();

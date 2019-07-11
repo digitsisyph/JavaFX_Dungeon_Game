@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-import javafx.geometry.Rectangle2D;
+import javafx.scene.image.Image;
 
 /**
  * The player entity
@@ -11,6 +11,7 @@ import javafx.geometry.Rectangle2D;
 public class Player extends Entity {
 
 	private Dungeon dungeon;
+	private CollisionBehavior collision;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -21,13 +22,14 @@ public class Player extends Entity {
 	public Player(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		this.dungeon = dungeon;
+		this.collision = new PlayerCollision();
 	}
 
 	public void moveUp() {
 
 		if (getY() > 0) {
 			int newY = getY() - 1;
-			if (checkCollision(getX(), newY))
+			if (collision.check(getX(), newY, dungeon.getEntities()))
 				y().set(newY);
 		}
 		for (Entity e : dungeon.getEntities()) {
@@ -40,7 +42,7 @@ public class Player extends Entity {
 	public void moveDown() {
 		if (getY() < dungeon.getHeight() - 1) {
 			int newY = getY() + 1;
-			if (checkCollision(getX(), newY))
+			if (collision.check(getX(), newY, dungeon.getEntities()))
 				y().set(newY);
 		}
 		for (Entity e : dungeon.getEntities()) {
@@ -53,7 +55,7 @@ public class Player extends Entity {
 	public void moveLeft() {
 		if (getX() > 0) {
 			int newX = getX() - 1;
-			if (checkCollision(newX, getY()))
+			if (collision.check(newX, getY(), dungeon.getEntities()))
 				x().set(newX);
 		}
 		for (Entity e : dungeon.getEntities()) {
@@ -66,7 +68,7 @@ public class Player extends Entity {
 	public void moveRight() {
 		if (getX() < dungeon.getWidth() - 1) {
 			int newX = getX() + 1;
-			if (checkCollision(newX, getY()))
+			if (collision.check(newX, getY(), dungeon.getEntities()))
 				x().set(newX);
 		}
 		for (Entity e : dungeon.getEntities()) {
@@ -81,16 +83,8 @@ public class Player extends Entity {
 		return "Player at X " + getX() + " Y " + getY();
 	}
 
-	private boolean checkCollision(int x, int y) {
-		Rectangle2D rec = new Rectangle2D(x, y, 1, 1);
-		for (Entity e : dungeon.getEntities()) {
-			if (e instanceof Wall) {
-				if (rec.intersects(e.getX(), e.getY(), 1, 1)) {
-					System.out.println("Collision");
-					return false;
-				}
-			}
-		}
-		return true;
+	@Override
+	public Image getImage() {
+		return new Image("/human_new.png");
 	}
 }
