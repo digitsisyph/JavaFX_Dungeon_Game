@@ -20,7 +20,7 @@ public class Dungeon {
     private int width, height;
     private List<Entity> entities;
     private Player player;
-
+    
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
@@ -46,5 +46,9 @@ public class Dungeon {
 
     public void addEntity(Entity entity) {
         entities.add(entity);
+    }
+    
+    public List<Entity> getEntities(){
+    	return entities;
     }
 }
