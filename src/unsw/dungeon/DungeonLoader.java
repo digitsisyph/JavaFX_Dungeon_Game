@@ -61,7 +61,36 @@ public abstract class DungeonLoader {
 			onLoad(wall);
 			entity = wall;
 			break;
-		// TODO Handle other possible entities
+		case "exit":
+			// TODO
+			break;
+		case "treasure":
+			// TODO
+			break;
+		case "door":
+			// TODO
+			break;
+		case "key":
+			// TODO
+			break;
+		case "boulder":
+			// TODO
+			break;
+		case "switch":
+			// TODO
+			break;
+		case "bomb":
+			// TODO
+			break;
+		case "enemy":
+			// TODO
+			break;
+		case "sword":
+			// TODO
+			break;
+		case "invincibility":
+			// TODO
+			break;
 		}
 		dungeon.addEntity(entity);
 	}
