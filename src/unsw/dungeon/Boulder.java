@@ -12,7 +12,23 @@ public class Boulder extends Entity {
 	@Override
 	public Image getImage() {
 		// TODO Auto-generated method stub
-		return new Image("\boulder.png");
+		return new Image("/boulder.png");
+	}
+
+	public void moveUp() {
+		// TODO
+	}
+
+	public void moveDown() {
+		// TODO
+	}
+
+	public void moveLeft() {
+		// TODO
+	}
+
+	public void moveRight() {
+		// TODO
 	}
 
 }

@@ -6,6 +6,7 @@ public class Enemy extends Entity {
 
 	private Dungeon dungeon;
 	private CollisionBehavior collision;
+
 	public Enemy(Dungeon dungeon, int x, int y) {
 		super(x, y);
 		this.dungeon = dungeon;
@@ -19,4 +20,19 @@ public class Enemy extends Entity {
 		return new Image("/deep_elf_master_archer.png");
 	}
 
+	public void moveUp() {
+		// TODO
+	}
+
+	public void moveDown() {
+		// TODO
+	}
+
+	public void moveLeft() {
+		// TODO
+	}
+
+	public void moveRight() {
+		// TODO
+	}
 }
