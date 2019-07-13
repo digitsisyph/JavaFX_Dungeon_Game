@@ -14,53 +14,59 @@ class MovementController {
     }
 
     public void moveUp(Movable entity) {
-        if (entity.getY() > 0) {
-            int newX = entity.getX();
-            int newY = entity.getY() - 1;
-            if (dungeon.isWalkable(newX, newY))
-                entity.y().set(newY);
-        }
-        notifyCollision(entity);
-        debuggerIO(entity);
+        int newX = entity.getX();
+        int newY = entity.getY() - 1;
+        moveTo(entity, newX, newY);
     }
 
     public void moveDown(Movable entity) {
-        if (entity.getY() < dungeon.getHeight() - 1) {
-            int newX = entity.getX();
-            int newY = entity.getY() + 1;
-            if (dungeon.isWalkable(newX, newY))
-                entity.y().set(newY);
-        }
-        notifyCollision(entity);
-        debuggerIO(entity);
+        int newX = entity.getX();
+        int newY = entity.getY() + 1;
+        moveTo(entity, newX, newY);
     }
 
     public void moveLeft(Movable entity) {
-        if (entity.getX() > 0) {
-            int newX = entity.getX() - 1;
-            int newY = entity.getY();
-            if (dungeon.isWalkable(newX, newY))
-                entity.x().set(newX);
-        }
-        notifyCollision(entity);
-        debuggerIO(entity);
+        int newX = entity.getX() - 1;
+        int newY = entity.getY();
+        moveTo(entity, newX, newY);
     }
 
     public void moveRight(Movable entity) {
-        if (entity.getX() < dungeon.getWidth() - 1) {
-            int newX = entity.getX() + 1;
-            int newY = entity.getY();
-            if (dungeon.isWalkable(newX, newY))
-                entity.x().set(newX);
+        int newX = entity.getX() + 1;
+        int newY = entity.getY();
+        moveTo(entity, newX, newY);
+    }
+
+    private void moveTo(Movable entity, int target_X, int target_Y) {
+        if (target_X < 0 || target_X >= dungeon.getWidth()
+            || target_Y < 0 || target_Y >= dungeon.getHeight())
+            return;
+        if (dungeon.isWalkable(target_X, target_Y)) {
+            entity.x().set(target_X);
+            entity.y().set(target_Y);
+            notifyCollision(entity);
+        } else {
+            notifyCollisionFrom(entity, target_X, target_Y);
         }
-        notifyCollision(entity);
         debuggerIO(entity);
     }
 
+
+    // notify a collision
     private void notifyCollision(Movable movable) {
         List<Entity> collidedEntities = dungeon.getEntities(movable.getX(), movable.getY());
         if (movable instanceof Entity) {
             collidedEntities.forEach(entity -> entity.collideWith((Entity) movable));
+        }
+    }
+
+    // mainly for pushing and opening a door
+    private void notifyCollisionFrom(Movable movable, int target_X, int target_Y) {
+        List<Entity> collidedEntities = dungeon.getEntities(target_X, target_Y);
+        for (Entity entity : collidedEntities) {
+            if (entity instanceof Boulder && movable instanceof Entity) {
+                ((Boulder) entity).bePushed((Entity) movable);
+            }
         }
     }
 

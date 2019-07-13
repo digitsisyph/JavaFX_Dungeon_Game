@@ -33,7 +33,6 @@ public class DungeonController {
 		this.initialEntities = new ArrayList<>(initialEntities);
 	}
 
-	// TODO
 	public GridPane getSquares() {
 		return squares;
 	}
@@ -47,7 +46,6 @@ public class DungeonController {
 				squares.add(new ImageView(ground), x, y);
 			}
 		}
-
 		// add all the entities into the dungeon
 		for (ImageView entity : initialEntities)
 			squares.getChildren().add(entity);

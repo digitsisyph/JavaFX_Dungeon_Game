@@ -1,6 +1,7 @@
 package unsw.dungeon.entities.items;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.movable.Player;
@@ -8,6 +9,8 @@ import unsw.dungeon.entities.movable.Player;
 public class Door extends Entity {
 
 	Dungeon dungeon;
+
+	private int id;
 
 	public Door(int x, int y, Dungeon dungeon) {
 		super(x, y);
@@ -23,6 +26,7 @@ public class Door extends Entity {
 	public void open() {
 		this.setPassable(true);
 		// TODO change image
+		((ImageView) this.getNode()).setImage(new Image("/opened_door.png"));
 	}
 
 	// TODO
@@ -30,6 +34,10 @@ public class Door extends Entity {
 		if (entity instanceof Player) {
 			this.dungeon.removeEntity(this);
 		}
+	}
+
+	public int getID() {
+		return this.id;
 	}
 
 }

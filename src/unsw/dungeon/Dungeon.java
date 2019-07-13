@@ -5,6 +5,7 @@ package unsw.dungeon;
 
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.movable.Player;
+import unsw.dungeon.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,17 +22,20 @@ import java.util.stream.Collectors;
  */
 public class Dungeon {
 
+    private DungeonController controller;
     private int width, height;
     private List<Entity> entities;
     private Player player;
-    // TODO
-    private DungeonController controller;
+    private Inventory inventory;
+
     
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<>();
         this.player = null;
+        this.controller = null;
+        this.inventory = new Inventory();
     }
 
     public int getWidth() {
@@ -60,8 +64,9 @@ public class Dungeon {
 
     public void removeEntity(Entity entity) {
         System.out.println("Remove:" + entity.toString());
+        // remove it from the dungeon
         this.entities.remove(entity);
-        // TODO
+        // remove its correspoding ImageView
         this.controller.getSquares().getChildren().remove(entity.getNode());
     }
 
