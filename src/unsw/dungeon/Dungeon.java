@@ -4,6 +4,7 @@
 package unsw.dungeon;
 
 import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.movable.Enemy;
 import unsw.dungeon.entities.movable.Player;
 import unsw.dungeon.inventory.Inventory;
 
@@ -83,7 +84,18 @@ public class Dungeon {
         return this.getEntities(X, Y).stream()
                 .allMatch(Entity::isPassable);
     }
-    
+
+    public void playerMovementUpdate() {
+        getEnemies().forEach(enemy -> enemy.moveTowardsPlayer(this.player));
+    }
+
+    private List<Enemy> getEnemies() {
+        return entities.stream()
+                .filter(entity -> entity instanceof Enemy)
+                .map(Enemy.class::cast)
+                .collect(Collectors.toList());
+    }
+
     public List<Entity> getEntities(){
     	return entities;
     }

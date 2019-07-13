@@ -13,6 +13,7 @@ import unsw.dungeon.entities.Entity;
 public class Player extends Entity implements Movable {
 
 	private MovementController movement;
+	private Dungeon dungeon;
 	private CollisionBehavior collision;
 
 	/**
@@ -23,6 +24,7 @@ public class Player extends Entity implements Movable {
 	 */
 	public Player(int x, int y, Dungeon dungeon) {
 		super(x, y);
+		this.dungeon = dungeon;
 		this.movement = new MovementController(dungeon);
 		this.collision = new PlayerCollision();
 		this.setPassable(false);
@@ -30,18 +32,22 @@ public class Player extends Entity implements Movable {
 
 	public void moveUp() {
 		movement.moveUp(this);
+		this.dungeon.playerMovementUpdate();
 	}
 
 	public void moveDown() {
 		movement.moveDown(this);
+		this.dungeon.playerMovementUpdate();
 	}
 
 	public void moveLeft() {
 		movement.moveLeft(this);
+		this.dungeon.playerMovementUpdate();
 	}
 
 	public void moveRight() {
 		movement.moveRight(this);
+		this.dungeon.playerMovementUpdate();
 	}
 
 	@Override

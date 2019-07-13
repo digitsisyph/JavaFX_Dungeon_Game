@@ -37,6 +37,7 @@ class MovementController {
         moveTo(entity, newX, newY);
     }
 
+    // helper function for moving up, down, left, right
     private void moveTo(Movable entity, int target_X, int target_Y) {
         if (target_X < 0 || target_X >= dungeon.getWidth()
             || target_Y < 0 || target_Y >= dungeon.getHeight())
