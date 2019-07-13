@@ -14,8 +14,9 @@ public class DungeonApplication extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Dungeon");
 
+        // use ControllerLoader to load map from a json file
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
-
+        // create a Controller from the ControllerLoader
         DungeonController controller = dungeonLoader.loadController();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));

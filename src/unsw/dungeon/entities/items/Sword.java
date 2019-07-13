@@ -1,14 +1,20 @@
-package unsw.dungeon;
+package unsw.dungeon.entities.items;
 
 import javafx.scene.image.Image;
+import unsw.dungeon.Dungeon;
+import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.movable.Player;
 
 public class Sword extends Entity {
 
 	private int durability;
+	Dungeon dungeon;
 
-	public Sword(int x, int y) {
+	public Sword(int x, int y, Dungeon dungeon) {
 		super(x, y);
 		this.durability = 5; // default to 5
+		this.setPassable(true);
+		this.dungeon = dungeon;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -24,6 +30,13 @@ public class Sword extends Entity {
 
 	public void setDurability(int durability) {
 		this.durability = durability;
+	}
+
+	// TODO
+	public void collideWith(Entity entity) {
+		if (entity instanceof Player) {
+			this.dungeon.removeEntity(this);
+		}
 	}
 
 }

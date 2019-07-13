@@ -1,16 +1,20 @@
-package unsw.dungeon;
+package unsw.dungeon.entities.movable;
 
 import javafx.scene.image.Image;
+import unsw.dungeon.Dungeon;
+import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.movable.CollisionBehavior;
 
 public class Enemy extends Entity {
 
 	private Dungeon dungeon;
 	private CollisionBehavior collision;
 
-	public Enemy(Dungeon dungeon, int x, int y) {
+	public Enemy(int x, int y, Dungeon dungeon) {
 		super(x, y);
 		this.dungeon = dungeon;
 		this.collision = null;
+		this.setPassable(false);
 		// TODO Collision behavior for enemy
 	}
 
@@ -34,5 +38,10 @@ public class Enemy extends Entity {
 
 	public void moveRight() {
 		// TODO
+	}
+
+	// TODO
+	public void collideWith(Entity entity) {
+		//
 	}
 }

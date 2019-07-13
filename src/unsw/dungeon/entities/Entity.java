@@ -1,4 +1,4 @@
-package unsw.dungeon;
+package unsw.dungeon.entities;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -14,6 +14,7 @@ public abstract class Entity {
     // IntegerProperty is used so that changes to the entities position can be
     // externally observed.
     private IntegerProperty x, y;
+    private Boolean isPassable;
 
     /**
      * Create an entity positioned in square (x,y)
@@ -39,6 +40,16 @@ public abstract class Entity {
 
     public int getX() {
         return x().get();
+    }
+
+    abstract public void collideWith(Entity entity);
+
+    public void setPassable(Boolean bool) {
+        this.isPassable = bool;
+    }
+
+    public Boolean isPassable() {
+        return this.isPassable;
     }
     
     public abstract Image getImage();

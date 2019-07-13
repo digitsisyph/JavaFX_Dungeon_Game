@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import unsw.dungeon.entities.movable.Player;
 
 /**
  * A JavaFX controller for the dungeon.
@@ -23,7 +24,6 @@ public class DungeonController {
 	private List<ImageView> initialEntities;
 
 	private Player player;
-
 	private Dungeon dungeon;
 
 	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
@@ -34,18 +34,17 @@ public class DungeonController {
 
 	@FXML
 	public void initialize() {
-		Image ground = new Image("/dirt_0_new.png");
-
 		// Add the ground first so it is below all other entities
+		Image ground = new Image("/dirt_0_new.png");
 		for (int x = 0; x < dungeon.getWidth(); x++) {
 			for (int y = 0; y < dungeon.getHeight(); y++) {
 				squares.add(new ImageView(ground), x, y);
 			}
 		}
 
+		// add all the entities into the dungeon
 		for (ImageView entity : initialEntities)
 			squares.getChildren().add(entity);
-
 	}
 
 	@FXML
