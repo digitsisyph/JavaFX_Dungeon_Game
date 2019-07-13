@@ -2,6 +2,7 @@ package unsw.dungeon.entities;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 
 /**
@@ -15,6 +16,7 @@ public abstract class Entity {
     // externally observed.
     private IntegerProperty x, y;
     private Boolean isPassable;
+    private Node node;
 
     /**
      * Create an entity positioned in square (x,y)
@@ -53,4 +55,12 @@ public abstract class Entity {
     }
     
     public abstract Image getImage();
+
+    public void setNode(Node node) {
+        this.node = node;
+    }
+
+    public Node getNode() {
+        return this.node;
+    }
 }

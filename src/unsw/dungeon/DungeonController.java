@@ -28,8 +28,14 @@ public class DungeonController {
 
 	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
 		this.dungeon = dungeon;
+		this.dungeon.setController(this);
 		this.player = dungeon.getPlayer();
 		this.initialEntities = new ArrayList<>(initialEntities);
+	}
+
+	// TODO
+	public GridPane getSquares() {
+		return squares;
 	}
 
 	@FXML

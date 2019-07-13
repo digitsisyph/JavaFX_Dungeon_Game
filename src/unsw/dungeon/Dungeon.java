@@ -24,6 +24,8 @@ public class Dungeon {
     private int width, height;
     private List<Entity> entities;
     private Player player;
+    // TODO
+    private DungeonController controller;
     
     public Dungeon(int width, int height) {
         this.width = width;
@@ -52,9 +54,15 @@ public class Dungeon {
         entities.add(entity);
     }
 
+    public void setController(DungeonController controller) {
+        this.controller = controller;
+    }
+
     public void removeEntity(Entity entity) {
         System.out.println("Remove:" + entity.toString());
-        entities.remove(entity);
+        this.entities.remove(entity);
+        // TODO
+        this.controller.getSquares().getChildren().remove(entity.getNode());
     }
 
     // helper function: To retrieve an entity in a specific grid
