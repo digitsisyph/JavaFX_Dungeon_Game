@@ -6,6 +6,11 @@ import java.io.FileReader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import unsw.dungeon.entities.*;
+import unsw.dungeon.entities.items.*;
+import unsw.dungeon.entities.movable.Boulder;
+import unsw.dungeon.entities.movable.Enemy;
+import unsw.dungeon.entities.movable.Player;
 
 /**
  * Loads a dungeon from a .json file.
@@ -51,7 +56,7 @@ public abstract class DungeonLoader {
 		Entity entity = null;
 		switch (type) {
 		case "player":
-			Player player = new Player(dungeon, x, y);
+			Player player = new Player(x, y, dungeon);
 			dungeon.setPlayer(player);
 			onLoad(player);
 			entity = player;
@@ -62,27 +67,27 @@ public abstract class DungeonLoader {
 			entity = wall;
 			break;
 		case "exit":
-			Exit exit = new Exit(x, y);
+			Exit exit = new Exit(x, y, dungeon);
 			onLoad(exit);
 			entity = exit;
 			break;
 		case "treasure":
-			Treasure treasure = new Treasure(x, y);
+			Treasure treasure = new Treasure(x, y, dungeon);
 			onLoad(treasure);
 			entity = treasure;
 			break;
 		case "door":
-			Door door = new Door(x, y);
+			Door door = new Door(x, y, dungeon);
 			onLoad(door);
 			entity = door;
 			break;
 		case "key":
-			Key key = new Key(x, y);
+			Key key = new Key(x, y, dungeon);
 			onLoad(key);
 			entity = key;
 			break;
 		case "boulder":
-			Boulder boulder = new Boulder(x, y);
+			Boulder boulder = new Boulder(x, y, dungeon);
 			onLoad(boulder);
 			entity = boulder;
 			break;
@@ -92,22 +97,22 @@ public abstract class DungeonLoader {
 			entity = plate;
 			break;
 		case "bomb":
-			Bomb bomb = new Bomb(x, y);
+			Bomb bomb = new Bomb(x, y, dungeon);
 			onLoad(bomb);
 			entity = bomb;
 			break;
 		case "enemy":
-			Enemy enemy = new Enemy(dungeon, x, y);
+			Enemy enemy = new Enemy(x, y, dungeon);
 			onLoad(enemy);
 			entity = enemy;
 			break;
 		case "sword":
-			Sword sword = new Sword(x, y);
+			Sword sword = new Sword(x, y, dungeon);
 			onLoad(sword);
 			entity = sword;
 			break;
 		case "invincibility":
-			Potion potion = new Potion(x, y);
+			Potion potion = new Potion(x, y, dungeon);
 			onLoad(potion);
 			entity = potion;
 			break;

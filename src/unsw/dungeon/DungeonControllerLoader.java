@@ -7,9 +7,9 @@ import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import unsw.dungeon.entities.Entity;
 
 /**
  * A DungeonLoader that also creates the necessary ImageViews for the UI,
@@ -36,6 +36,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private void addEntity(Entity entity, ImageView view) {
 		trackPosition(entity, view);
 		entities.add(view);
+		// TODO set node to control
+		entity.setNode(view);
 	}
 
 	/**

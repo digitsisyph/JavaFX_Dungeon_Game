@@ -1,4 +1,6 @@
-package unsw.dungeon;
+package unsw.dungeon.entities.movable;
+
+import unsw.dungeon.entities.Entity;
 
 import java.util.List;
 
