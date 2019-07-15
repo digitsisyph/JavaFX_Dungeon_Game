@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.EntityType;
 import unsw.dungeon.entities.movable.Player;
 
 public class Door extends Entity {
@@ -38,6 +39,10 @@ public class Door extends Entity {
 
 	public int getID() {
 		return this.id;
+	}
+	@Override
+	public EntityType type() {
+		return EntityType.DOOR;
 	}
 
 }

@@ -3,6 +3,7 @@ package unsw.dungeon.entities.items;
 import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.EntityType;
 import unsw.dungeon.entities.movable.Player;
 
 public class Exit extends Entity {
@@ -27,6 +28,11 @@ public class Exit extends Entity {
 		if (entity instanceof Player) {
 			// TODO check other goals
 		}
+	}
+
+	@Override
+	public EntityType type() {
+		return EntityType.EXIT;
 	}
 
 }

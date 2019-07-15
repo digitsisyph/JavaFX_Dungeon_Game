@@ -63,4 +63,6 @@ public abstract class Entity {
     public Node getNode() {
         return this.node;
     }
+    
+    public abstract EntityType type();
 }

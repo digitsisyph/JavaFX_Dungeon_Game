@@ -3,6 +3,7 @@ package unsw.dungeon.entities.movable;
 import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.EntityType;
 
 /**
  * The player entity
@@ -61,5 +62,10 @@ public class Player extends Entity implements Movable {
 	// TODO
 	public void collideWith(Entity entity) {
 		//
+	}
+
+	@Override
+	public EntityType type() {
+		return EntityType.PLAYER;
 	}
 }

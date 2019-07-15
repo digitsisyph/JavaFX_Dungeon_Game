@@ -2,6 +2,7 @@ package unsw.dungeon.entities.items;
 
 import javafx.scene.image.Image;
 import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.EntityType;
 import unsw.dungeon.entities.movable.Player;
 
 public class Wall extends Entity {
@@ -24,5 +25,10 @@ public class Wall extends Entity {
 	// TODO
 	public void collideWith(Entity entity) {
 		//pass
+	}
+
+	@Override
+	public EntityType type() {
+		return EntityType.WALL;
 	}
 }

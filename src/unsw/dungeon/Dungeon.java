@@ -25,94 +25,85 @@ import java.util.stream.Collectors;
  */
 public class Dungeon {
 
-    private DungeonController controller;
-    private int width, height;
-    private List<Entity> entities;
-    private Player player;
-    private Inventory inventory;
+	private DungeonController controller;
+	private int width, height;
+	private List<Entity> entities;
+	private Player player;
+	private Inventory inventory;
 
-    
-    public Dungeon(int width, int height) {
-        this.width = width;
-        this.height = height;
-        this.entities = new ArrayList<>();
-        this.player = null;
-        this.controller = null;
-        this.inventory = new Inventory();
-    }
+	public Dungeon(int width, int height) {
+		this.width = width;
+		this.height = height;
+		this.entities = new ArrayList<>();
+		this.player = null;
+		this.controller = null;
+		this.inventory = new Inventory();
+	}
 
-    public int getWidth() {
-        return width;
-    }
+	public int getWidth() {
+		return width;
+	}
 
-    public int getHeight() {
-        return height;
-    }
+	public int getHeight() {
+		return height;
+	}
 
-    public Player getPlayer() {
-        return player;
-    }
+	public Player getPlayer() {
+		return player;
+	}
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 
-    public void addEntity(Entity entity) {
-        entities.add(entity);
-    }
+	public void addEntity(Entity entity) {
+		entities.add(entity);
+	}
 
-    public void setController(DungeonController controller) {
-        this.controller = controller;
-    }
+	public void setController(DungeonController controller) {
+		this.controller = controller;
+	}
 
-    public void removeEntity(Entity entity) {
-        System.out.println("Remove:" + entity.toString());
-        // remove it from the dungeon
-        this.entities.remove(entity);
-        // remove its correspoding ImageView
-        this.controller.getSquares().getChildren().remove(entity.getNode());
-    }
+	public void removeEntity(Entity entity) {
+		System.out.println("Remove:" + entity.toString());
+		// remove it from the dungeon
+		this.entities.remove(entity);
+		// remove its correspoding ImageView
+		this.controller.getSquares().getChildren().remove(entity.getNode());
+	}
 
-    // helper function: To retrieve an entity in a specific grid
-    // if not found, this will return null
-    public List<Entity> getEntities(int X, int Y) {
-        return entities.stream()
-                .filter(entity -> (entity.getX() == X && entity.getY() == Y))
-                .collect(Collectors.toList());
-    }
+	// helper function: To retrieve an entity in a specific grid
+	// if not found, this will return null
+	public List<Entity> getEntities(int X, int Y) {
+		return entities.stream().filter(entity -> (entity.getX() == X && entity.getY() == Y))
+				.collect(Collectors.toList());
+	}
 
-    // helper function: check whether a grid is walkable
-    public Boolean isWalkable(int X, int Y) {
-        return this.getEntities(X, Y).stream()
-                .allMatch(Entity::isPassable);
-    }
+	// helper function: check whether a grid is walkable
+	public Boolean isWalkable(int X, int Y) {
+		return this.getEntities(X, Y).stream().allMatch(Entity::isPassable);
+	}
 
-    public void playerMovementUpdate() {
-        getEnemies().forEach(enemy -> enemy.moveTowardsPlayer(this.player));
-    }
+	public void playerMovementUpdate() {
+		getEnemies().forEach(enemy -> enemy.moveTowardsPlayer(this.player));
+	}
 
-    private List<Enemy> getEnemies() {
-        return entities.stream()
-                .filter(entity -> entity instanceof Enemy)
-                .map(Enemy.class::cast)
-                .collect(Collectors.toList());
-    }
+	private List<Enemy> getEnemies() {
+		return entities.stream().filter(entity -> entity instanceof Enemy).map(Enemy.class::cast)
+				.collect(Collectors.toList());
+	}
 
-    private List<Switch> getSwitches() {
-        return entities.stream()
-                .filter(entity -> entity instanceof Switch)
-                .map(Switch.class::cast)
-                .collect(Collectors.toList());
-    }
+	private List<Switch> getSwitches() {
+		return entities.stream().filter(entity -> entity instanceof Switch).map(Switch.class::cast)
+				.collect(Collectors.toList());
+	}
 
-    private List<Treasure> getTreasures() {
-        return entities.stream()
-                .filter(entity -> entity instanceof Treasure)
-                .map(Treasure.class::cast)
-                .collect(Collectors.toList());
-    }
+	private List<Treasure> getTreasures() {
+		return entities.stream().filter(entity -> entity instanceof Treasure).map(Treasure.class::cast)
+				.collect(Collectors.toList());
+	}
 
-    public List<Entity> getEntities(){
-    	return entities;
-    }
+	public List<Entity> getEntities() {
+		return entities;
+	}
 }

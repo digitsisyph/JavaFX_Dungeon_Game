@@ -92,7 +92,7 @@ public abstract class DungeonLoader {
 			entity = boulder;
 			break;
 		case "switch":
-			Switch plate = new Switch(x, y);
+			Switch plate = new Switch(x, y, null);
 			onLoad(plate);
 			entity = plate;
 			break;
