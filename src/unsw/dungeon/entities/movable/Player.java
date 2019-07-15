@@ -14,7 +14,6 @@ public class Player extends Entity implements Movable {
 
 	private MovementController movement;
 	private Dungeon dungeon;
-	private CollisionBehavior collision;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -26,7 +25,6 @@ public class Player extends Entity implements Movable {
 		super(x, y);
 		this.dungeon = dungeon;
 		this.movement = new MovementController(dungeon);
-		this.collision = new PlayerCollision();
 		this.setPassable(false);
 	}
 

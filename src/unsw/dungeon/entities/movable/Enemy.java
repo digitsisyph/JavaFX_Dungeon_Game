@@ -9,13 +9,11 @@ public class Enemy extends Entity implements Movable {
 
 	private Dungeon dungeon;
 	private MovementController movement;
-	private CollisionBehavior collision;
 
 	public Enemy(int x, int y, Dungeon dungeon) {
 		super(x, y);
 		this.dungeon = dungeon;
 		this.movement = new MovementController(dungeon);
-		this.collision = null;
 		this.setPassable(false);
 		// TODO Collision behavior for enemy
 	}
