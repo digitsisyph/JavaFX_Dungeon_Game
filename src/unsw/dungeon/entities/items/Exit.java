@@ -25,7 +25,7 @@ public class Exit extends Entity {
 	// TODO
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
-			this.dungeon.removeEntity(this);
+			// TODO check other goals
 		}
 	}
 

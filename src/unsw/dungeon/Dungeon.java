@@ -4,6 +4,8 @@
 package unsw.dungeon;
 
 import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.items.Switch;
+import unsw.dungeon.entities.items.Treasure;
 import unsw.dungeon.entities.movable.Enemy;
 import unsw.dungeon.entities.movable.Player;
 import unsw.dungeon.inventory.Inventory;
@@ -93,6 +95,20 @@ public class Dungeon {
         return entities.stream()
                 .filter(entity -> entity instanceof Enemy)
                 .map(Enemy.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    private List<Switch> getSwitches() {
+        return entities.stream()
+                .filter(entity -> entity instanceof Switch)
+                .map(Switch.class::cast)
+                .collect(Collectors.toList());
+    }
+
+    private List<Treasure> getTreasures() {
+        return entities.stream()
+                .filter(entity -> entity instanceof Treasure)
+                .map(Treasure.class::cast)
                 .collect(Collectors.toList());
     }
 
