@@ -36,7 +36,10 @@ public class ORGoals extends GoalComponent {
 
 	@Override
 	public void print() {
-		System.out.println("ANDGoals: " + goals.size());
+		System.out.print("ORGoals: " + goals.size());
+		for(GoalComponent goal : goals) {
+			goal.print();
+		}
 	}
 
 }

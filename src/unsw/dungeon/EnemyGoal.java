@@ -18,5 +18,6 @@ public class EnemyGoal extends GoalComponent {
 
 	@Override
 	public void print() {
+		System.out.println("ENEMY GOAL");
 	}
 }

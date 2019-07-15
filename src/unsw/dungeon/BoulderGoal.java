@@ -40,5 +40,6 @@ public class BoulderGoal extends GoalComponent {
 
 	@Override
 	public void print() {
+		System.out.println("BOULDER GOAL");
 	}
 }

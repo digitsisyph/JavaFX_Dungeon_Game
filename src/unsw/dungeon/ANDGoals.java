@@ -36,6 +36,9 @@ public class ANDGoals extends GoalComponent {
 	@Override
 	public void print() {
 		System.out.println("ANDGoals: " + goals.size());
+		for(GoalComponent goal : goals) {
+			goal.print();
+		}
 	}
 	
 }

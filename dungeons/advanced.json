@@ -393,6 +393,11 @@
       "type": "invincibility"
     },
     {
+      "x": 11,
+      "y": 14,
+      "type": "exit"
+    },
+    {
       "x": 17,
       "y": 10,
       "type": "wall"
@@ -607,7 +612,7 @@
     "goal": "AND",
     "subgoals": [
       {
-        "goal": "enemies"
+        "goal": "exit"
       },
       {
         "goal": "treasure"

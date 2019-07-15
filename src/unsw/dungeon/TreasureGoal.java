@@ -15,4 +15,10 @@ public class TreasureGoal extends GoalComponent {
 			return false;
 		}
 	}
+
+	@Override
+	public void print() {
+		System.out.println("TREASURE GOAL");
+	}
+
 }

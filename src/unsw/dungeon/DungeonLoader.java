@@ -49,6 +49,7 @@ public abstract class DungeonLoader {
 			loadEntity(dungeon, jsonEntities.getJSONObject(i));
 		}
 		dungeon.setGoal(base); // give dungeon base goals
+		base.print();
 		return dungeon;
 	}
 
@@ -68,8 +69,20 @@ public abstract class DungeonLoader {
 			base.add(new TreasureGoal(dungeon));
 			break;
 		case "AND":
+			ANDGoals childAND = new ANDGoals();
+			base.add(childAND);
+			JSONArray subGoals = json.getJSONArray("subgoals");
+			for(int i = 0; i < subGoals.length(); i++) {
+				loadGoal(dungeon,subGoals.getJSONObject(i),childAND);
+			}
 			break;
 		case "OR":
+			ORGoals childOR = new ORGoals();
+			base.add(childOR);
+			JSONArray subGoals1 = json.getJSONArray("subgoals");
+			for(int i = 0; i < subGoals1.length(); i++) {
+				loadGoal(dungeon,subGoals1.getJSONObject(i),childOR);
+			}
 			break;
 		}
 	}

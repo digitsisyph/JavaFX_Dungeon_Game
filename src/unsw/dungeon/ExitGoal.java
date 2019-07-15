@@ -26,6 +26,7 @@ public class ExitGoal extends GoalComponent {
 
 	@Override
 	public void print() {
+		System.out.println("EXIT GOAL");
 	}
 
 }
