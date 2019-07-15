@@ -24,14 +24,6 @@ public class Sword extends Entity {
 		return new Image("/greatsword_1_new.png");
 	}
 
-	public int getDurability() {
-		return durability;
-	}
-
-	public void setDurability(int durability) {
-		this.durability = durability;
-	}
-
 	// TODO
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
