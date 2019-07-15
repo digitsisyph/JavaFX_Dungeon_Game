@@ -30,6 +30,7 @@ public class Dungeon {
 	private List<Entity> entities;
 	private Player player;
 	private Inventory inventory;
+	private GoalComponent goals;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
@@ -38,6 +39,7 @@ public class Dungeon {
 		this.player = null;
 		this.controller = null;
 		this.inventory = new Inventory();
+		this.goals = null;
 	}
 
 	public int getWidth() {
@@ -86,24 +88,29 @@ public class Dungeon {
 
 	public void playerMovementUpdate() {
 		getEnemies().forEach(enemy -> enemy.moveTowardsPlayer(this.player));
+		System.out.println("Goal Achieved: " + goals.satisfied());
 	}
 
-	private List<Enemy> getEnemies() {
+	public List<Enemy> getEnemies() {
 		return entities.stream().filter(entity -> entity instanceof Enemy).map(Enemy.class::cast)
 				.collect(Collectors.toList());
 	}
 
-	private List<Switch> getSwitches() {
+	public List<Switch> getSwitches() {
 		return entities.stream().filter(entity -> entity instanceof Switch).map(Switch.class::cast)
 				.collect(Collectors.toList());
 	}
 
-	private List<Treasure> getTreasures() {
+	public List<Treasure> getTreasures() {
 		return entities.stream().filter(entity -> entity instanceof Treasure).map(Treasure.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<Entity> getEntities() {
 		return entities;
+	}
+	
+	public void setGoal(GoalComponent goal) {
+		this.goals = goal;
 	}
 }

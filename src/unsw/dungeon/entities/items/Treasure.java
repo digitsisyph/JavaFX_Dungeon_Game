@@ -25,7 +25,7 @@ public class Treasure extends Entity {
 
 	// TODO
 	public void collideWith(Entity entity) {
-		if (entity instanceof Player) {
+		if (entity.type() == EntityType.PLAYER) {
 			this.dungeon.removeEntity(this);
 		}
 	}
