@@ -13,7 +13,11 @@ public class Inventory {
         this.bomb = new BombInv();
         this.sword = null;
         this.key = null;
-        this.treasure = null;
+        this.treasure = new TreasureInv();
+    }
+
+    public void pickTreasure() {
+        this.treasure.pickTreasure();
     }
 
     public void pickSword() {
@@ -48,5 +52,13 @@ public class Inventory {
 
     public void useKey() {
         this.key = null;
+    }
+
+    // for debug
+    public void debug() {
+        if (sword != null) {
+            System.out.println("The player has a sword, its durability is " + sword.getDurability());
+        }
+        System.out.println("The player has " + bomb.getNumBombs() + " bombs");
     }
 }

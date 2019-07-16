@@ -6,6 +6,10 @@ class SwordInv {
 
     private int durability;
 
+    SwordInv() {
+        this.durability = 5;
+    }
+
     void restoreDurability() {
         this.durability += 1;
     }

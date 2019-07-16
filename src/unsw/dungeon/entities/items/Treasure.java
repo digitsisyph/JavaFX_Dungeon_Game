@@ -20,8 +20,8 @@ public class Treasure extends Entity {
 
 	// TODO
 	public void collideWith(Entity entity) {
-		if (entity.type() == EntityType.PLAYER) {
-			this.getDungeon().removeEntity(this);
+		if (entity instanceof Player) {
+			this.getDungeon().pickTreasure(this);
 		}
 	}
 

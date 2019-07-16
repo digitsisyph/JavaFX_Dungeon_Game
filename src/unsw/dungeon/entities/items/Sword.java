@@ -21,7 +21,7 @@ public class Sword extends Entity {
 	// TODO
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
-			this.getDungeon().removeEntity(this);
+			this.getDungeon().pickSword(this);
 		}
 	}
 

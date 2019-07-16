@@ -4,7 +4,9 @@
 package unsw.dungeon;
 
 import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.items.Bomb;
 import unsw.dungeon.entities.items.Switch;
+import unsw.dungeon.entities.items.Sword;
 import unsw.dungeon.entities.items.Treasure;
 import unsw.dungeon.entities.movable.Enemy;
 import unsw.dungeon.entities.movable.Player;
@@ -115,6 +117,10 @@ public class Dungeon {
 				.collect(Collectors.toList());
 	}
 
+	public Inventory getInventory() {
+		return inventory;
+	}
+
 	public List<Entity> getEntities() {
 		return entities;
 	}
@@ -122,4 +128,37 @@ public class Dungeon {
 	public void setGoal(GoalComponent goal) {
 		this.goals = goal;
 	}
+
+	// for interacting
+
+	public void pickSword(Sword sword) {
+		removeEntity(sword);
+		this.getInventory().pickSword();
+		// TODO debug
+		this.getInventory().debug();
+	}
+
+	public void pickTreasure(Treasure treasure) {
+		removeEntity(treasure);
+		this.getInventory().pickTreasure();
+		// TODO debug
+		this.getInventory().debug();
+	}
+
+	public void pickBomb(Bomb bomb) {
+		removeEntity(bomb);
+		this.getInventory().pickBomb();
+		// TODO debug
+		this.getInventory().debug();
+	}
+
+	public void fightEnemy(Enemy enemy) {
+		if (this.getInventory().useSword()) {
+			removeEntity(enemy);
+		} else {
+			// TODO player die
+			removeEntity(player);
+		}
+	}
+
 }
