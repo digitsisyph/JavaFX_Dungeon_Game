@@ -93,7 +93,7 @@ public class Dungeon {
 	// helper function: check whether a grid is walkable
 	public Boolean isWalkable(int X, int Y) {
 		return this.getEntities(X, Y).stream()
-				.allMatch(Entity::isPassable)
+				.allMatch(Entity::canPassThrough)
 				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
 

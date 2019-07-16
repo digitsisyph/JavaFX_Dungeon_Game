@@ -10,7 +10,7 @@ public class Bomb extends Entity {
 
 	public Bomb(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.setPassable(true);
+		this.setPassThrough(true);
 	}
 
 	@Override

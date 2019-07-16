@@ -10,7 +10,7 @@ public class Potion extends Entity {
 
 	public Potion(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.setPassable(true);
+		this.setPassThrough(true);
 	}
 
 	@Override

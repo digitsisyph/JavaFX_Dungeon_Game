@@ -13,7 +13,7 @@ public class Door extends Entity {
 
 	public Door(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.setPassable(false);
+		this.setPassThrough(false);
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class Door extends Entity {
 	}
 
 	public void open() {
-		this.setPassable(true);
+		this.setPassThrough(true);
 		// TODO change image
 		((ImageView) this.getNode()).setImage(new Image("/opened_door.png"));
 	}

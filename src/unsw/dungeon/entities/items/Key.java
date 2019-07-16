@@ -10,7 +10,7 @@ public class Key extends Entity {
 
 	public Key(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.setPassable(true);
+		this.setPassThrough(true);
 	}
 
 	@Override

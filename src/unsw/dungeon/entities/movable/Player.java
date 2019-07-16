@@ -24,7 +24,7 @@ public class Player extends Entity implements Movable {
 	public Player(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.movement = new MovementController(dungeon);
-		this.setPassable(false);
+		this.setPassThrough(false);
 	}
 
 	public void moveUp() {

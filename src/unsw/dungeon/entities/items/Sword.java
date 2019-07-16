@@ -10,7 +10,7 @@ public class Sword extends Entity {
 
 	public Sword(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.setPassable(true);
+		this.setPassThrough(true);
 	}
 
 	@Override

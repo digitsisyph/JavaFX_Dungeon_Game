@@ -10,7 +10,7 @@ public class Exit extends Entity {
 
 	public Exit(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.setPassable(true);
+		this.setPassThrough(true);
 	}
 
 	@Override

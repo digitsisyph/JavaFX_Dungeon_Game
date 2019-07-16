@@ -10,7 +10,7 @@ public class Wall extends Entity {
 
     public Wall(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
-		this.setPassable(false);
+		this.setPassThrough(false);
     }
 
 	@Override

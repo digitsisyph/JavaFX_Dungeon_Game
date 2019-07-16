@@ -10,7 +10,7 @@ public class Treasure extends Entity {
 
 	public Treasure(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.setPassable(true);
+		this.setPassThrough(true);
 	}
 
 	@Override

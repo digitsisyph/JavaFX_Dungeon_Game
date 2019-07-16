@@ -11,7 +11,7 @@ public class Switch extends Entity {
 
 	public Switch(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.setPassable(true);
+		this.setPassThrough(true);
 	}
 
 	@Override

@@ -73,16 +73,16 @@ public abstract class DungeonLoader {
 			ANDGoals childAND = new ANDGoals();
 			base.add(childAND);
 			JSONArray subGoals = json.getJSONArray("subgoals");
-			for(int i = 0; i < subGoals.length(); i++) {
-				loadGoal(dungeon,subGoals.getJSONObject(i),childAND);
+			for (int i = 0; i < subGoals.length(); i++) {
+				loadGoal(dungeon, subGoals.getJSONObject(i), childAND);
 			}
 			break;
 		case "OR":
 			ORGoals childOR = new ORGoals();
 			base.add(childOR);
 			JSONArray subGoals1 = json.getJSONArray("subgoals");
-			for(int i = 0; i < subGoals1.length(); i++) {
-				loadGoal(dungeon,subGoals1.getJSONObject(i),childOR);
+			for (int i = 0; i < subGoals1.length(); i++) {
+				loadGoal(dungeon, subGoals1.getJSONObject(i), childOR);
 			}
 			break;
 		}
@@ -92,6 +92,9 @@ public abstract class DungeonLoader {
 		String type = json.getString("type");
 		int x = json.getInt("x");
 		int y = json.getInt("y");
+		if (type.equals("key") || type.equals("door")) {
+			int id = json.getInt("id");
+		}
 
 		Entity entity = null;
 		switch (type) {
@@ -132,7 +135,7 @@ public abstract class DungeonLoader {
 			entity = boulder;
 			break;
 		case "switch":
-			Switch plate = new Switch(x, y, null);
+			Switch plate = new Switch(x, y, dungeon);
 			onLoad(plate);
 			entity = plate;
 			break;

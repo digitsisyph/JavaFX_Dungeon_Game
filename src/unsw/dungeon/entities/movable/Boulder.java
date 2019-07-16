@@ -11,7 +11,7 @@ public class Boulder extends Entity implements Movable {
 
 	public Boulder(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.setPassable(false);
+		this.setPassThrough(false);
 		this.movement = new MovementController(dungeon);
 	}
 

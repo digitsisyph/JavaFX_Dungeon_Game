@@ -16,7 +16,7 @@ public class Enemy extends Entity implements Movable {
 	public Enemy(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.movement = new MovementController(dungeon);
-		this.setPassable(false);
+		this.setPassThrough(false);
 		// TODO Collision behavior for enemy
 	}
 

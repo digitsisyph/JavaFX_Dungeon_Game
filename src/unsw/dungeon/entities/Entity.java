@@ -18,7 +18,7 @@ public abstract class Entity {
     private IntegerProperty x, y;
     private Node node;
     private Dungeon dungeon;
-    private Boolean isPassable;
+    private Boolean passThrough;
 
     /**
      * Create an entity positioned in square (x,y)
@@ -49,12 +49,12 @@ public abstract class Entity {
 
     abstract public void collideWith(Entity entity);
 
-    public void setPassable(Boolean bool) {
-        this.isPassable = bool;
+    public void setPassThrough(Boolean bool) {
+        this.passThrough = bool;
     }
 
-    public Boolean isPassable() {
-        return this.isPassable;
+    public Boolean canPassThrough() {
+        return this.passThrough;
     }
     
     public abstract Image getImage();
