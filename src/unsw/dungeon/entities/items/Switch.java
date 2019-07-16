@@ -9,24 +9,18 @@ import unsw.dungeon.entities.movable.Player;
 
 public class Switch extends Entity {
 
-	Dungeon dungeon;
-
 	public Switch(int x, int y, Dungeon dungeon) {
-		super(x, y);
+		super(x, y, dungeon);
 		this.setPassable(true);
-		this.dungeon = dungeon;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
 		return new Image("/pressure_plate.png");
 	}
 
-	// TODO
 	public void collideWith(Entity entity) {
-		//
+		// TODO
 	}
 
 	@Override

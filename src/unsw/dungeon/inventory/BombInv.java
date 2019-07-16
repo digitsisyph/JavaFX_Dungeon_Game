@@ -1,6 +1,6 @@
 package unsw.dungeon.inventory;
 
-public class BombInv {
+class BombInv {
 
     private int num_bombs;
 

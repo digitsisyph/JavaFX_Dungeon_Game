@@ -1,4 +1,6 @@
-package unsw.dungeon;
+package unsw.dungeon.goal;
+
+import unsw.dungeon.Dungeon;
 
 public class EnemyGoal extends GoalComponent {
 	private Dungeon dungeon;

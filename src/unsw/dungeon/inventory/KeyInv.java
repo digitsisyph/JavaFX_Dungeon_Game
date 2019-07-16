@@ -1,7 +1,12 @@
 package unsw.dungeon.inventory;
 
-public class KeyInv {
+class KeyInv {
+
     private int key_id;
+
+    KeyInv(int id) {
+        this.key_id = id;
+    }
 
 
 

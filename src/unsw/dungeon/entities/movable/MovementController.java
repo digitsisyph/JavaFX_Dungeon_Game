@@ -39,15 +39,12 @@ class MovementController {
 
     // helper function for moving up, down, left, right
     private void moveTo(Movable entity, int target_X, int target_Y) {
-        if (target_X < 0 || target_X >= dungeon.getWidth()
-            || target_Y < 0 || target_Y >= dungeon.getHeight())
-            return;
         if (dungeon.isWalkable(target_X, target_Y)) {
             entity.x().set(target_X);
             entity.y().set(target_Y);
             notifyCollision(entity);
         } else {
-            notifyCollisionFrom(entity, target_X, target_Y);
+            notifyCollision(entity, target_X, target_Y);
         }
         debuggerIO(entity);
     }
@@ -62,12 +59,10 @@ class MovementController {
     }
 
     // mainly for pushing and opening a door
-    private void notifyCollisionFrom(Movable movable, int target_X, int target_Y) {
+    private void notifyCollision(Movable movable, int target_X, int target_Y) {
         List<Entity> collidedEntities = dungeon.getEntities(target_X, target_Y);
         for (Entity entity : collidedEntities) {
-            if (entity instanceof Boulder && movable instanceof Entity) {
-                ((Boulder) entity).bePushed((Entity) movable);
-            }
+            entity.collideWith((Entity) movable);
         }
     }
 

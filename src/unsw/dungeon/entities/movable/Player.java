@@ -14,7 +14,6 @@ import unsw.dungeon.entities.EntityType;
 public class Player extends Entity implements Movable {
 
 	private MovementController movement;
-	private Dungeon dungeon;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -23,30 +22,29 @@ public class Player extends Entity implements Movable {
 	 * @param y
 	 */
 	public Player(int x, int y, Dungeon dungeon) {
-		super(x, y);
-		this.dungeon = dungeon;
+		super(x, y, dungeon);
 		this.movement = new MovementController(dungeon);
 		this.setPassable(false);
 	}
 
 	public void moveUp() {
 		movement.moveUp(this);
-		this.dungeon.playerMovementUpdate();
+		this.getDungeon().playerMovementUpdate();
 	}
 
 	public void moveDown() {
 		movement.moveDown(this);
-		this.dungeon.playerMovementUpdate();
+		this.getDungeon().playerMovementUpdate();
 	}
 
 	public void moveLeft() {
 		movement.moveLeft(this);
-		this.dungeon.playerMovementUpdate();
+		this.getDungeon().playerMovementUpdate();
 	}
 
 	public void moveRight() {
 		movement.moveRight(this);
-		this.dungeon.playerMovementUpdate();
+		this.getDungeon().playerMovementUpdate();
 	}
 
 	@Override

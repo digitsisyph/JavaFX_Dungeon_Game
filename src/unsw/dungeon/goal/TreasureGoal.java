@@ -1,4 +1,7 @@
-package unsw.dungeon;
+package unsw.dungeon.goal;
+
+import unsw.dungeon.Dungeon;
+import unsw.dungeon.goal.GoalComponent;
 
 public class TreasureGoal extends GoalComponent {
 	private Dungeon dungeon;

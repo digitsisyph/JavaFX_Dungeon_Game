@@ -10,7 +10,7 @@ public class Boulder extends Entity implements Movable {
 	MovementController movement;
 
 	public Boulder(int x, int y, Dungeon dungeon) {
-		super(x, y);
+		super(x, y, dungeon);
 		this.setPassable(false);
 		this.movement = new MovementController(dungeon);
 	}
@@ -42,10 +42,6 @@ public class Boulder extends Entity implements Movable {
 
 	// TODO
 	public void collideWith(Entity entity) {
-		// pass
-	}
-
-	public void bePushed(Entity entity) {
 		if (entity instanceof Player) {
 			if (entity.getY() > this.getY()) {
 				this.moveUp();

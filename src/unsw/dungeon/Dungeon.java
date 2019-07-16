@@ -4,11 +4,14 @@
 package unsw.dungeon;
 
 import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.items.Bomb;
 import unsw.dungeon.entities.items.Switch;
+import unsw.dungeon.entities.items.Sword;
 import unsw.dungeon.entities.items.Treasure;
 import unsw.dungeon.entities.movable.Enemy;
 import unsw.dungeon.entities.movable.Player;
-import unsw.dungeon.inventory.Inventory;
+import unsw.dungeon.goal.*;
+import unsw.dungeon.inventory.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +69,12 @@ public class Dungeon {
 		this.controller = controller;
 	}
 
+
+	public void playerPick(Entity entity) {
+
+	}
+
+
 	public void removeEntity(Entity entity) {
 		System.out.println("Remove:" + entity.toString());
 		// remove it from the dungeon
@@ -83,7 +92,9 @@ public class Dungeon {
 
 	// helper function: check whether a grid is walkable
 	public Boolean isWalkable(int X, int Y) {
-		return this.getEntities(X, Y).stream().allMatch(Entity::isPassable);
+		return this.getEntities(X, Y).stream()
+				.allMatch(Entity::isPassable)
+				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
 
 	public void playerMovementUpdate() {
@@ -106,6 +117,10 @@ public class Dungeon {
 				.collect(Collectors.toList());
 	}
 
+	public Inventory getInventory() {
+		return inventory;
+	}
+
 	public List<Entity> getEntities() {
 		return entities;
 	}
@@ -113,4 +128,37 @@ public class Dungeon {
 	public void setGoal(GoalComponent goal) {
 		this.goals = goal;
 	}
+
+	// for interacting
+
+	public void pickSword(Sword sword) {
+		removeEntity(sword);
+		this.getInventory().pickSword();
+		// TODO debug
+		this.getInventory().debug();
+	}
+
+	public void pickTreasure(Treasure treasure) {
+		removeEntity(treasure);
+		this.getInventory().pickTreasure();
+		// TODO debug
+		this.getInventory().debug();
+	}
+
+	public void pickBomb(Bomb bomb) {
+		removeEntity(bomb);
+		this.getInventory().pickBomb();
+		// TODO debug
+		this.getInventory().debug();
+	}
+
+	public void fightEnemy(Enemy enemy) {
+		if (this.getInventory().useSword()) {
+			removeEntity(enemy);
+		} else {
+			// TODO player die
+			removeEntity(player);
+		}
+	}
+
 }
