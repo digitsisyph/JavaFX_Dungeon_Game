@@ -3,16 +3,14 @@ package unsw.dungeon.entities.items;
 import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.EntityType;
 import unsw.dungeon.entities.movable.Player;
 
 public class Bomb extends Entity {
 
-	Dungeon dungeon;
-
 	public Bomb(int x, int y, Dungeon dungeon) {
-		super(x, y);
+		super(x, y, dungeon);
 		this.setPassable(true);
-		this.dungeon = dungeon;
 	}
 
 	@Override
@@ -22,11 +20,15 @@ public class Bomb extends Entity {
 	}
 	// TODO Apply State Pattern
 
-
 	// TODO
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
-			this.dungeon.removeEntity(this);
+			this.getDungeon().removeEntity(this);
 		}
+	}
+
+	@Override
+	public EntityType type() {
+		return EntityType.BOMB;
 	}
 }

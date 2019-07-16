@@ -3,19 +3,16 @@ package unsw.dungeon.entities.movable;
 import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.EntityType;
 import unsw.dungeon.entities.movable.CollisionBehavior;
 
 public class Enemy extends Entity implements Movable {
 
-	private Dungeon dungeon;
 	private MovementController movement;
-	private CollisionBehavior collision;
 
 	public Enemy(int x, int y, Dungeon dungeon) {
-		super(x, y);
-		this.dungeon = dungeon;
+		super(x, y, dungeon);
 		this.movement = new MovementController(dungeon);
-		this.collision = null;
 		this.setPassable(false);
 		// TODO Collision behavior for enemy
 	}
@@ -29,16 +26,16 @@ public class Enemy extends Entity implements Movable {
 	// TODO this is just a very basic enemy AI, we can try to improve
 	public void moveTowardsPlayer(Player player) {
 		if (player.getX() > this.getX()
-				&& dungeon.isWalkable(this.getX() + 1, this.getY())) {
+				&& getDungeon().isWalkable(this.getX() + 1, this.getY())) {
 			moveRight();
 		} else if (player.getX() < this.getX()
-				&& dungeon.isWalkable(this.getX() - 1, this.getY())) {
+				&& getDungeon().isWalkable(this.getX() - 1, this.getY())) {
 			moveLeft();
 		} else if (player.getY() > this.getY()
-				&& dungeon.isWalkable(this.getX(), this.getY() + 1))  {
+				&& getDungeon().isWalkable(this.getX(), this.getY() + 1))  {
 			moveDown();
 		} else if (player.getY() < this.getY()
-				&& dungeon.isWalkable(this.getX(), this.getY() - 1)) {
+				&& getDungeon().isWalkable(this.getX(), this.getY() - 1)) {
 			moveUp();
 		}
 	}
@@ -68,5 +65,10 @@ public class Enemy extends Entity implements Movable {
 	// TODO
 	public void collideWith(Entity entity) {
 		//
+	}
+
+	@Override
+	public EntityType type() {
+		return EntityType.ENEMY;
 	}
 }

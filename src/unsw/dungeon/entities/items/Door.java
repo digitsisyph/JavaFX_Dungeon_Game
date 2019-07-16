@@ -4,22 +4,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.EntityType;
 import unsw.dungeon.entities.movable.Player;
 
 public class Door extends Entity {
 
-	Dungeon dungeon;
-
 	private int id;
 
 	public Door(int x, int y, Dungeon dungeon) {
-		super(x, y);
+		super(x, y, dungeon);
 		this.setPassable(false);
-		this.dungeon = dungeon;
 	}
+
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
 		return new Image("/closed_door.png");
 	}
 
@@ -32,12 +30,16 @@ public class Door extends Entity {
 	// TODO
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
-			this.dungeon.removeEntity(this);
+			this.getDungeon().removeEntity(this);
 		}
 	}
 
 	public int getID() {
 		return this.id;
+	}
+	@Override
+	public EntityType type() {
+		return EntityType.DOOR;
 	}
 
 }

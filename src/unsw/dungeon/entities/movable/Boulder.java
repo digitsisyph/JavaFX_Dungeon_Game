@@ -3,13 +3,14 @@ package unsw.dungeon.entities.movable;
 import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
+import unsw.dungeon.entities.EntityType;
 
 public class Boulder extends Entity implements Movable {
 
 	MovementController movement;
 
 	public Boulder(int x, int y, Dungeon dungeon) {
-		super(x, y);
+		super(x, y, dungeon);
 		this.setPassable(false);
 		this.movement = new MovementController(dungeon);
 	}
@@ -56,6 +57,11 @@ public class Boulder extends Entity implements Movable {
 				this.moveLeft();
 			}
 		}
+	}
+
+	@Override
+	public EntityType type() {
+		return EntityType.BOULDER;
 	}
 
 }
