@@ -11,6 +11,7 @@ import unsw.dungeon.entities.items.*;
 import unsw.dungeon.entities.movable.Boulder;
 import unsw.dungeon.entities.movable.Enemy;
 import unsw.dungeon.entities.movable.Player;
+import unsw.dungeon.goal.*;
 
 /**
  * Loads a dungeon from a .json file.

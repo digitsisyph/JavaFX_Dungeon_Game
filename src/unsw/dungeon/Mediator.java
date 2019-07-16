@@ -14,7 +14,7 @@ public class Mediator {
 	}
 	
 	public void removeEntity(Entity entity) {
-		dungeon.removeEntity(entity);;
+		dungeon.removeEntity(entity);
 	}
 	
 	public List<Entity> getEntitiesAt(int x,int y){

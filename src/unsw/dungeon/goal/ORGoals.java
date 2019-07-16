@@ -1,4 +1,6 @@
-package unsw.dungeon;
+package unsw.dungeon.goal;
+
+import unsw.dungeon.goal.GoalComponent;
 
 import java.util.ArrayList;
 

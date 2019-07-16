@@ -8,7 +8,8 @@ import unsw.dungeon.entities.items.Switch;
 import unsw.dungeon.entities.items.Treasure;
 import unsw.dungeon.entities.movable.Enemy;
 import unsw.dungeon.entities.movable.Player;
-import unsw.dungeon.inventory.Inventory;
+import unsw.dungeon.goal.*;
+import unsw.dungeon.inventory.*;
 
 import java.util.ArrayList;
 import java.util.List;

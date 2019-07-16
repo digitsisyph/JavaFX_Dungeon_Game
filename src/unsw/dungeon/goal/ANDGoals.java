@@ -1,4 +1,4 @@
-package unsw.dungeon;
+package unsw.dungeon.goal;
 
 import java.util.ArrayList;
 

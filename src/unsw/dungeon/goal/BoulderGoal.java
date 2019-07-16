@@ -1,7 +1,8 @@
-package unsw.dungeon;
+package unsw.dungeon.goal;
 
 import java.util.List;
 
+import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
 import unsw.dungeon.entities.items.Switch;
