@@ -53,6 +53,14 @@ public class Inventory {
     public void useKey() {
         this.key = null;
     }
+    
+    public KeyInv getKey() {
+    	return this.key;
+    }
+    
+    public int getKeyID() {
+    	return this.key.getKey_id();
+    }
 
     // for debug
     public void debug() {
@@ -60,5 +68,8 @@ public class Inventory {
             System.out.println("The player has a sword, its durability is " + sword.getDurability());
         }
         System.out.println("The player has " + bomb.getNumBombs() + " bombs");
+        if (key != null) {
+        	System.out.println("Player has key id: " + key.getKey_id());
+        }
     }
 }

@@ -5,6 +5,8 @@ package unsw.dungeon;
 
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.items.Bomb;
+import unsw.dungeon.entities.items.Door;
+import unsw.dungeon.entities.items.Key;
 import unsw.dungeon.entities.items.Switch;
 import unsw.dungeon.entities.items.Sword;
 import unsw.dungeon.entities.items.Treasure;
@@ -131,21 +133,21 @@ public class Dungeon {
 
 	// for interacting
 
-	public void pickSword(Sword sword) {
+	public void pickUpSword(Sword sword) {
 		removeEntity(sword);
 		this.getInventory().pickSword();
 		// TODO debug
 		this.getInventory().debug();
 	}
 
-	public void pickTreasure(Treasure treasure) {
+	public void pickUpTreasure(Treasure treasure) {
 		removeEntity(treasure);
 		this.getInventory().pickTreasure();
 		// TODO debug
 		this.getInventory().debug();
 	}
 
-	public void pickBomb(Bomb bomb) {
+	public void pickUpBomb(Bomb bomb) {
 		removeEntity(bomb);
 		this.getInventory().pickBomb();
 		// TODO debug
@@ -160,5 +162,29 @@ public class Dungeon {
 			removeEntity(player);
 		}
 	}
+	
+	public void pickUpKey(Key key) {
+		// player can only have 1 key
+		if (this.getInventory().getKey() == null) {
+			this.getInventory().pickKey(key.getId());
+			removeEntity(key);
+			System.out.println("Key picked up");
+		} else {
+			System.out.println("Already has a key");
+		}
+		this.getInventory().debug();
+	}
 
+	public void attemptToOpenDoor(Door door) {
+		if(this.getInventory().getKey() != null) {
+			if(this.getInventory().getKeyID() == door.getId()) {
+				this.getInventory().useKey();
+				door.open();
+			} else {
+				System.out.println("Wrong key");
+			}
+		} else {
+			System.out.println("No key");
+		}
+	}
 }

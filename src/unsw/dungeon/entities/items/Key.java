@@ -8,9 +8,12 @@ import unsw.dungeon.entities.movable.Player;
 
 public class Key extends Entity {
 
-	public Key(int x, int y, Dungeon dungeon) {
+	private int id;
+
+	public Key(int x, int y, Dungeon dungeon, int id) {
 		super(x, y, dungeon);
 		this.setPassThrough(true);
+		this.id = id;
 	}
 
 	@Override
@@ -18,10 +21,9 @@ public class Key extends Entity {
 		return new Image("/key.png");
 	}
 
-	// TODO
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
-			this.getDungeon().removeEntity(this);
+			this.getDungeon().pickUpKey(this);
 		}
 	}
 
@@ -30,4 +32,10 @@ public class Key extends Entity {
 		return EntityType.KEY;
 	}
 
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
 }

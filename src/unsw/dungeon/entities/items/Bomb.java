@@ -23,7 +23,7 @@ public class Bomb extends Entity {
 	// TODO
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
-			this.getDungeon().pickBomb(this);
+			this.getDungeon().pickUpBomb(this);
 		}
 	}
 

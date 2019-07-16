@@ -21,7 +21,7 @@ public class Treasure extends Entity {
 	// TODO
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
-			this.getDungeon().pickTreasure(this);
+			this.getDungeon().pickUpTreasure(this);
 		}
 	}
 
