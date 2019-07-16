@@ -14,6 +14,7 @@ public class Key extends Entity {
 		super(x, y, dungeon);
 		this.setPassThrough(true);
 		this.id = id;
+		System.out.println("key created");
 	}
 
 	@Override

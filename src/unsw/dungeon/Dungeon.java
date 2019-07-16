@@ -71,11 +71,12 @@ public class Dungeon {
 		this.controller = controller;
 	}
 
-
+	public DungeonController getController() {
+		return controller;
+	}
 	public void playerPick(Entity entity) {
 
 	}
-
 
 	public void removeEntity(Entity entity) {
 		System.out.println("Remove:" + entity.toString());
@@ -94,8 +95,7 @@ public class Dungeon {
 
 	// helper function: check whether a grid is walkable
 	public Boolean isWalkable(int X, int Y) {
-		return this.getEntities(X, Y).stream()
-				.allMatch(Entity::canPassThrough)
+		return this.getEntities(X, Y).stream().allMatch(Entity::canPassThrough)
 				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
 
@@ -126,7 +126,7 @@ public class Dungeon {
 	public List<Entity> getEntities() {
 		return entities;
 	}
-	
+
 	public void setGoal(GoalComponent goal) {
 		this.goals = goal;
 	}
@@ -162,7 +162,7 @@ public class Dungeon {
 			removeEntity(player);
 		}
 	}
-	
+
 	public void pickUpKey(Key key) {
 		// player can only have 1 key
 		if (this.getInventory().getKey() == null) {
@@ -176,15 +176,17 @@ public class Dungeon {
 	}
 
 	public void attemptToOpenDoor(Door door) {
-		if(this.getInventory().getKey() != null) {
-			if(this.getInventory().getKeyID() == door.getId()) {
-				this.getInventory().useKey();
-				door.open();
+		if (!door.canPassThrough()) {
+			if (this.getInventory().getKey() != null) {
+				if (this.getInventory().getKeyID() == door.getId()) {
+					this.getInventory().useKey();
+					door.open();
+				} else {
+					System.out.println("Wrong key");
+				}
 			} else {
-				System.out.println("Wrong key");
+				System.out.println("No key");
 			}
-		} else {
-			System.out.println("No key");
 		}
 	}
 }

@@ -12,12 +12,14 @@ public class Door extends Entity {
 	private int id;
 	private DoorState closedDoor;
 	private DoorState openedDoor;
-	private DoorState state = closedDoor;
+	private DoorState state;
 
 	public Door(int x, int y, Dungeon dungeon, int id) {
 		super(x, y, dungeon);
+		
 		closedDoor = new ClosedDoorState(this);
 		openedDoor = new OpenedDoorState(this);
+		this.state = closedDoor;
 		this.id = id;
 		this.setPassThrough(state.passThrough());
 	}
@@ -65,7 +67,15 @@ public class Door extends Entity {
 	public void open() {
 		state.unlock();
 		this.setPassThrough(state.passThrough());
-		((ImageView) this.getNode()).setImage(state.getImage());
+		if(this.getNode() instanceof ImageView) {
+			System.out.println("YESSSS");
+			ImageView img = (ImageView)this.getNode();
+			Image img2 = state.getImage();
+			img.setImage(img2);
+		}
+		if(this.getDungeon().getController().entImages().contains(this.getNode())) {
+			System.out.println("YESSSS");
+		}
 	}
 
 	public void collideWith(Entity entity) {

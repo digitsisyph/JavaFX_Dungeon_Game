@@ -36,6 +36,10 @@ public class DungeonController {
 	public GridPane getSquares() {
 		return squares;
 	}
+	
+	public List<ImageView> entImages(){
+		return initialEntities;
+	}
 
 	@FXML
 	public void initialize() {
