@@ -8,18 +8,13 @@ import unsw.dungeon.entities.movable.Player;
 
 public class Exit extends Entity {
 
-	Dungeon dungeon;
-
 	public Exit(int x, int y, Dungeon dungeon) {
-		super(x, y);
+		super(x, y, dungeon);
 		this.setPassable(true);
-		this.dungeon = dungeon;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
 		return new Image("/exit.png");
 	}
 

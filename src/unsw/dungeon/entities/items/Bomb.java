@@ -8,12 +8,9 @@ import unsw.dungeon.entities.movable.Player;
 
 public class Bomb extends Entity {
 
-	Dungeon dungeon;
-
 	public Bomb(int x, int y, Dungeon dungeon) {
-		super(x, y);
+		super(x, y, dungeon);
 		this.setPassable(true);
-		this.dungeon = dungeon;
 	}
 
 	@Override
@@ -26,7 +23,7 @@ public class Bomb extends Entity {
 	// TODO
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
-			this.dungeon.removeEntity(this);
+			this.getDungeon().removeEntity(this);
 		}
 	}
 

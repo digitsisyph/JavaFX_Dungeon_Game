@@ -8,25 +8,20 @@ import unsw.dungeon.entities.movable.Player;
 
 public class Treasure extends Entity {
 
-	Dungeon dungeon;
-
 	public Treasure(int x, int y, Dungeon dungeon) {
-		super(x, y);
+		super(x, y, dungeon);
 		this.setPassable(true);
-		this.dungeon = dungeon;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
 		return new Image("/gold_pile.png");
 	}
 
 	// TODO
 	public void collideWith(Entity entity) {
 		if (entity.type() == EntityType.PLAYER) {
-			this.dungeon.removeEntity(this);
+			this.getDungeon().removeEntity(this);
 		}
 	}
 
