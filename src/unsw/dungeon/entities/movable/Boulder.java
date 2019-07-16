@@ -42,10 +42,6 @@ public class Boulder extends Entity implements Movable {
 
 	// TODO
 	public void collideWith(Entity entity) {
-		// pass
-	}
-
-	public void bePushed(Entity entity) {
 		if (entity instanceof Player) {
 			if (entity.getY() > this.getY()) {
 				this.moveUp();

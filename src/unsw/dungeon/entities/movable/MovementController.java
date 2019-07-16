@@ -44,7 +44,7 @@ class MovementController {
             entity.y().set(target_Y);
             notifyCollision(entity);
         } else {
-            notifyCollisionFrom(entity, target_X, target_Y);
+            notifyCollision(entity, target_X, target_Y);
         }
         debuggerIO(entity);
     }
@@ -59,12 +59,10 @@ class MovementController {
     }
 
     // mainly for pushing and opening a door
-    private void notifyCollisionFrom(Movable movable, int target_X, int target_Y) {
+    private void notifyCollision(Movable movable, int target_X, int target_Y) {
         List<Entity> collidedEntities = dungeon.getEntities(target_X, target_Y);
         for (Entity entity : collidedEntities) {
-            if (entity instanceof Boulder && movable instanceof Entity) {
-                ((Boulder) entity).bePushed((Entity) movable);
-            }
+            entity.collideWith((Entity) movable);
         }
     }
 
