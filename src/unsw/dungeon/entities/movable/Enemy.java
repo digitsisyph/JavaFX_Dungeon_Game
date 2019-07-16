@@ -5,10 +5,13 @@ import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
 import unsw.dungeon.entities.movable.CollisionBehavior;
+import java.util.Random;
 
 public class Enemy extends Entity implements Movable {
 
 	private MovementController movement;
+	// for random movement
+	private Random rand = new Random();
 
 	public Enemy(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
@@ -24,19 +27,38 @@ public class Enemy extends Entity implements Movable {
 
 
 	// TODO this is just a very basic enemy AI, we can try to improve
+	// added a random movement
 	public void moveTowardsPlayer(Player player) {
-		if (player.getX() > this.getX()
-				&& getDungeon().isWalkable(this.getX() + 1, this.getY())) {
-			moveRight();
-		} else if (player.getX() < this.getX()
-				&& getDungeon().isWalkable(this.getX() - 1, this.getY())) {
-			moveLeft();
-		} else if (player.getY() > this.getY()
-				&& getDungeon().isWalkable(this.getX(), this.getY() + 1))  {
-			moveDown();
-		} else if (player.getY() < this.getY()
-				&& getDungeon().isWalkable(this.getX(), this.getY() - 1)) {
-			moveUp();
+		int ran = rand.nextInt(2);
+
+		if (ran == 0) {
+			if (player.getX() > this.getX()
+					&& getDungeon().isWalkable(this.getX() + 1, this.getY())) {
+				moveRight();
+			} else if (player.getX() < this.getX()
+					&& getDungeon().isWalkable(this.getX() - 1, this.getY())) {
+				moveLeft();
+			} else if (player.getY() > this.getY()
+					&& getDungeon().isWalkable(this.getX(), this.getY() + 1)) {
+				moveDown();
+			} else if (player.getY() < this.getY()
+					&& getDungeon().isWalkable(this.getX(), this.getY() - 1)) {
+				moveUp();
+			}
+		} else {
+			if (player.getY() > this.getY()
+					&& getDungeon().isWalkable(this.getX(), this.getY() + 1)) {
+				moveDown();
+			} else if (player.getY() < this.getY()
+					&& getDungeon().isWalkable(this.getX(), this.getY() - 1)) {
+				moveUp();
+			} else if (player.getX() > this.getX()
+					&& getDungeon().isWalkable(this.getX() + 1, this.getY())) {
+				moveRight();
+			} else if (player.getX() < this.getX()
+					&& getDungeon().isWalkable(this.getX() - 1, this.getY())) {
+				moveLeft();
+			}
 		}
 	}
 

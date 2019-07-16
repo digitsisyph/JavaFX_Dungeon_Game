@@ -67,6 +67,12 @@ public class Dungeon {
 		this.controller = controller;
 	}
 
+
+	public void playerPick(Entity entity) {
+
+	}
+
+
 	public void removeEntity(Entity entity) {
 		System.out.println("Remove:" + entity.toString());
 		// remove it from the dungeon
@@ -84,7 +90,9 @@ public class Dungeon {
 
 	// helper function: check whether a grid is walkable
 	public Boolean isWalkable(int X, int Y) {
-		return this.getEntities(X, Y).stream().allMatch(Entity::isPassable);
+		return this.getEntities(X, Y).stream()
+				.allMatch(Entity::isPassable)
+				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
 
 	public void playerMovementUpdate() {
