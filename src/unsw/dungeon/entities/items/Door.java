@@ -16,7 +16,6 @@ public class Door extends Entity {
 
 	public Door(int x, int y, Dungeon dungeon, int id) {
 		super(x, y, dungeon);
-		
 		closedDoor = new ClosedDoorState(this);
 		openedDoor = new OpenedDoorState(this);
 		this.state = closedDoor;
@@ -67,14 +66,9 @@ public class Door extends Entity {
 	public void open() {
 		state.unlock();
 		this.setPassThrough(state.passThrough());
-		if(this.getNode() instanceof ImageView) {
-			System.out.println("YESSSS");
-			ImageView img = (ImageView)this.getNode();
-			Image img2 = state.getImage();
-			img.setImage(img2);
-		}
-		if(this.getDungeon().getController().entImages().contains(this.getNode())) {
-			System.out.println("YESSSS");
+		if (this.getNode() instanceof ImageView) {
+			ImageView img = (ImageView) this.getNode();
+			img.setImage(state.getImage());
 		}
 	}
 

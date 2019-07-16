@@ -12,7 +12,7 @@ public class OpenedDoorState implements DoorState {
 	
 	@Override
 	public Image getImage() {
-		return new Image("/opened_door.png");
+		return new Image("/open_door.png");
 	}
 
 	@Override
