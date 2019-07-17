@@ -46,6 +46,10 @@ public class Inventory {
 	public void useBomb() {
 		this.bomb.decreaseBomb();
 	}
+	
+	public int getBombNum() {
+		return this.bomb.getNumBombs();
+	}
 
 	public void pickKey(int id) {
 		this.key = new KeyInv(id);

@@ -47,6 +47,9 @@ public class Player extends Entity implements Movable {
 		this.getDungeon().playerMovementUpdate();
 	}
 
+	public void placeBomb() {
+		this.getDungeon().playerPlacesBomb();
+	}
 	@Override
 	public String toString() {
 		return "Player at X " + getX() + " Y " + getY();

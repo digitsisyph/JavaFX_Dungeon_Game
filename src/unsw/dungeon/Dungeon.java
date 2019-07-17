@@ -12,6 +12,8 @@ import unsw.dungeon.entities.items.Switch;
 import unsw.dungeon.entities.items.Sword;
 import unsw.dungeon.entities.items.Treasure;
 import unsw.dungeon.entities.movable.Enemy;
+import unsw.dungeon.entities.movable.MoveAwayFromPlayer;
+import unsw.dungeon.entities.movable.MoveTowardsPlayer;
 import unsw.dungeon.entities.movable.Player;
 import unsw.dungeon.goal.*;
 import unsw.dungeon.inventory.*;
@@ -99,10 +101,17 @@ public class Dungeon {
 		return this.getEntities(X, Y).stream().allMatch(Entity::canPassThrough)
 				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
-	/*
+	/* TODO
 	 * For every player movement, something must change
+	 * Might be better to have enemy observes player
+	 * And put invincibility as an attribute inside the player class
 	 */
 	public void playerMovementUpdate() {
+		if(getInventory().isInvincible()) {
+			getEnemies().forEach(enemy -> enemy.setBehaviour(new MoveAwayFromPlayer()));
+		} else {
+			getEnemies().forEach(enemy -> enemy.setBehaviour(new MoveTowardsPlayer()));
+		}
 		getEnemies().forEach(enemy -> enemy.move(this.player));
 		getInventory().decreaseInvincibility();
 		System.out.println("Goal Achieved: " + goals.satisfied());
@@ -194,6 +203,14 @@ public class Dungeon {
 			} else {
 				System.out.println("No key");
 			}
+		}
+	}
+	
+	public void playerPlacesBomb() {
+		if(this.getInventory().getBombNum() > 0) {
+			this.getInventory().useBomb(); // this method just decrease numbomb by 1;
+		} else {
+			System.out.println("No bomb to use");
 		}
 	}
 	
