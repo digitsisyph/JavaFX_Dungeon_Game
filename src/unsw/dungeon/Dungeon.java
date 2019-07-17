@@ -118,6 +118,7 @@ public class Dungeon {
 			getEnemies().forEach(enemy -> enemy.setBehaviour(new MoveTowardsPlayer()));
 		}
 		getEnemies().forEach(enemy -> enemy.move(this.player));
+		getBombs().forEach(bomb -> bomb.next());
 		getInventory().decreaseInvincibility();
 		System.out.println("Goal Achieved: " + goals.satisfied());
 	}
@@ -137,6 +138,10 @@ public class Dungeon {
 				.collect(Collectors.toList());
 	}
 
+	public List<Bomb> getBombs() {
+		return entities.stream().filter(entity -> entity instanceof Bomb).map(Bomb.class::cast)
+				.collect(Collectors.toList());
+	}
 	public Inventory getInventory() {
 		return inventory;
 	}
@@ -236,6 +241,7 @@ public class Dungeon {
 	}
 
 	public void bombActivated(Bomb bomb) {
-
+		// TODO:: Destroy neighbour entities
+		removeEntity(bomb);
 	}
 }

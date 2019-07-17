@@ -22,6 +22,7 @@ public class LitBomb4 implements BombState {
 
 	@Override
 	public void next() {
+		System.out.println("EXPLOSION");
 		bomb.getDungeon().bombActivated(bomb);
 	}
 
