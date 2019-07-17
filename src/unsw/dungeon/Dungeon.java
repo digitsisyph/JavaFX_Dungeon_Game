@@ -112,14 +112,30 @@ public class Dungeon {
 	 * class
 	 */
 	public void playerMovementUpdate() {
+		enemyTick();
+		bombTick();
+		inventoryTick();
+		goalTick();
+	}
+
+	private void enemyTick() {
 		if (getInventory().isInvincible()) {
 			getEnemies().forEach(enemy -> enemy.setBehaviour(new MoveAwayFromPlayer()));
 		} else {
 			getEnemies().forEach(enemy -> enemy.setBehaviour(new MoveTowardsPlayer()));
 		}
 		getEnemies().forEach(enemy -> enemy.move(this.player));
+	}
+
+	private void bombTick() {
 		getBombs().forEach(bomb -> bomb.next());
+	}
+
+	private void inventoryTick() {
 		getInventory().decreaseInvincibility();
+	}
+
+	private void goalTick() {
 		System.out.println("Goal Achieved: " + goals.satisfied());
 	}
 
@@ -142,6 +158,7 @@ public class Dungeon {
 		return entities.stream().filter(entity -> entity instanceof Bomb).map(Bomb.class::cast)
 				.collect(Collectors.toList());
 	}
+
 	public Inventory getInventory() {
 		return inventory;
 	}
