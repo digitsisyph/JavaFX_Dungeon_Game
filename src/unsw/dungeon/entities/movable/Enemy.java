@@ -47,6 +47,12 @@ public class Enemy extends Entity implements Movable {
 			this.getDungeon().fightEnemy(this);
 		}
 	}
+	/**
+	 * @param behaviour the behaviour to set
+	 */
+	public void setBehaviour(MovementBehaviour behaviour) {
+		this.behaviour = behaviour;
+	}
 
 	@Override
 	public EntityType type() {

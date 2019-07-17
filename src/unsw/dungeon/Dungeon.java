@@ -7,6 +7,7 @@ import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.items.Bomb;
 import unsw.dungeon.entities.items.Door;
 import unsw.dungeon.entities.items.Key;
+import unsw.dungeon.entities.items.Potion;
 import unsw.dungeon.entities.items.Switch;
 import unsw.dungeon.entities.items.Sword;
 import unsw.dungeon.entities.items.Treasure;
@@ -98,9 +99,12 @@ public class Dungeon {
 		return this.getEntities(X, Y).stream().allMatch(Entity::canPassThrough)
 				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
-
+	/*
+	 * For every player movement, something must change
+	 */
 	public void playerMovementUpdate() {
 		getEnemies().forEach(enemy -> enemy.move(this.player));
+		getInventory().decreaseInvincibility();
 		System.out.println("Goal Achieved: " + goals.satisfied());
 	}
 
@@ -155,10 +159,13 @@ public class Dungeon {
 	}
 
 	public void fightEnemy(Enemy enemy) {
-		if (this.getInventory().useSword()) {
+		if (this.getInventory().isInvincible()) {
+			removeEntity(enemy);
+		} else if (this.getInventory().useSword()) {
 			removeEntity(enemy);
 		} else {
 			// TODO player die
+			// this is broken right now
 			removeEntity(player);
 		}
 	}
@@ -188,5 +195,10 @@ public class Dungeon {
 				System.out.println("No key");
 			}
 		}
+	}
+	
+	public void pickUpPotion(Potion potion) {
+		this.getInventory().pickUpPotion();
+		removeEntity(potion);
 	}
 }

@@ -2,7 +2,7 @@ package unsw.dungeon.inventory;
 
 class BombInv {
 
-    private int num_bombs;
+    private int num_bombs = 0;
 
     void increaseBomb() {
         this.num_bombs += 1;
