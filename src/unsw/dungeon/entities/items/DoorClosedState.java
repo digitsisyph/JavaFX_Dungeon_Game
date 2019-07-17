@@ -2,11 +2,11 @@ package unsw.dungeon.entities.items;
 
 import javafx.scene.image.Image;
 
-public class ClosedDoorState implements DoorState {
+public class DoorClosedState implements DoorState {
 
 	Door door;
 
-	public ClosedDoorState(Door door) {
+	public DoorClosedState(Door door) {
 		this.door = door;
 	}
 

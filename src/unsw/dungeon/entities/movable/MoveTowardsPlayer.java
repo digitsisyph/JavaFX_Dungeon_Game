@@ -10,7 +10,8 @@ public class MoveTowardsPlayer implements MovementBehaviour {
 	public void move(Enemy enemy, Player player) {
 		int randInt = rand.nextInt(2);
 		if (randInt == 0) {
-			if (player.getX() > enemy.getX() && enemy.getDungeon().canOccupyGrid(enemy.getX() + 1, enemy.getY())) {
+			if (player.getX() > enemy.getX()
+					&& enemy.getDungeon().canOccupyGrid(enemy.getX() + 1, enemy.getY())) {
 				enemy.moveRight();
 			} else if (player.getX() < enemy.getX()
 					&& enemy.getDungeon().canOccupyGrid(enemy.getX() - 1, enemy.getY())) {
@@ -23,7 +24,8 @@ public class MoveTowardsPlayer implements MovementBehaviour {
 				enemy.moveUp();
 			}
 		} else {
-			if (player.getY() > enemy.getY() && enemy.getDungeon().canOccupyGrid(enemy.getX(), enemy.getY() + 1)) {
+			if (player.getY() > enemy.getY()
+					&& enemy.getDungeon().canOccupyGrid(enemy.getX(), enemy.getY() + 1)) {
 				enemy.moveDown();
 			} else if (player.getY() < enemy.getY()
 					&& enemy.getDungeon().canOccupyGrid(enemy.getX(), enemy.getY() - 1)) {

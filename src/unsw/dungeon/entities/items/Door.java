@@ -15,8 +15,8 @@ public class Door extends Entity {
 
 	public Door(int x, int y, Dungeon dungeon, int id) {
 		super(x, y, dungeon);
-		closedDoor = new ClosedDoorState(this);
-		openedDoor = new OpenedDoorState(this);
+		closedDoor = new DoorClosedState(this);
+		openedDoor = new DoorOpenedState(this);
 		this.state = closedDoor;
 		this.id = id;
 		this.setPassThrough(state.passThrough());

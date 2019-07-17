@@ -3,18 +3,9 @@
  */
 package unsw.dungeon;
 
-import unsw.dungeon.entities.Entity;
-import unsw.dungeon.entities.items.Bomb;
-import unsw.dungeon.entities.items.Door;
-import unsw.dungeon.entities.items.Key;
-import unsw.dungeon.entities.items.Potion;
-import unsw.dungeon.entities.items.Switch;
-import unsw.dungeon.entities.items.Sword;
-import unsw.dungeon.entities.items.Treasure;
-import unsw.dungeon.entities.movable.Enemy;
-import unsw.dungeon.entities.movable.MoveAwayFromPlayer;
-import unsw.dungeon.entities.movable.MoveTowardsPlayer;
-import unsw.dungeon.entities.movable.Player;
+import unsw.dungeon.entities.*;
+import unsw.dungeon.entities.items.*;
+import unsw.dungeon.entities.movable.*;
 import unsw.dungeon.goal.*;
 import unsw.dungeon.inventory.*;
 
