@@ -22,7 +22,7 @@ public class LitBomb4 implements BombState {
 
 	@Override
 	public void next() {
-		// TODO Should be deleted
+		bomb.getDungeon().bombActivated(bomb);
 	}
 
 	@Override

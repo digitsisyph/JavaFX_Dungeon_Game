@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -77,6 +80,7 @@ public class Dungeon {
 	public DungeonController getController() {
 		return controller;
 	}
+
 	public void playerPick(Entity entity) {
 
 	}
@@ -101,13 +105,14 @@ public class Dungeon {
 		return this.getEntities(X, Y).stream().allMatch(Entity::canPassThrough)
 				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
-	/* TODO
-	 * For every player movement, something must change
-	 * Might be better to have enemy observes player
-	 * And put invincibility as an attribute inside the player class
+
+	/*
+	 * TODO For every player movement, something must change Might be better to have
+	 * enemy observes player And put invincibility as an attribute inside the player
+	 * class
 	 */
 	public void playerMovementUpdate() {
-		if(getInventory().isInvincible()) {
+		if (getInventory().isInvincible()) {
 			getEnemies().forEach(enemy -> enemy.setBehaviour(new MoveAwayFromPlayer()));
 		} else {
 			getEnemies().forEach(enemy -> enemy.setBehaviour(new MoveTowardsPlayer()));
@@ -205,17 +210,32 @@ public class Dungeon {
 			}
 		}
 	}
-	
+
 	public void playerPlacesBomb() {
-		if(this.getInventory().getBombNum() > 0) {
+		if (this.getInventory().getBombNum() > 0) {
 			this.getInventory().useBomb(); // this method just decrease numbomb by 1;
+			Bomb newBomb = new Bomb(player.getX(), player.getY(), this);
+			newBomb.lit();
+			// add into dungeon entity list
+			addEntity(newBomb);
+			// add imageview to gridpane
+			ImageView bombImg = new ImageView(newBomb.getImage());
+			newBomb.setNode(bombImg);
+			GridPane.setColumnIndex(bombImg, newBomb.getX());
+			GridPane.setRowIndex(bombImg, newBomb.getY());
+			this.controller.getSquares().getChildren().add(bombImg);
+			System.out.println("Use bomb");
 		} else {
 			System.out.println("No bomb to use");
 		}
 	}
-	
+
 	public void pickUpPotion(Potion potion) {
 		this.getInventory().pickUpPotion();
 		removeEntity(potion);
+	}
+
+	public void bombActivated(Bomb bomb) {
+
 	}
 }

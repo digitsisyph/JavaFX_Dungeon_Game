@@ -33,7 +33,9 @@ public class Bomb extends Entity {
 
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
-			this.getDungeon().pickUpBomb(this);
+			if (this.state == unlit) {
+				this.getDungeon().pickUpBomb(this);
+			}
 		}
 	}
 
@@ -91,6 +93,11 @@ public class Bomb extends Entity {
 	 */
 	public BombState getLit4() {
 		return lit4;
+	}
+
+	@Override
+	public String toString() {
+		return "Bomb state=" + state + "]";
 	}
 
 }

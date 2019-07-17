@@ -32,4 +32,11 @@ public class LitBomb1 implements BombState {
 		 */
 	}
 
+	@Override
+	public String toString() {
+		return "LitBomb1 [bomb=" + bomb + "]";
+	}
+	
+	
+
 }
