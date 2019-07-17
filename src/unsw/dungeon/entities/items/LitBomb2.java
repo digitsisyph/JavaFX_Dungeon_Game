@@ -21,9 +21,10 @@ public class LitBomb2 implements BombState {
 	}
 
 	@Override
-	public void next() {
+	public boolean next() {
 		System.out.println("Bomb now lit3");
 		bomb.setState(bomb.getLit3());
+		return true;
 	}
 
 	@Override

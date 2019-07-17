@@ -49,8 +49,8 @@ public class Bomb extends Entity {
 		this.setPassThrough(state.passThrough());
 	}
 
-	public void next() {
-		state.next();
+	public boolean next() {
+		return state.next();
 	}
 
 	/**

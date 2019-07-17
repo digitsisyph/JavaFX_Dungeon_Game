@@ -21,9 +21,10 @@ public class UnlitBomb implements BombState {
 	}
 
 	@Override
-	public void next() {
+	public boolean next() {
 		// does not have next state
 		// because it is not lit
+		return false;
 	}
 
 	@Override

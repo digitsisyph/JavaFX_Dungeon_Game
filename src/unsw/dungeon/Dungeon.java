@@ -128,7 +128,12 @@ public class Dungeon {
 	}
 
 	private void bombTick() {
-		getBombs().forEach(bomb -> bomb.next());
+		for (Bomb b : getBombs()) {
+			if(b.next()) {
+				ImageView img = (ImageView) b.getNode();
+				img.setImage(b.getImage());
+			}
+		}
 	}
 
 	private void inventoryTick() {
