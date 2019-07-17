@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -130,12 +131,14 @@ public class Dungeon {
 	private void bombTick() {
 		for (Bomb b : getBombs()) {
 			if(b.next()) {
-				ImageView img = (ImageView) b.getNode();
-				img.setImage(b.getImage());
+				updateGridImage(b, b.getImage());
 			}
 		}
 	}
-
+	public void updateGridImage(Entity ent, Image img) {
+		ImageView img1 = (ImageView) ent.getNode();
+		img1.setImage(img);
+	}
 	private void inventoryTick() {
 		getInventory().decreaseInvincibility();
 	}

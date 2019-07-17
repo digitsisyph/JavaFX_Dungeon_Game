@@ -1,7 +1,6 @@
 package unsw.dungeon.entities.items;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
@@ -66,10 +65,7 @@ public class Door extends Entity {
 	public void open() {
 		state.unlock();
 		this.setPassThrough(state.passThrough());
-		if (this.getNode() instanceof ImageView) {
-			ImageView img = (ImageView) this.getNode();
-			img.setImage(state.getImage());
-		}
+		getDungeon().updateGridImage(this, getImage());
 	}
 
 	public void collideWith(Entity entity) {
