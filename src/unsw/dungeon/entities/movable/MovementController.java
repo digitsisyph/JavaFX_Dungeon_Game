@@ -39,7 +39,7 @@ class MovementController {
 
     // helper function for moving up, down, left, right
     private void moveTo(Movable entity, int target_X, int target_Y) {
-        if (dungeon.isWalkable(target_X, target_Y)) {
+        if (dungeon.canOccupyGrid(target_X, target_Y)) {
             entity.x().set(target_X);
             entity.y().set(target_Y);
             notifyCollision(entity);

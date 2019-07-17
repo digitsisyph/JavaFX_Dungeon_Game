@@ -94,13 +94,13 @@ public class Dungeon {
 	}
 
 	// helper function: check whether a grid is walkable
-	public Boolean isWalkable(int X, int Y) {
+	public Boolean canOccupyGrid(int X, int Y) {
 		return this.getEntities(X, Y).stream().allMatch(Entity::canPassThrough)
 				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
 
 	public void playerMovementUpdate() {
-		getEnemies().forEach(enemy -> enemy.moveTowardsPlayer(this.player));
+		getEnemies().forEach(enemy -> enemy.move(this.player));
 		System.out.println("Goal Achieved: " + goals.satisfied());
 	}
 

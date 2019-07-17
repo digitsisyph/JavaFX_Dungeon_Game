@@ -22,7 +22,7 @@ public class Mediator {
 	}
 	
 	public Boolean canOccupyGrid(int x,int y) {
-		return dungeon.isWalkable(x, y);
+		return dungeon.canOccupyGrid(x, y);
 	}
 	
 	public void playerMovementTick() {

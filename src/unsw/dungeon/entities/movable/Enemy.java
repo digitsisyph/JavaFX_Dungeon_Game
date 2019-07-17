@@ -4,20 +4,16 @@ import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
-import unsw.dungeon.entities.movable.CollisionBehavior;
-import java.util.Random;
 
 public class Enemy extends Entity implements Movable {
 
 	private MovementController movement;
-	// for random movement
-	private Random rand = new Random();
-
+	private MovementBehaviour behaviour;
 	public Enemy(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.movement = new MovementController(dungeon);
 		this.setPassThrough(false);
-		// TODO Collision behavior for enemy
+		this.behaviour = new MoveTowardsPlayer();
 	}
 
 	@Override
@@ -25,54 +21,15 @@ public class Enemy extends Entity implements Movable {
 		return new Image("/deep_elf_master_archer.png");
 	}
 
-
-	// TODO this is just a very basic enemy AI, we can try to improve
-	// added a random movement
-	public void moveTowardsPlayer(Player player) {
-		int ran = rand.nextInt(2);
-
-		if (ran == 0) {
-			if (player.getX() > this.getX()
-					&& getDungeon().isWalkable(this.getX() + 1, this.getY())) {
-				moveRight();
-			} else if (player.getX() < this.getX()
-					&& getDungeon().isWalkable(this.getX() - 1, this.getY())) {
-				moveLeft();
-			} else if (player.getY() > this.getY()
-					&& getDungeon().isWalkable(this.getX(), this.getY() + 1)) {
-				moveDown();
-			} else if (player.getY() < this.getY()
-					&& getDungeon().isWalkable(this.getX(), this.getY() - 1)) {
-				moveUp();
-			}
-		} else {
-			if (player.getY() > this.getY()
-					&& getDungeon().isWalkable(this.getX(), this.getY() + 1)) {
-				moveDown();
-			} else if (player.getY() < this.getY()
-					&& getDungeon().isWalkable(this.getX(), this.getY() - 1)) {
-				moveUp();
-			} else if (player.getX() > this.getX()
-					&& getDungeon().isWalkable(this.getX() + 1, this.getY())) {
-				moveRight();
-			} else if (player.getX() < this.getX()
-					&& getDungeon().isWalkable(this.getX() - 1, this.getY())) {
-				moveLeft();
-			}
-		}
-	}
-
-	public void moveAwayFromPlayer(Player player) {
-		// TODO
+	public void move(Player player) {
+		behaviour.move(this, player);
 	}
 
 	public void moveUp() {
-		System.out.println("Move UP");
 		this.movement.moveUp(this);
 	}
 
 	public void moveDown() {
-		System.out.println("Move DOWN");
 		this.movement.moveDown(this);
 	}
 
