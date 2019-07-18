@@ -1,6 +1,5 @@
 package unsw.dungeon.entities.items;
 
-import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
@@ -27,7 +26,7 @@ public class Bomb extends Entity {
 	}
 
 	@Override
-	public Image getImage() {
+	public String getImagePath() {
 		return state.getImage();
 	}
 

@@ -125,15 +125,16 @@ public class Dungeon {
 	private void bombTick() {
 		for (Bomb b : getBombs()) {
 			if (b.next()) {
-				updateGridImage(b, b.getImage());
+				updateGridImage(b, b.getImagePath());
 			}
 		}
 	}
 
-	public void updateGridImage(Entity ent, Image img) {
+	public void updateGridImage(Entity ent, String imgPath) {
 		if (this.controller != null) {
-			ImageView img1 = (ImageView) ent.getNode();
-			img1.setImage(img);
+			Image img = new Image(imgPath);
+			ImageView imgView = (ImageView) ent.getNode();
+			imgView.setImage(img);
 		}
 	}
 
@@ -253,7 +254,7 @@ public class Dungeon {
 			// add into dungeon entity list
 			addEntity(newBomb);
 			// add imageview to gridpane
-			ImageView bombImg = new ImageView(newBomb.getImage());
+			ImageView bombImg = new ImageView(newBomb.getImagePath());
 			newBomb.setNode(bombImg);
 			GridPane.setColumnIndex(bombImg, newBomb.getX());
 			GridPane.setRowIndex(bombImg, newBomb.getY());

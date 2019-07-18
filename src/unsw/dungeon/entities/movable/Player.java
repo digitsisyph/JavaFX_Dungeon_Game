@@ -1,6 +1,5 @@
 package unsw.dungeon.entities.movable;
 
-import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
@@ -56,8 +55,8 @@ public class Player extends Entity implements Movable {
 	}
 
 	@Override
-	public Image getImage() {
-		return new Image("/human_new.png");
+	public String getImagePath() {
+		return "/human_new.png";
 	}
 
 	// TODO

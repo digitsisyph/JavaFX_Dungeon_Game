@@ -1,7 +1,5 @@
 package unsw.dungeon.entities.items;
 
-import javafx.scene.image.Image;
-
 public class LitBomb1 implements BombState {
 
 	Bomb bomb;
@@ -11,8 +9,8 @@ public class LitBomb1 implements BombState {
 	}
 
 	@Override
-	public Image getImage() {
-		return new Image("/bomb_lit_1.png");
+	public String getImage() {
+		return "/bomb_lit_1.png";
 	}
 
 	@Override

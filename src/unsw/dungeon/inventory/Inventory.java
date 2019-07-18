@@ -94,6 +94,10 @@ public class Inventory {
 	public boolean isInvincible() {
 		return invincible;
 	}
+	
+	public int invincStep() {
+		return invincibilitySteps;
+	}
 
 	// for debug
 	public void debug() {

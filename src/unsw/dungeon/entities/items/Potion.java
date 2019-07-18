@@ -1,6 +1,5 @@
 package unsw.dungeon.entities.items;
 
-import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
@@ -14,8 +13,8 @@ public class Potion extends Entity {
 	}
 
 	@Override
-	public Image getImage() {
-		return new Image("/brilliant_blue_new.png");
+	public String getImagePath() {
+		return "/brilliant_blue_new.png";
 	}
 
 	// TODO
