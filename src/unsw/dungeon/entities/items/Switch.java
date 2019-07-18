@@ -4,8 +4,6 @@ import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
-import unsw.dungeon.entities.movable.Boulder;
-import unsw.dungeon.entities.movable.Player;
 
 public class Switch extends Entity {
 
