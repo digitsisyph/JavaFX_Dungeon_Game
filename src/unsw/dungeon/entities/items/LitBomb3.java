@@ -24,6 +24,7 @@ public class LitBomb3 implements BombState {
 	public boolean next() {
 		System.out.println("Bomb now lit4");
 		bomb.setState(bomb.getLit4());
+		bomb.getDungeon().bombActivated(bomb);
 		return true;
 	}
 

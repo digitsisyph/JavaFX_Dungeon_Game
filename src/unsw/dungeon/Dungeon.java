@@ -277,13 +277,10 @@ public class Dungeon {
 	// a helper function to kill the player
 	private void killPlayer() {
 		// if the player is invincible now, it would not die
-		if (getInventory().isInvincible())
-			return;
-		else {
+		if (!getInventory().isInvincible()) {
 			removeEntity(player);
 			gameOver();
 		}
-
 	}
 
 	public void bombActivated(Bomb bomb) {
@@ -296,6 +293,6 @@ public class Dungeon {
 				removeEntity(entity);
 			}
 		}
-		removeEntity(bomb);
+		//removeEntity(bomb);
 	}
 }

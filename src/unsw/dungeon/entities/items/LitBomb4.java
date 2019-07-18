@@ -23,7 +23,7 @@ public class LitBomb4 implements BombState {
 	@Override
 	public boolean next() {
 		System.out.println("EXPLOSION");
-		bomb.getDungeon().bombActivated(bomb);
+		bomb.getDungeon().removeEntity(bomb);
 		return false;
 	}
 
