@@ -167,6 +167,10 @@ public class Dungeon {
 				.collect(Collectors.toList());
 	}
 
+	public List<Entity> getEntityOfType(EntityType type) {
+		return entities.stream().filter(entity -> entity.type().equals(type)).collect(Collectors.toList());
+	}
+
 	public Inventory getInventory() {
 		return inventory;
 	}
