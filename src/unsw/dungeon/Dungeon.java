@@ -228,7 +228,7 @@ public class Dungeon {
 		} else {
 			// TODO player die
 			// this is broken right now
-			removeEntity(player);
+			killPlayer();
 		}
 	}
 

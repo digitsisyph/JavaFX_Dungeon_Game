@@ -4,9 +4,9 @@ import javafx.scene.image.Image;
 
 public class DoorClosedState implements DoorState {
 
-	Door door;
+	private Door door;
 
-	public DoorClosedState(Door door) {
+	DoorClosedState(Door door) {
 		this.door = door;
 	}
 
@@ -16,13 +16,14 @@ public class DoorClosedState implements DoorState {
 	}
 
 	@Override
-	public boolean passThrough() {
+	public boolean canPassThrough() {
 		return false;
 	}
 
 	@Override
 	public void unlock() {
-		door.setState(door.getOpenedDoor());
+		door.setState(new DoorOpenedState(door));
+		door.getDungeon().updateGridImage(door, getImage());
 	}
 
 }

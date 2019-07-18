@@ -4,9 +4,9 @@ import javafx.scene.image.Image;
 
 public class DoorOpenedState implements DoorState {
 
-	Door door;
+	private Door door;
 
-	public DoorOpenedState(Door door) {
+	DoorOpenedState(Door door) {
 		this.door = door;
 	}
 	
@@ -16,7 +16,7 @@ public class DoorOpenedState implements DoorState {
 	}
 
 	@Override
-	public boolean passThrough() {
+	public boolean canPassThrough() {
 		return true;
 	}
 

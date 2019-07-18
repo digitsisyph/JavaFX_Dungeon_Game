@@ -9,6 +9,7 @@ public class Enemy extends Entity implements Movable {
 
 	private MovementController movement;
 	private MovementBehaviour behaviour;
+
 	public Enemy(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.movement = new MovementController(dungeon);

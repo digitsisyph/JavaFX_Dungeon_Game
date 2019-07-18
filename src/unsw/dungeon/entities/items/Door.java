@@ -9,17 +9,17 @@ import unsw.dungeon.entities.movable.Player;
 public class Door extends Entity {
 
 	private int id;
-	private DoorState closedDoor;
-	private DoorState openedDoor;
 	private DoorState state;
 
 	public Door(int x, int y, Dungeon dungeon, int id) {
 		super(x, y, dungeon);
-		closedDoor = new DoorClosedState(this);
-		openedDoor = new DoorOpenedState(this);
-		this.state = closedDoor;
 		this.id = id;
-		this.setPassThrough(state.passThrough());
+		this.state = new DoorClosedState(this);
+	}
+
+	@Override
+	public Boolean canPassThrough() {
+		return this.getState().canPassThrough();
 	}
 
 	@Override
@@ -48,24 +48,8 @@ public class Door extends Entity {
 		return id;
 	}
 
-	/**
-	 * @return the closedDoor
-	 */
-	public DoorState getClosedDoor() {
-		return closedDoor;
-	}
-
-	/**
-	 * @return the openedDoor
-	 */
-	public DoorState getOpenedDoor() {
-		return openedDoor;
-	}
-
 	public void open() {
 		state.unlock();
-		this.setPassThrough(state.passThrough());
-		getDungeon().updateGridImage(this, getImage());
 	}
 
 	public void collideWith(Entity entity) {

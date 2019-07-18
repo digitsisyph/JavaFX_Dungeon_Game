@@ -42,21 +42,11 @@ class MovementController {
         if (dungeon.canOccupyGrid(target_X, target_Y)) {
             entity.x().set(target_X);
             entity.y().set(target_Y);
-            notifyCollision(entity);
-        } else {
-            notifyCollision(entity, target_X, target_Y);
         }
+        notifyCollision(entity, target_X, target_Y);
         debuggerIO(entity);
     }
 
-
-    // notify a collision
-    private void notifyCollision(Movable movable) {
-        List<Entity> collidedEntities = dungeon.getEntities(movable.getX(), movable.getY());
-        if (movable instanceof Entity) {
-            collidedEntities.forEach(entity -> entity.collideWith((Entity) movable));
-        }
-    }
 
     // mainly for pushing and opening a door
     private void notifyCollision(Movable movable, int target_X, int target_Y) {

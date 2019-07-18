@@ -1,7 +1,6 @@
 package unsw.dungeon.goal;
 
 import unsw.dungeon.Dungeon;
-import unsw.dungeon.goal.GoalComponent;
 
 public class TreasureGoal extends GoalComponent {
 	private Dungeon dungeon;
@@ -12,11 +11,7 @@ public class TreasureGoal extends GoalComponent {
 
 	@Override
 	public boolean satisfied() {
-		if (dungeon.getTreasures().size() == 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return dungeon.getTreasures().size() == 0;
 	}
 
 	@Override
