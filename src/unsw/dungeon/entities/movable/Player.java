@@ -62,7 +62,9 @@ public class Player extends Entity implements Movable {
 
 	// TODO
 	public void collideWith(Entity entity) {
-		//
+		if (entity instanceof Enemy) {
+			this.getDungeon().fightEnemy((Enemy) entity);
+		}
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import unsw.dungeon.goal.*;
 import unsw.dungeon.inventory.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -138,6 +139,8 @@ public class Dungeon {
 		System.out.println("Goal Achieved: " + goals.satisfied());
 	}
 
+	// some retriever functions
+
 	public List<Enemy> getEnemies() {
 		return entities.stream().filter(entity -> entity instanceof Enemy).map(Enemy.class::cast)
 				.collect(Collectors.toList());
@@ -256,8 +259,43 @@ public class Dungeon {
 		removeEntity(potion);
 	}
 
+	// a helper function for bomb
+	private List<Entity> getNearbyEntities(int X, int Y) {
+		List<Entity> nearbyEntities = new LinkedList<Entity>();
+		nearbyEntities.addAll(getEntities(X, Y + 1));
+		nearbyEntities.addAll(getEntities(X, Y - 1));
+		nearbyEntities.addAll(getEntities(X + 1, Y));
+		nearbyEntities.addAll(getEntities(X - 1, Y));
+		return nearbyEntities;
+	}
+
+	// TODO game over
+	private void gameOver() {
+		//
+	}
+
+	// a helper function to kill the player
+	private void killPlayer() {
+		// if the player is invincible now, it would not die
+		if (getInventory().isInvincible())
+			return;
+		else {
+			removeEntity(player);
+			gameOver();
+		}
+
+	}
+
 	public void bombActivated(Bomb bomb) {
-		// TODO:: Destroy neighbour entities
+		List<Entity> nearbyEntities = getNearbyEntities(bomb.getX(), bomb.getY());
+		for (Entity entity : nearbyEntities) {
+			if (entity instanceof Player) {
+				killPlayer();
+			} else if (entity instanceof Enemy
+					|| entity instanceof Boulder) {
+				removeEntity(entity);
+			}
+		}
 		removeEntity(bomb);
 	}
 }
