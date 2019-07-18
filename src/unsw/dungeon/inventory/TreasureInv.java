@@ -1,7 +1,5 @@
 package unsw.dungeon.inventory;
 
-import unsw.dungeon.entities.items.Treasure;
-
 class TreasureInv {
     private int num_treasures;
 
@@ -11,5 +9,9 @@ class TreasureInv {
 
     public void pickTreasure() {
         this.num_treasures++;
+    }
+    
+    public int getNumTreasures() {
+    	return this.num_treasures;
     }
 }

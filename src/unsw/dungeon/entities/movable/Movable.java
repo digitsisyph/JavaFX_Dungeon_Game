@@ -1,7 +1,6 @@
 package unsw.dungeon.entities.movable;
 
 import javafx.beans.property.IntegerProperty;
-import org.w3c.dom.Entity;
 
 public interface Movable {
 
