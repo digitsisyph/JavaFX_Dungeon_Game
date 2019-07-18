@@ -22,15 +22,7 @@ public class ANDGoals extends GoalComponent {
 
 	@Override
 	public boolean satisfied() {
-		boolean result = true;
-		for (GoalComponent goal : goals) {
-			result = goal.satisfied();
-			// every result must be true;
-			if(result == false) {
-				return false;
-			}
-		}
-		return result;
+		return goals.stream().allMatch(goal -> goal.satisfied());
 	}
 
 	@Override

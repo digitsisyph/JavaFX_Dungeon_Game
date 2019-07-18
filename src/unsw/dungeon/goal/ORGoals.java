@@ -1,7 +1,5 @@
 package unsw.dungeon.goal;
 
-import unsw.dungeon.goal.GoalComponent;
-
 import java.util.ArrayList;
 
 public class ORGoals extends GoalComponent {
@@ -25,15 +23,7 @@ public class ORGoals extends GoalComponent {
 
 	@Override
 	public boolean satisfied() {
-		boolean result = false;
-		for (GoalComponent goal : goals) {
-			result = goal.satisfied();
-			// only one result must be true;
-			if (result == true) {
-				return true;
-			}
-		}
-		return result;
+		return goals.stream().anyMatch(goal -> goal.satisfied());
 	}
 
 	@Override

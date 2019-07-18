@@ -1,17 +1,17 @@
 package unsw.dungeon;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import unsw.dungeon.entities.*;
+import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.items.*;
 import unsw.dungeon.entities.movable.Boulder;
 import unsw.dungeon.entities.movable.Enemy;
 import unsw.dungeon.entities.movable.Player;
 import unsw.dungeon.goal.*;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 /**
  * Loads a dungeon from a .json file.
@@ -137,7 +137,7 @@ public abstract class DungeonLoader {
 			entity = plate;
 			break;
 		case "bomb":
-			Bomb bomb = new Bomb(x, y, dungeon);
+			UnlitBomb bomb = new UnlitBomb(x, y, dungeon);
 			onLoad(bomb);
 			entity = bomb;
 			break;

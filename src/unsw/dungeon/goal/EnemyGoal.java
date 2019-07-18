@@ -3,6 +3,7 @@ package unsw.dungeon.goal;
 import unsw.dungeon.Dungeon;
 
 public class EnemyGoal extends GoalComponent {
+
 	private Dungeon dungeon;
 
 	public EnemyGoal(Dungeon dungeon) {
@@ -11,11 +12,7 @@ public class EnemyGoal extends GoalComponent {
 
 	@Override
 	public boolean satisfied() {
-		if (dungeon.getEnemies().size() == 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return dungeon.getEnemies().size() == 0;
 	}
 
 	@Override

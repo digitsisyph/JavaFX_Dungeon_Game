@@ -3,20 +3,19 @@
  */
 package unsw.dungeon;
 
-import unsw.dungeon.entities.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.items.*;
 import unsw.dungeon.entities.movable.*;
-import unsw.dungeon.goal.*;
-import unsw.dungeon.inventory.*;
+import unsw.dungeon.goal.GoalComponent;
+import unsw.dungeon.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
 
 /**
  * A dungeon in the interactive dungeon player.
@@ -34,7 +33,7 @@ public class Dungeon {
 	private List<Entity> entities;
 	private Player player;
 	private Inventory inventory;
-	private GoalComponent goals;
+	private GoalComponent goal;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
@@ -43,7 +42,7 @@ public class Dungeon {
 		this.player = null;
 		this.controller = null;
 		this.inventory = new Inventory();
-		this.goals = null;
+		this.goal = null;
 	}
 
 	// ---  getter ---
@@ -96,8 +95,13 @@ public class Dungeon {
 				.collect(Collectors.toList());
 	}
 
-	public List<Bomb> getBombs() {
-		return entities.stream().filter(entity -> entity instanceof Bomb).map(Bomb.class::cast)
+	public List<UnlitBomb> getUnlitBombs() {
+		return entities.stream().filter(entity -> entity instanceof UnlitBomb).map(UnlitBomb.class::cast)
+				.collect(Collectors.toList());
+	}
+
+	public List<LitBomb> getLitBombs() {
+		return entities.stream().filter(entity -> entity instanceof LitBomb).map(LitBomb.class::cast)
 				.collect(Collectors.toList());
 	}
 
@@ -121,7 +125,7 @@ public class Dungeon {
 	}
 
 	public void setGoal(GoalComponent goal) {
-		this.goals = goal;
+		this.goal = goal;
 	}
 
 	public void addEntity(Entity entity) {
@@ -178,10 +182,9 @@ public class Dungeon {
 	}
 
 	private void bombTick() {
-		for (Bomb b : getBombs()) {
-			if(b.next()) {
-				updateGridImage(b, b.getImage());
-			}
+		for (LitBomb b : getLitBombs()) {
+			b.nextState();
+			updateGridImage(b, b.getImage());
 		}
 	}
 	public void updateGridImage(Entity ent, Image img) {
@@ -193,7 +196,7 @@ public class Dungeon {
 	}
 
 	private void goalTick() {
-		System.out.println("Goal Achieved: " + goals.satisfied());
+		System.out.println("Goal Achieved: " + goal.satisfied());
 	}
 
 	// some retriever functions
@@ -205,22 +208,16 @@ public class Dungeon {
 	public void pickUpSword(Sword sword) {
 		removeEntity(sword);
 		this.getInventory().pickSword();
-		// TODO debug
-		this.getInventory().debug();
 	}
 
 	public void pickUpTreasure(Treasure treasure) {
 		removeEntity(treasure);
 		this.getInventory().pickTreasure();
-		// TODO debug
-		this.getInventory().debug();
 	}
 
-	public void pickUpBomb(Bomb bomb) {
+	public void pickUpBomb(UnlitBomb bomb) {
 		removeEntity(bomb);
 		this.getInventory().pickBomb();
-		// TODO debug
-		this.getInventory().debug();
 	}
 
 	public void fightEnemy(Enemy enemy) {
@@ -265,15 +262,14 @@ public class Dungeon {
 	public void playerPlacesBomb() {
 		if (this.getInventory().getBombNum() > 0) {
 			this.getInventory().useBomb(); // this method just decrease numbomb by 1;
-			Bomb newBomb = new Bomb(player.getX(), player.getY(), this);
-			newBomb.lit();
+			LitBomb bomb = new LitBomb(player.getX(), player.getY(), this);
 			// add into dungeon entity list
-			addEntity(newBomb);
+			addEntity(bomb);
 			// add imageview to gridpane
-			ImageView bombImg = new ImageView(newBomb.getImage());
-			newBomb.setNode(bombImg);
-			GridPane.setColumnIndex(bombImg, newBomb.getX());
-			GridPane.setRowIndex(bombImg, newBomb.getY());
+			ImageView bombImg = new ImageView(bomb.getImage());
+			bomb.setNode(bombImg);
+			GridPane.setColumnIndex(bombImg, bomb.getX());
+			GridPane.setRowIndex(bombImg, bomb.getY());
 			this.controller.getSquares().getChildren().add(bombImg);
 			System.out.println("Use bomb");
 		} else {
@@ -300,7 +296,7 @@ public class Dungeon {
 		}
 	}
 
-	public void bombActivated(Bomb bomb) {
+	public void explodeBomb(LitBomb bomb) {
 		List<Entity> nearbyEntities = getNearbyEntities(bomb.getX(), bomb.getY());
 		for (Entity entity : nearbyEntities) {
 			if (entity instanceof Player) {
@@ -310,6 +306,5 @@ public class Dungeon {
 				removeEntity(entity);
 			}
 		}
-		//removeEntity(bomb);
 	}
 }

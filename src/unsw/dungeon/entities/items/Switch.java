@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
+import unsw.dungeon.entities.movable.Boulder;
 
 public class Switch extends Entity {
 
@@ -17,8 +18,14 @@ public class Switch extends Entity {
 		return new Image("/pressure_plate.png");
 	}
 
-	public void collideWith(Entity entity) {
-		// TODO
+	public void collideWith(Entity entity) {;}
+
+	public boolean isActivated() {
+		for (Entity entity : getDungeon().getEntities(getX(), getY())) {
+			if (entity instanceof Boulder)
+				return true;
+		}
+		return false;
 	}
 
 	@Override
