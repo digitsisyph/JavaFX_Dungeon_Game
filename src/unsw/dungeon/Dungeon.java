@@ -46,6 +46,8 @@ public class Dungeon {
 		this.goals = null;
 	}
 
+	// ---  getter ---
+
 	public int getWidth() {
 		return width;
 	}
@@ -58,24 +60,72 @@ public class Dungeon {
 		return player;
 	}
 
-	public void setPlayer(Player player) {
-		this.player = player;
+	public DungeonController getController() {
+		return controller;
 	}
 
-	public void addEntity(Entity entity) {
-		entities.add(entity);
+	// helper function: To retrieve an entity in a specific grid
+	// if not found, this will return null
+	public List<Entity> getEntities(int X, int Y) {
+		return entities.stream().filter(entity -> (entity.getX() == X && entity.getY() == Y))
+				.collect(Collectors.toList());
+	}
+
+	// a helper function for bomb
+	private List<Entity> getNearbyEntities(int X, int Y) {
+		List<Entity> nearbyEntities = new LinkedList<Entity>();
+		nearbyEntities.addAll(getEntities(X, Y + 1));
+		nearbyEntities.addAll(getEntities(X, Y - 1));
+		nearbyEntities.addAll(getEntities(X + 1, Y));
+		nearbyEntities.addAll(getEntities(X - 1, Y));
+		return nearbyEntities;
+	}
+
+	public List<Enemy> getEnemies() {
+		return entities.stream().filter(entity -> entity instanceof Enemy).map(Enemy.class::cast)
+				.collect(Collectors.toList());
+	}
+
+	public List<Switch> getSwitches() {
+		return entities.stream().filter(entity -> entity instanceof Switch).map(Switch.class::cast)
+				.collect(Collectors.toList());
+	}
+
+	public List<Treasure> getTreasures() {
+		return entities.stream().filter(entity -> entity instanceof Treasure).map(Treasure.class::cast)
+				.collect(Collectors.toList());
+	}
+
+	public List<Bomb> getBombs() {
+		return entities.stream().filter(entity -> entity instanceof Bomb).map(Bomb.class::cast)
+				.collect(Collectors.toList());
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public List<Entity> getEntities() {
+		return entities;
+	}
+
+
+	// --- setter
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	public void setController(DungeonController controller) {
 		this.controller = controller;
 	}
 
-	public DungeonController getController() {
-		return controller;
+	public void setGoal(GoalComponent goal) {
+		this.goals = goal;
 	}
 
-	public void playerPick(Entity entity) {
-
+	public void addEntity(Entity entity) {
+		entities.add(entity);
 	}
 
 	public void removeEntity(Entity entity) {
@@ -86,18 +136,9 @@ public class Dungeon {
 		this.controller.getSquares().getChildren().remove(entity.getNode());
 	}
 
-	// helper function: To retrieve an entity in a specific grid
-	// if not found, this will return null
-	public List<Entity> getEntities(int X, int Y) {
-		return entities.stream().filter(entity -> (entity.getX() == X && entity.getY() == Y))
-				.collect(Collectors.toList());
-	}
 
-	// helper function: check whether a grid is walkable
-	public Boolean canOccupyGrid(int X, int Y) {
-		return this.getEntities(X, Y).stream().allMatch(Entity::canPassThrough)
-				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
-	}
+
+	// interactions
 
 	/*
 	 * TODO For every player movement, something must change Might be better to have
@@ -111,6 +152,22 @@ public class Dungeon {
 		goalTick();
 	}
 
+
+	public void playerPick(Entity entity) {
+
+	}
+
+	// helper function: check whether a grid is walkable
+	public Boolean canOccupyGrid(int X, int Y) {
+		return this.getEntities(X, Y).stream().allMatch(Entity::canPassThrough)
+				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
+	}
+
+
+
+	// --- Tick ----
+
+	// TODO refactor this to be state pattern
 	private void enemyTick() {
 		if (getInventory().isInvincible()) {
 			getEnemies().forEach(enemy -> enemy.setBehaviour(new MoveAwayFromPlayer()));
@@ -141,37 +198,7 @@ public class Dungeon {
 
 	// some retriever functions
 
-	public List<Enemy> getEnemies() {
-		return entities.stream().filter(entity -> entity instanceof Enemy).map(Enemy.class::cast)
-				.collect(Collectors.toList());
-	}
 
-	public List<Switch> getSwitches() {
-		return entities.stream().filter(entity -> entity instanceof Switch).map(Switch.class::cast)
-				.collect(Collectors.toList());
-	}
-
-	public List<Treasure> getTreasures() {
-		return entities.stream().filter(entity -> entity instanceof Treasure).map(Treasure.class::cast)
-				.collect(Collectors.toList());
-	}
-
-	public List<Bomb> getBombs() {
-		return entities.stream().filter(entity -> entity instanceof Bomb).map(Bomb.class::cast)
-				.collect(Collectors.toList());
-	}
-
-	public Inventory getInventory() {
-		return inventory;
-	}
-
-	public List<Entity> getEntities() {
-		return entities;
-	}
-
-	public void setGoal(GoalComponent goal) {
-		this.goals = goal;
-	}
 
 	// for interacting
 
@@ -257,16 +284,6 @@ public class Dungeon {
 	public void pickUpPotion(Potion potion) {
 		this.getInventory().pickUpPotion();
 		removeEntity(potion);
-	}
-
-	// a helper function for bomb
-	private List<Entity> getNearbyEntities(int X, int Y) {
-		List<Entity> nearbyEntities = new LinkedList<Entity>();
-		nearbyEntities.addAll(getEntities(X, Y + 1));
-		nearbyEntities.addAll(getEntities(X, Y - 1));
-		nearbyEntities.addAll(getEntities(X + 1, Y));
-		nearbyEntities.addAll(getEntities(X - 1, Y));
-		return nearbyEntities;
 	}
 
 	// TODO game over
