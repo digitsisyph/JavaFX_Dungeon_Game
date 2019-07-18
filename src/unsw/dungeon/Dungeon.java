@@ -82,8 +82,10 @@ public class Dungeon {
 		System.out.println("Remove:" + entity.toString());
 		// remove it from the dungeon
 		this.entities.remove(entity);
-		// remove its correspoding ImageView
-		this.controller.getSquares().getChildren().remove(entity.getNode());
+		// remove its corresponding ImageView
+		if (this.controller != null) {
+			this.controller.getSquares().getChildren().remove(entity.getNode());
+		}
 	}
 
 	// helper function: To retrieve an entity in a specific grid
@@ -122,15 +124,19 @@ public class Dungeon {
 
 	private void bombTick() {
 		for (Bomb b : getBombs()) {
-			if(b.next()) {
+			if (b.next()) {
 				updateGridImage(b, b.getImage());
 			}
 		}
 	}
+
 	public void updateGridImage(Entity ent, Image img) {
-		ImageView img1 = (ImageView) ent.getNode();
-		img1.setImage(img);
+		if (this.controller != null) {
+			ImageView img1 = (ImageView) ent.getNode();
+			img1.setImage(img);
+		}
 	}
+
 	private void inventoryTick() {
 		getInventory().decreaseInvincibility();
 	}
@@ -291,8 +297,7 @@ public class Dungeon {
 		for (Entity entity : nearbyEntities) {
 			if (entity instanceof Player) {
 				killPlayer();
-			} else if (entity instanceof Enemy
-					|| entity instanceof Boulder) {
+			} else if (entity instanceof Enemy || entity instanceof Boulder) {
 				removeEntity(entity);
 			}
 		}

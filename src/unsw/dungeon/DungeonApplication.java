@@ -15,7 +15,7 @@ public class DungeonApplication extends Application {
 		primaryStage.setTitle("Dungeon");
 
 		// use ControllerLoader to load map from a json file
-		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("TEST_1.json");
+		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
 		// create a Controller from the ControllerLoader
 		DungeonController controller = dungeonLoader.loadController();
 
