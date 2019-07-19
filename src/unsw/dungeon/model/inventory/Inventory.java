@@ -88,6 +88,13 @@ public class Inventory {
 		}
 	}
 
+	public SwordInv getSword() {
+		return this.sword;
+	}
+	
+	public int getSwordDurability() {
+		return this.sword.getDurability();
+	}
 	/**
 	 * @return the invincible
 	 */
