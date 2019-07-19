@@ -6,6 +6,7 @@ public class DoorClosedState implements DoorState {
 
 	DoorClosedState(Door door) {
 		this.door = door;
+		door.setImagePath(this.getImagePath());
 	}
 
 	@Override
@@ -19,9 +20,8 @@ public class DoorClosedState implements DoorState {
 	}
 
 	@Override
-	public void unlock() {
+	public void nextState() {
 		door.setState(new DoorOpenedState(door));
-		door.getDungeon().updateEntityImage(door);
 	}
 
 }

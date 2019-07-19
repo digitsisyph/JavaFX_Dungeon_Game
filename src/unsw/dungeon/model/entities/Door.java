@@ -18,11 +18,6 @@ public class Door extends Entity {
 		return this.getState().canPassThrough();
 	}
 
-	@Override
-	public String getImagePath() {
-		return state.getImagePath();
-	}
-
 	/**
 	 * @return the state
 	 */
@@ -45,7 +40,7 @@ public class Door extends Entity {
 	}
 
 	public void open() {
-		state.unlock();
+		state.nextState();
 	}
 
 	public void collideWith(Entity entity) {

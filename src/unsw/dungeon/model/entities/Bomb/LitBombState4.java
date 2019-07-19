@@ -8,6 +8,7 @@ public class LitBombState4 implements LitBombState {
 		this.bomb = bomb;
 		// in this state, the bomb explodes
 		bomb.getDungeon().explodeBomb(bomb);
+		bomb.setImagePath(this.getImagePath());
 	}
 
 	@Override
@@ -16,7 +17,7 @@ public class LitBombState4 implements LitBombState {
 	}
 
 	@Override
-	public void next() {
+	public void nextState() {
 		// after this state, the bomb would be removed
 		bomb.getDungeon().removeEntity(bomb);
 	}

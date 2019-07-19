@@ -6,6 +6,7 @@ public class DoorOpenedState implements DoorState {
 
 	DoorOpenedState(Door door) {
 		this.door = door;
+		door.setImagePath(this.getImagePath());
 	}
 	
 	@Override
@@ -19,7 +20,7 @@ public class DoorOpenedState implements DoorState {
 	}
 
 	@Override
-	public void unlock() {
+	public void nextState() {
 		System.out.println("Door is already opened");
 	}
 

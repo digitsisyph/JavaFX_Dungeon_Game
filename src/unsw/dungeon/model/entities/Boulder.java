@@ -8,13 +8,23 @@ public class Boulder extends Entity implements Movable {
 
 	public Boulder(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.setPassThrough(false);
-		this.movement = new Movement(this, dungeon);
+		movement = new Movement(this, dungeon);
+		setPassThrough(false);
+		setImagePath("/boulder.png");
 	}
 
-	@Override
-	public String getImagePath() {
-		return "/boulder.png";
+	public void collideWith(Entity entity) {
+		if (entity instanceof Player) {
+			if (entity.getY() > this.getY()) {
+				this.moveUp();
+			} else if (entity.getY() < this.getY()) {
+				this.moveDown();
+			} else if (entity.getX() < this.getX()) {
+				this.moveRight();
+			} else if (entity.getX() > this.getX()) {
+				this.moveLeft();
+			}
+		}
 	}
 
 	public void moveUp() {
@@ -31,20 +41,6 @@ public class Boulder extends Entity implements Movable {
 
 	public void moveRight() {
 		this.movement.moveRight();
-	}
-
-	public void collideWith(Entity entity) {
-		if (entity instanceof Player) {
-			if (entity.getY() > this.getY()) {
-				this.moveUp();
-			} else if (entity.getY() < this.getY()) {
-				this.moveDown();
-			} else if (entity.getX() < this.getX()) {
-				this.moveRight();
-			} else if (entity.getX() > this.getX()) {
-				this.moveLeft();
-			}
-		}
 	}
 
 	@Override

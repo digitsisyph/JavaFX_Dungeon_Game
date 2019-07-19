@@ -3,8 +3,6 @@
  */
 package unsw.dungeon.model;
 
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import unsw.dungeon.controller.DungeonController;
 import unsw.dungeon.model.entities.Bomb.LitBomb;
 import unsw.dungeon.model.entities.Bomb.UnlitBomb;
@@ -135,6 +133,12 @@ public class Dungeon {
 		entities.add(entity);
 	}
 
+	// create a new entity in the dungeon
+	public void createEntity(Entity entity) {
+		controller.addEntityImage(entity);
+		entities.add(entity);
+	}
+
 	public void removeEntity(Entity entity) {
 		System.out.println("Remove:" + entity.toString());
 		// remove it from the dungeon
@@ -143,6 +147,28 @@ public class Dungeon {
 		if (this.controller != null)
 			this.controller.removeEntityImage(entity);
 	}
+
+	// player movement
+	public void movePlayerUp() {
+		if (player != null)
+			player.moveUp();
+	}
+
+	public void movePlayerDown() {
+		if (player != null)
+			player.moveDown();
+	}
+
+	public void movePlayerRight() {
+		if (player != null)
+			player.moveRight();
+	}
+
+	public void movePlayerLeft() {
+		if (player != null)
+			player.moveLeft();
+	}
+
 	// interactions
 
 	/*
@@ -151,10 +177,11 @@ public class Dungeon {
 	 * class
 	 */
 	public void playerMovementUpdate() {
-		enemyTick();
-		bombTick();
-		inventoryTick();
-		goalTick();
+		System.out.println("Player @ " + player.getX() + " " + player.getY());
+		enemyUpdate();
+		bombUpdate();
+		inventoryUpdate();
+		goalUpdate();
 	}
 
 	// helper function: check whether a grid is walkable
@@ -166,7 +193,7 @@ public class Dungeon {
 	// --- Tick ----
 
 	// TODO refactor this to be state pattern
-	private void enemyTick() {
+	private void enemyUpdate() {
 		if (getInventory().isInvincible()) {
 			getEnemies().forEach(enemy -> enemy.setBehaviour(new EnemyMoveAway()));
 		} else {
@@ -175,24 +202,16 @@ public class Dungeon {
 		getEnemies().forEach(enemy -> enemy.move(this.player));
 	}
 
-	private void bombTick() {
-		for (LitBomb b : getLitBombs()) {
-			b.nextState();
-			updateEntityImage(b);
-		}
+	private void bombUpdate() {
+		getLitBombs().forEach(bomb -> bomb.nextState());
 	}
 
-	public void updateEntityImage(Entity entity) {
-		if (this.controller != null)
-			controller.updateEntityImage(entity);
-	}
-
-	private void inventoryTick() {
+	private void inventoryUpdate() {
 		getInventory().decreaseInvincibility();
 	}
 
-	private void goalTick() {
-		System.out.println("Goal Achieved: " + goalAchieved());
+	private void goalUpdate() {
+		System.out.println("Goal Achieved: " + goal.isSatisfied());
 	}
 
 	// some retriever functions
@@ -225,6 +244,7 @@ public class Dungeon {
 		}
 	}
 
+	// pickUp helper
 	private void pickUpSword(Sword sword) {
 		removeEntity(sword);
 		this.getInventory().pickSword();
@@ -288,17 +308,9 @@ public class Dungeon {
 
 	public void playerPlacesBomb() {
 		if (this.getInventory().getBombNum() > 0) {
-			this.getInventory().useBomb(); // this method just decrease numbomb by 1;
-			LitBomb bomb = new LitBomb(player.getX(), player.getY(), this);
-			// add into dungeon entity list
-			addEntity(bomb);
-			// add imageview to gridpane
-			ImageView bombImg = new ImageView(bomb.getImagePath());
-			bomb.setNode(bombImg);
-			GridPane.setColumnIndex(bombImg, bomb.getX());
-			GridPane.setRowIndex(bombImg, bomb.getY());
-			this.controller.getSquares().getChildren().add(bombImg);
 			System.out.println("Use bomb");
+			this.getInventory().useBomb(); // this method just decrease numbomb by 1;
+			createEntity(new LitBomb(player.getX(), player.getY(), this));
 		} else {
 			System.out.println("No bomb to use");
 		}
@@ -306,7 +318,7 @@ public class Dungeon {
 
 	// TODO game over
 	private void gameOver() {
-		//
+		//if (goal.isSatisfied())
 	}
 	
 	public boolean goalAchieved() {
@@ -316,7 +328,8 @@ public class Dungeon {
 	private void killPlayer() {
 		// if the player is invincible now, it would not die
 		if (!getInventory().isInvincible()) {
-			removeEntity(player);
+			removeEntity(this.player);
+			this.player = null;
 			gameOver();
 		}
 	}
