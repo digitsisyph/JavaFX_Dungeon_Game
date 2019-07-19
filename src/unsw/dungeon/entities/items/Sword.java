@@ -20,7 +20,7 @@ public class Sword extends Entity {
 
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player)
-			this.getDungeon().pickUpSword(this);
+			this.getDungeon().pickUp(this);
 	}
 
 	@Override

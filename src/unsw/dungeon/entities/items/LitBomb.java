@@ -24,7 +24,7 @@ public class LitBomb extends Entity {
 
 	@Override
 	public EntityType type() {
-		return EntityType.BOMB;
+		return EntityType.LITBOMB;
 	}
 
 	public void nextState() {

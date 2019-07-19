@@ -20,12 +20,12 @@ public class UnlitBomb extends Entity {
 
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player)
-			this.getDungeon().pickUpBomb(this);
+			this.getDungeon().pickUp(this);
 	}
 
 	@Override
 	public EntityType type() {
-		return EntityType.BOMB;
+		return EntityType.UNLITBOMB;
 	}
 
 }

@@ -20,7 +20,7 @@ public class Potion extends Entity {
 
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player)
-			this.getDungeon().pickUpPotion(this);
+			this.getDungeon().pickUp(this);
 	}
 
 	@Override

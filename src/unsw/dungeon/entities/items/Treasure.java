@@ -20,7 +20,7 @@ public class Treasure extends Entity {
 
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player)
-			this.getDungeon().pickUpTreasure(this);
+			this.getDungeon().pickUp(this);
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class Key extends Entity {
 
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player)
-			this.getDungeon().pickUpKey(this);
+			this.getDungeon().pickUp(this);
 	}
 
 	@Override

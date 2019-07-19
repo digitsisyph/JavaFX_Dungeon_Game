@@ -203,22 +203,66 @@ public class Dungeon {
 
 
 
-	// for interacting
+	// for picking up
 
-	public void pickUpSword(Sword sword) {
+	public void pickUp(Entity entity) {
+		switch (entity.type()) {
+			case SWORD:
+				pickUpSword((Sword) entity);
+				break;
+
+			case TREASURE:
+				pickUpTreasure((Treasure) entity);
+				break;
+
+			case UNLITBOMB:
+				pickUpBomb((UnlitBomb) entity);
+				break;
+
+			case POTION:
+				pickUpPotion((Potion) entity);
+				break;
+
+			case KEY:
+				pickUpKey((Key) entity);
+				break;
+		}
+	}
+
+	private void pickUpSword(Sword sword) {
 		removeEntity(sword);
 		this.getInventory().pickSword();
 	}
 
-	public void pickUpTreasure(Treasure treasure) {
+	private void pickUpTreasure(Treasure treasure) {
 		removeEntity(treasure);
 		this.getInventory().pickTreasure();
 	}
 
-	public void pickUpBomb(UnlitBomb bomb) {
+	private void pickUpBomb(UnlitBomb bomb) {
 		removeEntity(bomb);
 		this.getInventory().pickBomb();
 	}
+
+	private void pickUpPotion(Potion potion) {
+		this.getInventory().pickUpPotion();
+		removeEntity(potion);
+	}
+
+	private void pickUpKey(Key key) {
+		// player can only have 1 key
+		if (this.getInventory().getKey() == null) {
+			this.getInventory().pickKey(key.getId());
+			removeEntity(key);
+			System.out.println("Key picked up");
+		} else {
+			System.out.println("Already has a key");
+		}
+		this.getInventory().debug();
+	}
+
+
+	// --- other interactions
 
 	public void fightEnemy(Enemy enemy) {
 		if (this.getInventory().isInvincible()) {
@@ -230,18 +274,6 @@ public class Dungeon {
 			// this is broken right now
 			killPlayer();
 		}
-	}
-
-	public void pickUpKey(Key key) {
-		// player can only have 1 key
-		if (this.getInventory().getKey() == null) {
-			this.getInventory().pickKey(key.getId());
-			removeEntity(key);
-			System.out.println("Key picked up");
-		} else {
-			System.out.println("Already has a key");
-		}
-		this.getInventory().debug();
 	}
 
 	public void attemptToOpenDoor(Door door) {
@@ -277,10 +309,7 @@ public class Dungeon {
 		}
 	}
 
-	public void pickUpPotion(Potion potion) {
-		this.getInventory().pickUpPotion();
-		removeEntity(potion);
-	}
+
 
 	// TODO game over
 	private void gameOver() {
