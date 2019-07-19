@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import unsw.dungeon.model.entities.Boulder;
 import unsw.dungeon.model.entities.Enemy;
 import unsw.dungeon.model.entities.EntityType;
 import unsw.dungeon.model.entities.Potion;
@@ -63,7 +64,41 @@ public class ItemsTest extends testSetup {
 	}
 
 	@Test
-	void testExplodedBombDestroyEntities() {
-
+	void testExplodedBombDestroyBoulders() {
+		setup(10, 5, 1, 2);
+		UnlitBomb bomb = new UnlitBomb(2, 2, dungeon);
+		Boulder b = new Boulder(2,1,dungeon);
+		dungeon.addEntity(b);
+		b = new Boulder(3,2,dungeon);
+		dungeon.addEntity(b);
+		b = new Boulder(2,3,dungeon);
+		dungeon.addEntity(b);
+		dungeon.addEntity(bomb);
+		player.moveRight();	// at 2 2
+		dungeon.playerPlacesBomb();
+		assertEquals(3,dungeon.getEntities(EntityType.BOULDER).size());
+		player.moveLeft();
+		player.moveLeft();
+		player.moveLeft();
+		assertEquals(0,dungeon.getEntities(EntityType.BOULDER).size());
+	}
+	@Test
+	void testExplodedBombDestroyEnemies() {
+		setup(10, 5, 1, 2);
+		UnlitBomb bomb = new UnlitBomb(2, 2, dungeon);
+		Boulder b = new Boulder(2,1,dungeon);
+		dungeon.addEntity(b);
+		b = new Boulder(3,2,dungeon);
+		dungeon.addEntity(b);
+		b = new Boulder(2,3,dungeon);
+		dungeon.addEntity(b);
+		dungeon.addEntity(bomb);
+		player.moveRight();	// at 2 2
+		dungeon.playerPlacesBomb();
+		assertEquals(3,dungeon.getEntities(EntityType.BOULDER).size());
+		player.moveLeft();
+		player.moveLeft();
+		player.moveLeft();
+		assertEquals(0,dungeon.getEntities(EntityType.BOULDER).size());
 	}
 }
