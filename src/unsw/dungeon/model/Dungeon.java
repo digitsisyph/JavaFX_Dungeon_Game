@@ -146,6 +146,10 @@ public class Dungeon {
 			this.controller.removeEntityImage(entity);
 	}
 
+	public void updateEntityImage(Entity entity) {
+		if (this.controller != null)
+			controller.updateEntityImage(entity);
+	}
 
 	// interactions
 
@@ -155,15 +159,10 @@ public class Dungeon {
 	 * class
 	 */
 	public void playerMovementUpdate() {
-		enemyTick();
-		bombTick();
-		inventoryTick();
-		goalTick();
-	}
-
-
-	public void playerPick(Entity entity) {
-
+		enemyUpdate();
+		bombUpdate();
+		inventoryUpdate();
+		goalUpdate();
 	}
 
 	// helper function: check whether a grid is walkable
@@ -172,12 +171,10 @@ public class Dungeon {
 				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
 
-
-
 	// --- Tick ----
 
 	// TODO refactor this to be state pattern
-	private void enemyTick() {
+	private void enemyUpdate() {
 		if (getInventory().isInvincible()) {
 			getEnemies().forEach(enemy -> enemy.setBehaviour(new EnemyMoveAway()));
 		} else {
@@ -186,23 +183,18 @@ public class Dungeon {
 		getEnemies().forEach(enemy -> enemy.move(this.player));
 	}
 
-	private void bombTick() {
+	private void bombUpdate() {
 		for (LitBomb b : getLitBombs()) {
 			b.nextState();
 			updateEntityImage(b);
 		}
 	}
 
-	public void updateEntityImage(Entity entity) {
-		if (this.controller != null)
-			controller.updateEntityImage(entity);
-	}
-
-	private void inventoryTick() {
+	private void inventoryUpdate() {
 		getInventory().decreaseInvincibility();
 	}
 
-	private void goalTick() {
+	private void goalUpdate() {
 		System.out.println("Goal Achieved: " + goal.isSatisfied());
 	}
 
@@ -236,6 +228,7 @@ public class Dungeon {
 		}
 	}
 
+	// pickUp helper
 	private void pickUpSword(Sword sword) {
 		removeEntity(sword);
 		this.getInventory().pickSword();
@@ -320,7 +313,7 @@ public class Dungeon {
 
 	// TODO game over
 	private void gameOver() {
-		//
+		//if (goal.isSatisfied())
 	}
 
 	// a helper function to kill the player
