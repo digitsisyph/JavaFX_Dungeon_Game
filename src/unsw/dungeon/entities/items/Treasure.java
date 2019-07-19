@@ -18,11 +18,9 @@ public class Treasure extends Entity {
 		return new Image("/gold_pile.png");
 	}
 
-	// TODO
 	public void collideWith(Entity entity) {
-		if (entity instanceof Player) {
+		if (entity instanceof Player)
 			this.getDungeon().pickUpTreasure(this);
-		}
 	}
 
 	@Override

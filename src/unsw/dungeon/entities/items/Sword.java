@@ -18,11 +18,9 @@ public class Sword extends Entity {
 		return new Image("/greatsword_1_new.png");
 	}
 
-	// TODO
 	public void collideWith(Entity entity) {
-		if (entity instanceof Player) {
+		if (entity instanceof Player)
 			this.getDungeon().pickUpSword(this);
-		}
 	}
 
 	@Override

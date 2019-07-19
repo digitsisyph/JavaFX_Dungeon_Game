@@ -21,11 +21,8 @@ public class Switch extends Entity {
 	public void collideWith(Entity entity) {;}
 
 	public boolean isActivated() {
-		for (Entity entity : getDungeon().getEntities(getX(), getY())) {
-			if (entity instanceof Boulder)
-				return true;
-		}
-		return false;
+		return  getDungeon().getEntities(getX(), getY()).stream()
+				.anyMatch(entity -> entity instanceof Boulder);
 	}
 
 	@Override

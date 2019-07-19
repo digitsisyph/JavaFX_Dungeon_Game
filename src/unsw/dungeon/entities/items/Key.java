@@ -22,9 +22,8 @@ public class Key extends Entity {
 	}
 
 	public void collideWith(Entity entity) {
-		if (entity instanceof Player) {
+		if (entity instanceof Player)
 			this.getDungeon().pickUpKey(this);
-		}
 	}
 
 	@Override
@@ -32,9 +31,6 @@ public class Key extends Entity {
 		return EntityType.KEY;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public int getId() {
 		return id;
 	}

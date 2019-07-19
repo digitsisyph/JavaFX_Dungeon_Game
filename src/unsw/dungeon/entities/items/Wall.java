@@ -22,10 +22,7 @@ public class Wall extends Entity {
 		return new Image("/brick_brown_0.png");
 	}
 
-	// TODO
-	public void collideWith(Entity entity) {
-		//pass
-	}
+	public void collideWith(Entity entity) {;}
 
 	@Override
 	public EntityType type() {

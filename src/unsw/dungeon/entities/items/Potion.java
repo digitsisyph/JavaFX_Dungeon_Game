@@ -18,11 +18,9 @@ public class Potion extends Entity {
 		return new Image("/brilliant_blue_new.png");
 	}
 
-	// TODO
 	public void collideWith(Entity entity) {
-		if (entity instanceof Player) {
+		if (entity instanceof Player)
 			this.getDungeon().pickUpPotion(this);
-		}
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
+import unsw.dungeon.entities.movable.Player;
 
 public class UnlitBomb extends Entity {
 
@@ -18,7 +19,8 @@ public class UnlitBomb extends Entity {
 	}
 
 	public void collideWith(Entity entity) {
-		this.getDungeon().pickUpBomb(this);
+		if (entity instanceof Player)
+			this.getDungeon().pickUpBomb(this);
 	}
 
 	@Override

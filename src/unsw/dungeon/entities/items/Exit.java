@@ -4,7 +4,6 @@ import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
-import unsw.dungeon.entities.movable.Player;
 
 public class Exit extends Entity {
 
@@ -18,12 +17,7 @@ public class Exit extends Entity {
 		return new Image("/exit.png");
 	}
 
-	// TODO
-	public void collideWith(Entity entity) {
-		if (entity instanceof Player) {
-			// TODO check other goals
-		}
-	}
+	public void collideWith(Entity entity) {;}
 
 	@Override
 	public EntityType type() {
