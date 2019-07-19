@@ -71,6 +71,11 @@ public class Dungeon {
 				.collect(Collectors.toList());
 	}
 
+	public List<Entity> getEntities(EntityType type) {
+		return entities.stream().filter(entity -> entity.type() == type)
+				.collect(Collectors.toList());
+	}
+
 	// a helper function for bomb
 	private List<Entity> getNearbyEntities(int X, int Y) {
 		List<Entity> nearbyEntities = new LinkedList<Entity>();

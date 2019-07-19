@@ -1,13 +1,13 @@
 package unsw.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import unsw.dungeon.model.entities.Entity;
+import unsw.dungeon.model.entities.EntityType;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
-import unsw.dungeon.model.entities.Entity;
-import unsw.dungeon.model.entities.EntityType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class PlayerInteractionTest extends testSetup {
 
@@ -30,14 +30,14 @@ public class PlayerInteractionTest extends testSetup {
 	@Test
 	void testPickUpKey() {
 		setup("test-two-keys.json");
-		assertEquals(2, dungeon.getEntityOfType(EntityType.KEY).size());
+		assertEquals(2, dungeon.getEntities(EntityType.KEY).size());
 		assertEquals(null, dungeon.getInventory().getKey());
 		player.moveRight();
 		assertNotEquals(null, dungeon.getInventory().getKey());
-		assertEquals(1, dungeon.getEntityOfType(EntityType.KEY).size());
+		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
 		assertEquals(99, dungeon.getInventory().getKeyID());
 		player.moveRight();
-		assertEquals(1, dungeon.getEntityOfType(EntityType.KEY).size());
+		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
 		assertEquals(99, dungeon.getInventory().getKeyID());
 	}
 
@@ -47,13 +47,13 @@ public class PlayerInteractionTest extends testSetup {
 	@Test
 	void testPickUpBomb() {
 		setup("test-two-bombs.json");
-		assertEquals(2, dungeon.getEntityOfType(EntityType.BOMB).size());
+		assertEquals(2, dungeon.getEntities(EntityType.UNLITBOMB).size());
 		assertEquals(0, dungeon.getInventory().getBombNum());
 		player.moveRight();
-		assertEquals(1, dungeon.getEntityOfType(EntityType.BOMB).size());
+		assertEquals(1, dungeon.getEntities(EntityType.UNLITBOMB).size());
 		assertEquals(1, dungeon.getInventory().getBombNum());
 		player.moveRight();
-		assertEquals(0, dungeon.getEntityOfType(EntityType.BOMB).size());
+		assertEquals(0, dungeon.getEntities(EntityType.UNLITBOMB).size());
 		assertEquals(2, dungeon.getInventory().getBombNum());
 	}
 
@@ -63,14 +63,14 @@ public class PlayerInteractionTest extends testSetup {
 	@Test
 	void testPickUpPotion() {
 		setup("test-two-potions.json");
-		assertEquals(2, dungeon.getEntityOfType(EntityType.POTION).size());
+		assertEquals(2, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(false, dungeon.getInventory().isInvincible());
 		player.moveRight();
-		assertEquals(1, dungeon.getEntityOfType(EntityType.POTION).size());
+		assertEquals(1, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(true, dungeon.getInventory().isInvincible());
 		assertEquals(4, dungeon.getInventory().invincStep());
 		player.moveRight();
-		assertEquals(0, dungeon.getEntityOfType(EntityType.POTION).size());
+		assertEquals(0, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(true, dungeon.getInventory().isInvincible());
 		assertEquals(4, dungeon.getInventory().invincStep());
 	}
@@ -81,11 +81,11 @@ public class PlayerInteractionTest extends testSetup {
 		int startX = player.getX();
 		int startY = player.getY();
 		int openedDoorCount = 0;
-		List<Entity> doors = dungeon.getEntityOfType(EntityType.DOOR);
+		List<Entity> doors = dungeon.getEntities(EntityType.DOOR);
 		assertEquals(2, doors.size());
-		assertEquals(2, dungeon.getEntityOfType(EntityType.KEY).size());
+		assertEquals(2, dungeon.getEntities(EntityType.KEY).size());
 		player.moveRight();
-		assertEquals(1, dungeon.getEntityOfType(EntityType.KEY).size());
+		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
 		// should not move because wrong key
 		player.moveUp();
 		assertEquals(startX + 1, player.getX());
@@ -120,6 +120,6 @@ public class PlayerInteractionTest extends testSetup {
 				openedDoorCount++;
 		}
 		assertEquals(2, openedDoorCount);
-		assertEquals(0, dungeon.getEntityOfType(EntityType.KEY).size());
+		assertEquals(0, dungeon.getEntities(EntityType.KEY).size());
 	}
 }
