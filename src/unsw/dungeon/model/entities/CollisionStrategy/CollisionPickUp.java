@@ -2,7 +2,7 @@ package unsw.dungeon.model.entities.CollisionStrategy;
 
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
-import unsw.dungeon.model.entities.movable.Player;
+import unsw.dungeon.model.entities.Player;
 
 class CollisionPickUp {
     private Entity entity;

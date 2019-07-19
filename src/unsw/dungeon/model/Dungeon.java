@@ -6,10 +6,10 @@ package unsw.dungeon.model;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import unsw.dungeon.DungeonController;
-import unsw.dungeon.model.entities.Entity;
-import unsw.dungeon.model.entities.items.*;
-import unsw.dungeon.model.entities.movable.*;
+import unsw.dungeon.controller.DungeonController;
+import unsw.dungeon.model.entities.*;
+import unsw.dungeon.model.entities.Bomb.LitBomb;
+import unsw.dungeon.model.entities.Bomb.UnlitBomb;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
 

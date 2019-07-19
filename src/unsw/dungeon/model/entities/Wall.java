@@ -1,4 +1,4 @@
-package unsw.dungeon.model.entities.items;
+package unsw.dungeon.model.entities;
 
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;

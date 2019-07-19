@@ -1,8 +1,6 @@
-package unsw.dungeon.model.entities.movable;
+package unsw.dungeon.model.entities;
 
 import unsw.dungeon.model.Dungeon;
-import unsw.dungeon.model.entities.Entity;
-import unsw.dungeon.model.entities.EntityType;
 
 /**
  * The player entity

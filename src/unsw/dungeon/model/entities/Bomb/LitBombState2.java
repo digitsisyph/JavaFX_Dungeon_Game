@@ -1,4 +1,4 @@
-package unsw.dungeon.model.entities.items;
+package unsw.dungeon.model.entities.Bomb;
 
 public class LitBombState2 implements LitBombState {
 

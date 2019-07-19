@@ -1,9 +1,6 @@
-package unsw.dungeon.model.entities.items;
+package unsw.dungeon.model.entities;
 
 import unsw.dungeon.model.Dungeon;
-import unsw.dungeon.model.entities.Entity;
-import unsw.dungeon.model.entities.EntityType;
-import unsw.dungeon.model.entities.movable.Player;
 
 public class Door extends Entity {
 

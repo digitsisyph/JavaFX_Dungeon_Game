@@ -3,11 +3,8 @@ package unsw.dungeon;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import unsw.dungeon.model.entities.Entity;
-import unsw.dungeon.model.entities.items.*;
-import unsw.dungeon.model.entities.movable.Boulder;
-import unsw.dungeon.model.entities.movable.Enemy;
-import unsw.dungeon.model.entities.movable.Player;
+import unsw.dungeon.model.entities.*;
+import unsw.dungeon.model.entities.Bomb.UnlitBomb;
 import unsw.dungeon.model.goal.*;
 import unsw.dungeon.model.Dungeon;
 

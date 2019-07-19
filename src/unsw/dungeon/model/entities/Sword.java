@@ -1,20 +1,20 @@
-package unsw.dungeon.model.entities.items;
+package unsw.dungeon.model.entities;
 
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
 import unsw.dungeon.model.entities.EntityType;
-import unsw.dungeon.model.entities.movable.Player;
+import unsw.dungeon.model.entities.Player;
 
-public class Treasure extends Entity {
+public class Sword extends Entity {
 
-	public Treasure(int x, int y, Dungeon dungeon) {
+	public Sword(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.setPassThrough(true);
 	}
 
 	@Override
 	public String getImagePath() {
-		return "/gold_pile.png";
+		return "/greatsword_1_new.png";
 	}
 
 	public void collideWith(Entity entity) {
@@ -24,7 +24,7 @@ public class Treasure extends Entity {
 
 	@Override
 	public EntityType type() {
-		return EntityType.TREASURE;
+		return EntityType.SWORD;
 	}
 
 }

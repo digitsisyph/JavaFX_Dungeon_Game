@@ -1,20 +1,20 @@
-package unsw.dungeon.model.entities.items;
+package unsw.dungeon.model.entities;
 
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
 import unsw.dungeon.model.entities.EntityType;
-import unsw.dungeon.model.entities.movable.Player;
+import unsw.dungeon.model.entities.Player;
 
-public class UnlitBomb extends Entity {
+public class Potion extends Entity {
 
-	public UnlitBomb(int x, int y, Dungeon dungeon) {
+	public Potion(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.setPassThrough(true);
 	}
 
 	@Override
 	public String getImagePath() {
-		return "/bomb_unlit.png";
+		return "/brilliant_blue_new.png";
 	}
 
 	public void collideWith(Entity entity) {
@@ -24,7 +24,7 @@ public class UnlitBomb extends Entity {
 
 	@Override
 	public EntityType type() {
-		return EntityType.UNLITBOMB;
+		return EntityType.POTION;
 	}
 
 }

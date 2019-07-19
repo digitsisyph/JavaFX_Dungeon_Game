@@ -1,4 +1,4 @@
-package unsw.dungeon.model.entities.movable;
+package unsw.dungeon.model.entities;
 
 import javafx.beans.property.IntegerProperty;
 

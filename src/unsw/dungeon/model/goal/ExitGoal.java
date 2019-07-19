@@ -2,7 +2,7 @@ package unsw.dungeon.model.goal;
 
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
-import unsw.dungeon.model.entities.items.Exit;
+import unsw.dungeon.model.entities.Exit;
 
 import java.util.List;
 
