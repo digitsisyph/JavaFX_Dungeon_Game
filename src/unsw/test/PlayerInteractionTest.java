@@ -1,13 +1,21 @@
 package unsw.test;
 
-import org.junit.jupiter.api.Test;
-import unsw.dungeon.model.entities.Entity;
-import unsw.dungeon.model.entities.EntityType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import org.junit.jupiter.api.Test;
+
+import unsw.dungeon.model.entities.Door;
+import unsw.dungeon.model.entities.Enemy;
+import unsw.dungeon.model.entities.Entity;
+import unsw.dungeon.model.entities.EntityType;
+import unsw.dungeon.model.entities.Key;
+import unsw.dungeon.model.entities.Potion;
+import unsw.dungeon.model.entities.Sword;
+import unsw.dungeon.model.entities.Treasure;
+import unsw.dungeon.model.entities.Bomb.UnlitBomb;
 
 public class PlayerInteractionTest extends testSetup {
 
@@ -16,7 +24,11 @@ public class PlayerInteractionTest extends testSetup {
 	 */
 	@Test
 	void testPickUpTreasure() {
-		setup("test-two-treasures.json");
+		setup(5, 3, 1, 1);
+		Treasure treasure = new Treasure(2, 1, dungeon);
+		dungeon.addEntity(treasure);
+		treasure = new Treasure(3, 1, dungeon);
+		dungeon.addEntity(treasure);
 		assertEquals(0, dungeon.getInventory().numTreasurePicked());
 		player.moveRight();
 		assertEquals(1, dungeon.getInventory().numTreasurePicked());
@@ -29,7 +41,11 @@ public class PlayerInteractionTest extends testSetup {
 	 */
 	@Test
 	void testPickUpKey() {
-		setup("test-two-keys.json");
+		setup(5, 3, 1, 1);
+		Key key = new Key(2, 1, dungeon, 99);
+		dungeon.addEntity(key);
+		key = new Key(3, 1, dungeon, 20);
+		dungeon.addEntity(key);
 		assertEquals(2, dungeon.getEntities(EntityType.KEY).size());
 		assertEquals(null, dungeon.getInventory().getKey());
 		player.moveRight();
@@ -46,7 +62,11 @@ public class PlayerInteractionTest extends testSetup {
 	 */
 	@Test
 	void testPickUpBomb() {
-		setup("test-two-bombs.json");
+		setup(5, 3, 1, 1);
+		UnlitBomb bomb = new UnlitBomb(2, 1, dungeon);
+		dungeon.addEntity(bomb);
+		bomb = new UnlitBomb(3, 1, dungeon);
+		dungeon.addEntity(bomb);
 		assertEquals(2, dungeon.getEntities(EntityType.UNLITBOMB).size());
 		assertEquals(0, dungeon.getInventory().getBombNum());
 		player.moveRight();
@@ -62,7 +82,11 @@ public class PlayerInteractionTest extends testSetup {
 	 */
 	@Test
 	void testPickUpPotion() {
-		setup("test-two-potions.json");
+		setup(5, 3, 1, 1);
+		Potion potion = new Potion(2, 1, dungeon);
+		dungeon.addEntity(potion);
+		potion = new Potion(3, 1, dungeon);
+		dungeon.addEntity(potion);
 		assertEquals(2, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(false, dungeon.getInventory().isInvincible());
 		player.moveRight();
@@ -77,7 +101,15 @@ public class PlayerInteractionTest extends testSetup {
 
 	@Test
 	void testDoorInteraction() {
-		setup("test-two-doors.json");
+		setup(5, 3, 1, 1);
+		Door door = new Door(2, 0, dungeon, 69);
+		dungeon.addEntity(door);
+		door = new Door(3, 0, dungeon, 99);
+		dungeon.addEntity(door);
+		Key key = new Key(2, 1, dungeon, 99);
+		dungeon.addEntity(key);
+		key = new Key(3, 1, dungeon, 69);
+		dungeon.addEntity(key);
 		int startX = player.getX();
 		int startY = player.getY();
 		int openedDoorCount = 0;
@@ -125,7 +157,13 @@ public class PlayerInteractionTest extends testSetup {
 
 	@Test
 	void testPlayerSwordEnemyInteraction() {
-		setup("test-two-swords.json");
+		setup(5, 1, 0, 0);
+		Enemy enemy = new Enemy(3, 0, dungeon);
+		dungeon.addEntity(enemy);
+		Sword sword = new Sword(1, 0, dungeon);
+		dungeon.addEntity(sword);
+		sword = new Sword(4, 0, dungeon);
+		dungeon.addEntity(sword);
 		assertEquals(2, dungeon.getEntities(EntityType.SWORD).size());
 		assertEquals(1, dungeon.getEntities(EntityType.ENEMY).size());
 		assertEquals(null, dungeon.getInventory().getSword());
@@ -133,11 +171,12 @@ public class PlayerInteractionTest extends testSetup {
 		assertNotEquals(null, dungeon.getInventory().getSword());
 		assertEquals(5, dungeon.getInventory().getSwordDurability());
 		assertEquals(1, dungeon.getEntities(EntityType.SWORD).size());
-		player.moveRight(); // in front of enemy
 		player.moveRight(); // collide with the enemy but the player has sword
 		assertEquals(0, dungeon.getEntities(EntityType.ENEMY).size());
 		assertEquals(4, dungeon.getInventory().getSwordDurability());
-		player.moveDown(); // collect the last sword refresh sword's durability
+		player.moveRight(); // move right 3 times to collect the last sword
+		player.moveRight();
+		player.moveRight(); // collect the last sword refresh sword's durability
 		assertEquals(5, dungeon.getInventory().getSwordDurability());
 		assertEquals(0, dungeon.getEntities(EntityType.SWORD).size());
 	}
