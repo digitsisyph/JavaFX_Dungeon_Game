@@ -46,7 +46,7 @@ public class Dungeon {
 		this.goal = null;
 	}
 
-	// ---  getter ---
+	// --- getter ---
 
 	public int getWidth() {
 		return width;
@@ -72,8 +72,7 @@ public class Dungeon {
 	}
 
 	public List<Entity> getEntities(EntityType type) {
-		return entities.stream().filter(entity -> entity.type() == type)
-				.collect(Collectors.toList());
+		return entities.stream().filter(entity -> entity.type() == type).collect(Collectors.toList());
 	}
 
 	// a helper function for bomb
@@ -119,7 +118,6 @@ public class Dungeon {
 		return entities;
 	}
 
-
 	// --- setter
 
 	public void setPlayer(Player player) {
@@ -148,8 +146,6 @@ public class Dungeon {
 		}
 	}
 
-
-
 	// interactions
 
 	/*
@@ -164,7 +160,6 @@ public class Dungeon {
 		goalTick();
 	}
 
-
 	public void playerPick(Entity entity) {
 
 	}
@@ -174,8 +169,6 @@ public class Dungeon {
 		return this.getEntities(X, Y).stream().allMatch(Entity::canPassThrough)
 				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
-
-
 
 	// --- Tick ----
 
@@ -214,31 +207,31 @@ public class Dungeon {
 
 	// some retriever functions
 
-
-
 	// for picking up
 
 	public void pickUp(Entity entity) {
 		switch (entity.type()) {
-			case SWORD:
-				pickUpSword((Sword) entity);
-				break;
+		case SWORD:
+			pickUpSword((Sword) entity);
+			break;
 
-			case TREASURE:
-				pickUpTreasure((Treasure) entity);
-				break;
+		case TREASURE:
+			pickUpTreasure((Treasure) entity);
+			break;
 
-			case UNLITBOMB:
-				pickUpBomb((UnlitBomb) entity);
-				break;
+		case UNLITBOMB:
+			pickUpBomb((UnlitBomb) entity);
+			break;
 
-			case POTION:
-				pickUpPotion((Potion) entity);
-				break;
+		case POTION:
+			pickUpPotion((Potion) entity);
+			break;
 
-			case KEY:
-				pickUpKey((Key) entity);
-				break;
+		case KEY:
+			pickUpKey((Key) entity);
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -273,7 +266,6 @@ public class Dungeon {
 		}
 		this.getInventory().debug();
 	}
-
 
 	// --- other interactions
 
@@ -321,8 +313,6 @@ public class Dungeon {
 			System.out.println("No bomb to use");
 		}
 	}
-
-
 
 	// TODO game over
 	private void gameOver() {
