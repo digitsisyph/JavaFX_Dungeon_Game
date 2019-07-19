@@ -157,10 +157,6 @@ public class Dungeon {
 		goalTick();
 	}
 
-	public void playerPick(Entity entity) {
-
-	}
-
 	// helper function: check whether a grid is walkable
 	public Boolean canOccupyGrid(int X, int Y) {
 		return this.getEntities(X, Y).stream().allMatch(Entity::canPassThrough)
@@ -196,7 +192,7 @@ public class Dungeon {
 	}
 
 	private void goalTick() {
-		System.out.println("Goal Achieved: " + goal.isSatisfied());
+		System.out.println("Goal Achieved: " + goalAchieved());
 	}
 
 	// some retriever functions
@@ -312,7 +308,10 @@ public class Dungeon {
 	private void gameOver() {
 		//
 	}
-
+	
+	public boolean goalAchieved() {
+		return this.goal.isSatisfied();
+	}
 	// a helper function to kill the player
 	private void killPlayer() {
 		// if the player is invincible now, it would not die

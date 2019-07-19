@@ -10,18 +10,21 @@ public class testSetup {
 
 	Dungeon dungeon = null;
 	Player player = null;
+	Goal baseGoal;
 
 	void setup(int width, int height, int playerX, int playerY) {
 		dungeon = new Dungeon(width, height);
 		player = new Player(playerX, playerY, dungeon);
 		dungeon.setPlayer(player);
-		Goal dummy = new AndGoals();
-		dungeon.setGoal(dummy);
+		baseGoal = new AndGoals();
+		dungeon.setGoal(baseGoal);
 	}
 
 	@AfterEach
 	void teatDown() {
 		dungeon = null;
 		player = null;
+		baseGoal = null;	
+		
 	}
 }
