@@ -135,7 +135,10 @@ public class Dungeon {
 
 	// create a new entity in the dungeon
 	public void createEntity(Entity entity) {
-		controller.addEntityImage(entity);
+		System.out.println(entity);
+		if(controller != null) {
+			controller.addEntityImage(entity);
+		}
 		entities.add(entity);
 	}
 

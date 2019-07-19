@@ -25,15 +25,15 @@ public class PlayerInteractionTest extends testSetup {
 	// this is an example test code from the tutor
 	@Test
 	void testSomething() {
-		Dungeon dungeon = new Dungeon(4, 5);
-		Player player = new Player(2, 4, dungeon);
-
-		dungeon.createEntity(player);
-
-		player.moveRight();
-		player.moveLeft();
-
-		assertEquals(player.getX(), 2);
+//		Dungeon dungeon = new Dungeon(4, 5);
+//		Player player = new Player(2, 4, dungeon);
+//
+//		dungeon.createEntity(player);
+//
+//		player.moveRight();
+//		player.moveLeft();
+//
+//		assertEquals(player.getX(), 2);
 	}
 
 	/*

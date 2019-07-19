@@ -51,7 +51,7 @@ public class ItemsTest extends testSetup {
 		player.moveRight();
 		player.moveRight();
 		player.moveRight();
-		//player.placeBomb();
+		dungeon.playerPlacesBomb();
 		LitBomb bombLit = (LitBomb) dungeon.getEntities(EntityType.LITBOMB).get(0);
 		assertEquals("/bomb_lit_1.png", bombLit.getImagePath());
 		player.moveLeft();
