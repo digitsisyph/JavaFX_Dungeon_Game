@@ -86,6 +86,7 @@ public class DungeonController {
 
 	public void addEntityImage(Entity entity) {
 		this.loader.onLoad(entity);
+		this.getSquares().getChildren().add(entity.getNode());
 	}
 
 }

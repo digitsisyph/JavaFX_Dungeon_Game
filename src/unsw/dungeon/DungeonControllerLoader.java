@@ -78,6 +78,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				System.out.println("change image: " + newValue.toString());
 				((ImageView) node).setImage(new Image(newValue.toString()));
+				System.out.println(entity);
 			}
 		});
 	}

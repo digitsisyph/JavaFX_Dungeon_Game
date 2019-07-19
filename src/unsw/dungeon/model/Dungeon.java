@@ -137,8 +137,8 @@ public class Dungeon {
 
 	// create a new entity in the dungeon
 	public void createEntity(Entity entity) {
-		entities.add(entity);
 		controller.addEntityImage(entity);
+		entities.add(entity);
 	}
 
 	public void removeEntity(Entity entity) {
@@ -179,6 +179,7 @@ public class Dungeon {
 	 * class
 	 */
 	public void playerMovementUpdate() {
+		System.out.println("Player @ " + player.getX() + " " + player.getY());
 		enemyUpdate();
 		bombUpdate();
 		inventoryUpdate();

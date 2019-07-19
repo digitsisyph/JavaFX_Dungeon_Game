@@ -41,7 +41,7 @@ public class LitBomb extends Entity {
 
 	@Override
 	public String toString() {
-		return "Bomb state=" + state + "]";
+		return "Lit Bomb @ " + this.getX() + " " + this.getY() + ", state=" + state + "]";
 	}
 
 }
