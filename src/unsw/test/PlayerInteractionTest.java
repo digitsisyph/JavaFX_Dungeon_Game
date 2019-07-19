@@ -1,8 +1,10 @@
 package unsw.test;
 
 import org.junit.jupiter.api.Test;
+import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
 import unsw.dungeon.model.entities.EntityType;
+import unsw.dungeon.model.entities.Player;
 
 import java.util.List;
 
@@ -10,6 +12,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class PlayerInteractionTest extends testSetup {
+
+
+	// this is an example test code from the tutor
+	@Test
+	void testSomething() {
+		Dungeon dungeon = new Dungeon(4, 5);
+		Player player = new Player(2, 4, dungeon);
+
+		dungeon.addEntity(player);
+
+		player.moveRight();
+		player.moveLeft();
+
+		assertEquals(player.getX(), 2);
+	}
 
 	/*
 	 * Player can collect any number of treasures
