@@ -6,12 +6,12 @@ import unsw.dungeon.model.entities.EntityType;
 
 public class Boulder extends Entity implements Movable {
 
-	Movement movement;
+	private Movement movement;
 
 	public Boulder(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.setPassThrough(false);
-		this.movement = new Movement(dungeon);
+		this.movement = new Movement(this, dungeon);
 	}
 
 	@Override
@@ -20,19 +20,19 @@ public class Boulder extends Entity implements Movable {
 	}
 
 	public void moveUp() {
-		this.movement.moveUp(this);
+		this.movement.moveUp();
 	}
 
 	public void moveDown() {
-		this.movement.moveDown(this);
+		this.movement.moveDown();
 	}
 
 	public void moveLeft() {
-		this.movement.moveLeft(this);
+		this.movement.moveLeft();
 	}
 
 	public void moveRight() {
-		this.movement.moveRight(this);
+		this.movement.moveRight();
 	}
 
 	public void collideWith(Entity entity) {

@@ -7,38 +7,40 @@ import java.util.List;
 
 class Movement {
 
+    private Movable entity;
     private Dungeon dungeon;
 
-    Movement(Dungeon dungeon) {
+    Movement(Movable entity, Dungeon dungeon) {
+        this.entity = entity;
         this.dungeon = dungeon;
     }
 
-    public void moveUp(Movable entity) {
+    public void moveUp() {
         int newX = entity.getX();
         int newY = entity.getY() - 1;
-        moveTo(entity, newX, newY);
+        moveTo(newX, newY);
     }
 
-    public void moveDown(Movable entity) {
+    public void moveDown() {
         int newX = entity.getX();
         int newY = entity.getY() + 1;
-        moveTo(entity, newX, newY);
+        moveTo(newX, newY);
     }
 
-    public void moveLeft(Movable entity) {
+    public void moveLeft() {
         int newX = entity.getX() - 1;
         int newY = entity.getY();
-        moveTo(entity, newX, newY);
+        moveTo(newX, newY);
     }
 
-    public void moveRight(Movable entity) {
+    public void moveRight() {
         int newX = entity.getX() + 1;
         int newY = entity.getY();
-        moveTo(entity, newX, newY);
+        moveTo(newX, newY);
     }
 
     // helper function for moving up, down, left, right
-    private void moveTo(Movable entity, int target_X, int target_Y) {
+    private void moveTo(int target_X, int target_Y) {
         if (dungeon.canOccupyGrid(target_X, target_Y)) {
             entity.x().set(target_X);
             entity.y().set(target_Y);

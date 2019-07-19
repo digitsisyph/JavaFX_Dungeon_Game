@@ -22,27 +22,27 @@ public class Player extends Entity implements Movable {
 	 */
 	public Player(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.movement = new Movement(dungeon);
+		this.movement = new Movement(this, dungeon);
 		this.setPassThrough(false);
 	}
 
 	public void moveUp() {
-		movement.moveUp(this);
+		movement.moveUp();
 		this.getDungeon().playerMovementUpdate();
 	}
 
 	public void moveDown() {
-		movement.moveDown(this);
+		movement.moveDown();
 		this.getDungeon().playerMovementUpdate();
 	}
 
 	public void moveLeft() {
-		movement.moveLeft(this);
+		movement.moveLeft();
 		this.getDungeon().playerMovementUpdate();
 	}
 
 	public void moveRight() {
-		movement.moveRight(this);
+		movement.moveRight();
 		this.getDungeon().playerMovementUpdate();
 	}
 

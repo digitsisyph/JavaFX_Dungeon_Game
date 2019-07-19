@@ -55,6 +55,7 @@ public abstract class DungeonLoader {
 		return dungeon;
 	}
 
+	// add goals for the dungeon
 	private void loadGoal(Dungeon dungeon, JSONObject json, Goal base) {
 		String type = json.getString("goal");
 		switch (type) {
@@ -89,6 +90,7 @@ public abstract class DungeonLoader {
 		}
 	}
 
+	// add entities for the dungeon
 	private void loadEntity(Dungeon dungeon, JSONObject json) {
 		String type = json.getString("type");
 		int x = json.getInt("x");
@@ -162,7 +164,4 @@ public abstract class DungeonLoader {
 	}
 
 	public abstract void onLoad(Entity entity);
-
-	// TODO Create additional abstract methods for the other entities
-
 }

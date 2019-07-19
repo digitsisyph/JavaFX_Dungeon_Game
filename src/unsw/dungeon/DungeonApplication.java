@@ -12,7 +12,7 @@ public class DungeonApplication extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		primaryStage.setTitle("Dungeon");
+
 
 		// use ControllerLoader to load map from a json file
 		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
@@ -21,9 +21,14 @@ public class DungeonApplication extends Application {
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
 		loader.setController(controller);
+
+		// get the root and set scene
 		Parent root = loader.load();
 		Scene scene = new Scene(root);
 		root.requestFocus();
+
+		// set primary stage
+		primaryStage.setTitle("Dungeon");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
