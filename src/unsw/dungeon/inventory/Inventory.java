@@ -21,6 +21,10 @@ public class Inventory {
 		this.treasure.pickTreasure();
 	}
 
+	public int numTreasurePicked() {
+		return this.treasure.getNumTreasures();
+	}
+
 	public void pickSword() {
 		if (this.sword == null) {
 			this.sword = new SwordInv();
@@ -46,7 +50,7 @@ public class Inventory {
 	public void useBomb() {
 		this.bomb.decreaseBomb();
 	}
-	
+
 	public int getBombNum() {
 		return this.bomb.getNumBombs();
 	}
@@ -89,6 +93,10 @@ public class Inventory {
 	 */
 	public boolean isInvincible() {
 		return invincible;
+	}
+	
+	public int invincStep() {
+		return invincibilitySteps;
 	}
 
 	// for debug

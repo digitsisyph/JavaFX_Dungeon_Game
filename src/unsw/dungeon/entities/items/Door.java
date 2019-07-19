@@ -1,6 +1,5 @@
 package unsw.dungeon.entities.items;
 
-import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
@@ -23,8 +22,8 @@ public class Door extends Entity {
 	}
 
 	@Override
-	public Image getImage() {
-		return state.getImage();
+	public String getImagePath() {
+		return state.getImagePath();
 	}
 
 	/**

@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import unsw.dungeon.entities.Entity;
@@ -29,7 +30,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	@Override
 	public void onLoad(Entity entity) {
-		ImageView view = new ImageView(entity.getImage());
+		Image img = new Image(entity.getImagePath());
+		ImageView view = new ImageView(img);
 		addEntity(entity, view);
 	}
 

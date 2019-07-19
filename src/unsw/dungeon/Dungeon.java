@@ -136,8 +136,10 @@ public class Dungeon {
 		System.out.println("Remove:" + entity.toString());
 		// remove it from the dungeon
 		this.entities.remove(entity);
-		// remove its correspoding ImageView
-		this.controller.getSquares().getChildren().remove(entity.getNode());
+		// remove its corresponding ImageView
+		if (this.controller != null) {
+			this.controller.getSquares().getChildren().remove(entity.getNode());
+		}
 	}
 
 
@@ -184,13 +186,18 @@ public class Dungeon {
 	private void bombTick() {
 		for (LitBomb b : getLitBombs()) {
 			b.nextState();
-			updateGridImage(b, b.getImage());
+			updateGridImage(b, b.getImagePath());
 		}
 	}
-	public void updateGridImage(Entity ent, Image img) {
-		ImageView img1 = (ImageView) ent.getNode();
-		img1.setImage(img);
+
+	public void updateGridImage(Entity ent, String imgPath) {
+		if (this.controller != null) {
+			Image img = new Image(imgPath);
+			ImageView imgView = (ImageView) ent.getNode();
+			imgView.setImage(img);
+		}
 	}
+
 	private void inventoryTick() {
 		getInventory().decreaseInvincibility();
 	}
@@ -298,7 +305,7 @@ public class Dungeon {
 			// add into dungeon entity list
 			addEntity(bomb);
 			// add imageview to gridpane
-			ImageView bombImg = new ImageView(bomb.getImage());
+			ImageView bombImg = new ImageView(bomb.getImagePath());
 			bomb.setNode(bombImg);
 			GridPane.setColumnIndex(bombImg, bomb.getX());
 			GridPane.setRowIndex(bombImg, bomb.getY());
@@ -330,8 +337,7 @@ public class Dungeon {
 		for (Entity entity : nearbyEntities) {
 			if (entity instanceof Player) {
 				killPlayer();
-			} else if (entity instanceof Enemy
-					|| entity instanceof Boulder) {
+			} else if (entity instanceof Enemy || entity instanceof Boulder) {
 				removeEntity(entity);
 			}
 		}

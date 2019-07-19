@@ -1,6 +1,5 @@
 package unsw.dungeon.entities.movable;
 
-import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.EntityType;
@@ -16,8 +15,8 @@ public class Boulder extends Entity implements Movable {
 	}
 
 	@Override
-	public Image getImage() {
-		return new Image("/boulder.png");
+	public String getImagePath() {
+		return "/boulder.png";
 	}
 
 	public void moveUp() {

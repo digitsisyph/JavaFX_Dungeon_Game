@@ -1,7 +1,5 @@
 package unsw.dungeon.entities.items;
 
-import javafx.scene.image.Image;
-
 public class DoorOpenedState implements DoorState {
 
 	private Door door;
@@ -11,8 +9,8 @@ public class DoorOpenedState implements DoorState {
 	}
 	
 	@Override
-	public Image getImage() {
-		return new Image("/open_door.png");
+	public String getImagePath() {
+		return "/open_door.png";
 	}
 
 	@Override
@@ -22,7 +20,7 @@ public class DoorOpenedState implements DoorState {
 
 	@Override
 	public void unlock() {
-		System.out.println("Door is opened");
+		System.out.println("Door is already opened");
 	}
 
 }

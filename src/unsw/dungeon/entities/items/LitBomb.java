@@ -16,8 +16,8 @@ public class LitBomb extends Entity {
 	}
 
 	@Override
-	public Image getImage() {
-		return state.getImage();
+	public String getImagePath() {
+		return state.getImagePath();
 	}
 
 	public void collideWith(Entity entity) {;}

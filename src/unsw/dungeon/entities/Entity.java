@@ -3,7 +3,6 @@ package unsw.dungeon.entities;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import unsw.dungeon.Dungeon;
 
 /**
@@ -57,7 +56,7 @@ public abstract class Entity {
         return this.passThrough;
     }
     
-    public abstract Image getImage();
+    public abstract String getImagePath();
 
     public void setNode(Node node) {
         this.node = node;
