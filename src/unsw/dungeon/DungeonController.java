@@ -1,14 +1,15 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import unsw.dungeon.entities.movable.Player;
+import unsw.dungeon.model.Dungeon;
+import unsw.dungeon.model.entities.movable.Player;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A JavaFX controller for the dungeon.

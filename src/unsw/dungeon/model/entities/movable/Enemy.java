@@ -1,0 +1,60 @@
+package unsw.dungeon.model.entities.movable;
+
+import unsw.dungeon.model.Dungeon;
+import unsw.dungeon.model.entities.Entity;
+import unsw.dungeon.model.entities.EntityType;
+
+public class Enemy extends Entity implements Movable {
+
+	private Movement movement;
+	private EnemyBehaviour behaviour;
+
+	public Enemy(int x, int y, Dungeon dungeon) {
+		super(x, y, dungeon);
+		this.movement = new Movement(dungeon);
+		this.setPassThrough(false);
+		this.behaviour = new EnemyMoveClose();
+	}
+
+	@Override
+	public String getImagePath() {
+		return "/deep_elf_master_archer.png";
+	}
+
+	public void move(Player player) {
+		behaviour.move(this, player);
+	}
+
+	public void moveUp() {
+		this.movement.moveUp(this);
+	}
+
+	public void moveDown() {
+		this.movement.moveDown(this);
+	}
+
+	public void moveLeft() {
+		this.movement.moveLeft(this);
+	}
+
+	public void moveRight() {
+		this.movement.moveRight(this);
+	}
+
+	public void collideWith(Entity entity) {
+		if (entity instanceof Player) {
+			this.getDungeon().fightEnemy(this);
+		}
+	}
+	/**
+	 * @param behaviour the behaviour to set
+	 */
+	public void setBehaviour(EnemyBehaviour behaviour) {
+		this.behaviour = behaviour;
+	}
+
+	@Override
+	public EntityType type() {
+		return EntityType.ENEMY;
+	}
+}
