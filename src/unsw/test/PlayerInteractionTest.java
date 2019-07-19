@@ -122,23 +122,23 @@ public class PlayerInteractionTest extends testSetup {
 		assertEquals(2, openedDoorCount);
 		assertEquals(0, dungeon.getEntities(EntityType.KEY).size());
 	}
-	
+
 	@Test
 	void testPlayerSwordEnemyInteraction() {
 		setup("test-two-swords.json");
-		assertEquals(2,dungeon.getEntities(EntityType.SWORD).size());
-		assertEquals(1,dungeon.getEntities(EntityType.ENEMY).size());
-		assertEquals(null,dungeon.getInventory().getSword());
+		assertEquals(2, dungeon.getEntities(EntityType.SWORD).size());
+		assertEquals(1, dungeon.getEntities(EntityType.ENEMY).size());
+		assertEquals(null, dungeon.getInventory().getSword());
 		player.moveRight(); // on sword grid , player collect it
-		assertNotEquals(null,dungeon.getInventory().getSword());
-		assertEquals(5,dungeon.getInventory().getSwordDurability());
-		assertEquals(1,dungeon.getEntities(EntityType.SWORD).size());
+		assertNotEquals(null, dungeon.getInventory().getSword());
+		assertEquals(5, dungeon.getInventory().getSwordDurability());
+		assertEquals(1, dungeon.getEntities(EntityType.SWORD).size());
 		player.moveRight(); // in front of enemy
 		player.moveRight(); // collide with the enemy but the player has sword
-		assertEquals(0,dungeon.getEntities(EntityType.ENEMY).size());
-		assertEquals(4,dungeon.getInventory().getSwordDurability());
+		assertEquals(0, dungeon.getEntities(EntityType.ENEMY).size());
+		assertEquals(4, dungeon.getInventory().getSwordDurability());
 		player.moveDown(); // collect the last sword refresh sword's durability
-		assertEquals(5,dungeon.getInventory().getSwordDurability());
-		assertEquals(0,dungeon.getEntities(EntityType.SWORD).size());
+		assertEquals(5, dungeon.getInventory().getSwordDurability());
+		assertEquals(0, dungeon.getEntities(EntityType.SWORD).size());
 	}
 }
