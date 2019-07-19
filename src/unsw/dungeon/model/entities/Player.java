@@ -22,6 +22,7 @@ public class Player extends Entity implements Movable {
 		super(x, y, dungeon);
 		this.movement = new Movement(this, dungeon);
 		this.setPassThrough(false);
+		this.setImagePath("/human_new.png");
 	}
 
 	public void moveUp() {
@@ -43,21 +44,6 @@ public class Player extends Entity implements Movable {
 		movement.moveRight();
 		this.getDungeon().playerMovementUpdate();
 	}
-
-	public void placeBomb() {
-		this.getDungeon().playerPlacesBomb();
-	}
-
-	@Override
-	public String toString() {
-		return "Player at X " + getX() + " Y " + getY();
-	}
-
-	@Override
-	public String getImagePath() {
-		return "/human_new.png";
-	}
-
 
 	public void collideWith(Entity entity) {
 		if (entity instanceof Enemy)

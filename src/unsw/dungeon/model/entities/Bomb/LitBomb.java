@@ -14,11 +14,6 @@ public class LitBomb extends Entity {
 		this.setPassThrough(false);
 	}
 
-	@Override
-	public String getImagePath() {
-		return state.getImagePath();
-	}
-
 	public void collideWith(Entity entity) {;}
 
 	@Override
@@ -27,7 +22,7 @@ public class LitBomb extends Entity {
 	}
 
 	public void nextState() {
-		state.next();
+		state.nextState();
 	}
 
 	/**

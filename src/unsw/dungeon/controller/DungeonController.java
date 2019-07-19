@@ -5,9 +5,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import unsw.dungeon.DungeonControllerLoader;
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
-import unsw.dungeon.model.entities.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +22,14 @@ public class DungeonController {
 
 	@FXML
 	private GridPane squares;
-
 	private List<ImageView> initialEntities;
-
-	private Player player;
 	private Dungeon dungeon;
+	private DungeonControllerLoader loader;
 
-	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
+	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, DungeonControllerLoader loader) {
 		this.dungeon = dungeon;
 		this.dungeon.setController(this);
-		this.player = dungeon.getPlayer();
+		this.loader = loader;
 		this.initialEntities = new ArrayList<>(initialEntities);
 	}
 
@@ -62,19 +60,20 @@ public class DungeonController {
 
 		switch (event.getCode()) {
 			case UP:
-				player.moveUp();
+				dungeon.movePlayerUp();
 				break;
 			case DOWN:
-				player.moveDown();
+				dungeon.movePlayerDown();
 				break;
 			case LEFT:
-				player.moveLeft();
+				dungeon.movePlayerLeft();
 				break;
 			case RIGHT:
-				player.moveRight();
+				dungeon.movePlayerRight();
 				break;
 			case U:
-				player.placeBomb();
+				dungeon.playerPlacesBomb();
+				break;
 			default:
 				break;
 		}
@@ -85,8 +84,8 @@ public class DungeonController {
 		this.getSquares().getChildren().remove(entity.getNode());
 	}
 
-	public void updateEntityImage(Entity entity) {
-		((ImageView) entity.getNode()).setImage(new Image(entity.getImagePath()));
+	public void addEntityImage(Entity entity) {
+		this.loader.onLoad(entity);
 	}
 
 }

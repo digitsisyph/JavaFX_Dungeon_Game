@@ -11,12 +11,8 @@ public class Enemy extends Entity implements Movable {
 		super(x, y, dungeon);
 		this.movement = new Movement(this, dungeon);
 		this.setPassThrough(false);
+		this.setImagePath("/deep_elf_master_archer.png");
 		this.behaviour = new EnemyMoveClose();
-	}
-
-	@Override
-	public String getImagePath() {
-		return "/deep_elf_master_archer.png";
 	}
 
 	public void move(Player player) {

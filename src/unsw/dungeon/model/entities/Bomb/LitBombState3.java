@@ -6,6 +6,7 @@ public class LitBombState3 implements LitBombState {
 
 	LitBombState3(LitBomb bomb) {
 		this.bomb = bomb;
+		bomb.setImagePath(this.getImagePath());
 	}
 
 	@Override
@@ -14,9 +15,8 @@ public class LitBombState3 implements LitBombState {
 	}
 
 	@Override
-	public void next() {
+	public void nextState() {
 		bomb.setState(new LitBombState4(bomb));
-		bomb.getDungeon().updateEntityImage(bomb);
 	}
 
 }

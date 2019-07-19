@@ -3,8 +3,6 @@
  */
 package unsw.dungeon.model;
 
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import unsw.dungeon.controller.DungeonController;
 import unsw.dungeon.model.entities.Bomb.LitBomb;
 import unsw.dungeon.model.entities.Bomb.UnlitBomb;
@@ -137,6 +135,12 @@ public class Dungeon {
 		entities.add(entity);
 	}
 
+	// create a new entity in the dungeon
+	public void createEntity(Entity entity) {
+		entities.add(entity);
+		controller.addEntityImage(entity);
+	}
+
 	public void removeEntity(Entity entity) {
 		System.out.println("Remove:" + entity.toString());
 		// remove it from the dungeon
@@ -146,9 +150,25 @@ public class Dungeon {
 			this.controller.removeEntityImage(entity);
 	}
 
-	public void updateEntityImage(Entity entity) {
-		if (this.controller != null)
-			controller.updateEntityImage(entity);
+	// player movement
+	public void movePlayerUp() {
+		if (player != null)
+			player.moveUp();
+	}
+
+	public void movePlayerDown() {
+		if (player != null)
+			player.moveDown();
+	}
+
+	public void movePlayerRight() {
+		if (player != null)
+			player.moveRight();
+	}
+
+	public void movePlayerLeft() {
+		if (player != null)
+			player.moveLeft();
 	}
 
 	// interactions
@@ -184,10 +204,7 @@ public class Dungeon {
 	}
 
 	private void bombUpdate() {
-		for (LitBomb b : getLitBombs()) {
-			b.nextState();
-			updateEntityImage(b);
-		}
+		getLitBombs().forEach(bomb -> bomb.nextState());
 	}
 
 	private void inventoryUpdate() {
@@ -293,17 +310,9 @@ public class Dungeon {
 
 	public void playerPlacesBomb() {
 		if (this.getInventory().getBombNum() > 0) {
-			this.getInventory().useBomb(); // this method just decrease numbomb by 1;
-			LitBomb bomb = new LitBomb(player.getX(), player.getY(), this);
-			// add into dungeon entity list
-			addEntity(bomb);
-			// add imageview to gridpane
-			ImageView bombImg = new ImageView(bomb.getImagePath());
-			bomb.setNode(bombImg);
-			GridPane.setColumnIndex(bombImg, bomb.getX());
-			GridPane.setRowIndex(bombImg, bomb.getY());
-			this.controller.getSquares().getChildren().add(bombImg);
 			System.out.println("Use bomb");
+			this.getInventory().useBomb(); // this method just decrease numbomb by 1;
+			createEntity(new LitBomb(player.getX(), player.getY(), this));
 		} else {
 			System.out.println("No bomb to use");
 		}
@@ -320,7 +329,8 @@ public class Dungeon {
 	private void killPlayer() {
 		// if the player is invincible now, it would not die
 		if (!getInventory().isInvincible()) {
-			removeEntity(player);
+			removeEntity(this.player);
+			this.player = null;
 			gameOver();
 		}
 	}

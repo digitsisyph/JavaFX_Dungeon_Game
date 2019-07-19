@@ -9,12 +9,8 @@ public class UnlitBomb extends Entity {
 
 	public UnlitBomb(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.setPassThrough(true);
-	}
-
-	@Override
-	public String getImagePath() {
-		return "/bomb_unlit.png";
+		setPassThrough(true);
+		setImagePath("/bomb_unlit.png");
 	}
 
 	public void collideWith(Entity entity) {

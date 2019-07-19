@@ -1,9 +1,6 @@
 package unsw.dungeon.model.entities;
 
 import unsw.dungeon.model.Dungeon;
-import unsw.dungeon.model.entities.Entity;
-import unsw.dungeon.model.entities.EntityType;
-import unsw.dungeon.model.entities.Player;
 
 public class Key extends Entity {
 
@@ -13,11 +10,7 @@ public class Key extends Entity {
 		super(x, y, dungeon);
 		this.setPassThrough(true);
 		this.id = id;
-	}
-
-	@Override
-	public String getImagePath() {
-		return "/key.png";
+		this.setImagePath("/key.png");
 	}
 
 	public void collideWith(Entity entity) {

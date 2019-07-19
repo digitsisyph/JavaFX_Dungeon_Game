@@ -20,7 +20,7 @@ public class PlayerInteractionTest extends testSetup {
 		Dungeon dungeon = new Dungeon(4, 5);
 		Player player = new Player(2, 4, dungeon);
 
-		dungeon.addEntity(player);
+		dungeon.createEntity(player);
 
 		player.moveRight();
 		player.moveLeft();

@@ -2,6 +2,8 @@ package unsw.dungeon.model.entities;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.Node;
 import unsw.dungeon.model.Dungeon;
 
@@ -14,6 +16,7 @@ public abstract class Entity {
 
     // IntegerProperty is used so that changes to the entities position can be
     // externally observed.
+    private StringProperty imagePath;
     private IntegerProperty x, y;
     private Node node;
     private Dungeon dungeon;
@@ -27,8 +30,11 @@ public abstract class Entity {
     public Entity(int x, int y, Dungeon dungeon) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
+        this.imagePath = new SimpleStringProperty();
         this.dungeon = dungeon;
     }
+
+    // properties for javafx
 
     public IntegerProperty x() {
         return x;
@@ -46,6 +52,29 @@ public abstract class Entity {
         return x().get();
     }
 
+    public StringProperty imagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String path) {
+        this.imagePath.set(path);
+    }
+
+    public String getImagePath() {
+        return this.imagePath.get();
+    }
+
+    public void setNode(Node node) {
+        this.node = node;
+    }
+
+    public Node getNode() {
+        return this.node;
+    }
+
+
+    // other methods
+
     abstract public void collideWith(Entity entity);
 
     public void setPassThrough(Boolean bool) {
@@ -54,16 +83,6 @@ public abstract class Entity {
 
     public Boolean canPassThrough() {
         return this.passThrough;
-    }
-    
-    public abstract String getImagePath();
-
-    public void setNode(Node node) {
-        this.node = node;
-    }
-
-    public Node getNode() {
-        return this.node;
     }
 
     public Dungeon getDungeon() {

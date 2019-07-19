@@ -31,13 +31,14 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	@Override
 	public void onLoad(Entity entity) {
-		Image img = new Image(entity.getImagePath());
-		ImageView view = new ImageView(img);
+		System.out.println("onload " + entity);
+		ImageView view = new ImageView(new Image(entity.getImagePath()));
 		addEntity(entity, view);
 	}
 
 	private void addEntity(Entity entity, ImageView view) {
 		trackPosition(entity, view);
+		trackImage(entity, view);
 		entities.add(view);
 		// TODO set node to control
 		entity.setNode(view);
@@ -71,6 +72,16 @@ public class DungeonControllerLoader extends DungeonLoader {
 		});
 	}
 
+	private void trackImage(Entity entity, Node node) {
+		entity.imagePath().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				System.out.println("change image: " + newValue.toString());
+				((ImageView) node).setImage(new Image(newValue.toString()));
+			}
+		});
+	}
+
 	/**
 	 * Create a controller that can be attached to the DungeonView with all the
 	 * loaded entities.
@@ -79,7 +90,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 	 * @throws FileNotFoundException
 	 */
 	public DungeonController loadController() throws FileNotFoundException {
-		return new DungeonController(load(), entities);
+		return new DungeonController(load(), entities, this);
 	}
 
 }

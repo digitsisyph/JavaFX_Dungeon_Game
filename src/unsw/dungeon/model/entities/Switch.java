@@ -1,20 +1,13 @@
 package unsw.dungeon.model.entities;
 
 import unsw.dungeon.model.Dungeon;
-import unsw.dungeon.model.entities.Entity;
-import unsw.dungeon.model.entities.EntityType;
-import unsw.dungeon.model.entities.Boulder;
 
 public class Switch extends Entity {
 
 	public Switch(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.setPassThrough(true);
-	}
-
-	@Override
-	public String getImagePath() {
-		return "/pressure_plate.png";
+		this.setImagePath("/pressure_plate.png");
 	}
 
 	public void collideWith(Entity entity) {;}
