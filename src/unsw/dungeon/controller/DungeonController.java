@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import unsw.dungeon.model.Dungeon;
+import unsw.dungeon.model.entities.Entity;
 import unsw.dungeon.model.entities.Player;
 
 import java.util.ArrayList;
@@ -79,8 +80,13 @@ public class DungeonController {
 		}
 	}
 
-	public void removeEntity() {
+	// TODO maybe change?
+	public void removeEntityImage(Entity entity) {
+		this.getSquares().getChildren().remove(entity.getNode());
+	}
 
+	public void updateEntityImage(Entity entity) {
+		((ImageView) entity.getNode()).setImage(new Image(entity.getImagePath()));
 	}
 
 }

@@ -3,13 +3,12 @@
  */
 package unsw.dungeon.model;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import unsw.dungeon.controller.DungeonController;
-import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.Bomb.LitBomb;
 import unsw.dungeon.model.entities.Bomb.UnlitBomb;
+import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
 
@@ -141,11 +140,9 @@ public class Dungeon {
 		// remove it from the dungeon
 		this.entities.remove(entity);
 		// remove its corresponding ImageView
-		if (this.controller != null) {
-			this.controller.getSquares().getChildren().remove(entity.getNode());
-		}
+		if (this.controller != null)
+			this.controller.removeEntityImage(entity);
 	}
-
 	// interactions
 
 	/*
@@ -185,16 +182,13 @@ public class Dungeon {
 	private void bombTick() {
 		for (LitBomb b : getLitBombs()) {
 			b.nextState();
-			updateGridImage(b, b.getImagePath());
+			updateEntityImage(b);
 		}
 	}
 
-	public void updateGridImage(Entity ent, String imgPath) {
-		if (this.controller != null) {
-			Image img = new Image(imgPath);
-			ImageView imgView = (ImageView) ent.getNode();
-			imgView.setImage(img);
-		}
+	public void updateEntityImage(Entity entity) {
+		if (this.controller != null)
+			controller.updateEntityImage(entity);
 	}
 
 	private void inventoryTick() {

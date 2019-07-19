@@ -21,7 +21,7 @@ public class DoorClosedState implements DoorState {
 	@Override
 	public void unlock() {
 		door.setState(new DoorOpenedState(door));
-		door.getDungeon().updateGridImage(door, getImagePath());
+		door.getDungeon().updateEntityImage(door);
 	}
 
 }

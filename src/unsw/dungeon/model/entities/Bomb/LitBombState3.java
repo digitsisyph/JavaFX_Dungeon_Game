@@ -16,6 +16,7 @@ public class LitBombState3 implements LitBombState {
 	@Override
 	public void next() {
 		bomb.setState(new LitBombState4(bomb));
+		bomb.getDungeon().updateEntityImage(bomb);
 	}
 
 }
