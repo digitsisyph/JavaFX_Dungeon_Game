@@ -40,7 +40,7 @@ public abstract class DungeonLoader {
 		int height = json.getInt("height");
 
 		Dungeon dungeon = new Dungeon(width, height);
-		GoalComponent base = new ANDGoals(); // base goals
+		Goal base = new AndGoals(); // base goals
 		JSONArray jsonEntities = json.getJSONArray("entities");
 		JSONObject goalConditions = json.getJSONObject("goal-condition");
 		System.out.println(goalConditions.toString());
@@ -54,7 +54,7 @@ public abstract class DungeonLoader {
 		return dungeon;
 	}
 
-	private void loadGoal(Dungeon dungeon, JSONObject json, GoalComponent base) {
+	private void loadGoal(Dungeon dungeon, JSONObject json, Goal base) {
 		String type = json.getString("goal");
 		switch (type) {
 		case "exit":
@@ -70,7 +70,7 @@ public abstract class DungeonLoader {
 			base.add(new TreasureGoal(dungeon));
 			break;
 		case "AND":
-			ANDGoals childAND = new ANDGoals();
+			AndGoals childAND = new AndGoals();
 			base.add(childAND);
 			JSONArray subGoals = json.getJSONArray("subgoals");
 			for (int i = 0; i < subGoals.length(); i++) {
@@ -78,7 +78,7 @@ public abstract class DungeonLoader {
 			}
 			break;
 		case "OR":
-			ORGoals childOR = new ORGoals();
+			OrGoals childOR = new OrGoals();
 			base.add(childOR);
 			JSONArray subGoals1 = json.getJSONArray("subgoals");
 			for (int i = 0; i < subGoals1.length(); i++) {

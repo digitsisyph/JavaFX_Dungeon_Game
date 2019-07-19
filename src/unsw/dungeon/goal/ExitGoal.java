@@ -1,12 +1,12 @@
 package unsw.dungeon.goal;
 
-import java.util.List;
-
 import unsw.dungeon.Dungeon;
 import unsw.dungeon.entities.Entity;
-import unsw.dungeon.entities.EntityType;
+import unsw.dungeon.entities.items.Exit;
 
-public class ExitGoal extends GoalComponent {
+import java.util.List;
+
+public class ExitGoal implements Goal {
 
 	private Dungeon dungeon;
 
@@ -14,18 +14,19 @@ public class ExitGoal extends GoalComponent {
 		this.dungeon = dungeon;
 	}
 
-	@Override
-	public boolean satisfied() {
-		List<Entity> entitiesAtPlayers = dungeon.getEntities(dungeon.getPlayer().getX(), dungeon.getPlayer().getY());
-		for (Entity e : entitiesAtPlayers) {
-			if(e.type() == EntityType.EXIT) {
-				return true;
-			}
-		}
-		return false;
+	public void add(Goal goal) {
+		System.out.println("Unsupported Operation for goal leaf!");
 	}
 
-	@Override
+	public void remove(Goal goal) {
+		System.out.println("Unsupported Operation for goal leaf!");
+	}
+
+	public boolean isSatisfied() {
+		List<Entity> entitiesAtPlayers = dungeon.getEntities(dungeon.getPlayer().getX(), dungeon.getPlayer().getY());
+		return entitiesAtPlayers.stream().anyMatch(entity -> entity instanceof Exit);
+	}
+
 	public void print() {
 		System.out.println("EXIT GOAL");
 	}

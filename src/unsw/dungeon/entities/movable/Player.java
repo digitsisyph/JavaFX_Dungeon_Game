@@ -13,7 +13,7 @@ import unsw.dungeon.entities.EntityType;
  */
 public class Player extends Entity implements Movable {
 
-	private MovementController movement;
+	private Movement movement;
 
 	/**
 	 * Create a player positioned in square (x,y)
@@ -23,7 +23,7 @@ public class Player extends Entity implements Movable {
 	 */
 	public Player(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.movement = new MovementController(dungeon);
+		this.movement = new Movement(dungeon);
 		this.setPassThrough(false);
 	}
 
@@ -50,6 +50,7 @@ public class Player extends Entity implements Movable {
 	public void placeBomb() {
 		this.getDungeon().playerPlacesBomb();
 	}
+
 	@Override
 	public String toString() {
 		return "Player at X " + getX() + " Y " + getY();
@@ -60,11 +61,10 @@ public class Player extends Entity implements Movable {
 		return new Image("/human_new.png");
 	}
 
-	// TODO
+
 	public void collideWith(Entity entity) {
-		if (entity instanceof Enemy) {
+		if (entity instanceof Enemy)
 			this.getDungeon().fightEnemy((Enemy) entity);
-		}
 	}
 
 	@Override

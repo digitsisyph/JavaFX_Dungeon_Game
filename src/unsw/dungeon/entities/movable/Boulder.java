@@ -7,12 +7,12 @@ import unsw.dungeon.entities.EntityType;
 
 public class Boulder extends Entity implements Movable {
 
-	MovementController movement;
+	Movement movement;
 
 	public Boulder(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.setPassThrough(false);
-		this.movement = new MovementController(dungeon);
+		this.movement = new Movement(dungeon);
 	}
 
 	@Override
@@ -21,26 +21,21 @@ public class Boulder extends Entity implements Movable {
 	}
 
 	public void moveUp() {
-		System.out.println("Boulder be pushed UP");
 		this.movement.moveUp(this);
 	}
 
 	public void moveDown() {
-		System.out.println("Boulder be pushed DOWN");
 		this.movement.moveDown(this);
 	}
 
 	public void moveLeft() {
-		System.out.println("Boulder be pushed LEFT");
 		this.movement.moveLeft(this);
 	}
 
 	public void moveRight() {
-		System.out.println("Boulder be pushed RIGHT");
 		this.movement.moveRight(this);
 	}
 
-	// TODO
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
 			if (entity.getY() > this.getY()) {

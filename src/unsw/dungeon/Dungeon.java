@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 import unsw.dungeon.entities.Entity;
 import unsw.dungeon.entities.items.*;
 import unsw.dungeon.entities.movable.*;
-import unsw.dungeon.goal.GoalComponent;
+import unsw.dungeon.goal.Goal;
 import unsw.dungeon.inventory.Inventory;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class Dungeon {
 	private List<Entity> entities;
 	private Player player;
 	private Inventory inventory;
-	private GoalComponent goal;
+	private Goal goal;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
@@ -124,7 +124,7 @@ public class Dungeon {
 		this.controller = controller;
 	}
 
-	public void setGoal(GoalComponent goal) {
+	public void setGoal(Goal goal) {
 		this.goal = goal;
 	}
 
@@ -174,9 +174,9 @@ public class Dungeon {
 	// TODO refactor this to be state pattern
 	private void enemyTick() {
 		if (getInventory().isInvincible()) {
-			getEnemies().forEach(enemy -> enemy.setBehaviour(new MoveAwayFromPlayer()));
+			getEnemies().forEach(enemy -> enemy.setBehaviour(new EnemyMoveAway()));
 		} else {
-			getEnemies().forEach(enemy -> enemy.setBehaviour(new MoveTowardsPlayer()));
+			getEnemies().forEach(enemy -> enemy.setBehaviour(new EnemyMoveClose()));
 		}
 		getEnemies().forEach(enemy -> enemy.move(this.player));
 	}
@@ -196,7 +196,7 @@ public class Dungeon {
 	}
 
 	private void goalTick() {
-		System.out.println("Goal Achieved: " + goal.satisfied());
+		System.out.println("Goal Achieved: " + goal.isSatisfied());
 	}
 
 	// some retriever functions

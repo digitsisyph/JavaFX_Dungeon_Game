@@ -7,14 +7,14 @@ import unsw.dungeon.entities.EntityType;
 
 public class Enemy extends Entity implements Movable {
 
-	private MovementController movement;
-	private MovementBehaviour behaviour;
+	private Movement movement;
+	private EnemyBehaviour behaviour;
 
 	public Enemy(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
-		this.movement = new MovementController(dungeon);
+		this.movement = new Movement(dungeon);
 		this.setPassThrough(false);
-		this.behaviour = new MoveTowardsPlayer();
+		this.behaviour = new EnemyMoveClose();
 	}
 
 	@Override
@@ -42,7 +42,6 @@ public class Enemy extends Entity implements Movable {
 		this.movement.moveRight(this);
 	}
 
-	// TODO
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
 			this.getDungeon().fightEnemy(this);
@@ -51,7 +50,7 @@ public class Enemy extends Entity implements Movable {
 	/**
 	 * @param behaviour the behaviour to set
 	 */
-	public void setBehaviour(MovementBehaviour behaviour) {
+	public void setBehaviour(EnemyBehaviour behaviour) {
 		this.behaviour = behaviour;
 	}
 

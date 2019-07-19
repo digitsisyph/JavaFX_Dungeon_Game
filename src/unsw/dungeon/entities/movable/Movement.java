@@ -5,11 +5,11 @@ import unsw.dungeon.entities.Entity;
 
 import java.util.List;
 
-class MovementController {
+class Movement {
 
     private Dungeon dungeon;
 
-    MovementController(Dungeon dungeon) {
+    Movement(Dungeon dungeon) {
         this.dungeon = dungeon;
     }
 
@@ -43,23 +43,15 @@ class MovementController {
             entity.x().set(target_X);
             entity.y().set(target_Y);
         }
+        // after a movement, no matter success or fails, there would be a collision
         notifyCollision(entity, target_X, target_Y);
-        debuggerIO(entity);
     }
 
 
     // mainly for pushing and opening a door
     private void notifyCollision(Movable movable, int target_X, int target_Y) {
         List<Entity> collidedEntities = dungeon.getEntities(target_X, target_Y);
-        for (Entity entity : collidedEntities) {
-            entity.collideWith((Entity) movable);
-        }
+        collidedEntities.forEach(entity -> entity.collideWith((Entity) movable));
     }
 
-    private void debuggerIO(Movable target) {
-        for (Entity e : dungeon.getEntities()) {
-            if (e != null && e.equals(target))
-                System.out.println(e.toString());
-        }
-    }
 }

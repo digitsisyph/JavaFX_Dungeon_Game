@@ -2,7 +2,7 @@ package unsw.dungeon.goal;
 
 import unsw.dungeon.Dungeon;
 
-public class BoulderGoal extends GoalComponent {
+public class BoulderGoal implements Goal {
 
 	private Dungeon dungeon;
 
@@ -10,12 +10,18 @@ public class BoulderGoal extends GoalComponent {
 		this.dungeon = dungeon;
 	}
 
-	@Override
-	public boolean satisfied() {
+	public void add(Goal goal) {
+		System.out.println("Unsupported Operation for goal leaf!");
+	}
+
+	public void remove(Goal goal) {
+		System.out.println("Unsupported Operation for goal leaf!");
+	}
+
+	public boolean isSatisfied() {
 		return dungeon.getSwitches().stream().allMatch(s -> s.isActivated());
 	}
 
-	@Override
 	public void print() {
 		System.out.println("BOULDER GOAL");
 	}
