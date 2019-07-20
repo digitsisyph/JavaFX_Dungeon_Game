@@ -333,7 +333,6 @@ public class Dungeon {
 		if (!getInventory().isInvincible()) {
 			removeEntity(this.player);
 			this.player = null;
-			System.out.println("KILLLLLLL");
 			gameOver();
 		}
 	}
@@ -343,11 +342,9 @@ public class Dungeon {
 		System.out.println("Hello");
 		for (Entity entity : nearbyEntities) {
 			if (entity instanceof Player) {
-				System.out.println("KILLLLL PLAYER");
 				killPlayer();
 			} else if (entity instanceof Enemy || entity instanceof Boulder) {
 				removeEntity(entity);
-				System.out.println("KILLLLL BOBBBBBB");
 			}
 		}
 	}
