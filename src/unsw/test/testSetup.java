@@ -3,28 +3,31 @@ package unsw.test;
 import org.junit.jupiter.api.AfterEach;
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Player;
-import java.io.FileNotFoundException;
+import unsw.dungeon.model.goal.AndGoals;
+import unsw.dungeon.model.goal.Goal;
 
 public class testSetup {
 
-	DummyDungeonLoader dungeonLoader = null;
 	Dungeon dungeon = null;
 	Player player = null;
-	
-	void setup(String name) {
-		try {
-			dungeonLoader = new DummyDungeonLoader(name);
-			dungeon = dungeonLoader.load();
-			player = dungeon.getPlayer();
-		} catch (FileNotFoundException e) {
-			System.out.println("File not found");
-		}
+	Goal baseGoal;
+	/*
+	 * To configure dungeon for each test
+	 */
+	void setup(int width, int height, int playerX, int playerY) {
+		dungeon = new Dungeon(width, height);
+		player = new Player(playerX, playerY, dungeon);
+		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
+		baseGoal = new AndGoals();
+		dungeon.setGoal(baseGoal);
 	}
+
 	@AfterEach
 	void teatDown() {
-		dungeonLoader = null;
 		dungeon = null;
 		player = null;
-		System.out.println("Cleared Variables");
+		baseGoal = null;	
+		
 	}
 }

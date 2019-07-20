@@ -46,7 +46,7 @@ public class Dungeon {
 		this.goal = null;
 	}
 
-	// ---  getter ---
+	// --- getter ---
 
 	public int getWidth() {
 		return width;
@@ -72,8 +72,7 @@ public class Dungeon {
 	}
 
 	public List<Entity> getEntities(EntityType type) {
-		return entities.stream().filter(entity -> entity.type() == type)
-				.collect(Collectors.toList());
+		return entities.stream().filter(entity -> entity.type() == type).collect(Collectors.toList());
 	}
 
 	// a helper function for bomb
@@ -120,7 +119,6 @@ public class Dungeon {
 		return entities;
 	}
 
-
 	// --- setter
 
 	public void setPlayer(Player player) {
@@ -141,7 +139,10 @@ public class Dungeon {
 
 	// create a new entity in the dungeon
 	public void createEntity(Entity entity) {
-		controller.addEntityImage(entity);
+		System.out.println(entity);
+		if(controller != null) {
+			controller.addEntityImage(entity);
+		}
 		entities.add(entity);
 	}
 
@@ -217,31 +218,31 @@ public class Dungeon {
 
 	// some retriever functions
 
-
-
 	// for picking up
 
 	public void pickUp(Entity entity) {
 		switch (entity.type()) {
-			case SWORD:
-				pickUpSword((Sword) entity);
-				break;
+		case SWORD:
+			pickUpSword((Sword) entity);
+			break;
 
-			case TREASURE:
-				pickUpTreasure((Treasure) entity);
-				break;
+		case TREASURE:
+			pickUpTreasure((Treasure) entity);
+			break;
 
-			case UNLITBOMB:
-				pickUpBomb((UnlitBomb) entity);
-				break;
+		case UNLITBOMB:
+			pickUpBomb((UnlitBomb) entity);
+			break;
 
-			case POTION:
-				pickUpPotion((Potion) entity);
-				break;
+		case POTION:
+			pickUpPotion((Potion) entity);
+			break;
 
-			case KEY:
-				pickUpKey((Key) entity);
-				break;
+		case KEY:
+			pickUpKey((Key) entity);
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -277,7 +278,6 @@ public class Dungeon {
 		}
 		this.getInventory().debug();
 	}
-
 
 	// --- other interactions
 
@@ -318,13 +318,14 @@ public class Dungeon {
 		}
 	}
 
-
-
 	// TODO game over
 	private void gameOver() {
 		//if (goal.isSatisfied())
 	}
-
+	
+	public boolean goalAchieved() {
+		return this.goal.isSatisfied();
+	}
 	// a helper function to kill the player
 	private void killPlayer() {
 		// if the player is invincible now, it would not die
@@ -343,7 +344,6 @@ public class Dungeon {
 		createEntity(new ExplodedBomb(bomb.getX(), bomb.getY() - 1, this));
 		// kill nearby Entities
 		List<Entity> nearbyEntities = getNearbyEntities(bomb.getX(), bomb.getY());
-
 		for (Entity entity : nearbyEntities) {
 			switch (entity.type()) {
 				case ENEMY:

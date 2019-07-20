@@ -16,7 +16,7 @@ public class DungeonApplication extends Application {
 
 
 		// use ControllerLoader to load map from a json file
-		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
+		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced2.json");
 		// create a Controller from the ControllerLoader
 		DungeonController controller = dungeonLoader.loadController();
 

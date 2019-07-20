@@ -11,7 +11,7 @@ class SwordInv {
     }
 
     void restoreDurability() {
-        this.durability += 1;
+        this.durability = 5;
     }
 
     public Image getImage() {

@@ -90,6 +90,13 @@ public class Inventory {
 			return this.invincible.getRemainingTime();
 	}
 
+	public SwordInv getSword() {
+		return this.sword;
+	}
+	
+	public int getSwordDurability() {
+		return this.sword.getDurability();
+	}
 	/**
 	 * @return the invincible
 	 */

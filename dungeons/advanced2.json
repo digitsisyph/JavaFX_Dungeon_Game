@@ -98,8 +98,8 @@
       "type": "wall"
     },
     {
-      "x": 1,
-      "y": 1,
+      "x": 3,
+      "y": 7,
       "type": "player"
     },
     {
@@ -208,11 +208,6 @@
       "type": "bomb"
     },
     {
-      "x": 13,
-      "y": 5,
-      "type": "bomb"
-    },
-    {
       "x": 17,
       "y": 4,
       "type": "wall"
@@ -225,12 +220,7 @@
     {
       "x": 3,
       "y": 5,
-      "type": "enemy"
-    },
-    {
-      "x": 4,
-      "y": 5,
-      "type": "hound"
+      "type": "sword"
     },
     {
       "x": 8,
@@ -404,8 +394,8 @@
     },
     {
       "x": 11,
-      "y": 14,
-      "type": "exit"
+      "y": 11,
+      "type": "invincibility"
     },
     {
       "x": 17,
@@ -622,7 +612,7 @@
     "goal": "AND",
     "subgoals": [
       {
-        "goal": "exit"
+        "goal": "enemies"
       },
       {
         "goal": "treasure"
