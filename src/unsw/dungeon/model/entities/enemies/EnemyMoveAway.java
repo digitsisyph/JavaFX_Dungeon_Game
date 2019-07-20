@@ -1,4 +1,6 @@
-package unsw.dungeon.model.entities;
+package unsw.dungeon.model.entities.enemies;
+
+import unsw.dungeon.model.entities.Player;
 
 import java.util.Random;
 

@@ -1,6 +1,7 @@
 package unsw.dungeon.model.entities;
 
 import unsw.dungeon.model.Dungeon;
+import unsw.dungeon.model.entities.enemies.HumanEnemy;
 
 /**
  * The player entity
@@ -27,27 +28,27 @@ public class Player extends Entity implements Movable {
 
 	public void moveUp() {
 		movement.moveUp();
-		this.getDungeon().playerMovementUpdate();
+		this.getDungeon().notifyMovement();
 	}
 
 	public void moveDown() {
 		movement.moveDown();
-		this.getDungeon().playerMovementUpdate();
+		this.getDungeon().notifyMovement();
 	}
 
 	public void moveLeft() {
 		movement.moveLeft();
-		this.getDungeon().playerMovementUpdate();
+		this.getDungeon().notifyMovement();
 	}
 
 	public void moveRight() {
 		movement.moveRight();
-		this.getDungeon().playerMovementUpdate();
+		this.getDungeon().notifyMovement();
 	}
 
 	public void collideWith(Entity entity) {
-		if (entity instanceof Enemy)
-			this.getDungeon().fightEnemy((Enemy) entity);
+		if (entity instanceof HumanEnemy)
+			this.getDungeon().fightEnemy((HumanEnemy) entity);
 	}
 
 	@Override

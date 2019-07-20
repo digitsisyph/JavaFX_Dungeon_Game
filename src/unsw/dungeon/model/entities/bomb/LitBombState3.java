@@ -1,4 +1,4 @@
-package unsw.dungeon.model.entities.Bomb;
+package unsw.dungeon.model.entities.bomb;
 
 public class LitBombState3 implements LitBombState {
 
@@ -16,6 +16,8 @@ public class LitBombState3 implements LitBombState {
 
 	@Override
 	public void nextState() {
+		// explode the bomb
+		bomb.getDungeon().explodeBomb(bomb);
 		bomb.setState(new LitBombState4(bomb));
 	}
 

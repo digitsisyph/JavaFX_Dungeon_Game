@@ -1,6 +1,7 @@
-package unsw.dungeon.model.entities;
+package unsw.dungeon.model.entities.enemies;
 
 import unsw.dungeon.model.Dungeon;
+import unsw.dungeon.model.entities.Player;
 
 import java.util.LinkedList;
 
@@ -41,7 +42,7 @@ public class EnemyMoveClose implements EnemyBehaviour {
 			for (Grid grid : nearbyGrids) {
 				if (grid.x == player.getX() && grid.y == player.getY()) {
 					found = true;
-					// this is to let enemy attack player
+					// this is to let humanEnemy attack player
 					visited[grid.x][grid.y] = curr;
 					curr = grid;
 					break;

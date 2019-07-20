@@ -31,7 +31,6 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	@Override
 	public void onLoad(Entity entity) {
-		System.out.println("onload " + entity);
 		ImageView view = new ImageView(new Image(entity.getImagePath()));
 		addEntity(entity, view);
 	}
@@ -76,9 +75,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 		entity.imagePath().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				System.out.println("change image: " + newValue.toString());
 				((ImageView) node).setImage(new Image(newValue.toString()));
-				System.out.println(entity);
 			}
 		});
 	}

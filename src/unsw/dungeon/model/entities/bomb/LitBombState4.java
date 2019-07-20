@@ -1,4 +1,4 @@
-package unsw.dungeon.model.entities.Bomb;
+package unsw.dungeon.model.entities.bomb;
 
 public class LitBombState4 implements LitBombState {
 
@@ -6,8 +6,6 @@ public class LitBombState4 implements LitBombState {
 
 	LitBombState4(LitBomb bomb) {
 		this.bomb = bomb;
-		// in this state, the bomb explodes
-		bomb.getDungeon().explodeBomb(bomb);
 		bomb.setImagePath(this.getImagePath());
 	}
 

@@ -1,4 +1,4 @@
-package unsw.dungeon.model.entities.Bomb;
+package unsw.dungeon.model.entities.bomb;
 
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;

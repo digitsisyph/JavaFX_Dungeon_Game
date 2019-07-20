@@ -4,9 +4,12 @@
 package unsw.dungeon.model;
 
 import unsw.dungeon.controller.DungeonController;
-import unsw.dungeon.model.entities.Bomb.LitBomb;
-import unsw.dungeon.model.entities.Bomb.UnlitBomb;
 import unsw.dungeon.model.entities.*;
+import unsw.dungeon.model.entities.bomb.ExplodedBomb;
+import unsw.dungeon.model.entities.bomb.LitBomb;
+import unsw.dungeon.model.entities.bomb.UnlitBomb;
+import unsw.dungeon.model.entities.door.Door;
+import unsw.dungeon.model.entities.enemies.Enemy;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
 
@@ -84,27 +87,28 @@ public class Dungeon {
 	}
 
 	public List<Enemy> getEnemies() {
-		return entities.stream().filter(entity -> entity instanceof Enemy).map(Enemy.class::cast)
+		return entities.stream()
+				.filter(entity -> entity.type() == EntityType.ENEMY)
+				.map(Enemy.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<Switch> getSwitches() {
-		return entities.stream().filter(entity -> entity instanceof Switch).map(Switch.class::cast)
+		return entities.stream()
+				.filter(entity -> entity instanceof Switch).map(Switch.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<Treasure> getTreasures() {
-		return entities.stream().filter(entity -> entity instanceof Treasure).map(Treasure.class::cast)
-				.collect(Collectors.toList());
-	}
-
-	public List<UnlitBomb> getUnlitBombs() {
-		return entities.stream().filter(entity -> entity instanceof UnlitBomb).map(UnlitBomb.class::cast)
+		return entities.stream()
+				.filter(entity -> entity instanceof Treasure).map(Treasure.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<LitBomb> getLitBombs() {
-		return entities.stream().filter(entity -> entity instanceof LitBomb).map(LitBomb.class::cast)
+		return entities.stream()
+				.filter(entity -> entity.type() == EntityType.LITBOMB)
+				.map(LitBomb.class::cast)
 				.collect(Collectors.toList());
 	}
 
@@ -173,18 +177,7 @@ public class Dungeon {
 
 	// interactions
 
-	/*
-	 * TODO For every player movement, something must change Might be better to have
-	 * enemy observes player And put invincibility as an attribute inside the player
-	 * class
-	 */
-	public void playerMovementUpdate() {
-		System.out.println("Player @ " + player.getX() + " " + player.getY());
-		enemyUpdate();
-		bombUpdate();
-		inventoryUpdate();
-		goalUpdate();
-	}
+
 
 	// helper function: check whether a grid is walkable
 	public Boolean canOccupyGrid(int X, int Y) {
@@ -194,26 +187,32 @@ public class Dungeon {
 
 	// --- Tick ----
 
+	/*
+	 * TODO For every player movement, something must change Might be better to have
+	 * enemy observes player And put invincibility as an attribute inside the player
+	 * class
+	 */
+	public void notifyMovement() {
+		System.out.println("Player @ " + player.getX() + " " + player.getY());
+		enemyUpdate();
+		bombUpdate();
+		goalUpdate();
+		inventory.updatePerMovement();
+	}
+
 	// TODO refactor this to be state pattern
 	private void enemyUpdate() {
-		if (getInventory().isInvincible()) {
-			getEnemies().forEach(enemy -> enemy.setBehaviour(new EnemyMoveAway()));
-		} else {
-			getEnemies().forEach(enemy -> enemy.setBehaviour(new EnemyMoveClose()));
-		}
-		getEnemies().forEach(enemy -> enemy.move(this.player));
+		getEnemies().forEach(enemy -> enemy.updateStrategy(getInventory().isInvincible()));
+		getEnemies().forEach(enemy -> enemy.move(player));
 	}
 
 	private void bombUpdate() {
 		getLitBombs().forEach(bomb -> bomb.nextState());
 	}
 
-	private void inventoryUpdate() {
-		getInventory().decreaseInvincibility();
-	}
-
 	private void goalUpdate() {
-		System.out.println("Goal Achieved: " + goal.isSatisfied());
+		if (goal.isSatisfied())
+			System.out.println("Goal Achieved: " + goal.isSatisfied());
 	}
 
 	// some retriever functions
@@ -337,12 +336,27 @@ public class Dungeon {
 	}
 
 	public void explodeBomb(LitBomb bomb) {
+		// put exploded Bomb
+		createEntity(new ExplodedBomb(bomb.getX() + 1, bomb.getY(), this));
+		createEntity(new ExplodedBomb(bomb.getX() - 1, bomb.getY(), this));
+		createEntity(new ExplodedBomb(bomb.getX(), bomb.getY() + 1, this));
+		createEntity(new ExplodedBomb(bomb.getX(), bomb.getY() - 1, this));
+		// kill nearby Entities
 		List<Entity> nearbyEntities = getNearbyEntities(bomb.getX(), bomb.getY());
+
 		for (Entity entity : nearbyEntities) {
-			if (entity instanceof Player) {
-				killPlayer();
-			} else if (entity instanceof Enemy || entity instanceof Boulder) {
-				removeEntity(entity);
+			switch (entity.type()) {
+				case ENEMY:
+					removeEntity(entity);
+					break;
+				case BOULDER:
+					removeEntity(entity);
+					break;
+				case PLAYER:
+					killPlayer();
+					break;
+				default:
+					break;
 			}
 		}
 	}

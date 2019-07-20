@@ -4,7 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import unsw.dungeon.model.entities.*;
-import unsw.dungeon.model.entities.Bomb.UnlitBomb;
+import unsw.dungeon.model.entities.bomb.UnlitBomb;
+import unsw.dungeon.model.entities.door.Door;
+import unsw.dungeon.model.entities.enemies.HoundEnemy;
+import unsw.dungeon.model.entities.enemies.HumanEnemy;
 import unsw.dungeon.model.goal.*;
 import unsw.dungeon.model.Dungeon;
 
@@ -102,62 +105,56 @@ public abstract class DungeonLoader {
 				entity = player;
 				break;
 			case "wall":
-				Wall wall = new Wall(x, y, dungeon);
-				onLoad(wall);
-				entity = wall;
+				entity = new Wall(x, y, dungeon);
+				onLoad(entity);
 				break;
 			case "exit":
-				Exit exit = new Exit(x, y, dungeon);
-				onLoad(exit);
-				entity = exit;
+				entity = new Exit(x, y, dungeon);
+				onLoad(entity);
 				break;
 			case "treasure":
-				Treasure treasure = new Treasure(x, y, dungeon);
-				onLoad(treasure);
-				entity = treasure;
+				entity = new Treasure(x, y, dungeon);
+				onLoad(entity);
 				break;
 			case "door":
-				Door door = new Door(x, y, dungeon, json.getInt("id"));
-				onLoad(door);
-				entity = door;
+				entity = new Door(x, y, dungeon, json.getInt("id"));
+				onLoad(entity);
 				break;
 			case "key":
-				Key key = new Key(x, y, dungeon, json.getInt("id"));
-				onLoad(key);
-				entity = key;
+				entity = new Key(x, y, dungeon, json.getInt("id"));
+				onLoad(entity);
 				break;
 			case "boulder":
-				Boulder boulder = new Boulder(x, y, dungeon);
-				onLoad(boulder);
-				entity = boulder;
+				entity = new Boulder(x, y, dungeon);
+				onLoad(entity);
 				break;
 			case "switch":
-				Switch plate = new Switch(x, y, dungeon);
-				onLoad(plate);
-				entity = plate;
+				entity = new Switch(x, y, dungeon);
+				onLoad(entity);
 				break;
 			case "bomb":
-				UnlitBomb bomb = new UnlitBomb(x, y, dungeon);
-				onLoad(bomb);
-				entity = bomb;
+				entity = new UnlitBomb(x, y, dungeon);
+				onLoad(entity);
 				break;
 			case "enemy":
-				Enemy enemy = new Enemy(x, y, dungeon);
-				onLoad(enemy);
-				entity = enemy;
+				entity = new HumanEnemy(x, y, dungeon);
+				onLoad(entity);
+				break;
+			case "hound":
+				entity = new HoundEnemy(x, y, dungeon);
+				onLoad(entity);
 				break;
 			case "sword":
-				Sword sword = new Sword(x, y, dungeon);
-				onLoad(sword);
-				entity = sword;
+				entity = new Sword(x, y, dungeon);
+				onLoad(entity);
 				break;
 			case "invincibility":
-				Potion potion = new Potion(x, y, dungeon);
-				onLoad(potion);
-				entity = potion;
+				entity = new Potion(x, y, dungeon);
+				onLoad(entity);
 				break;
 		}
-		dungeon.addEntity(entity);
+		if (entity != null)
+			dungeon.addEntity(entity);
 	}
 
 	public abstract void onLoad(Entity entity);

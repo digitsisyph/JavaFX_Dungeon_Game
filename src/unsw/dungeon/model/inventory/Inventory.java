@@ -6,9 +6,7 @@ public class Inventory {
 	private SwordInv sword;
 	private KeyInv key;
 	private TreasureInv treasure;
-
-	private int invincibilitySteps = 0;
-	private boolean invincible = false;
+	private InvincibleState invincible = null;
 
 	public Inventory() {
 		this.bomb = new BombInv();
@@ -72,31 +70,31 @@ public class Inventory {
 	}
 
 	public void pickUpPotion() {
-		this.invincibilitySteps = 5;
-		this.invincible = true;
-		System.out.println("Invincible = " + invincibilitySteps);
+		setInvincibleState(new InvincibleState(this, 5));
 	}
 
-	public void decreaseInvincibility() {
+	public void updatePerMovement() {
 		// decrease every step
-		if (this.invincibilitySteps > 0) {
-			this.invincibilitySteps--;
-			System.out.println("Invincible = " + invincibilitySteps);
-		}
-		if (this.invincibilitySteps == 0) {
-			this.invincible = false;
-		}
+		if (invincible != null)
+			this.invincible.nextState();
+	}
+
+	void setInvincibleState(InvincibleState invincibleState) {
+		this.invincible = invincibleState;
+	}
+
+	public int invincStep() {
+		if (this.invincible == null)
+			return 0;
+		else
+			return this.invincible.getRemainingTime();
 	}
 
 	/**
 	 * @return the invincible
 	 */
 	public boolean isInvincible() {
-		return invincible;
-	}
-	
-	public int invincStep() {
-		return invincibilitySteps;
+		return invincible != null;
 	}
 
 	// for debug

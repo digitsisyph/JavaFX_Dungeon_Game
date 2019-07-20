@@ -1,4 +1,4 @@
-package unsw.dungeon.model.entities;
+package unsw.dungeon.model.entities.door;
 
 public interface DoorState {
 	public String getImagePath();

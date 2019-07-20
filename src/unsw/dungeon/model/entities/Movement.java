@@ -4,12 +4,12 @@ import unsw.dungeon.model.Dungeon;
 
 import java.util.List;
 
-class Movement {
+public class Movement {
 
     private Movable entity;
     private Dungeon dungeon;
 
-    Movement(Movable entity, Dungeon dungeon) {
+    public Movement(Movable entity, Dungeon dungeon) {
         this.entity = entity;
         this.dungeon = dungeon;
     }
