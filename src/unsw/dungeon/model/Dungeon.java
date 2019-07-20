@@ -33,14 +33,17 @@ public class Dungeon {
 	private int width, height;
 	private List<Entity> entities;
 	private Player player;
+	private Player tempPlayer;
 	private Inventory inventory;
 	private Goal goal;
+	public boolean gameOver = false;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.entities = new ArrayList<>();
 		this.player = null;
+		this.tempPlayer = null;
 		this.controller = null;
 		this.inventory = new Inventory();
 		this.goal = null;
@@ -86,28 +89,22 @@ public class Dungeon {
 	}
 
 	public List<Enemy> getEnemies() {
-		return entities.stream()
-				.filter(entity -> entity.type() == EntityType.ENEMY)
-				.map(Enemy.class::cast)
+		return entities.stream().filter(entity -> entity.type() == EntityType.ENEMY).map(Enemy.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<Switch> getSwitches() {
-		return entities.stream()
-				.filter(entity -> entity instanceof Switch).map(Switch.class::cast)
+		return entities.stream().filter(entity -> entity instanceof Switch).map(Switch.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<Treasure> getTreasures() {
-		return entities.stream()
-				.filter(entity -> entity instanceof Treasure).map(Treasure.class::cast)
+		return entities.stream().filter(entity -> entity instanceof Treasure).map(Treasure.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<LitBomb> getLitBombs() {
-		return entities.stream()
-				.filter(entity -> entity.type() == EntityType.LITBOMB)
-				.map(LitBomb.class::cast)
+		return entities.stream().filter(entity -> entity.type() == EntityType.LITBOMB).map(LitBomb.class::cast)
 				.collect(Collectors.toList());
 	}
 
@@ -123,6 +120,7 @@ public class Dungeon {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+		this.tempPlayer = player;
 	}
 
 	public void setController(DungeonController controller) {
@@ -140,7 +138,7 @@ public class Dungeon {
 	// create a new entity in the dungeon
 	public void createEntity(Entity entity) {
 		System.out.println(entity);
-		if(controller != null) {
+		if (controller != null) {
 			controller.addEntityImage(entity);
 		}
 		entities.add(entity);
@@ -178,8 +176,6 @@ public class Dungeon {
 
 	// interactions
 
-
-
 	// helper function: check whether a grid is walkable
 	public Boolean canOccupyGrid(int X, int Y) {
 		return this.getEntities(X, Y).stream().allMatch(Entity::canPassThrough)
@@ -195,20 +191,27 @@ public class Dungeon {
 	 */
 	public void notifyMovement() {
 		System.out.println("Player @ " + player.getX() + " " + player.getY());
-		enemyUpdate();
-		bombUpdate();
 		goalUpdate();
 		inventory.updatePerMovement();
+		enemyUpdate();
+		bombUpdate();
+		if (gameOver) {
+			System.out.println("DEFEAT!!!");
+		}
 	}
 
 	// TODO refactor this to be state pattern
 	private void enemyUpdate() {
-		getEnemies().forEach(enemy -> enemy.updateStrategy(getInventory().isInvincible()));
-		getEnemies().forEach(enemy -> enemy.move(player));
+		if (!gameOver) {
+			getEnemies().forEach(enemy -> enemy.updateStrategy(getInventory().isInvincible()));
+			getEnemies().forEach(enemy -> enemy.move(tempPlayer));
+		}
 	}
 
 	private void bombUpdate() {
-		getLitBombs().forEach(bomb -> bomb.nextState());
+		if (!gameOver) {
+			getLitBombs().forEach(bomb -> bomb.nextState());
+		}
 	}
 
 	private void goalUpdate() {
@@ -287,8 +290,6 @@ public class Dungeon {
 		} else if (this.getInventory().useSword()) {
 			removeEntity(enemy);
 		} else {
-			// TODO player die
-			// this is broken right now
 			killPlayer();
 		}
 	}
@@ -320,12 +321,13 @@ public class Dungeon {
 
 	// TODO game over
 	private void gameOver() {
-		//if (goal.isSatisfied())
+		gameOver = true;
 	}
-	
+
 	public boolean goalAchieved() {
 		return this.goal.isSatisfied();
 	}
+
 	// a helper function to kill the player
 	private void killPlayer() {
 		// if the player is invincible now, it would not die
@@ -346,17 +348,17 @@ public class Dungeon {
 		List<Entity> nearbyEntities = getNearbyEntities(bomb.getX(), bomb.getY());
 		for (Entity entity : nearbyEntities) {
 			switch (entity.type()) {
-				case ENEMY:
-					removeEntity(entity);
-					break;
-				case BOULDER:
-					removeEntity(entity);
-					break;
-				case PLAYER:
-					killPlayer();
-					break;
-				default:
-					break;
+			case ENEMY:
+				removeEntity(entity);
+				break;
+			case BOULDER:
+				removeEntity(entity);
+				break;
+			case PLAYER:
+				killPlayer();
+				break;
+			default:
+				break;
 			}
 		}
 	}
