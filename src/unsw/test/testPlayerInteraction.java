@@ -19,21 +19,6 @@ import unsw.dungeon.model.entities.Bomb.UnlitBomb;
 
 public class testPlayerInteraction extends testSetup {
 
-
-	// this is an example test code from the tutor
-	@Test
-	void testSomething() {
-//		Dungeon dungeon = new Dungeon(4, 5);
-//		Player player = new Player(2, 4, dungeon);
-//
-//		dungeon.createEntity(player);
-//
-//		player.moveRight();
-//		player.moveLeft();
-//
-//		assertEquals(player.getX(), 2);
-	}
-
 	/*
 	 * Player can collect any number of treasures
 	 */
@@ -93,7 +78,9 @@ public class testPlayerInteraction extends testSetup {
 	}
 
 	/*
-	 * Player picking potion will set invincibility step to 5 TODO: Should be 5?
+	 * Player picking potion will set invincibility step to 5. Player is invincible
+	 * for 5 steps counting the first step from the moment he steps into the grid
+	 * containing the potion
 	 */
 	@Test
 	void testPickUpPotion() {
@@ -106,14 +93,27 @@ public class testPlayerInteraction extends testSetup {
 		assertEquals(false, dungeon.getInventory().isInvincible());
 		player.moveRight();
 		assertEquals(1, dungeon.getEntities(EntityType.POTION).size());
-		assertEquals(true, dungeon.getInventory().isInvincible());
+		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
+		assertEquals(4, dungeon.getInventory().invincStep());
+		player.moveRight(); // collects another potion
+		assertEquals(0, dungeon.getEntities(EntityType.POTION).size());
+		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
 		assertEquals(4, dungeon.getInventory().invincStep());
 		player.moveRight();
-		assertEquals(0, dungeon.getEntities(EntityType.POTION).size());
-		assertEquals(true, dungeon.getInventory().isInvincible());
-		assertEquals(4, dungeon.getInventory().invincStep());
+		assertEquals(3, dungeon.getInventory().invincStep());
+		player.moveRight();
+		assertEquals(2, dungeon.getInventory().invincStep());
+		player.moveRight();
+		assertEquals(1, dungeon.getInventory().invincStep());
+		player.moveRight();
+		assertEquals(0, dungeon.getInventory().invincStep());
+		assertEquals(false, dungeon.getInventory().isInvincible()); // no longer invincible
+
 	}
 
+	/*
+	 * Player can only use key to unlock matching door
+	 */
 	@Test
 	void testDoorInteraction() {
 		setup(5, 3, 1, 1);
@@ -170,6 +170,10 @@ public class testPlayerInteraction extends testSetup {
 		assertEquals(0, dungeon.getEntities(EntityType.KEY).size());
 	}
 
+	/*
+	 * Player can use sword to kill the enemy Each time a sword is used its
+	 * durability is decreased by one.
+	 */
 	@Test
 	void testPlayerSwordEnemyInteraction() {
 		setup(5, 1, 0, 0);

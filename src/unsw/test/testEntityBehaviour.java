@@ -9,6 +9,7 @@ import unsw.dungeon.model.entities.Boulder;
 import unsw.dungeon.model.entities.Door;
 import unsw.dungeon.model.entities.Enemy;
 import unsw.dungeon.model.entities.EntityType;
+import unsw.dungeon.model.entities.Key;
 import unsw.dungeon.model.entities.Potion;
 import unsw.dungeon.model.entities.Wall;
 import unsw.dungeon.model.entities.Bomb.LitBomb;
@@ -16,6 +17,9 @@ import unsw.dungeon.model.entities.Bomb.UnlitBomb;
 
 public class testEntityBehaviour extends testSetup {
 
+	/*
+	 * Enemy will move away when the player is invincible
+	 */
 	@Test
 	void testEnemyMoveAway() {
 		setup(10, 1, 0, 0);
@@ -31,7 +35,10 @@ public class testEntityBehaviour extends testSetup {
 		player.moveRight();
 		assertEquals(distance, (enemy.getX() - player.getX()));
 	}
-
+	/*
+	 * Normally the enemy will close the distance between the player
+	 * and itself
+	 */
 	@Test
 	void testEnemyMoveTowards() {
 		setup(10, 1, 0, 0);
@@ -45,7 +52,9 @@ public class testEntityBehaviour extends testSetup {
 		player.moveRight();
 		assertEquals(distance - 6, (enemy.getX() - player.getX()));
 	}
-
+	/*
+	 * Testing lit bomb state transition
+	 */
 	@Test
 	void testLitBombStates() {
 		setup(10, 1, 0, 0);
@@ -66,6 +75,9 @@ public class testEntityBehaviour extends testSetup {
 		assertEquals("/bomb_lit_4.png", bombLit.getImagePath());
 	}
 
+	/*
+	 * Exploded bombs will destroy neighbouring boulders
+	 */
 	@Test
 	void testExplodedBombDestroyBoulders() {
 		setup(10, 5, 1, 2);
@@ -86,6 +98,9 @@ public class testEntityBehaviour extends testSetup {
 		assertEquals(0, dungeon.getEntities(EntityType.BOULDER).size());
 	}
 
+	/*
+	 * Exploded bombs will destroy neighbouring enemies
+	 */
 	@Test
 	void testExplodedBombDestroyEnemies() {
 		setup(10, 5, 1, 2);
@@ -106,6 +121,9 @@ public class testEntityBehaviour extends testSetup {
 		assertEquals(0, dungeon.getEntities(EntityType.BOULDER).size());
 	}
 
+	/*
+	 * Boulder can be pushed by the player
+	 */
 	@Test
 	void testPushBoulder() {
 		setup(3, 1, 0, 0);
@@ -116,7 +134,9 @@ public class testEntityBehaviour extends testSetup {
 		assertEquals(1, dungeon.getEntities(2, 0).size());
 		assertTrue(dungeon.getEntities(2, 0).get(0) instanceof Boulder);
 	}
-
+	/*
+	 * Player is strong enough to only push 1 boulder at a time
+	 */
 	@Test
 	void testCannotPushTwoBoulders() {
 		setup(4, 1, 0, 0);
@@ -127,36 +147,63 @@ public class testEntityBehaviour extends testSetup {
 		player.moveRight(); // pushing
 		assertEquals(0, dungeon.getEntities(3, 0).size()); // no boulder on x3y0
 	}
-
+	/*
+	 * Cant push boulder through wall
+	 */
 	@Test
 	void testPushBoulderWall() {
-		setup(3,1,0,0);
+		setup(3, 1, 0, 0);
 		Boulder bou = new Boulder(1, 0, dungeon);
 		dungeon.addEntity(bou);
-		Wall wall = new Wall(2,0,dungeon);
+		Wall wall = new Wall(2, 0, dungeon);
 		dungeon.addEntity(wall);
 		player.moveRight(); // pushing
 		assertTrue(dungeon.getEntities(1, 0).get(0) instanceof Boulder);
 	}
-	
+	/*
+	 * Cant push boulder through closed door
+	 */
 	@Test
-	void testPushBoulderDoor() {
-		setup(3,1,0,0);
+	void testPushBoulderClosedDoor() {
+		setup(3, 1, 0, 0);
 		Boulder bou = new Boulder(1, 0, dungeon);
 		dungeon.addEntity(bou);
-		Door door = new Door(2,0,dungeon,0);
+		Door door = new Door(2, 0, dungeon, 0);
 		dungeon.addEntity(door);
 		player.moveRight(); // pushing
 		assertTrue(dungeon.getEntities(1, 0).get(0) instanceof Boulder);
 	}
+	/*
+	 * Player cannot push boulder into the enemy
+	 */
 	@Test
 	void testPushBoulderEnemy() {
-		setup(3,1,0,0);
+		setup(3, 1, 0, 0);
 		Boulder bou = new Boulder(1, 0, dungeon);
 		dungeon.addEntity(bou);
-		Enemy enemy = new Enemy(2,0,dungeon);
+		Enemy enemy = new Enemy(2, 0, dungeon);
 		dungeon.addEntity(enemy);
 		player.moveRight(); // pushing
 		assertTrue(dungeon.getEntities(1, 0).get(0) instanceof Boulder);
+	}
+	/*
+	 * Player can pushed boulder through opened door
+	 */
+	@Test
+	void testPushBoulderOpenedDoor() {
+		setup(4, 1, 0, 0);
+		// Adding key
+		Key key = new Key(0, 0, dungeon, 0);
+		dungeon.addEntity(key);
+		Boulder bou = new Boulder(1, 0, dungeon);
+		dungeon.addEntity(bou);
+		Door door = new Door(2, 0, dungeon, 0);
+		dungeon.addEntity(door);
+		dungeon.pickUp(key);
+		dungeon.attemptToOpenDoor(door);
+		player.moveRight(); // pushing
+		player.moveRight(); // boulder at door
+		player.moveRight(); // boulder passes door
+		assertTrue(dungeon.getEntities(3, 0).get(0) instanceof Boulder);
 	}
 }

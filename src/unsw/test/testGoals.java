@@ -19,6 +19,9 @@ import unsw.dungeon.model.goal.TreasureGoal;
 
 public class testGoals extends testSetup {
 
+	/*
+	 * Collect all treasures to complete the goal
+	 */
 	@Test
 	void testTreasureGoal() {
 		setup(5, 3, 1, 1);
@@ -33,14 +36,15 @@ public class testGoals extends testSetup {
 		assertEquals(true, dungeon.goalAchieved());
 	}
 
+	/*
+	 * Kill all enemies to complete the goal
+	 */
 	@Test
 	void testEnemyGoal() {
 		setup(5, 1, 0, 0);
 		baseGoal.add(new EnemyGoal(dungeon));
 		Enemy enemy = new Enemy(1, 0, dungeon);
 		dungeon.addEntity(enemy);
-//		enemy = new Enemy(4, 0, dungeon);
-//		dungeon.addEntity(enemy);
 		Sword sword = new Sword(0, 0, dungeon);
 		dungeon.addEntity(sword);
 		dungeon.pickUp(sword);
@@ -50,6 +54,9 @@ public class testGoals extends testSetup {
 
 	}
 
+	/*
+	 * Push all boulders on switches
+	 */
 	@Test
 	void testBouldersGoal() {
 		setup(5, 5, 2, 2);
@@ -68,19 +75,25 @@ public class testGoals extends testSetup {
 		assertEquals(true, dungeon.goalAchieved());
 	}
 
+	/*
+	 * Be at the exit to complete the goal
+	 */
 	@Test
 	void testExitGoal() {
 		setup(5, 5, 2, 2);
 		baseGoal.add(new ExitGoal(dungeon));
-		Exit exit = new Exit(2,1,dungeon);
+		Exit exit = new Exit(2, 1, dungeon);
 		dungeon.addEntity(exit);
 		assertEquals(false, dungeon.goalAchieved());
 		player.moveUp();
 		assertEquals(true, dungeon.goalAchieved());
 	}
 
+	/*
+	 * Testing 2 AND goals
+	 */
 	@Test
-	void testOneLevel() {
+	void testOneLevelCompositeGoal() {
 		setup(5, 3, 1, 1);
 		AndGoals andGoals = new AndGoals();
 		andGoals.add(new ExitGoal(dungeon));
@@ -95,10 +108,12 @@ public class testGoals extends testSetup {
 		player.moveRight();
 		assertEquals(true, dungeon.goalAchieved());
 	}
-	
-	
+
+	/*
+	 * Testing two level goals AND + (OR goals)
+	 */
 	@Test
-	void testTwoLevel() {
+	void testTwoLevelCompositeGoal1() {
 		setup(5, 3, 2, 2);
 		AndGoals andGoals = new AndGoals();
 		OrGoals orGoals = new OrGoals();
@@ -120,16 +135,20 @@ public class testGoals extends testSetup {
 		player.moveUp();
 		assertEquals(true, dungeon.goalAchieved());
 	}
+
+	/*
+	 * Testing two level goals OR + (AND goals)
+	 */
 	@Test
-	void testTwoLevel2() {
+	void testTwoLevelCompositeGoal2() {
 		setup(5, 3, 2, 2);
 		AndGoals andGoals = new AndGoals();
 		OrGoals orGoals = new OrGoals();
-		baseGoal.add(andGoals);
-		andGoals.add(new ExitGoal(dungeon));
-		andGoals.add(orGoals);
-		orGoals.add(new BoulderGoal(dungeon));
-		orGoals.add(new TreasureGoal(dungeon));
+		baseGoal.add(orGoals);
+		orGoals.add(new ExitGoal(dungeon));
+		orGoals.add(andGoals);
+		andGoals.add(new BoulderGoal(dungeon));
+		andGoals.add(new TreasureGoal(dungeon));
 		Treasure treasure = new Treasure(1, 2, dungeon);
 		Boulder boulder = new Boulder(3, 2, dungeon);
 		Switch sw = new Switch(4, 2, dungeon);
@@ -138,10 +157,16 @@ public class testGoals extends testSetup {
 		dungeon.addEntity(exit);
 		dungeon.addEntity(boulder);
 		dungeon.addEntity(sw);
-		player.moveLeft();
-		assertEquals(false, dungeon.goalAchieved());
-		player.moveRight();
 		player.moveUp();
+		assertEquals(true, dungeon.goalAchieved()); // at exit true
+		player.moveDown();
+		assertEquals(false, dungeon.goalAchieved()); // move back to origin false
+		player.moveRight();
+		assertEquals(false, dungeon.goalAchieved()); // only pushes boulder false
+		player.moveLeft(); // collected treasure
+		assertEquals(true, dungeon.goalAchieved());
+		player.moveLeft(); // dummy movement will result in true because the player has satisfied boulder +
+							// treasure
 		assertEquals(true, dungeon.goalAchieved());
 	}
 }
