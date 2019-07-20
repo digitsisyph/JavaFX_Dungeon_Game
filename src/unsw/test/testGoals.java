@@ -37,16 +37,15 @@ public class testGoals extends testSetup {
 	void testEnemyGoal() {
 		setup(5, 1, 0, 0);
 		baseGoal.add(new EnemyGoal(dungeon));
-		Enemy enemy = new Enemy(3, 0, dungeon);
+		Enemy enemy = new Enemy(1, 0, dungeon);
 		dungeon.addEntity(enemy);
-		enemy = new Enemy(4, 0, dungeon);
-		dungeon.addEntity(enemy);
-		Sword sword = new Sword(1, 0, dungeon);
+//		enemy = new Enemy(4, 0, dungeon);
+//		dungeon.addEntity(enemy);
+		Sword sword = new Sword(0, 0, dungeon);
 		dungeon.addEntity(sword);
-		player.moveRight(); // pick sword
+		dungeon.pickUp(sword);
 		assertEquals(false, dungeon.goalAchieved());
-		player.moveRight();
-		player.moveRight();
+		player.moveRight(); // pick sword
 		assertEquals(true, dungeon.goalAchieved());
 
 	}
