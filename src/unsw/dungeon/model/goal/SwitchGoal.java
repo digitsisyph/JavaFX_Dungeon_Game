@@ -2,11 +2,11 @@ package unsw.dungeon.model.goal;
 
 import unsw.dungeon.model.Dungeon;
 
-public class BoulderGoal implements Goal {
+public class SwitchGoal implements Goal {
 
 	private Dungeon dungeon;
 
-	public BoulderGoal(Dungeon dungeon) {
+	public SwitchGoal(Dungeon dungeon) {
 		this.dungeon = dungeon;
 	}
 

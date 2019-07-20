@@ -27,6 +27,13 @@ public class Boulder extends Entity implements Movable {
 		}
 	}
 
+	@Override
+	public EntityType type() {
+		return EntityType.BOULDER;
+	}
+
+	// for movable interface
+
 	public void moveUp() {
 		this.movement.moveUp();
 	}
@@ -41,11 +48,6 @@ public class Boulder extends Entity implements Movable {
 
 	public void moveRight() {
 		this.movement.moveRight();
-	}
-
-	@Override
-	public EntityType type() {
-		return EntityType.BOULDER;
 	}
 
 }

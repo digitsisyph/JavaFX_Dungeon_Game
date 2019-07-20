@@ -53,7 +53,7 @@ public class testGoals extends testSetup {
 	void testBouldersGoal() {
 		setup(3, 1, 0, 0);
 
-		baseGoal.add(new BoulderGoal(dungeon));
+		baseGoal.add(new SwitchGoal(dungeon));
 
 		dungeon.addEntity(new Switch(1, 0, dungeon));
 		dungeon.addEntity(new Switch(2, 0, dungeon));
@@ -117,7 +117,7 @@ public class testGoals extends testSetup {
 		andGoals.add(new ExitGoal(dungeon));
 		OrGoals orGoals = new OrGoals();
 		andGoals.add(orGoals);
-		orGoals.add(new BoulderGoal(dungeon));
+		orGoals.add(new SwitchGoal(dungeon));
 		orGoals.add(new TreasureGoal(dungeon));
 		baseGoal.add(andGoals);
 
@@ -142,7 +142,7 @@ public class testGoals extends testSetup {
 		setup(5, 3, 2, 2);
 
 		AndGoals andGoals = new AndGoals();
-		andGoals.add(new BoulderGoal(dungeon));
+		andGoals.add(new SwitchGoal(dungeon));
 		andGoals.add(new TreasureGoal(dungeon));
 		OrGoals orGoals = new OrGoals();
 		orGoals.add(new ExitGoal(dungeon));

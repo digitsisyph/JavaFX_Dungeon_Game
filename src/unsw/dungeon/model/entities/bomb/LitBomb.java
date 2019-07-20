@@ -26,22 +26,10 @@ public class LitBomb extends Entity {
 	}
 
 	/**
-	 * @return the state
-	 */
-	public LitBombState getState() {
-		return state;
-	}
-
-	/**
 	 * @param state the state to set
 	 */
 	public void setState(LitBombState state) {
 		this.state = state;
-	}
-
-	@Override
-	public String toString() {
-		return "Lit Bomb @ " + this.getX() + " " + this.getY() + ", state=" + state + "]";
 	}
 
 }

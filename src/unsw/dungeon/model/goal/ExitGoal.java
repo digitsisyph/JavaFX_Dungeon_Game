@@ -24,7 +24,8 @@ public class ExitGoal implements Goal {
 
 	public boolean isSatisfied() {
 		List<Entity> entitiesAtPlayers = dungeon.getEntities(dungeon.getPlayer().getX(), dungeon.getPlayer().getY());
-		return entitiesAtPlayers.stream().anyMatch(entity -> entity instanceof Exit);
+		return entitiesAtPlayers.stream()
+				.anyMatch(entity -> entity instanceof Exit);
 	}
 
 	public void print() {

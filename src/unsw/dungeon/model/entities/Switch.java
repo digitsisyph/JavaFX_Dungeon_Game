@@ -12,13 +12,16 @@ public class Switch extends Entity {
 
 	public void collideWith(Entity entity) {;}
 
-	public boolean isActivated() {
-		return  getDungeon().getEntities(getX(), getY()).stream()
-				.anyMatch(entity -> entity instanceof Boulder);
-	}
-
 	@Override
 	public EntityType type() {
 		return EntityType.SWITCH;
+	}
+
+	// for achieving goal
+
+	public boolean isActivated() {
+		return  getDungeon().getEntities(getX(), getY())
+				.stream()
+				.anyMatch(entity -> entity instanceof Boulder);
 	}
 }

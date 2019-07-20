@@ -26,6 +26,18 @@ public class Player extends Entity implements Movable {
 		this.setImagePath("/human_new.png");
 	}
 
+	public void collideWith(Entity entity) {
+		if (entity instanceof HumanEnemy)
+			this.getDungeon().fightEnemy((HumanEnemy) entity);
+	}
+
+	@Override
+	public EntityType type() {
+		return EntityType.PLAYER;
+	}
+
+	// for movable interface
+
 	public void moveUp() {
 		movement.moveUp();
 		this.getDungeon().notifyMovement();
@@ -44,15 +56,5 @@ public class Player extends Entity implements Movable {
 	public void moveRight() {
 		movement.moveRight();
 		this.getDungeon().notifyMovement();
-	}
-
-	public void collideWith(Entity entity) {
-		if (entity instanceof HumanEnemy)
-			this.getDungeon().fightEnemy((HumanEnemy) entity);
-	}
-
-	@Override
-	public EntityType type() {
-		return EntityType.PLAYER;
 	}
 }

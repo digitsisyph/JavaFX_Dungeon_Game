@@ -66,7 +66,7 @@ public abstract class DungeonLoader {
 				base.add(new EnemyGoal(dungeon));
 				break;
 			case "boulders":
-				base.add(new BoulderGoal(dungeon));
+				base.add(new SwitchGoal(dungeon));
 				break;
 			case "treasure":
 				base.add(new TreasureGoal(dungeon));
