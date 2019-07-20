@@ -36,8 +36,8 @@ public class DungeonController {
 	public GridPane getSquares() {
 		return squares;
 	}
-	
-	public List<ImageView> entImages(){
+
+	public List<ImageView> entImages() {
 		return initialEntities;
 	}
 
@@ -59,23 +59,23 @@ public class DungeonController {
 	public void handleKeyPress(KeyEvent event) {
 
 		switch (event.getCode()) {
-			case UP:
-				dungeon.movePlayerUp();
-				break;
-			case DOWN:
-				dungeon.movePlayerDown();
-				break;
-			case LEFT:
-				dungeon.movePlayerLeft();
-				break;
-			case RIGHT:
-				dungeon.movePlayerRight();
-				break;
-			case U:
-				dungeon.playerPlacesBomb();
-				break;
-			default:
-				break;
+		case UP:
+			dungeon.movePlayerUp();
+			break;
+		case DOWN:
+			dungeon.movePlayerDown();
+			break;
+		case LEFT:
+			dungeon.movePlayerLeft();
+			break;
+		case RIGHT:
+			dungeon.movePlayerRight();
+			break;
+		case U:
+			dungeon.playerPlacesBomb();
+			break;
+		default:
+			break;
 		}
 	}
 
