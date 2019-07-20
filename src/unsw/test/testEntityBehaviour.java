@@ -118,6 +118,7 @@ public class testEntityBehaviour extends testSetup {
 		player.moveLeft();
 		player.moveLeft();
 		player.moveLeft();
+		player.moveLeft();
 		assertEquals(0, dungeon.getEntities(EntityType.BOULDER).size());
 	}
 

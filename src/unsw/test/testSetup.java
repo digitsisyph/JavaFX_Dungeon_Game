@@ -11,11 +11,14 @@ public class testSetup {
 	Dungeon dungeon = null;
 	Player player = null;
 	Goal baseGoal;
-
+	/*
+	 * To configure dungeon for each test
+	 */
 	void setup(int width, int height, int playerX, int playerY) {
 		dungeon = new Dungeon(width, height);
 		player = new Player(playerX, playerY, dungeon);
 		dungeon.setPlayer(player);
+		dungeon.addEntity(player);
 		baseGoal = new AndGoals();
 		dungeon.setGoal(baseGoal);
 	}

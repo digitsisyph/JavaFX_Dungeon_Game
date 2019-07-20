@@ -15,6 +15,7 @@ import unsw.dungeon.model.entities.Key;
 import unsw.dungeon.model.entities.Potion;
 import unsw.dungeon.model.entities.Sword;
 import unsw.dungeon.model.entities.Treasure;
+import unsw.dungeon.model.entities.Bomb.LitBomb;
 import unsw.dungeon.model.entities.Bomb.UnlitBomb;
 
 public class testPlayerInteraction extends testSetup {
@@ -198,5 +199,35 @@ public class testPlayerInteraction extends testSetup {
 		player.moveRight(); // collect the last sword refresh sword's durability
 		assertEquals(5, dungeon.getInventory().getSwordDurability());
 		assertEquals(0, dungeon.getEntities(EntityType.SWORD).size());
+	}
+	/*
+	 * When invincible the player cannot die from explosion
+	 */
+	@Test
+	void testPlayerBombInvincibility() {
+		setup(3,1,0,0);
+		LitBomb bomb = new LitBomb(2, 0, dungeon);
+		Potion potion = new Potion(1,0, dungeon);
+		dungeon.addEntity(potion);
+		dungeon.addEntity(bomb);
+		player.moveRight();
+		player.moveRight();
+		player.moveRight();
+		player.moveRight();
+		player.moveRight();
+		assertNotEquals(null,dungeon.getPlayer());
+	}
+	/*
+	 * When invincible the player cannot die from explosion
+	 */
+	@Test
+	void testPlayerDieFromBomb() {
+		setup(3,1,0,0);
+		LitBomb bomb = new LitBomb(2, 0, dungeon);
+		dungeon.addEntity(bomb);
+		player.moveRight();
+		player.moveRight();
+		player.moveRight();
+		assertEquals(null,dungeon.getPlayer());
 	}
 }

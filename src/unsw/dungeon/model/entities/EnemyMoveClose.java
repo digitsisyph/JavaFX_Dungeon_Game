@@ -61,16 +61,16 @@ public class EnemyMoveClose implements EnemyBehaviour {
 
 	@Override
 	public void move(Enemy enemy, Player player) {
-//		Grid next_grid = findNextGrid(enemy, player, enemy.getDungeon());
-//
-//		if (next_grid.x > enemy.getX()) {
-//			enemy.moveRight();
-//		} else if (next_grid.x < enemy.getX()) {
-//			enemy.moveLeft();
-//		} else if (next_grid.y > enemy.getY()) {
-//			enemy.moveDown();
-//		} else if (next_grid.y < enemy.getY()) {
-//			enemy.moveUp();
-//		}
+		Grid next_grid = findNextGrid(enemy, player, enemy.getDungeon());
+
+		if (next_grid.x > enemy.getX()) {
+			enemy.moveRight();
+		} else if (next_grid.x < enemy.getX()) {
+			enemy.moveLeft();
+		} else if (next_grid.y > enemy.getY()) {
+			enemy.moveDown();
+		} else if (next_grid.y < enemy.getY()) {
+			enemy.moveUp();
+		}
 	}
 }
