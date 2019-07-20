@@ -5,7 +5,6 @@ import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.bomb.LitBomb;
 import unsw.dungeon.model.entities.bomb.UnlitBomb;
 import unsw.dungeon.model.entities.door.Door;
-import unsw.dungeon.model.entities.enemies.Enemy;
 import unsw.dungeon.model.entities.enemies.HumanEnemy;
 
 import java.util.List;
@@ -172,29 +171,37 @@ public class testPlayerInteraction extends testSetup {
 	 */
 	@Test
 	void testPlayerSwordEnemyInteraction() {
-		setup(5, 1, 0, 0);
-		Enemy enemy = new HumanEnemy(3, 0, dungeon);
-		dungeon.addEntity(enemy);
-		Sword sword = new Sword(1, 0, dungeon);
-		dungeon.addEntity(sword);
-		sword = new Sword(4, 0, dungeon);
-		dungeon.addEntity(sword);
+
+		// initialize a 3 * 1 dungeon, and add an enemy and two swords into it
+		setup(4, 1, 0, 0);
+		dungeon.addEntity(new Sword(1, 0, dungeon));
+		dungeon.addEntity(new HumanEnemy(3, 0, dungeon));
+		dungeon.addEntity(new Sword(4, 0, dungeon));
+
+
 		assertEquals(2, dungeon.getEntities(EntityType.SWORD).size());
 		assertEquals(1, dungeon.getEntities(EntityType.ENEMY).size());
 		assertEquals(null, dungeon.getInventory().getSword());
+
 		player.moveRight(); // on sword grid , player collect it
+
 		assertNotEquals(null, dungeon.getInventory().getSword());
 		assertEquals(5, dungeon.getInventory().getSwordDurability());
 		assertEquals(1, dungeon.getEntities(EntityType.SWORD).size());
+
 		player.moveRight(); // collide with the enemy but the player has sword
-		assertEquals(0, dungeon.getEntities(EntityType.ENEMY).size());
-		assertEquals(4, dungeon.getInventory().getSwordDurability());
-		player.moveRight(); // move right 3 times to collect the last sword
+
+		assertEquals(0, dungeon.getEntities(EntityType.ENEMY).size());	// the player should use the sword to kill enemy
+		assertEquals(4, dungeon.getInventory().getSwordDurability());	// the durability should decrease
+
+		player.moveRight(); // move right 2 times to collect the last sword
 		player.moveRight();
 		player.moveRight(); // collect the last sword refresh sword's durability
-		assertEquals(5, dungeon.getInventory().getSwordDurability());
+
+		assertEquals(5, dungeon.getInventory().getSwordDurability());	// the durability should be refreshed
 		assertEquals(0, dungeon.getEntities(EntityType.SWORD).size());
 	}
+
 	/*
 	 * When invincible the player cannot die from explosion
 	 */

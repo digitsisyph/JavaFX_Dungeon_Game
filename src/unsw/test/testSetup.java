@@ -15,10 +15,13 @@ public class testSetup {
 	 * To configure dungeon for each test
 	 */
 	void setup(int width, int height, int playerX, int playerY) {
+		// create a new dungeon
 		dungeon = new Dungeon(width, height);
+		// set a player
 		player = new Player(playerX, playerY, dungeon);
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
+		// set a basic goal
 		baseGoal = new AndGoals();
 		dungeon.setGoal(baseGoal);
 	}

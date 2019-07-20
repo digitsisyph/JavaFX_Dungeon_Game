@@ -21,6 +21,7 @@ public class EnemyMoveClose implements EnemyBehaviour {
 	private Grid findNextGrid(Enemy enemy, Player player, Dungeon dungeon) {
 
 		Grid[][] visited = new Grid[dungeon.getWidth()][dungeon.getHeight()];
+		System.out.println("size of dungeon: " + dungeon.getWidth() + " " + dungeon.getHeight());
 		boolean found = false;
 		LinkedList<Grid> queue = new LinkedList<Grid>();
 
@@ -33,12 +34,17 @@ public class EnemyMoveClose implements EnemyBehaviour {
 		while (queue.size() != 0 && !found)
 		{
 			curr = queue.poll();
-			Grid[] nearbyGrids = new Grid[] {
-					new Grid(curr.x + 1, curr.y),
-					new Grid(curr.x - 1, curr.y),
-					new Grid(curr.x, curr.y + 1),
-					new Grid(curr.x, curr.y - 1)
-			};
+			LinkedList<Grid> nearbyGrids = new LinkedList<Grid>();
+
+			if (curr.x > 0)
+				nearbyGrids.add(new Grid(curr.x - 1, curr.y));
+			if (curr.x < dungeon.getWidth() - 1)
+				nearbyGrids.add(new Grid(curr.x + 1, curr.y));
+			if (curr.y > 0)
+				nearbyGrids.add(new Grid(curr.x, curr.y - 1));
+			if (curr.y < dungeon.getHeight() - 1)
+				nearbyGrids.add(new Grid(curr.x, curr.y + 1));
+
 			for (Grid grid : nearbyGrids) {
 				if (grid.x == player.getX() && grid.y == player.getY()) {
 					found = true;
