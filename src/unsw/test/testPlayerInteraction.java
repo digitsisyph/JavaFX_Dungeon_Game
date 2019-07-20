@@ -7,19 +7,17 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Door;
 import unsw.dungeon.model.entities.Enemy;
 import unsw.dungeon.model.entities.Entity;
 import unsw.dungeon.model.entities.EntityType;
 import unsw.dungeon.model.entities.Key;
-import unsw.dungeon.model.entities.Player;
 import unsw.dungeon.model.entities.Potion;
 import unsw.dungeon.model.entities.Sword;
 import unsw.dungeon.model.entities.Treasure;
 import unsw.dungeon.model.entities.Bomb.UnlitBomb;
 
-public class PlayerInteractionTest extends testSetup {
+public class testPlayerInteraction extends testSetup {
 
 
 	// this is an example test code from the tutor

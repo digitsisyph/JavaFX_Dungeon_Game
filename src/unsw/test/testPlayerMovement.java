@@ -1,12 +1,12 @@
 package unsw.test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import unsw.dungeon.model.entities.Wall;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class PlayerMovementTest extends testSetup {
+public class testPlayerMovement extends testSetup {
 
 	@Test
 	void testPlayerWallCollision() {

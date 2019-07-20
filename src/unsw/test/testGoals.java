@@ -17,7 +17,7 @@ import unsw.dungeon.model.goal.ExitGoal;
 import unsw.dungeon.model.goal.OrGoals;
 import unsw.dungeon.model.goal.TreasureGoal;
 
-public class GoalsTest extends testSetup {
+public class testGoals extends testSetup {
 
 	@Test
 	void testTreasureGoal() {

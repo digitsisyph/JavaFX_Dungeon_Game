@@ -11,7 +11,7 @@ import unsw.dungeon.model.entities.Potion;
 import unsw.dungeon.model.entities.Bomb.LitBomb;
 import unsw.dungeon.model.entities.Bomb.UnlitBomb;
 
-public class ItemsTest extends testSetup {
+public class testEntityBehaviour extends testSetup {
 
 	@Test
 	void testEnemyMoveAway() {
