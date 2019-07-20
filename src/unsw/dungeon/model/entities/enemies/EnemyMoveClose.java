@@ -21,7 +21,6 @@ public class EnemyMoveClose implements EnemyBehaviour {
 	private Grid findNextGrid(Enemy enemy, Player player, Dungeon dungeon) {
 
 		Grid[][] visited = new Grid[dungeon.getWidth()][dungeon.getHeight()];
-		System.out.println("size of dungeon: " + dungeon.getWidth() + " " + dungeon.getHeight());
 		boolean found = false;
 		LinkedList<Grid> queue = new LinkedList<Grid>();
 

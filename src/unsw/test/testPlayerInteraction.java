@@ -20,15 +20,21 @@ public class testPlayerInteraction extends testSetup {
 	@Test
 	void testPickUpTreasure() {
 		setup(5, 3, 1, 1);
-		Treasure treasure = new Treasure(2, 1, dungeon);
-		dungeon.addEntity(treasure);
-		treasure = new Treasure(3, 1, dungeon);
-		dungeon.addEntity(treasure);
+
+		dungeon.addEntity(new Treasure(2, 1, dungeon));
+		dungeon.addEntity(new Treasure(3, 1, dungeon));
+
+		// the player does not have any treasure at first
 		assertEquals(0, dungeon.getInventory().numTreasurePicked());
+		assertEquals(2, dungeon.getEntities(EntityType.TREASURE).size());
+
 		player.moveRight();
 		assertEquals(1, dungeon.getInventory().numTreasurePicked());
+		assertEquals(1, dungeon.getEntities(EntityType.TREASURE).size());
+
 		player.moveRight();
 		assertEquals(2, dungeon.getInventory().numTreasurePicked());
+		assertEquals(0, dungeon.getEntities(EntityType.TREASURE).size());
 	}
 
 	/*
@@ -37,16 +43,18 @@ public class testPlayerInteraction extends testSetup {
 	@Test
 	void testPickUpKey() {
 		setup(5, 3, 1, 1);
-		Key key = new Key(2, 1, dungeon, 99);
-		dungeon.addEntity(key);
-		key = new Key(3, 1, dungeon, 20);
-		dungeon.addEntity(key);
+
+		dungeon.addEntity(new Key(2, 1, dungeon, 99));
+		dungeon.addEntity(new Key(3, 1, dungeon, 20));
+
 		assertEquals(2, dungeon.getEntities(EntityType.KEY).size());
 		assertEquals(null, dungeon.getInventory().getKey());
+
 		player.moveRight();
 		assertNotEquals(null, dungeon.getInventory().getKey());
 		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
 		assertEquals(99, dungeon.getInventory().getKeyID());
+
 		player.moveRight();
 		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
 		assertEquals(99, dungeon.getInventory().getKeyID());
@@ -58,15 +66,17 @@ public class testPlayerInteraction extends testSetup {
 	@Test
 	void testPickUpBomb() {
 		setup(5, 3, 1, 1);
-		UnlitBomb bomb = new UnlitBomb(2, 1, dungeon);
-		dungeon.addEntity(bomb);
-		bomb = new UnlitBomb(3, 1, dungeon);
-		dungeon.addEntity(bomb);
+
+		dungeon.addEntity(new UnlitBomb(2, 1, dungeon));
+		dungeon.addEntity(new UnlitBomb(3, 1, dungeon));
+
 		assertEquals(2, dungeon.getEntities(EntityType.UNLITBOMB).size());
 		assertEquals(0, dungeon.getInventory().getBombNum());
+
 		player.moveRight();
 		assertEquals(1, dungeon.getEntities(EntityType.UNLITBOMB).size());
 		assertEquals(1, dungeon.getInventory().getBombNum());
+
 		player.moveRight();
 		assertEquals(0, dungeon.getEntities(EntityType.UNLITBOMB).size());
 		assertEquals(2, dungeon.getInventory().getBombNum());
@@ -80,28 +90,35 @@ public class testPlayerInteraction extends testSetup {
 	@Test
 	void testPickUpPotion() {
 		setup(5, 3, 1, 1);
-		Potion potion = new Potion(2, 1, dungeon);
-		dungeon.addEntity(potion);
-		potion = new Potion(3, 1, dungeon);
-		dungeon.addEntity(potion);
+
+		dungeon.addEntity(new Potion(2, 1, dungeon));
+		dungeon.addEntity(new Potion(3, 1, dungeon));
+
 		assertEquals(2, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(false, dungeon.getInventory().isInvincible());
+
 		player.moveRight();
 		assertEquals(1, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
 		assertEquals(4, dungeon.getInventory().invincStep());
+
 		player.moveRight(); // collects another potion
 		assertEquals(0, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
 		assertEquals(4, dungeon.getInventory().invincStep());
+
 		player.moveRight();
 		assertEquals(3, dungeon.getInventory().invincStep());
+
 		player.moveRight();
 		assertEquals(2, dungeon.getInventory().invincStep());
+
 		player.moveRight();
 		assertEquals(1, dungeon.getInventory().invincStep());
+
 		player.moveRight();
 		assertEquals(0, dungeon.getInventory().invincStep());
+
 		assertEquals(false, dungeon.getInventory().isInvincible()); // no longer invincible
 
 	}
@@ -112,20 +129,20 @@ public class testPlayerInteraction extends testSetup {
 	@Test
 	void testDoorInteraction() {
 		setup(5, 3, 1, 1);
-		Door door = new Door(2, 0, dungeon, 69);
-		dungeon.addEntity(door);
-		door = new Door(3, 0, dungeon, 99);
-		dungeon.addEntity(door);
-		Key key = new Key(2, 1, dungeon, 99);
-		dungeon.addEntity(key);
-		key = new Key(3, 1, dungeon, 69);
-		dungeon.addEntity(key);
+
+		dungeon.addEntity(new Door(2, 0, dungeon, 69));
+		dungeon.addEntity(new Door(3, 0, dungeon, 99));
+		dungeon.addEntity(new Key(2, 1, dungeon, 99));
+		dungeon.addEntity(new Key(3, 1, dungeon, 69));
+
 		int startX = player.getX();
 		int startY = player.getY();
 		int openedDoorCount = 0;
+
 		List<Entity> doors = dungeon.getEntities(EntityType.DOOR);
 		assertEquals(2, doors.size());
 		assertEquals(2, dungeon.getEntities(EntityType.KEY).size());
+
 		player.moveRight();
 		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
 		// should not move because wrong key
@@ -206,30 +223,30 @@ public class testPlayerInteraction extends testSetup {
 	 * When invincible the player cannot die from explosion
 	 */
 	@Test
-	void testPlayerBombInvincibility() {
+	void testPlayerDieFromBomb() {
 		setup(3,1,0,0);
-		LitBomb bomb = new LitBomb(2, 0, dungeon);
-		Potion potion = new Potion(1,0, dungeon);
-		dungeon.addEntity(potion);
+
+		LitBomb bomb = new LitBomb(1, 0, dungeon);
 		dungeon.addEntity(bomb);
-		player.moveRight();
-		player.moveRight();
-		player.moveRight();
-		player.moveRight();
-		player.moveRight();
-		assertNotEquals(null,dungeon.getPlayer());
+		dungeon.explodeBomb(bomb);
+
+		assertEquals(null, dungeon.getPlayer());
 	}
+
 	/*
 	 * When invincible the player cannot die from explosion
 	 */
 	@Test
-	void testPlayerDieFromBomb() {
-		setup(3,1,0,0);
-		LitBomb bomb = new LitBomb(2, 0, dungeon);
+	void testPlayerBombInvincibility() {
+		setup(2,1,0,0);
+
+		dungeon.pickUp(new Potion(0, 0, dungeon));
+
+		LitBomb bomb = new LitBomb(1, 0, dungeon);
 		dungeon.addEntity(bomb);
-		player.moveRight();
-		player.moveRight();
-		player.moveRight();
-		assertEquals(null,dungeon.getPlayer());
+		dungeon.explodeBomb(bomb);
+
+		assertNotEquals(null, dungeon.getPlayer());
 	}
+
 }
