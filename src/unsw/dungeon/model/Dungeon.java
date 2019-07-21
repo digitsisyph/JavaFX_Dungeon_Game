@@ -30,13 +30,13 @@ import java.util.stream.Collectors;
 public class Dungeon {
 
 	private DungeonController controller;
-	private int width, height;
+	private final int width, height;
 	private List<Entity> entities;
 	private Player player;
 	private Player tempPlayer;
 	private Inventory inventory;
 	private Goal goal;
-	public boolean gameOver = false;
+	private boolean gameOver = false;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
@@ -48,6 +48,22 @@ public class Dungeon {
 		this.inventory = new Inventory();
 		this.goal = null;
 	}
+
+	// --- setter ---
+
+	public void setController(DungeonController controller) {
+		this.controller = controller;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+		this.tempPlayer = player;
+	}
+
+	public void setGoal(Goal goal) {
+		this.goal = goal;
+	}
+
 
 	// --- getter ---
 
@@ -63,19 +79,21 @@ public class Dungeon {
 		return player;
 	}
 
-	public DungeonController getController() {
-		return controller;
+	public List<Entity> getEntities() {
+		return entities;
 	}
 
 	// helper function: To retrieve an entity in a specific grid
-	// if not found, this will return null
 	public List<Entity> getEntities(int X, int Y) {
-		return entities.stream().filter(entity -> (entity.getX() == X && entity.getY() == Y))
+		return entities.stream()
+				.filter(entity -> (entity.getX() == X && entity.getY() == Y))
 				.collect(Collectors.toList());
 	}
 
 	public List<Entity> getEntities(EntityType type) {
-		return entities.stream().filter(entity -> entity.type() == type).collect(Collectors.toList());
+		return entities.stream()
+				.filter(entity -> entity.type() == type)
+				.collect(Collectors.toList());
 	}
 
 	// a helper function for bomb
@@ -89,22 +107,30 @@ public class Dungeon {
 	}
 
 	public List<Enemy> getEnemies() {
-		return entities.stream().filter(entity -> entity.type() == EntityType.ENEMY).map(Enemy.class::cast)
+		return entities.stream()
+				.filter(entity -> entity.type() == EntityType.ENEMY)
+				.map(Enemy.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<Switch> getSwitches() {
-		return entities.stream().filter(entity -> entity instanceof Switch).map(Switch.class::cast)
+		return entities.stream()
+				.filter(entity -> entity.type() == EntityType.SWITCH)
+				.map(Switch.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<Treasure> getTreasures() {
-		return entities.stream().filter(entity -> entity instanceof Treasure).map(Treasure.class::cast)
+		return entities.stream()
+				.filter(entity -> entity.type() == EntityType.TREASURE)
+				.map(Treasure.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<LitBomb> getLitBombs() {
-		return entities.stream().filter(entity -> entity.type() == EntityType.LITBOMB).map(LitBomb.class::cast)
+		return entities.stream()
+				.filter(entity -> entity.type() == EntityType.LITBOMB)
+				.map(LitBomb.class::cast)
 				.collect(Collectors.toList());
 	}
 
@@ -112,24 +138,8 @@ public class Dungeon {
 		return inventory;
 	}
 
-	public List<Entity> getEntities() {
-		return entities;
-	}
 
-	// --- setter
-
-	public void setPlayer(Player player) {
-		this.player = player;
-		this.tempPlayer = player;
-	}
-
-	public void setController(DungeonController controller) {
-		this.controller = controller;
-	}
-
-	public void setGoal(Goal goal) {
-		this.goal = goal;
-	}
+	// functions for entities
 
 	public void addEntity(Entity entity) {
 		entities.add(entity);
@@ -153,70 +163,78 @@ public class Dungeon {
 			this.controller.removeEntityImage(entity);
 	}
 
+
 	// player movement
-	public void movePlayerUp() {
-		if (player != null)
-			player.moveUp();
-	}
-
-	public void movePlayerDown() {
-		if (player != null)
-			player.moveDown();
-	}
-
-	public void movePlayerRight() {
-		if (player != null)
-			player.moveRight();
-	}
-
-	public void movePlayerLeft() {
-		if (player != null)
-			player.moveLeft();
-	}
-
-	// interactions
 
 	// helper function: check whether a grid is walkable
-	public Boolean canOccupyGrid(int X, int Y) {
+	public boolean canOccupyGrid(int X, int Y) {
 		return this.getEntities(X, Y).stream().allMatch(Entity::canPassThrough)
 				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
 
-	// --- Tick ----
+	public void movePlayerUp() {
+		if (player != null) {
+			player.moveUp();
+			notifyPerMovement();
+		}
+
+	}
+
+	public void movePlayerDown() {
+		if (player != null) {
+			player.moveDown();
+			notifyPerMovement();
+		}
+	}
+
+	public void movePlayerRight() {
+		if (player != null) {
+			player.moveRight();
+			notifyPerMovement();
+		}
+	}
+
+	public void movePlayerLeft() {
+		if (player != null) {
+			player.moveLeft();
+			notifyPerMovement();
+		}
+
+	}
 
 	/*
 	 * TODO For every player movement, something must change Might be better to have
 	 * enemy observes player And put invincibility as an attribute inside the player
 	 * class
 	 */
-	public void notifyMovement() {
+	private void notifyPerMovement() {
 		System.out.println("Player @ " + player.getX() + " " + player.getY());
-		goalUpdate();
-		inventory.updatePerMovement();
-		enemyUpdate();
-		bombUpdate();
 		if (gameOver) {
-			System.out.println("DEFEAT!!!");
+			System.out.println("Game Over!");
+		} else {
+			goalUpdate();
+			inventoryUpdate();
+			enemyUpdate();
+			litbombUpdate();
 		}
 	}
 
-	// TODO refactor this to be state pattern
+	private void inventoryUpdate() {
+		inventory.updatePerMovement();
+	}
+
 	private void enemyUpdate() {
-		if (!gameOver) {
-			getEnemies().forEach(enemy -> enemy.updateStrategy(getInventory().isInvincible()));
-			getEnemies().forEach(enemy -> enemy.move(tempPlayer));
-		}
+		getEnemies().forEach(enemy -> enemy.updateStrategy(getInventory().isInvincible()));
+		getEnemies().forEach(enemy -> enemy.move(tempPlayer));
 	}
 
-	private void bombUpdate() {
-		if (!gameOver) {
-			getLitBombs().forEach(bomb -> bomb.nextState());
-		}
+	private void litbombUpdate() {
+		getLitBombs().forEach(bomb -> bomb.nextState());
 	}
 
 	private void goalUpdate() {
 		if (goal.isSatisfied())
-			System.out.println("Goal Achieved: " + goal.isSatisfied());
+			System.out.println("Goal Achieved!");
 	}
 
 	// some retriever functions
@@ -312,7 +330,7 @@ public class Dungeon {
 	public void playerPlacesBomb() {
 		if (this.getInventory().getBombNum() > 0) {
 			System.out.println("Use bomb");
-			this.getInventory().useBomb(); // this method just decrease numbomb by 1;
+			this.getInventory().useBomb(); // this method just decrease num of bomb by 1;
 			createEntity(new LitBomb(player.getX(), player.getY(), this));
 		} else {
 			System.out.println("No bomb to use");

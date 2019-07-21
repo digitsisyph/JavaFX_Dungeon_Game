@@ -16,19 +16,19 @@ public class testPlayerMovement extends testSetup {
 		int startX = player.getX();
 		int startY = player.getY();
 
-		player.moveDown();
+		dungeon.movePlayerDown();
 		assertEquals(startX, player.getX());
 		assertEquals(startY + 1, player.getY());
 
-		player.moveUp();
+		dungeon.movePlayerUp();
 		assertEquals(startX, player.getX());
 		assertEquals(startY, player.getY());
 
-		player.moveLeft();
+		dungeon.movePlayerLeft();
 		assertEquals(startX - 1, player.getX());
 		assertEquals(startY, player.getY());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(startX, player.getX());
 		assertEquals(startY, player.getY());
 	}
@@ -48,22 +48,22 @@ public class testPlayerMovement extends testSetup {
 		int startY = player.getY();
 
 		// player should not move
-		player.moveDown();
+		dungeon.movePlayerDown();
 		assertEquals(startX, player.getX());
 		assertEquals(startY, player.getY());
 
 		// player should not move
-		player.moveUp();
+		dungeon.movePlayerUp();
 		assertEquals(startX, player.getX());
 		assertEquals(startY, player.getY());
 
 		// player should not move
-		player.moveLeft();
+		dungeon.movePlayerLeft();
 		assertEquals(startX, player.getX());
 		assertEquals(startY, player.getY());
 
 		// player should not move
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(startX, player.getX());
 		assertEquals(startY, player.getY());
 	}

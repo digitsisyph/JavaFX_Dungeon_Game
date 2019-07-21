@@ -28,11 +28,11 @@ public class testPlayerInteraction extends testSetup {
 		assertEquals(0, dungeon.getInventory().numTreasurePicked());
 		assertEquals(2, dungeon.getEntities(EntityType.TREASURE).size());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(1, dungeon.getInventory().numTreasurePicked());
 		assertEquals(1, dungeon.getEntities(EntityType.TREASURE).size());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(2, dungeon.getInventory().numTreasurePicked());
 		assertEquals(0, dungeon.getEntities(EntityType.TREASURE).size());
 	}
@@ -50,12 +50,12 @@ public class testPlayerInteraction extends testSetup {
 		assertEquals(2, dungeon.getEntities(EntityType.KEY).size());
 		assertEquals(null, dungeon.getInventory().getKey());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertNotEquals(null, dungeon.getInventory().getKey());
 		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
 		assertEquals(99, dungeon.getInventory().getKeyID());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
 		assertEquals(99, dungeon.getInventory().getKeyID());
 	}
@@ -73,11 +73,11 @@ public class testPlayerInteraction extends testSetup {
 		assertEquals(2, dungeon.getEntities(EntityType.UNLITBOMB).size());
 		assertEquals(0, dungeon.getInventory().getBombNum());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(1, dungeon.getEntities(EntityType.UNLITBOMB).size());
 		assertEquals(1, dungeon.getInventory().getBombNum());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(0, dungeon.getEntities(EntityType.UNLITBOMB).size());
 		assertEquals(2, dungeon.getInventory().getBombNum());
 	}
@@ -97,26 +97,26 @@ public class testPlayerInteraction extends testSetup {
 		assertEquals(2, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(false, dungeon.getInventory().isInvincible());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(1, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
 		assertEquals(4, dungeon.getInventory().invincStep());
 
-		player.moveRight(); // collects another potion
+		dungeon.movePlayerRight(); // collects another potion
 		assertEquals(0, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
 		assertEquals(4, dungeon.getInventory().invincStep());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(3, dungeon.getInventory().invincStep());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(2, dungeon.getInventory().invincStep());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(1, dungeon.getInventory().invincStep());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(0, dungeon.getInventory().invincStep());
 
 		assertEquals(false, dungeon.getInventory().isInvincible()); // no longer invincible
@@ -143,10 +143,10 @@ public class testPlayerInteraction extends testSetup {
 		assertEquals(2, doors.size());
 		assertEquals(2, dungeon.getEntities(EntityType.KEY).size());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
 		// should not move because wrong key
-		player.moveUp();
+		dungeon.movePlayerUp();
 		assertEquals(startX + 1, player.getX());
 		assertEquals(startY, player.getY());
 		for (Entity d : doors) {
@@ -154,8 +154,8 @@ public class testPlayerInteraction extends testSetup {
 				openedDoorCount++;
 		}
 		assertEquals(0, openedDoorCount); // at this point no door unlocked
-		player.moveRight(); // facing the right door
-		player.moveUp(); // this action would unlock the door but player stay still
+		dungeon.movePlayerRight(); // facing the right door
+		dungeon.movePlayerUp(); // this action would unlock the door but player stay still
 		assertEquals(null, dungeon.getInventory().getKey()); // key is used and removed
 		for (Entity d : doors) {
 			if (d.canPassThrough())
@@ -163,15 +163,15 @@ public class testPlayerInteraction extends testSetup {
 		}
 		assertEquals(1, openedDoorCount); // at this point no door unlocked
 		// now the player can move up
-		player.moveUp();
+		dungeon.movePlayerUp();
 		assertEquals(startX + 2, player.getX());
 		assertEquals(startY - 1, player.getY());
 
 		// player to collect another key on dungeon
-		player.moveDown();
+		dungeon.movePlayerDown();
 		assertEquals(69, dungeon.getInventory().getKeyID()); // key picked
-		player.moveLeft();
-		player.moveUp();
+		dungeon.movePlayerLeft();
+		dungeon.movePlayerUp();
 		// reset opened door count
 		openedDoorCount = 0;
 		for (Entity d : doors) {
@@ -200,20 +200,20 @@ public class testPlayerInteraction extends testSetup {
 		assertEquals(1, dungeon.getEntities(EntityType.ENEMY).size());
 		assertEquals(null, dungeon.getInventory().getSword());
 
-		player.moveRight(); // on sword grid , player collect it
+		dungeon.movePlayerRight(); // on sword grid , player collect it
 
 		assertNotEquals(null, dungeon.getInventory().getSword());
 		assertEquals(5, dungeon.getInventory().getSwordDurability());
 		assertEquals(1, dungeon.getEntities(EntityType.SWORD).size());
 
-		player.moveRight(); // collide with the enemy but the player has sword
+		dungeon.movePlayerRight(); // collide with the enemy but the player has sword
 
 		assertEquals(0, dungeon.getEntities(EntityType.ENEMY).size());	// the player should use the sword to kill enemy
 		assertEquals(4, dungeon.getInventory().getSwordDurability());	// the durability should decrease
 
-		player.moveRight(); // move right 2 times to collect the last sword
-		player.moveRight();
-		player.moveRight(); // collect the last sword refresh sword's durability
+		dungeon.movePlayerRight(); // move right 2 times to collect the last sword
+		dungeon.movePlayerRight();
+		dungeon.movePlayerRight(); // collect the last sword refresh sword's durability
 
 		assertEquals(5, dungeon.getInventory().getSwordDurability());	// the durability should be refreshed
 		assertEquals(0, dungeon.getEntities(EntityType.SWORD).size());

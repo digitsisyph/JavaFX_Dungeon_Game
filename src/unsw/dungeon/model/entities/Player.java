@@ -40,21 +40,17 @@ public class Player extends Entity implements Movable {
 
 	public void moveUp() {
 		movement.moveUp();
-		this.getDungeon().notifyMovement();
 	}
 
 	public void moveDown() {
 		movement.moveDown();
-		this.getDungeon().notifyMovement();
 	}
 
 	public void moveLeft() {
 		movement.moveLeft();
-		this.getDungeon().notifyMovement();
 	}
 
 	public void moveRight() {
 		movement.moveRight();
-		this.getDungeon().notifyMovement();
 	}
 }

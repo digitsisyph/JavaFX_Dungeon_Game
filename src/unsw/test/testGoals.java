@@ -20,10 +20,10 @@ public class testGoals extends testSetup {
 		dungeon.addEntity(new Treasure(2, 1, dungeon));
 		dungeon.addEntity(new Treasure(3, 1, dungeon));
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(false, dungeon.goalAchieved());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(true, dungeon.goalAchieved());
 	}
 
@@ -41,7 +41,7 @@ public class testGoals extends testSetup {
 		dungeon.pickUp(sword);
 
 		assertEquals(false, dungeon.goalAchieved());
-		player.moveRight(); // pick sword
+		dungeon.movePlayerRight(); // pick sword
 		assertEquals(true, dungeon.goalAchieved());
 
 	}
@@ -80,7 +80,7 @@ public class testGoals extends testSetup {
 
 		assertFalse(dungeon.goalAchieved());
 
-		player.moveUp();	// let player move to the exit
+		dungeon.movePlayerUp();	// let player move to the exit
 		assertTrue(dungeon.goalAchieved());
 	}
 
@@ -99,10 +99,10 @@ public class testGoals extends testSetup {
 		dungeon.addEntity(new Treasure(1, 0, dungeon));
 		dungeon.addEntity(new Exit(2, 0, dungeon));
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertFalse(dungeon.goalAchieved());
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertTrue(dungeon.goalAchieved());
 	}
 
@@ -127,10 +127,10 @@ public class testGoals extends testSetup {
 		dungeon.addEntity(new Switch(4, 2, dungeon));
 		dungeon.addEntity(new Exit(2, 1, dungeon));
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertFalse(dungeon.goalAchieved());
 
-		player.moveUp();
+		dungeon.movePlayerUp();
 		assertTrue(dungeon.goalAchieved());
 	}
 
@@ -155,19 +155,19 @@ public class testGoals extends testSetup {
 		dungeon.addEntity(new Switch(4, 2, dungeon));
 		dungeon.addEntity(new Exit(2, 1, dungeon));
 
-		player.moveUp();
+		dungeon.movePlayerUp();
 		assertEquals(true, dungeon.goalAchieved()); // at exit true
 
-		player.moveDown();
+		dungeon.movePlayerDown();
 		assertEquals(false, dungeon.goalAchieved()); // move back to origin false
 
-		player.moveRight();
+		dungeon.movePlayerRight();
 		assertEquals(false, dungeon.goalAchieved()); // only pushes boulder false
 
-		player.moveLeft(); // collected treasure
+		dungeon.movePlayerLeft(); // collected treasure
 		assertEquals(true, dungeon.goalAchieved());
 
-		player.moveLeft(); // dummy movement will result in true because the player has satisfied boulder +
+		dungeon.movePlayerLeft(); // dummy movement will result in true because the player has satisfied boulder +
 							// treasure
 		assertEquals(true, dungeon.goalAchieved());
 	}
