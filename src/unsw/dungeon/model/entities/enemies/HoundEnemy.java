@@ -21,7 +21,6 @@ public class HoundEnemy extends Enemy implements Movable {
         else
             this.setBehaviour(moveClose);
 
-
         Player player = getDungeon().getPlayer();
         if (player != null) // avoid null pointer when the player is killed by other enemy
             this.move(player);

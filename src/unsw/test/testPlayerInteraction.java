@@ -26,15 +26,15 @@ public class testPlayerInteraction extends testSetup {
 		dungeon.addEntity(new Treasure(3, 1, dungeon));
 
 		// the player does not have any treasure at first
-		assertEquals(0, dungeon.getInventory().numTreasurePicked());
+		assertEquals(0, dungeon.getInventory().getTreasureNum());
 		assertEquals(2, dungeon.getEntities(EntityType.TREASURE).size());
 
 		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(1, dungeon.getInventory().numTreasurePicked());
+		assertEquals(1, dungeon.getInventory().getTreasureNum());
 		assertEquals(1, dungeon.getEntities(EntityType.TREASURE).size());
 
 		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(2, dungeon.getInventory().numTreasurePicked());
+		assertEquals(2, dungeon.getInventory().getTreasureNum());
 		assertEquals(0, dungeon.getEntities(EntityType.TREASURE).size());
 	}
 
@@ -101,24 +101,24 @@ public class testPlayerInteraction extends testSetup {
 		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals(1, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
-		assertEquals(4, dungeon.getInventory().invincStep());
+		assertEquals(4, dungeon.getInventory().getInvincStep());
 
 		dungeon.movePlayer(Direction.RIGHT); // collects another potion
 		assertEquals(0, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
-		assertEquals(4, dungeon.getInventory().invincStep());
+		assertEquals(4, dungeon.getInventory().getInvincStep());
 
 		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(3, dungeon.getInventory().invincStep());
+		assertEquals(3, dungeon.getInventory().getInvincStep());
 
 		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(2, dungeon.getInventory().invincStep());
+		assertEquals(2, dungeon.getInventory().getInvincStep());
 
 		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(1, dungeon.getInventory().invincStep());
+		assertEquals(1, dungeon.getInventory().getInvincStep());
 
 		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(0, dungeon.getInventory().invincStep());
+		assertEquals(0, dungeon.getInventory().getInvincStep());
 
 		assertEquals(false, dungeon.getInventory().isInvincible()); // no longer invincible
 

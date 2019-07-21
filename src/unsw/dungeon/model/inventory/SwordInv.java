@@ -1,7 +1,5 @@
 package unsw.dungeon.model.inventory;
 
-import javafx.scene.image.Image;
-
 class SwordInv {
 
     private int durability;
@@ -10,13 +8,12 @@ class SwordInv {
         this.durability = 5;
     }
 
-    void restoreDurability() {
-        this.durability = 5;
+    int getDurability() {
+        return durability;
     }
 
-    public Image getImage() {
-        // TODO Auto-generated method stub
-        return new Image("/greatsword_1_new.png");
+    void restoreDurability() {
+        this.durability = 5;
     }
 
     void use() {
@@ -24,17 +21,7 @@ class SwordInv {
     }
 
     boolean broken() {
-        if (this.durability <= 0)
-            return true;
-        else
-            return false;
+        return this.durability <= 0;
     }
 
-    public int getDurability() {
-        return durability;
-    }
-
-    public void setDurability(int durability) {
-        this.durability = durability;
-    }
 }

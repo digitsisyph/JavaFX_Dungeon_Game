@@ -16,13 +16,9 @@ public class Movement {
     }
 
     public void move(Direction direction) {
-        int newX = direction.newX(entity.getX());
-        int newY = direction.newY(entity.getY());
-        moveTo(newX, newY);
-    }
+        int target_X = direction.newX(entity.getX());
+        int target_Y = direction.newY(entity.getY());
 
-    // helper function for moving up, down, left, right
-    private void moveTo(int target_X, int target_Y) {
         if (dungeon.canOccupyGrid(target_X, target_Y)) {
             entity.x().set(target_X);
             entity.y().set(target_Y);

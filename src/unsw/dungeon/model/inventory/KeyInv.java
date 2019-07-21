@@ -8,9 +8,6 @@ class KeyInv {
 		this.key_id = id;
 	}
 
-	/**
-	 * @return the key_id
-	 */
 	public int getKey_id() {
 		return key_id;
 	}

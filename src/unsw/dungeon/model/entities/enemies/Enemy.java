@@ -40,5 +40,4 @@ public abstract class Enemy extends Entity implements Movable {
         this.movement.move(direction);
     }
 
-
 }

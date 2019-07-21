@@ -1,6 +1,6 @@
 package unsw.dungeon.model.inventory;
 
-public class InvincibleState {
+class InvincibleState {
 
     private int remaining_time;
     private Inventory inventory;
@@ -18,7 +18,7 @@ public class InvincibleState {
         }
     }
 
-    public int getRemainingTime() {
+    int getRemainingTime() {
         return this.remaining_time;
     }
 }

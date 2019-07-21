@@ -236,7 +236,7 @@ public class Dungeon {
 	}
 
 	private void pickUpPotion(Potion potion) {
-		this.getInventory().pickUpPotion();
+		this.getInventory().pickPotion();
 		removeEntity(potion);
 	}
 
@@ -283,9 +283,8 @@ public class Dungeon {
 	}
 
 	public void placeBomb() {
-		if (this.getInventory().getBombNum() > 0) {
+		if (getInventory().useBomb()) {
 			System.out.println("Use bomb");
-			this.getInventory().useBomb(); // this method just decrease num of bomb by 1;
 			createEntity(new LitBomb(player.getX(), player.getY(), this));
 		} else {
 			System.out.println("No bomb to use");
@@ -319,6 +318,7 @@ public class Dungeon {
 
 	// to finish a game over
 	private void gameOver() {
+		System.out.println("Game Over!");
 		gameOver = true;
 	}
 
