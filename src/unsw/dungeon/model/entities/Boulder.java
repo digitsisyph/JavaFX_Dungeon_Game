@@ -1,5 +1,6 @@
 package unsw.dungeon.model.entities;
 
+import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.Dungeon;
 
 public class Boulder extends Entity implements Movable {
@@ -16,13 +17,13 @@ public class Boulder extends Entity implements Movable {
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player) {
 			if (entity.getY() > this.getY()) {
-				this.moveUp();
+				this.move(Direction.UP);
 			} else if (entity.getY() < this.getY()) {
-				this.moveDown();
+				this.move(Direction.DOWN);
 			} else if (entity.getX() < this.getX()) {
-				this.moveRight();
+				this.move(Direction.RIGHT);
 			} else if (entity.getX() > this.getX()) {
-				this.moveLeft();
+				this.move(Direction.LEFT);
 			}
 		}
 	}
@@ -33,21 +34,8 @@ public class Boulder extends Entity implements Movable {
 	}
 
 	// for movable interface
-
-	public void moveUp() {
-		this.movement.moveUp();
-	}
-
-	public void moveDown() {
-		this.movement.moveDown();
-	}
-
-	public void moveLeft() {
-		this.movement.moveLeft();
-	}
-
-	public void moveRight() {
-		this.movement.moveRight();
+	public void move(Direction direction) {
+		movement.move(direction);
 	}
 
 }

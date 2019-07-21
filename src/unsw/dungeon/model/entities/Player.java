@@ -1,7 +1,8 @@
 package unsw.dungeon.model.entities;
 
+import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.Dungeon;
-import unsw.dungeon.model.entities.enemies.HumanEnemy;
+import unsw.dungeon.model.entities.enemies.Enemy;
 
 /**
  * The player entity
@@ -27,8 +28,8 @@ public class Player extends Entity implements Movable {
 	}
 
 	public void collideWith(Entity entity) {
-		if (entity instanceof HumanEnemy)
-			this.getDungeon().fightEnemy((HumanEnemy) entity);
+		if (entity.type() == EntityType.ENEMY)
+			this.getDungeon().fightEnemy((Enemy) entity);
 	}
 
 	@Override
@@ -37,20 +38,8 @@ public class Player extends Entity implements Movable {
 	}
 
 	// for movable interface
-
-	public void moveUp() {
-		movement.moveUp();
+	public void move(Direction direction) {
+		movement.move(direction);
 	}
 
-	public void moveDown() {
-		movement.moveDown();
-	}
-
-	public void moveLeft() {
-		movement.moveLeft();
-	}
-
-	public void moveRight() {
-		movement.moveRight();
-	}
 }

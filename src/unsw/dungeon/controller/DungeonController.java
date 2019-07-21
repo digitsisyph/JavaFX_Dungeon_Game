@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import unsw.dungeon.DungeonControllerLoader;
+import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
 
@@ -60,16 +61,16 @@ public class DungeonController {
 
 		switch (event.getCode()) {
 		case UP:
-			dungeon.movePlayerUp();
+			dungeon.movePlayer(Direction.UP);
 			break;
 		case DOWN:
-			dungeon.movePlayerDown();
+			dungeon.movePlayer(Direction.DOWN);
 			break;
 		case LEFT:
-			dungeon.movePlayerLeft();
+			dungeon.movePlayer(Direction.LEFT);
 			break;
 		case RIGHT:
-			dungeon.movePlayerRight();
+			dungeon.movePlayer(Direction.RIGHT);
 			break;
 		case U:
 			dungeon.playerPlacesBomb();

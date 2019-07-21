@@ -1,5 +1,6 @@
 package unsw.dungeon.model.entities;
 
+import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.Dungeon;
 
 import java.util.List;
@@ -14,27 +15,9 @@ public class Movement {
         this.dungeon = dungeon;
     }
 
-    public void moveUp() {
-        int newX = entity.getX();
-        int newY = entity.getY() - 1;
-        moveTo(newX, newY);
-    }
-
-    public void moveDown() {
-        int newX = entity.getX();
-        int newY = entity.getY() + 1;
-        moveTo(newX, newY);
-    }
-
-    public void moveLeft() {
-        int newX = entity.getX() - 1;
-        int newY = entity.getY();
-        moveTo(newX, newY);
-    }
-
-    public void moveRight() {
-        int newX = entity.getX() + 1;
-        int newY = entity.getY();
+    public void move(Direction direction) {
+        int newX = direction.newX(entity.getX());
+        int newY = direction.newY(entity.getY());
         moveTo(newX, newY);
     }
 
@@ -48,8 +31,7 @@ public class Movement {
         notifyCollision(entity, target_X, target_Y);
     }
 
-
-    // mainly for pushing and opening a door
+    // a movement would produce a collision to the target grid
     private void notifyCollision(Movable movable, int target_X, int target_Y) {
         List<Entity> collidedEntities = dungeon.getEntities(target_X, target_Y);
         collidedEntities.forEach(entity -> entity.collideWith((Entity) movable));

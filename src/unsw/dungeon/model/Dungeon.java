@@ -172,31 +172,9 @@ public class Dungeon {
 				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
 
-	public void movePlayerUp() {
+	public void movePlayer(Direction direction) {
 		if (player != null) {
-			player.moveUp();
-			notifyPerMovement();
-		}
-
-	}
-
-	public void movePlayerDown() {
-		if (player != null) {
-			player.moveDown();
-			notifyPerMovement();
-		}
-	}
-
-	public void movePlayerRight() {
-		if (player != null) {
-			player.moveRight();
-			notifyPerMovement();
-		}
-	}
-
-	public void movePlayerLeft() {
-		if (player != null) {
-			player.moveLeft();
+			player.move(direction);
 			notifyPerMovement();
 		}
 

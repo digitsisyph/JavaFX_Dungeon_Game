@@ -1,6 +1,7 @@
 package unsw.dungeon.model.entities;
 
 import javafx.beans.property.IntegerProperty;
+import unsw.dungeon.model.Direction;
 
 public interface Movable {
 
@@ -10,8 +11,5 @@ public interface Movable {
     public int getX();
     public int getY();
 
-    public void moveUp();
-    public void moveDown();
-    public void moveLeft();
-    public void moveRight();
+    public void move(Direction direction);
 }

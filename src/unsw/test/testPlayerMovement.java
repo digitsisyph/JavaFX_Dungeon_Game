@@ -1,6 +1,7 @@
 package unsw.test;
 
 import org.junit.jupiter.api.Test;
+import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.entities.Boulder;
 import unsw.dungeon.model.entities.Wall;
 import unsw.dungeon.model.entities.door.*;
@@ -16,19 +17,19 @@ public class testPlayerMovement extends testSetup {
 		int startX = player.getX();
 		int startY = player.getY();
 
-		dungeon.movePlayerDown();
+		dungeon.movePlayer(Direction.DOWN);
 		assertEquals(startX, player.getX());
 		assertEquals(startY + 1, player.getY());
 
-		dungeon.movePlayerUp();
+		dungeon.movePlayer(Direction.UP);
 		assertEquals(startX, player.getX());
 		assertEquals(startY, player.getY());
 
-		dungeon.movePlayerLeft();
+		dungeon.movePlayer(Direction.LEFT);
 		assertEquals(startX - 1, player.getX());
 		assertEquals(startY, player.getY());
 
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals(startX, player.getX());
 		assertEquals(startY, player.getY());
 	}
@@ -48,22 +49,22 @@ public class testPlayerMovement extends testSetup {
 		int startY = player.getY();
 
 		// player should not move
-		dungeon.movePlayerDown();
+		dungeon.movePlayer(Direction.DOWN);
 		assertEquals(startX, player.getX());
 		assertEquals(startY, player.getY());
 
 		// player should not move
-		dungeon.movePlayerUp();
+		dungeon.movePlayer(Direction.UP);
 		assertEquals(startX, player.getX());
 		assertEquals(startY, player.getY());
 
 		// player should not move
-		dungeon.movePlayerLeft();
+		dungeon.movePlayer(Direction.LEFT);
 		assertEquals(startX, player.getX());
 		assertEquals(startY, player.getY());
 
 		// player should not move
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals(startX, player.getX());
 		assertEquals(startY, player.getY());
 	}

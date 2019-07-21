@@ -1,5 +1,6 @@
 package unsw.dungeon.model.entities.enemies;
 
+import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.entities.Player;
 
 import java.util.Random;
@@ -15,30 +16,30 @@ public class EnemyMoveCloseStupid implements EnemyBehaviour {
 		if (randInt == 0) {
 			if (player.getX() > enemy.getX()
 					&& enemy.getDungeon().canOccupyGrid(enemy.getX() + 1, enemy.getY())) {
-				enemy.moveRight();
+				enemy.move(Direction.RIGHT);
 			} else if (player.getX() < enemy.getX()
 					&& enemy.getDungeon().canOccupyGrid(enemy.getX() - 1, enemy.getY())) {
-				enemy.moveLeft();
+				enemy.move(Direction.LEFT);
 			} else if (player.getY() > enemy.getY()
 					&& enemy.getDungeon().canOccupyGrid(enemy.getX(), enemy.getY() + 1)) {
-				enemy.moveDown();
+				enemy.move(Direction.DOWN);
 			} else if (player.getY() < enemy.getY()
 					&& enemy.getDungeon().canOccupyGrid(enemy.getX(), enemy.getY() - 1)) {
-				enemy.moveUp();
+				enemy.move(Direction.UP);
 			}
 		} else {
 			if (player.getY() > enemy.getY()
 					&& enemy.getDungeon().canOccupyGrid(enemy.getX(), enemy.getY() + 1)) {
-				enemy.moveDown();
+				enemy.move(Direction.DOWN);
 			} else if (player.getY() < enemy.getY()
 					&& enemy.getDungeon().canOccupyGrid(enemy.getX(), enemy.getY() - 1)) {
-				enemy.moveUp();
+				enemy.move(Direction.UP);
 			} else if (player.getX() > enemy.getX()
 					&& enemy.getDungeon().canOccupyGrid(enemy.getX() + 1, enemy.getY())) {
-				enemy.moveRight();
+				enemy.move(Direction.RIGHT);
 			} else if (player.getX() < enemy.getX()
 					&& enemy.getDungeon().canOccupyGrid(enemy.getX() - 1, enemy.getY())) {
-				enemy.moveLeft();
+				enemy.move(Direction.LEFT);
 			}
 		}
 	}

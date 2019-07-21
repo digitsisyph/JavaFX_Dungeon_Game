@@ -1,6 +1,7 @@
 package unsw.test;
 
 import org.junit.jupiter.api.Test;
+import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.bomb.LitBomb;
 import unsw.dungeon.model.entities.bomb.UnlitBomb;
@@ -45,13 +46,13 @@ public class testEntityBehaviour extends testSetup {
 
 		int distance = enemy.getX() - player.getX(); // distance will stay the same
 
-		dungeon.movePlayerRight(); // pick potion
+		dungeon.movePlayer(Direction.RIGHT); // pick potion
 		assertEquals(distance, (enemy.getX() - player.getX()));
 
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals(distance, (enemy.getX() - player.getX()));
 
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals(distance, (enemy.getX() - player.getX()));
 	}
 
@@ -68,13 +69,13 @@ public class testEntityBehaviour extends testSetup {
 		LitBomb bombLit = (LitBomb) dungeon.getEntities(EntityType.LITBOMB).get(0);
 		assertEquals("/bomb_lit_1.png", bombLit.getImagePath());
 
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals("/bomb_lit_2.png", bombLit.getImagePath());
 
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals("/bomb_lit_3.png", bombLit.getImagePath());
 
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals("/bomb_lit_4.png", bombLit.getImagePath());
 	}
 
@@ -137,19 +138,19 @@ public class testEntityBehaviour extends testSetup {
 		dungeon.addEntity(boulderUp);
 		dungeon.addEntity(boulderDown);
 
-		dungeon.movePlayerRight(); // pushing
+		dungeon.movePlayer(Direction.RIGHT); // pushing
 		assertEquals(4, boulderRight.getX());
 		assertEquals(2, boulderRight.getY());
 
-		dungeon.movePlayerLeft(); // pushing
+		dungeon.movePlayer(Direction.LEFT); // pushing
 		assertEquals(0, boulderLeft.getX());
 		assertEquals(2, boulderLeft.getY());
 
-		dungeon.movePlayerUp(); // pushing
+		dungeon.movePlayer(Direction.UP); // pushing
 		assertEquals(2, boulderUp.getX());
 		assertEquals(0, boulderUp.getY());
 
-		dungeon.movePlayerDown(); // pushing
+		dungeon.movePlayer(Direction.DOWN); // pushing
 		assertEquals(2, boulderDown.getX());
 		assertEquals(4, boulderDown.getY());
 	}
@@ -174,19 +175,19 @@ public class testEntityBehaviour extends testSetup {
 		dungeon.addEntity(boulderDown);
 		dungeon.addEntity(new Boulder(4, 6, dungeon));
 
-		dungeon.movePlayerRight(); // pushing
+		dungeon.movePlayer(Direction.RIGHT); // pushing
 		assertEquals(5, boulderRight.getX());
 		assertEquals(4, boulderRight.getY());
 
-		dungeon.movePlayerLeft(); // pushing
+		dungeon.movePlayer(Direction.LEFT); // pushing
 		assertEquals(3, boulderLeft.getX());
 		assertEquals(4, boulderLeft.getY());
 
-		dungeon.movePlayerUp(); // pushing
+		dungeon.movePlayer(Direction.UP); // pushing
 		assertEquals(4, boulderUp.getX());
 		assertEquals(3, boulderUp.getY());
 
-		dungeon.movePlayerDown(); // pushing
+		dungeon.movePlayer(Direction.DOWN); // pushing
 		assertEquals(4, boulderDown.getX());
 		assertEquals(5, boulderDown.getY());
 	}
@@ -212,19 +213,19 @@ public class testEntityBehaviour extends testSetup {
 		dungeon.addEntity(boulderDown);
 		dungeon.addEntity(new Door(4, 6, dungeon, 0));
 
-		dungeon.movePlayerRight(); // pushing
+		dungeon.movePlayer(Direction.RIGHT); // pushing
 		assertEquals(5, boulderRight.getX());
 		assertEquals(4, boulderRight.getY());
 
-		dungeon.movePlayerLeft(); // pushing
+		dungeon.movePlayer(Direction.LEFT); // pushing
 		assertEquals(3, boulderLeft.getX());
 		assertEquals(4, boulderLeft.getY());
 
-		dungeon.movePlayerUp(); // pushing
+		dungeon.movePlayer(Direction.UP); // pushing
 		assertEquals(4, boulderUp.getX());
 		assertEquals(3, boulderUp.getY());
 
-		dungeon.movePlayerDown(); // pushing
+		dungeon.movePlayer(Direction.DOWN); // pushing
 		assertEquals(4, boulderDown.getX());
 		assertEquals(5, boulderDown.getY());
 	}
@@ -240,7 +241,7 @@ public class testEntityBehaviour extends testSetup {
 		dungeon.addEntity(boulder);
 		dungeon.addEntity(new HumanEnemy(2, 0, dungeon));
 
-		dungeon.movePlayerRight(); // pushing
+		dungeon.movePlayer(Direction.RIGHT); // pushing
 
 		assertEquals(1, boulder.getX());
 		assertEquals(0, boulder.getY());
@@ -261,9 +262,9 @@ public class testEntityBehaviour extends testSetup {
 		dungeon.pickUp(new Key(0, 0, dungeon, 0));
 		dungeon.attemptToOpenDoor(door);
 
-		dungeon.movePlayerRight(); // pushing
-		dungeon.movePlayerRight(); // boulder at door
-		dungeon.movePlayerRight(); // boulder passes door
+		dungeon.movePlayer(Direction.RIGHT); // pushing
+		dungeon.movePlayer(Direction.RIGHT); // boulder at door
+		dungeon.movePlayer(Direction.RIGHT); // boulder passes door
 
 		assertEquals(3, boulder.getX());
 		assertEquals(0, boulder.getY());

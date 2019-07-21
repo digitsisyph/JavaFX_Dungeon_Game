@@ -1,6 +1,7 @@
 package unsw.test;
 
 import org.junit.jupiter.api.Test;
+import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.enemies.HumanEnemy;
 import unsw.dungeon.model.goal.*;
@@ -20,10 +21,10 @@ public class testGoals extends testSetup {
 		dungeon.addEntity(new Treasure(2, 1, dungeon));
 		dungeon.addEntity(new Treasure(3, 1, dungeon));
 
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals(false, dungeon.goalAchieved());
 
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals(true, dungeon.goalAchieved());
 	}
 
@@ -41,7 +42,7 @@ public class testGoals extends testSetup {
 		dungeon.pickUp(sword);
 
 		assertEquals(false, dungeon.goalAchieved());
-		dungeon.movePlayerRight(); // pick sword
+		dungeon.movePlayer(Direction.RIGHT); // pick sword
 		assertEquals(true, dungeon.goalAchieved());
 
 	}
@@ -80,7 +81,7 @@ public class testGoals extends testSetup {
 
 		assertFalse(dungeon.goalAchieved());
 
-		dungeon.movePlayerUp();	// let player move to the exit
+		dungeon.movePlayer(Direction.UP);	// let player move to the exit
 		assertTrue(dungeon.goalAchieved());
 	}
 
@@ -99,10 +100,10 @@ public class testGoals extends testSetup {
 		dungeon.addEntity(new Treasure(1, 0, dungeon));
 		dungeon.addEntity(new Exit(2, 0, dungeon));
 
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertFalse(dungeon.goalAchieved());
 
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertTrue(dungeon.goalAchieved());
 	}
 
@@ -127,10 +128,10 @@ public class testGoals extends testSetup {
 		dungeon.addEntity(new Switch(4, 2, dungeon));
 		dungeon.addEntity(new Exit(2, 1, dungeon));
 
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertFalse(dungeon.goalAchieved());
 
-		dungeon.movePlayerUp();
+		dungeon.movePlayer(Direction.UP);
 		assertTrue(dungeon.goalAchieved());
 	}
 
@@ -149,25 +150,24 @@ public class testGoals extends testSetup {
 		orGoals.add(andGoals);
 		baseGoal.add(orGoals);
 
-
 		dungeon.addEntity(new Treasure(1, 2, dungeon));
 		dungeon.addEntity(new Boulder(3, 2, dungeon));
 		dungeon.addEntity(new Switch(4, 2, dungeon));
 		dungeon.addEntity(new Exit(2, 1, dungeon));
 
-		dungeon.movePlayerUp();
+		dungeon.movePlayer(Direction.UP);
 		assertEquals(true, dungeon.goalAchieved()); // at exit true
 
-		dungeon.movePlayerDown();
+		dungeon.movePlayer(Direction.DOWN);
 		assertEquals(false, dungeon.goalAchieved()); // move back to origin false
 
-		dungeon.movePlayerRight();
+		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals(false, dungeon.goalAchieved()); // only pushes boulder false
 
-		dungeon.movePlayerLeft(); // collected treasure
+		dungeon.movePlayer(Direction.LEFT); // collected treasure
 		assertEquals(true, dungeon.goalAchieved());
 
-		dungeon.movePlayerLeft(); // dummy movement will result in true because the player has satisfied boulder +
+		dungeon.movePlayer(Direction.LEFT); // dummy movement will result in true because the player has satisfied boulder +
 							// treasure
 		assertEquals(true, dungeon.goalAchieved());
 	}

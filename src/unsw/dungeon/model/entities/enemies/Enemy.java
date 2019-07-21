@@ -1,5 +1,6 @@
 package unsw.dungeon.model.entities.enemies;
 
+import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.*;
 
@@ -22,20 +23,8 @@ public abstract class Enemy extends Entity implements Movable {
         behaviour.move(this, player);
     }
 
-    public void moveUp() {
-        this.movement.moveUp();
-    }
-
-    public void moveDown() {
-        this.movement.moveDown();
-    }
-
-    public void moveLeft() {
-        this.movement.moveLeft();
-    }
-
-    public void moveRight() {
-        this.movement.moveRight();
+    public void move(Direction direction) {
+        this.movement.move(direction);
     }
 
     public void collideWith(Entity entity) {

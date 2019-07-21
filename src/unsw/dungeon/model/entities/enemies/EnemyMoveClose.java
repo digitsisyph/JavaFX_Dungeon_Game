@@ -1,5 +1,6 @@
 package unsw.dungeon.model.entities.enemies;
 
+import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Player;
 
@@ -18,7 +19,7 @@ public class EnemyMoveClose implements EnemyBehaviour {
 	}
 
 	// use BFS to find next grid
-	private Grid findNextGrid(Enemy enemy, Player player, Dungeon dungeon) {
+	private Direction findNextDirection(Enemy enemy, Player player, Dungeon dungeon) {
 
 		Grid[][] visited = new Grid[dungeon.getWidth()][dungeon.getHeight()];
 		boolean found = false;
@@ -62,21 +63,21 @@ public class EnemyMoveClose implements EnemyBehaviour {
 		// retrieve the path
 		while (visited[curr.x][curr.y] != enemy_grid)
 			curr = visited[curr.x][curr.y];
-		return curr;
+
+		// find the direction
+		if (curr.x > enemy.getX()) {
+			return Direction.RIGHT;
+		} else if (curr.x < enemy.getX()) {
+			return Direction.LEFT;
+		} else if (curr.y > enemy.getY()) {
+			return Direction.DOWN;
+		} else {
+			return Direction.UP;
+		}
 	}
 
 	@Override
 	public void move(Enemy enemy, Player player) {
-		Grid next_grid = findNextGrid(enemy, player, enemy.getDungeon());
-
-		if (next_grid.x > enemy.getX()) {
-			enemy.moveRight();
-		} else if (next_grid.x < enemy.getX()) {
-			enemy.moveLeft();
-		} else if (next_grid.y > enemy.getY()) {
-			enemy.moveDown();
-		} else if (next_grid.y < enemy.getY()) {
-			enemy.moveUp();
-		}
+		enemy.move(findNextDirection(enemy, player, enemy.getDungeon()));
 	}
 }
