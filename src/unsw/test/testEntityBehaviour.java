@@ -7,6 +7,7 @@ import unsw.dungeon.model.entities.bomb.LitBomb;
 import unsw.dungeon.model.entities.bomb.UnlitBomb;
 import unsw.dungeon.model.entities.door.Door;
 import unsw.dungeon.model.entities.enemies.Enemy;
+import unsw.dungeon.model.entities.enemies.HoundEnemy;
 import unsw.dungeon.model.entities.enemies.HumanEnemy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,11 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class testEntityBehaviour extends testSetup {
 
 	/*
-	 * Normally the enemy will close the distance between the player
-	 * and itself
+	 * Normally the enemy will close the distance between the player and itself
 	 */
 	@Test
-	void testEnemyMoveTowards() {
+	void testHumanEnemyMoveTowards() {
 		setup(10, 1, 0, 0);
 
 		Enemy enemy = new HumanEnemy(9, 0, dungeon);
@@ -33,13 +33,55 @@ public class testEntityBehaviour extends testSetup {
 	}
 
 	/*
+	 * Normally the enemy will close the distance between the player and itself
+	 */
+	@Test
+	void testHoundEnemyMoveTowards() {
+		setup(10, 1, 0, 0);
+
+		Enemy enemy = new HoundEnemy(9, 0, dungeon);
+		dungeon.addEntity(enemy);
+
+		int distance = enemy.getX() - player.getX(); // distance should become smaller
+
+		for (int move = 1; move < distance; move++) {
+			enemy.move(player);
+			assertEquals(distance - move, (enemy.getX() - player.getX()));
+		}
+	}
+
+	/*
 	 * Enemy will move away when the player is invincible
 	 */
 	@Test
-	void testEnemyMoveAway() {
+	void testHumanEnemyMoveAway() {
 		setup(10, 1, 0, 0);
 
 		Enemy enemy = new HumanEnemy(3, 0, dungeon);
+		dungeon.addEntity(enemy);
+
+		dungeon.pickUp(new Potion(1, 0, dungeon));
+
+		int distance = enemy.getX() - player.getX(); // distance will stay the same
+
+		dungeon.movePlayer(Direction.RIGHT); // pick potion
+		assertEquals(distance, (enemy.getX() - player.getX()));
+
+		dungeon.movePlayer(Direction.RIGHT);
+		assertEquals(distance, (enemy.getX() - player.getX()));
+
+		dungeon.movePlayer(Direction.RIGHT);
+		assertEquals(distance, (enemy.getX() - player.getX()));
+	}
+
+	/*
+	 * Enemy will move away when the player is invincible
+	 */
+	@Test
+	void testHoundEnemyMoveAway() {
+		setup(10, 1, 0, 0);
+
+		Enemy enemy = new HoundEnemy(3, 0, dungeon);
 		dungeon.addEntity(enemy);
 
 		dungeon.pickUp(new Potion(1, 0, dungeon));
@@ -128,11 +170,10 @@ public class testEntityBehaviour extends testSetup {
 	void testPushBoulder() {
 		setup(5, 5, 2, 2);
 
-
 		Boulder boulderRight = new Boulder(3, 2, dungeon);
-		Boulder boulderLeft  = new Boulder(1, 2, dungeon);
-		Boulder boulderUp 	 = new Boulder(2, 1, dungeon);
-		Boulder boulderDown  = new Boulder(2, 3, dungeon);
+		Boulder boulderLeft = new Boulder(1, 2, dungeon);
+		Boulder boulderUp = new Boulder(2, 1, dungeon);
+		Boulder boulderDown = new Boulder(2, 3, dungeon);
 		dungeon.addEntity(boulderRight);
 		dungeon.addEntity(boulderLeft);
 		dungeon.addEntity(boulderUp);
@@ -154,6 +195,7 @@ public class testEntityBehaviour extends testSetup {
 		assertEquals(2, boulderDown.getX());
 		assertEquals(4, boulderDown.getY());
 	}
+
 	/*
 	 * Player is strong enough to only push 1 boulder at a time
 	 */
@@ -162,9 +204,9 @@ public class testEntityBehaviour extends testSetup {
 		setup(9, 9, 4, 4);
 
 		Boulder boulderRight = new Boulder(5, 4, dungeon);
-		Boulder boulderLeft  = new Boulder(3, 4, dungeon);
-		Boulder boulderUp 	 = new Boulder(4, 3, dungeon);
-		Boulder boulderDown  = new Boulder(4, 5, dungeon);
+		Boulder boulderLeft = new Boulder(3, 4, dungeon);
+		Boulder boulderUp = new Boulder(4, 3, dungeon);
+		Boulder boulderDown = new Boulder(4, 5, dungeon);
 
 		dungeon.addEntity(boulderRight);
 		dungeon.addEntity(new Boulder(6, 4, dungeon));
@@ -191,6 +233,7 @@ public class testEntityBehaviour extends testSetup {
 		assertEquals(4, boulderDown.getX());
 		assertEquals(5, boulderDown.getY());
 	}
+
 	/*
 	 * Cant push boulder through wall
 	 */
@@ -199,9 +242,9 @@ public class testEntityBehaviour extends testSetup {
 		setup(9, 9, 4, 4);
 
 		Boulder boulderRight = new Boulder(5, 4, dungeon);
-		Boulder boulderLeft  = new Boulder(3, 4, dungeon);
-		Boulder boulderUp 	 = new Boulder(4, 3, dungeon);
-		Boulder boulderDown  = new Boulder(4, 5, dungeon);
+		Boulder boulderLeft = new Boulder(3, 4, dungeon);
+		Boulder boulderUp = new Boulder(4, 3, dungeon);
+		Boulder boulderDown = new Boulder(4, 5, dungeon);
 
 		dungeon.addEntity(boulderRight);
 		dungeon.addEntity(new Wall(6, 4, dungeon));
@@ -246,6 +289,7 @@ public class testEntityBehaviour extends testSetup {
 		assertEquals(1, boulder.getX());
 		assertEquals(0, boulder.getY());
 	}
+
 	/*
 	 * Player can pushed boulder through opened door
 	 */
