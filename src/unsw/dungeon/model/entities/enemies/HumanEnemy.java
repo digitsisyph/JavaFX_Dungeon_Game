@@ -20,8 +20,10 @@ public class HumanEnemy extends Enemy implements Movable {
 			this.setBehaviour(moveAway);
 		else
 			this.setBehaviour(moveClose);
-		// move
-		this.move(getDungeon().getPlayer());
+
+		Player player = getDungeon().getPlayer();
+		if (player != null) // avoid null pointer when the player is killed by other enemy
+			this.move(player);
 	}
 
 }

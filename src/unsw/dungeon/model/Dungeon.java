@@ -164,6 +164,7 @@ public class Dungeon {
 	public void movePlayer(Direction direction) {
 		if (player != null) {
 			player.move(direction);
+			// observer pattern
 			notifyPerMovement();
 		}
 	}

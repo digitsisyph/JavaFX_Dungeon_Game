@@ -6,14 +6,27 @@ import unsw.dungeon.model.entities.*;
 
 public abstract class Enemy extends Entity implements Movable {
 
-    Movement movement;
-    EnemyBehaviour behaviour;
+    private Movement movement;
+    private EnemyBehaviour behaviour;
 
     Enemy(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
         this.movement = new Movement(this, dungeon);
         this.setPassThrough(false);
     }
+
+    public void collideWith(Entity entity) {
+        if (entity instanceof Player) {
+            this.getDungeon().fightEnemy(this);
+        }
+    }
+
+    @Override
+    public EntityType type() {
+        return EntityType.ENEMY;
+    }
+
+    public abstract void updatePerMovement();
 
     public void setBehaviour(EnemyBehaviour behaviour) {
         this.behaviour = behaviour;
@@ -27,17 +40,5 @@ public abstract class Enemy extends Entity implements Movable {
         this.movement.move(direction);
     }
 
-    public void collideWith(Entity entity) {
-        if (entity instanceof Player) {
-            this.getDungeon().fightEnemy(this);
-        }
-    }
-
-    public abstract void updatePerMovement();
-
-    @Override
-    public EntityType type() {
-        return EntityType.ENEMY;
-    }
 
 }

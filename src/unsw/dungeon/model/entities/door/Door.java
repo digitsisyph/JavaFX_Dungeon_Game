@@ -18,14 +18,7 @@ public class Door extends Entity {
 
 	@Override
 	public Boolean canPassThrough() {
-		return this.getState().canPassThrough();
-	}
-
-	/**
-	 * @return the state
-	 */
-	public DoorState getState() {
-		return state;
+		return this.state.canPassThrough();
 	}
 
 	/**
