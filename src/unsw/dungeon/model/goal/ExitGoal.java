@@ -28,6 +28,12 @@ public class ExitGoal implements Goal {
 				.anyMatch(entity -> entity instanceof Exit);
 	}
 
+	public void update() {
+		if (this.isSatisfied()) {
+			System.out.println("Goal Achieved!");
+		}
+	}
+
 	public void print() {
 		System.out.println("EXIT GOAL");
 	}

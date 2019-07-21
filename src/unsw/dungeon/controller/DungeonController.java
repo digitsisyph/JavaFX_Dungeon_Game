@@ -73,7 +73,7 @@ public class DungeonController {
 			dungeon.movePlayer(Direction.RIGHT);
 			break;
 		case U:
-			dungeon.playerPlacesBomb();
+			dungeon.placeBomb();
 			break;
 		default:
 			break;

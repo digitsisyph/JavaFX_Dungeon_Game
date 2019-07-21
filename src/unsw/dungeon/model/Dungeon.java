@@ -33,7 +33,6 @@ public class Dungeon {
 	private final int width, height;
 	private List<Entity> entities;
 	private Player player;
-	private Player tempPlayer;
 	private Inventory inventory;
 	private Goal goal;
 	private boolean gameOver = false;
@@ -43,7 +42,6 @@ public class Dungeon {
 		this.height = height;
 		this.entities = new ArrayList<>();
 		this.player = null;
-		this.tempPlayer = null;
 		this.controller = null;
 		this.inventory = new Inventory();
 		this.goal = null;
@@ -57,7 +55,6 @@ public class Dungeon {
 
 	public void setPlayer(Player player) {
 		this.player = player;
-		this.tempPlayer = player;
 	}
 
 	public void setGoal(Goal goal) {
@@ -147,10 +144,8 @@ public class Dungeon {
 
 	// create a new entity in the dungeon
 	public void createEntity(Entity entity) {
-		System.out.println(entity);
-		if (controller != null) {
+		if (controller != null)
 			controller.addEntityImage(entity);
-		}
 		entities.add(entity);
 	}
 
@@ -166,22 +161,21 @@ public class Dungeon {
 
 	// player movement
 
+	public void movePlayer(Direction direction) {
+		if (player != null) {
+			player.move(direction);
+			notifyPerMovement();
+		}
+	}
+
 	// helper function: check whether a grid is walkable
 	public boolean canOccupyGrid(int X, int Y) {
 		return this.getEntities(X, Y).stream().allMatch(Entity::canPassThrough)
 				&& (0 <= X && X < this.getWidth() && 0 <= Y && Y < this.getHeight());
 	}
 
-	public void movePlayer(Direction direction) {
-		if (player != null) {
-			player.move(direction);
-			notifyPerMovement();
-		}
-
-	}
-
 	/*
-	 * TODO For every player movement, something must change Might be better to have
+	 * For every player movement, something must change Might be better to have
 	 * enemy observes player And put invincibility as an attribute inside the player
 	 * class
 	 */
@@ -190,53 +184,31 @@ public class Dungeon {
 		if (gameOver) {
 			System.out.println("Game Over!");
 		} else {
-			goalUpdate();
-			inventoryUpdate();
-			enemyUpdate();
-			litbombUpdate();
+			// update all all observers
+			goal.update();
+			inventory.updatePerMovement();
+			getEnemies().forEach(Enemy::updatePerMovement);
+			getLitBombs().forEach(LitBomb::updatePerMovement);
 		}
 	}
 
-	private void inventoryUpdate() {
-		inventory.updatePerMovement();
-	}
 
-	private void enemyUpdate() {
-		getEnemies().forEach(enemy -> enemy.updateStrategy(getInventory().isInvincible()));
-		getEnemies().forEach(enemy -> enemy.move(tempPlayer));
-	}
-
-	private void litbombUpdate() {
-		getLitBombs().forEach(bomb -> bomb.nextState());
-	}
-
-	private void goalUpdate() {
-		if (goal.isSatisfied())
-			System.out.println("Goal Achieved!");
-	}
-
-	// some retriever functions
-
-	// for picking up
+	// for picking up entities
 
 	public void pickUp(Entity entity) {
 		switch (entity.type()) {
 		case SWORD:
 			pickUpSword((Sword) entity);
 			break;
-
 		case TREASURE:
 			pickUpTreasure((Treasure) entity);
 			break;
-
 		case UNLITBOMB:
 			pickUpBomb((UnlitBomb) entity);
 			break;
-
 		case POTION:
 			pickUpPotion((Potion) entity);
 			break;
-
 		case KEY:
 			pickUpKey((Key) entity);
 			break;
@@ -246,6 +218,7 @@ public class Dungeon {
 	}
 
 	// pickUp helper
+
 	private void pickUpSword(Sword sword) {
 		removeEntity(sword);
 		this.getInventory().pickSword();
@@ -278,10 +251,15 @@ public class Dungeon {
 		this.getInventory().debug();
 	}
 
+
 	// --- other interactions
 
+	public boolean isPlayerInvincible() {
+		return inventory.isInvincible();
+	}
+
 	public void fightEnemy(Enemy enemy) {
-		if (this.getInventory().isInvincible()) {
+		if (isPlayerInvincible()) {
 			removeEntity(enemy);
 		} else if (this.getInventory().useSword()) {
 			removeEntity(enemy);
@@ -290,47 +268,26 @@ public class Dungeon {
 		}
 	}
 
-	public void attemptToOpenDoor(Door door) {
-		if (!door.canPassThrough()) {
-			if (this.getInventory().getKey() != null) {
-				if (this.getInventory().getKeyID() == door.getId()) {
-					this.getInventory().useKey();
-					door.open();
-				} else {
-					System.out.println("Wrong key");
-				}
-			} else {
-				System.out.println("No key");
-			}
+	public void openDoor(Door door) {
+		if (door.canPassThrough())
+			System.out.println("Door already opened.");
+		else if (this.getInventory().getKey() == null)
+			System.out.println("No key");
+		else if (this.getInventory().getKeyID() != door.getId())
+			System.out.println("Wrong key");
+		else {
+			this.getInventory().useKey();
+			door.open();
 		}
 	}
 
-	public void playerPlacesBomb() {
+	public void placeBomb() {
 		if (this.getInventory().getBombNum() > 0) {
 			System.out.println("Use bomb");
 			this.getInventory().useBomb(); // this method just decrease num of bomb by 1;
 			createEntity(new LitBomb(player.getX(), player.getY(), this));
 		} else {
 			System.out.println("No bomb to use");
-		}
-	}
-
-	// TODO game over
-	private void gameOver() {
-		gameOver = true;
-	}
-
-	public boolean goalAchieved() {
-		return this.goal.isSatisfied();
-	}
-
-	// a helper function to kill the player
-	private void killPlayer() {
-		// if the player is invincible now, it would not die
-		if (!getInventory().isInvincible()) {
-			removeEntity(this.player);
-			this.player = null;
-			gameOver();
 		}
 	}
 
@@ -356,6 +313,25 @@ public class Dungeon {
 			default:
 				break;
 			}
+		}
+	}
+
+	// to finish a game over
+	private void gameOver() {
+		gameOver = true;
+	}
+
+	public boolean goalAchieved() {
+		return this.goal.isSatisfied();
+	}
+
+	// a helper function to kill the player
+	private void killPlayer() {
+		// if the player is invincible now, it would not die
+		if (!isPlayerInvincible()) {
+			removeEntity(this.player);
+			this.player = null;
+			gameOver();
 		}
 	}
 }

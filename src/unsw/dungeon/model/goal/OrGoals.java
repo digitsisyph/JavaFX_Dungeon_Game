@@ -19,6 +19,12 @@ public class OrGoals implements Goal {
 		return goals.stream().anyMatch(goal -> goal.isSatisfied());
 	}
 
+	public void update() {
+		if (this.isSatisfied()) {
+			System.out.println("Goal Achieved!");
+		}
+	}
+
 	public void print() {
 		System.out.print("OrGoals: " + goals.size());
 		for(Goal goal : goals) {

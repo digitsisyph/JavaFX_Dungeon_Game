@@ -21,6 +21,12 @@ public class TreasureGoal implements Goal {
 		return dungeon.getTreasures().size() == 0;
 	}
 
+	public void update() {
+		if (this.isSatisfied()) {
+			System.out.println("Goal Achieved!");
+		}
+	}
+
 	public void print() {
 		System.out.println("TREASURE GOAL");
 	}

@@ -65,7 +65,7 @@ public class testEntityBehaviour extends testSetup {
 
 		dungeon.pickUp(new UnlitBomb(0, 0, dungeon));
 
-		dungeon.playerPlacesBomb();
+		dungeon.placeBomb();
 		LitBomb bombLit = (LitBomb) dungeon.getEntities(EntityType.LITBOMB).get(0);
 		assertEquals("/bomb_lit_1.png", bombLit.getImagePath());
 
@@ -260,7 +260,7 @@ public class testEntityBehaviour extends testSetup {
 		Door door = new Door(2, 0, dungeon, 0);
 		dungeon.addEntity(door);
 		dungeon.pickUp(new Key(0, 0, dungeon, 0));
-		dungeon.attemptToOpenDoor(door);
+		dungeon.openDoor(door);
 
 		dungeon.movePlayer(Direction.RIGHT); // pushing
 		dungeon.movePlayer(Direction.RIGHT); // boulder at door

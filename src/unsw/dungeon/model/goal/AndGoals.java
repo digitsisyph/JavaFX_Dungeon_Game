@@ -22,6 +22,12 @@ public class AndGoals implements Goal {
 		return goals.stream().allMatch(goal -> goal.isSatisfied());
 	}
 
+	public void update() {
+		if (this.isSatisfied()) {
+			System.out.println("Goal Achieved!");
+		}
+	}
+
 	@Override
 	public void print() {
 		System.out.println("AndGoals: " + goals.size());

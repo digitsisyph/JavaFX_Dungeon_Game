@@ -21,7 +21,11 @@ public class LitBomb extends Entity {
 		return EntityType.LITBOMB;
 	}
 
-	public void nextState() {
+	public void updatePerMovement() {
+		this.nextState();
+	}
+
+	private void nextState() {
 		state.nextState();
 	}
 

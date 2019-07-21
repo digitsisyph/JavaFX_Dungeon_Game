@@ -33,7 +33,7 @@ public abstract class Enemy extends Entity implements Movable {
         }
     }
 
-    public abstract void updateStrategy(boolean playerInvincible);
+    public abstract void updatePerMovement();
 
     @Override
     public EntityType type() {

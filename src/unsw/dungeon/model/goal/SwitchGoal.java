@@ -22,6 +22,12 @@ public class SwitchGoal implements Goal {
 		return dungeon.getSwitches().stream().allMatch(s -> s.isActivated());
 	}
 
+	public void update() {
+		if (this.isSatisfied()) {
+			System.out.println("Goal Achieved!");
+		}
+	}
+
 	public void print() {
 		System.out.println("BOULDER GOAL");
 	}

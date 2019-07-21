@@ -14,11 +14,14 @@ public class HumanEnemy extends Enemy implements Movable {
 		this.setBehaviour(moveClose);
 	}
 
-	public void updateStrategy(boolean playerInvincible) {
-		if (playerInvincible)
+	public void updatePerMovement() {
+		// set strategy
+		if (getDungeon().isPlayerInvincible())
 			this.setBehaviour(moveAway);
 		else
 			this.setBehaviour(moveClose);
+		// move
+		this.move(getDungeon().getPlayer());
 	}
 
 }
