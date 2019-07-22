@@ -61,7 +61,6 @@ public class Dungeon {
 		this.goal = goal;
 	}
 
-
 	// --- getter ---
 
 	public int getWidth() {
@@ -82,15 +81,12 @@ public class Dungeon {
 
 	// helper function: To retrieve an entity in a specific grid
 	public List<Entity> getEntities(int X, int Y) {
-		return entities.stream()
-				.filter(entity -> (entity.getX() == X && entity.getY() == Y))
+		return entities.stream().filter(entity -> (entity.getX() == X && entity.getY() == Y))
 				.collect(Collectors.toList());
 	}
 
 	public List<Entity> getEntities(EntityType type) {
-		return entities.stream()
-				.filter(entity -> entity.type() == type)
-				.collect(Collectors.toList());
+		return entities.stream().filter(entity -> entity.type() == type).collect(Collectors.toList());
 	}
 
 	// a helper function for bomb
@@ -104,37 +100,28 @@ public class Dungeon {
 	}
 
 	public List<Enemy> getEnemies() {
-		return entities.stream()
-				.filter(entity -> entity.type() == EntityType.ENEMY)
-				.map(Enemy.class::cast)
+		return entities.stream().filter(entity -> entity.type() == EntityType.ENEMY).map(Enemy.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<Switch> getSwitches() {
-		return entities.stream()
-				.filter(entity -> entity.type() == EntityType.SWITCH)
-				.map(Switch.class::cast)
+		return entities.stream().filter(entity -> entity.type() == EntityType.SWITCH).map(Switch.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<Treasure> getTreasures() {
-		return entities.stream()
-				.filter(entity -> entity.type() == EntityType.TREASURE)
-				.map(Treasure.class::cast)
+		return entities.stream().filter(entity -> entity.type() == EntityType.TREASURE).map(Treasure.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public List<LitBomb> getLitBombs() {
-		return entities.stream()
-				.filter(entity -> entity.type() == EntityType.LITBOMB)
-				.map(LitBomb.class::cast)
+		return entities.stream().filter(entity -> entity.type() == EntityType.LITBOMB).map(LitBomb.class::cast)
 				.collect(Collectors.toList());
 	}
 
 	public Inventory getInventory() {
 		return inventory;
 	}
-
 
 	// functions for entities
 
@@ -158,14 +145,13 @@ public class Dungeon {
 			this.controller.removeEntityImage(entity);
 	}
 
-
 	// player movement
 
 	public void movePlayer(Direction direction) {
 		if (player != null) {
 			player.move(direction);
 			// observer pattern
-			notifyPerMovement();
+			// notifyPerMovement();
 		}
 	}
 
@@ -180,19 +166,18 @@ public class Dungeon {
 	 * enemy observes player And put invincibility as an attribute inside the player
 	 * class
 	 */
-	private void notifyPerMovement() {
-		System.out.println("Player @ " + player.getX() + " " + player.getY());
+	public void tick() {
 		if (gameOver) {
 			System.out.println("Game Over!");
 		} else {
 			// update all all observers
+			System.out.println("Player @ " + player.getX() + " " + player.getY());
 			goal.update();
 			inventory.updatePerMovement();
 			getEnemies().forEach(Enemy::updatePerMovement);
 			getLitBombs().forEach(LitBomb::updatePerMovement);
 		}
 	}
-
 
 	// for picking up entities
 
@@ -252,7 +237,6 @@ public class Dungeon {
 		this.getInventory().debug();
 	}
 
-
 	// --- other interactions
 
 	public boolean isPlayerInvincible() {
@@ -299,6 +283,7 @@ public class Dungeon {
 		createEntity(new ExplodedBomb(bomb.getX(), bomb.getY() - 1, this));
 		// kill nearby Entities
 		List<Entity> nearbyEntities = getNearbyEntities(bomb.getX(), bomb.getY());
+		nearbyEntities.addAll(getEntities(bomb.getX(), bomb.getY()));
 		for (Entity entity : nearbyEntities) {
 			switch (entity.type()) {
 			case ENEMY:
@@ -314,6 +299,7 @@ public class Dungeon {
 				break;
 			}
 		}
+
 	}
 
 	// to finish a game over
