@@ -41,7 +41,7 @@ public class Door extends Entity {
 
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player)
-			this.getDungeon().openDoor(this);
+			this.getDungeon().tryOpenDoor(this);
 	}
 
 	@Override

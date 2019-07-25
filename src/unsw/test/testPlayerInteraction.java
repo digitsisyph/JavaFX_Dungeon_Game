@@ -6,12 +6,10 @@ import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.bomb.LitBomb;
 import unsw.dungeon.model.entities.bomb.UnlitBomb;
 import unsw.dungeon.model.entities.door.Door;
+import unsw.dungeon.model.entities.enemies.HoundEnemy;
 import unsw.dungeon.model.entities.enemies.HumanEnemy;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class testPlayerInteraction extends testSetup {
 
@@ -19,46 +17,25 @@ public class testPlayerInteraction extends testSetup {
 	 * Player can collect any number of treasures
 	 */
 	@Test
-	void testPickUpTreasure() {
+	void testPickUpSword() {
 		setup(5, 3, 1, 1);
 
-		dungeon.addEntity(new Treasure(2, 1, dungeon));
-		dungeon.addEntity(new Treasure(3, 1, dungeon));
+		dungeon.addEntity(new Sword(2, 1, dungeon));
+		dungeon.addEntity(new Sword(3, 1, dungeon));
 
-		// the player does not have any treasure at first
-		assertEquals(0, dungeon.getInventory().getTreasureNum());
-		assertEquals(2, dungeon.getEntities(EntityType.TREASURE).size());
-
-		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(1, dungeon.getInventory().getTreasureNum());
-		assertEquals(1, dungeon.getEntities(EntityType.TREASURE).size());
+		// the player does not have any sword at first, so it cannot use sword
+		assertFalse(dungeon.getInventory().useSword());
+		assertEquals(2, dungeon.getEntities(EntityType.SWORD).size());
 
 		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(2, dungeon.getInventory().getTreasureNum());
-		assertEquals(0, dungeon.getEntities(EntityType.TREASURE).size());
-	}
-
-	/*
-	 * Player may only have one key at a time
-	 */
-	@Test
-	void testPickUpKey() {
-		setup(5, 3, 1, 1);
-
-		dungeon.addEntity(new Key(2, 1, dungeon, 99));
-		dungeon.addEntity(new Key(3, 1, dungeon, 20));
-
-		assertEquals(2, dungeon.getEntities(EntityType.KEY).size());
-		assertEquals(null, dungeon.getInventory().getKey());
+		assertEquals(1, dungeon.getEntities(EntityType.SWORD).size());
+		assertEquals(5, dungeon.getInventory().getSwordDurability());
+		assertTrue(dungeon.getInventory().useSword());	// now the player can use sword
+		assertEquals(4, dungeon.getInventory().getSwordDurability());	// after using a sword, the durability decreases
 
 		dungeon.movePlayer(Direction.RIGHT);
-		assertNotEquals(null, dungeon.getInventory().getKey());
-		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
-		assertEquals(99, dungeon.getInventory().getKeyID());
-
-		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
-		assertEquals(99, dungeon.getInventory().getKeyID());
+		assertEquals(5, dungeon.getInventory().getSwordDurability()); // the durability would be refreshed
+		assertEquals(0, dungeon.getEntities(EntityType.SWORD).size());
 	}
 
 	/*
@@ -125,121 +102,132 @@ public class testPlayerInteraction extends testSetup {
 	}
 
 	/*
-	 * Player can only use key to unlock matching door
+	 * Player may only have one key at a time
 	 */
 	@Test
-	void testDoorInteraction() {
+	void testPickUpKey() {
 		setup(5, 3, 1, 1);
 
-		dungeon.addEntity(new Door(2, 0, dungeon, 69));
-		dungeon.addEntity(new Door(3, 0, dungeon, 99));
 		dungeon.addEntity(new Key(2, 1, dungeon, 99));
-		dungeon.addEntity(new Key(3, 1, dungeon, 69));
+		dungeon.addEntity(new Key(3, 1, dungeon, 20));
 
-		int startX = player.getX();
-		int startY = player.getY();
-		int openedDoorCount = 0;
-
-		List<Entity> doors = dungeon.getEntities(EntityType.DOOR);
-		assertEquals(2, doors.size());
 		assertEquals(2, dungeon.getEntities(EntityType.KEY).size());
+		assertEquals(null, dungeon.getInventory().getKey());
+
+		dungeon.movePlayer(Direction.RIGHT);
+		assertNotEquals(null, dungeon.getInventory().getKey());
+		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
+		assertEquals(99, dungeon.getInventory().getKeyID());
 
 		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals(1, dungeon.getEntities(EntityType.KEY).size());
-
-		// should not move because wrong key
-		dungeon.movePlayer(Direction.UP);
-		assertEquals(startX + 1, player.getX());
-		assertEquals(startY, player.getY());
-		for (Entity d : doors) {
-			if (d.canPassThrough())
-				openedDoorCount++;
-		}
-		assertEquals(0, openedDoorCount); // at this point no door unlocked
-		dungeon.movePlayer(Direction.RIGHT); // facing the right door
-		dungeon.movePlayer(Direction.UP); // this action would unlock the door but player stay still
-		assertEquals(null, dungeon.getInventory().getKey()); // key is used and removed
-		for (Entity d : doors) {
-			if (d.canPassThrough())
-				openedDoorCount++;
-		}
-		assertEquals(1, openedDoorCount); // at this point no door unlocked
-		// now the player can move up
-		dungeon.movePlayer(Direction.UP);
-		assertEquals(startX + 2, player.getX());
-		assertEquals(startY - 1, player.getY());
-
-		// player to collect another key on dungeon
-		dungeon.movePlayer(Direction.DOWN);
-		assertEquals(69, dungeon.getInventory().getKeyID()); // key picked
-		dungeon.movePlayer(Direction.LEFT);
-		dungeon.movePlayer(Direction.UP);
-		// reset opened door count
-		openedDoorCount = 0;
-		for (Entity d : doors) {
-			if (d.canPassThrough())
-				openedDoorCount++;
-		}
-		assertEquals(2, openedDoorCount);
-		assertEquals(0, dungeon.getEntities(EntityType.KEY).size());
+		assertEquals(99, dungeon.getInventory().getKeyID());
 	}
 
 	/*
-	 * Player can use sword to kill the enemy Each time a sword is used its
-	 * durability is decreased by one.
+	 * Player can collect any number of treasures
 	 */
 	@Test
-	void testPlayerSwordEnemyInteraction() {
+	void testPickUpTreasure() {
+		setup(5, 3, 1, 1);
 
-		// initialize a 3 * 1 dungeon, and add an enemy and two swords into it
-		setup(4, 1, 0, 0);
-		dungeon.addEntity(new Sword(1, 0, dungeon));
-		dungeon.addEntity(new HumanEnemy(3, 0, dungeon));
-		dungeon.addEntity(new Sword(4, 0, dungeon));
+		dungeon.addEntity(new Treasure(2, 1, dungeon));
+		dungeon.addEntity(new Treasure(3, 1, dungeon));
 
+		// the player does not have any treasure at first
+		assertEquals(0, dungeon.getInventory().getTreasureNum());
+		assertEquals(2, dungeon.getEntities(EntityType.TREASURE).size());
 
-		assertEquals(2, dungeon.getEntities(EntityType.SWORD).size());
-		assertEquals(1, dungeon.getEntities(EntityType.ENEMY).size());
-		assertEquals(null, dungeon.getInventory().getSword());
-
-		dungeon.movePlayer(Direction.RIGHT); // on sword grid , player collect it
-
-		assertNotEquals(null, dungeon.getInventory().getSword());
-		assertEquals(5, dungeon.getInventory().getSwordDurability());
-		assertEquals(1, dungeon.getEntities(EntityType.SWORD).size());
-
-		dungeon.movePlayer(Direction.RIGHT); // collide with the enemy but the player has sword
-
-		assertEquals(0, dungeon.getEntities(EntityType.ENEMY).size());	// the player should use the sword to kill enemy
-		assertEquals(4, dungeon.getInventory().getSwordDurability());	// the durability should decrease
-
-		dungeon.movePlayer(Direction.RIGHT); // move right 2 times to collect the last sword
 		dungeon.movePlayer(Direction.RIGHT);
-		dungeon.movePlayer(Direction.RIGHT);  // collect the last sword refresh sword's durability
+		assertEquals(1, dungeon.getInventory().getTreasureNum());
+		assertEquals(1, dungeon.getEntities(EntityType.TREASURE).size());
 
-		assertEquals(5, dungeon.getInventory().getSwordDurability());	// the durability should be refreshed
-		assertEquals(0, dungeon.getEntities(EntityType.SWORD).size());
+		dungeon.movePlayer(Direction.RIGHT);
+		assertEquals(2, dungeon.getInventory().getTreasureNum());
+		assertEquals(0, dungeon.getEntities(EntityType.TREASURE).size());
+	}
+
+
+	// --- test bombs ----
+
+	/*
+	 * Test lit a bomb
+	 */
+	@Test
+	void testLitBomb() {
+		setup(10, 1, 0, 0);
+
+		dungeon.placeBomb(); // nothing should happen since the player does not have bombs
+		assertEquals(0, dungeon.getEntities(EntityType.LITBOMB).size());
+
+		dungeon.pickUp(new UnlitBomb(0, 0, dungeon)); // let player pick up a bomb
+		dungeon.placeBomb(); // a bomb should be placed since the player has a bomb
+
+		// a lit bomb would be placed in the grid where the player is
+		assertEquals(1, dungeon.getEntities(EntityType.LITBOMB).size());
+		LitBomb bombLit = (LitBomb) dungeon.getEntities(EntityType.LITBOMB).get(0);
+		assertEquals(dungeon.getPlayer().getX(), bombLit.getX());
+		assertEquals(dungeon.getPlayer().getY(), bombLit.getY());
+		// the number of bombs in the player’s inventory is decreased by 1
+		assertEquals(0, dungeon.getInventory().getBombNum());
+
+		assertEquals("/bomb_lit_1.png", bombLit.getImagePath());
+
+		dungeon.movePlayer(Direction.RIGHT);
+		assertEquals("/bomb_lit_2.png", bombLit.getImagePath());
+
+		dungeon.movePlayer(Direction.RIGHT);
+		assertEquals("/bomb_lit_3.png", bombLit.getImagePath());
+
+		dungeon.movePlayer(Direction.RIGHT);
+		assertEquals("/bomb_lit_4.png", bombLit.getImagePath());
+
+		dungeon.movePlayer(Direction.RIGHT);
+		assertEquals(0, dungeon.getEntities(EntityType.LITBOMB).size());	// the bomb should be removed after explosion
+	}
+
+	/*
+	 * Exploded bombs will destroy neighbouring boulders
+	 */
+	@Test
+	void testLitBombDestroyBouldersEnemies() {
+		setup(10, 5, 0, 0);
+
+		dungeon.addEntity(new Boulder(2, 1, dungeon));
+		dungeon.addEntity(new Boulder(2, 3, dungeon));
+		dungeon.addEntity(new HumanEnemy(3, 2, dungeon));
+		dungeon.addEntity(new HoundEnemy(3, 2, dungeon));
+
+		assertEquals(2, dungeon.getEntities(EntityType.BOULDER).size());
+		assertEquals(2, dungeon.getEntities(EntityType.ENEMY).size());
+
+		LitBomb bomb = new LitBomb(2, 2, dungeon);
+		dungeon.addEntity(bomb);
+		dungeon.explodeBomb(bomb);
+
+		assertEquals(0, dungeon.getEntities(EntityType.BOULDER).size());
+		assertEquals(0, dungeon.getEntities(EntityType.ENEMY).size());
 	}
 
 	/*
 	 * When invincible the player cannot die from explosion
 	 */
 	@Test
-	void testPlayerDieFromBomb() {
+	void testLitBombKillPlayer() {
 		setup(3,1,0,0);
 
 		LitBomb bomb = new LitBomb(1, 0, dungeon);
 		dungeon.addEntity(bomb);
 		dungeon.explodeBomb(bomb);
 
-		assertEquals(null, dungeon.getPlayer());
+		assertTrue(dungeon.isGameOver());
 	}
 
 	/*
 	 * When invincible the player cannot die from explosion
 	 */
 	@Test
-	void testPlayerBombInvincibility() {
+	void testBombInvinciblePlayer() {
 		setup(2,1,0,0);
 
 		dungeon.pickUp(new Potion(0, 0, dungeon));
@@ -251,4 +239,240 @@ public class testPlayerInteraction extends testSetup {
 		assertNotEquals(null, dungeon.getPlayer());
 	}
 
+
+	/*
+	 * Player can use sword to kill the enemy Each time a sword is used its
+	 * durability is decreased by one.
+	 */
+	@Test
+	void testUseSwordToFight() {
+
+		// initialize a 3 * 1 dungeon, and add an enemy and two swords into it
+		setup(4, 1, 0, 0);
+		dungeon.addEntity(new Sword(1, 0, dungeon));
+		dungeon.addEntity(new HumanEnemy(3, 0, dungeon));
+		dungeon.addEntity(new Sword(4, 0, dungeon));
+
+		assertEquals(2, dungeon.getEntities(EntityType.SWORD).size());
+		assertEquals(1, dungeon.getEntities(EntityType.ENEMY).size());
+		assertEquals(null, dungeon.getInventory().getSword());
+
+		dungeon.movePlayer(Direction.RIGHT); // on sword grid , player collect it
+
+		assertNotEquals(null, dungeon.getInventory().getSword());
+		assertEquals(5, dungeon.getInventory().getSwordDurability());
+		assertEquals(1, dungeon.getEntities(EntityType.SWORD).size());
+
+		// if the player with a sword collides with an enemy, the enemy would be destroyed and the sword’s durability would be reduced by 1.
+		dungeon.movePlayer(Direction.RIGHT); // collide with the enemy but the player has sword
+		assertEquals(0, dungeon.getEntities(EntityType.ENEMY).size());	// the player should use the sword to kill enemy
+		assertEquals(4, dungeon.getInventory().getSwordDurability());	// the durability should decrease
+
+		// Once a sword’s durability reaches 0, the sword is destroyed and removed from the player.
+		for (int i = 0; i < 4; i++)
+			dungeon.fightEnemy(new HumanEnemy(0, 0, dungeon));	// fight enemy four times
+		assertEquals(null, dungeon.getInventory().getSword()); // the sword should be broken now
+	}
+
+	/*
+	 * Player can only use key to unlock matching door
+	 */
+	@Test
+	void testUseKeyToOpenDoor() {
+		setup(3, 1, 1, 0);
+
+		Door door1 = new Door(0, 0, dungeon, 1);
+		Door door2 = new Door(2, 0, dungeon, 2);
+		dungeon.addEntity(door1);
+		dungeon.addEntity(door2);
+
+		// If the player holds a corresponding key to a door he is at, the door would be opened the key would be removed from the player.
+		// If the player does not have a key or the key does not match, nothing should happen and the door would not be opened.
+
+		dungeon.pickUp(new Key(0, 0, dungeon, 1));
+
+		dungeon.tryOpenDoor(door2);		// should fail
+		assertFalse(door2.canPassThrough());
+
+		dungeon.tryOpenDoor(door1);		// should success
+		assertTrue(door1.canPassThrough());
+		assertNull(dungeon.getInventory().getKey());	// key should be removed
+
+
+		dungeon.pickUp(new Key(0, 0, dungeon, 2));
+
+		dungeon.tryOpenDoor(door2);		// should success
+		assertTrue(door2.canPassThrough());
+		assertNull(dungeon.getInventory().getKey());	// key should be removed
+	}
+
+
+	// test pushing boulders
+
+	/*
+	 * Boulder can be pushed by the player
+	 */
+	@Test
+	void testPushBoulder() {
+		setup(5, 5, 2, 2);
+
+		Boulder boulderRight = new Boulder(3, 2, dungeon);
+		Boulder boulderLeft = new Boulder(1, 2, dungeon);
+		Boulder boulderUp = new Boulder(2, 1, dungeon);
+		Boulder boulderDown = new Boulder(2, 3, dungeon);
+		dungeon.addEntity(boulderRight);
+		dungeon.addEntity(boulderLeft);
+		dungeon.addEntity(boulderUp);
+		dungeon.addEntity(boulderDown);
+
+		dungeon.movePlayer(Direction.RIGHT); // pushing
+		assertEquals(4, boulderRight.getX());
+		assertEquals(2, boulderRight.getY());
+
+		dungeon.movePlayer(Direction.LEFT); // pushing
+		assertEquals(0, boulderLeft.getX());
+		assertEquals(2, boulderLeft.getY());
+
+		dungeon.movePlayer(Direction.UP); // pushing
+		assertEquals(2, boulderUp.getX());
+		assertEquals(0, boulderUp.getY());
+
+		dungeon.movePlayer(Direction.DOWN); // pushing
+		assertEquals(2, boulderDown.getX());
+		assertEquals(4, boulderDown.getY());
+	}
+
+	/*
+	 * Player is strong enough to only push 1 boulder at a time
+	 */
+	@Test
+	void testCannotPushTwoBoulders() {
+		setup(9, 9, 4, 4);
+
+		Boulder boulderRight = new Boulder(5, 4, dungeon);
+		Boulder boulderLeft = new Boulder(3, 4, dungeon);
+		Boulder boulderUp = new Boulder(4, 3, dungeon);
+		Boulder boulderDown = new Boulder(4, 5, dungeon);
+
+		dungeon.addEntity(boulderRight);
+		dungeon.addEntity(new Boulder(6, 4, dungeon));
+		dungeon.addEntity(boulderLeft);
+		dungeon.addEntity(new Boulder(2, 4, dungeon));
+		dungeon.addEntity(boulderUp);
+		dungeon.addEntity(new Boulder(4, 2, dungeon));
+		dungeon.addEntity(boulderDown);
+		dungeon.addEntity(new Boulder(4, 6, dungeon));
+
+		dungeon.movePlayer(Direction.RIGHT); // pushing
+		assertEquals(5, boulderRight.getX());
+		assertEquals(4, boulderRight.getY());
+
+		dungeon.movePlayer(Direction.LEFT); // pushing
+		assertEquals(3, boulderLeft.getX());
+		assertEquals(4, boulderLeft.getY());
+
+		dungeon.movePlayer(Direction.UP); // pushing
+		assertEquals(4, boulderUp.getX());
+		assertEquals(3, boulderUp.getY());
+
+		dungeon.movePlayer(Direction.DOWN); // pushing
+		assertEquals(4, boulderDown.getX());
+		assertEquals(5, boulderDown.getY());
+	}
+
+	/*
+	 * Cant push boulder through wall and door
+	 */
+	@Test
+	void testPushBoulderWithObstacle() {
+		setup(9, 9, 4, 4);
+
+		Boulder boulderRight = new Boulder(5, 4, dungeon);
+		Boulder boulderLeft = new Boulder(3, 4, dungeon);
+		Boulder boulderUp = new Boulder(4, 3, dungeon);
+		Boulder boulderDown = new Boulder(4, 5, dungeon);
+
+		dungeon.addEntity(boulderRight);
+		dungeon.addEntity(new Wall(6, 4, dungeon));
+		dungeon.addEntity(boulderLeft);
+		dungeon.addEntity(new Wall(2, 4, dungeon));
+
+		dungeon.addEntity(boulderUp);
+		dungeon.addEntity(new Door(4, 2, dungeon, 0));
+		dungeon.addEntity(boulderDown);
+		dungeon.addEntity(new Door(4, 6, dungeon, 0));
+
+		dungeon.movePlayer(Direction.RIGHT); // pushing
+		assertEquals(5, boulderRight.getX());
+		assertEquals(4, boulderRight.getY());
+
+		dungeon.movePlayer(Direction.LEFT); // pushing
+		assertEquals(3, boulderLeft.getX());
+		assertEquals(4, boulderLeft.getY());
+
+		dungeon.movePlayer(Direction.UP); // pushing
+		assertEquals(4, boulderUp.getX());
+		assertEquals(3, boulderUp.getY());
+
+		dungeon.movePlayer(Direction.DOWN); // pushing
+		assertEquals(4, boulderDown.getX());
+		assertEquals(5, boulderDown.getY());
+	}
+
+	/*
+	 * Player cannot push boulder into the enemy
+	 */
+	@Test
+	void testPushBoulderEnemy() {
+		setup(3, 1, 0, 0);
+
+		Boulder boulder = new Boulder(1, 0, dungeon);
+		dungeon.addEntity(boulder);
+		dungeon.addEntity(new HumanEnemy(2, 0, dungeon));
+
+		dungeon.movePlayer(Direction.RIGHT); // pushing
+
+		assertEquals(1, boulder.getX());
+		assertEquals(0, boulder.getY());
+	}
+
+	/*
+	 * Player can pushed boulder through entities
+	 */
+	@Test
+	void testPushBoulderThroughEntity() {
+		setup(5, 5, 2, 2);
+
+		Boulder boulderRight = new Boulder(3, 2, dungeon);
+		dungeon.addEntity(boulderRight);
+		dungeon.addEntity(new Potion(4, 2, dungeon));
+
+		dungeon.movePlayer(Direction.RIGHT); // pushing
+		assertEquals(4, boulderRight.getX());
+		assertEquals(2, boulderRight.getY());
+	}
+
+	/*
+	 * Player can pushed boulder through opened door
+	 */
+	@Test
+	void testPushBoulderThroughOpenedDoor() {
+		setup(4, 1, 0, 0);
+
+		Boulder boulder = new Boulder(1, 0, dungeon);
+		dungeon.addEntity(boulder);
+
+		// open the door
+		Door door = new Door(2, 0, dungeon, 0);
+		dungeon.addEntity(door);
+		dungeon.pickUp(new Key(0, 0, dungeon, 0));
+		dungeon.tryOpenDoor(door);
+
+		dungeon.movePlayer(Direction.RIGHT); // pushing
+		dungeon.movePlayer(Direction.RIGHT); // boulder at door
+		dungeon.movePlayer(Direction.RIGHT); // boulder passes door
+
+		assertEquals(3, boulder.getX());
+		assertEquals(0, boulder.getY());
+	}
 }

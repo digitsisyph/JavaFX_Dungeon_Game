@@ -35,7 +35,7 @@ public class Dungeon {
 	private Player player;
 	private Inventory inventory;
 	private Goal goal;
-	private boolean gameOver = false;
+	private boolean gameOver;
 
 	public Dungeon(int width, int height) {
 		this.width = width;
@@ -45,6 +45,7 @@ public class Dungeon {
 		this.controller = null;
 		this.inventory = new Inventory();
 		this.goal = null;
+		this.gameOver = false;
 	}
 
 	// --- setter ---
@@ -269,7 +270,7 @@ public class Dungeon {
 		}
 	}
 
-	public void openDoor(Door door) {
+	public void tryOpenDoor(Door door) {
 		if (door.canPassThrough())
 			System.out.println("Door already opened.");
 		else if (this.getInventory().getKey() == null)
@@ -320,6 +321,10 @@ public class Dungeon {
 	private void gameOver() {
 		System.out.println("Game Over!");
 		gameOver = true;
+	}
+
+	public boolean isGameOver() {
+		return this.gameOver;
 	}
 
 	public boolean goalAchieved() {
