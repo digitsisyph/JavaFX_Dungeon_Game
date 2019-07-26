@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import unsw.dungeon.DungeonControllerLoader;
 import unsw.dungeon.model.Direction;
@@ -71,7 +72,7 @@ public class DungeonController {
 
 		// set the inventory
 		// TODO
-		inventory.getChildren().addAll(new Button("Cut"), new Button("Try"));
+		inventory.getChildren().addAll(new Button("Cut"), new Text("Bomb * 0"));
 	}
 
 	@FXML

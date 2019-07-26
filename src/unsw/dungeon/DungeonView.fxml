@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.5" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.5" onKeyPressed="#handleKeyPress" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
 <items>
-   <GridPane fx:id="squares" onKeyPressed="#handleKeyPress" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <GridPane fx:id="squares" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
       <columnConstraints>
          <ColumnConstraints />
       </columnConstraints>
