@@ -78,25 +78,28 @@ public class testPlayerInteraction extends testSetup {
 		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals(1, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
+
+		dungeon.tick();
 		assertEquals(4, dungeon.getInventory().getInvincStep());
 
 		dungeon.movePlayer(Direction.RIGHT); // collects another potion
 		assertEquals(0, dungeon.getEntities(EntityType.POTION).size());
 		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
+		assertEquals(5, dungeon.getInventory().getInvincStep());
+
+		dungeon.tick();
 		assertEquals(4, dungeon.getInventory().getInvincStep());
 
-		dungeon.movePlayer(Direction.RIGHT);
+		dungeon.tick();
 		assertEquals(3, dungeon.getInventory().getInvincStep());
 
-		dungeon.movePlayer(Direction.RIGHT);
+		dungeon.tick();
 		assertEquals(2, dungeon.getInventory().getInvincStep());
 
-		dungeon.movePlayer(Direction.RIGHT);
+		dungeon.tick();
 		assertEquals(1, dungeon.getInventory().getInvincStep());
 
-		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(0, dungeon.getInventory().getInvincStep());
-
+		dungeon.tick();
 		assertEquals(false, dungeon.getInventory().isInvincible()); // no longer invincible
 
 	}
@@ -173,16 +176,16 @@ public class testPlayerInteraction extends testSetup {
 
 		assertEquals("/bomb_lit_1.png", bombLit.getImagePath());
 
-		dungeon.movePlayer(Direction.RIGHT);
+		dungeon.tick();
 		assertEquals("/bomb_lit_2.png", bombLit.getImagePath());
 
-		dungeon.movePlayer(Direction.RIGHT);
+		dungeon.tick();
 		assertEquals("/bomb_lit_3.png", bombLit.getImagePath());
 
-		dungeon.movePlayer(Direction.RIGHT);
+		dungeon.tick();
 		assertEquals("/bomb_lit_4.png", bombLit.getImagePath());
 
-		dungeon.movePlayer(Direction.RIGHT);
+		dungeon.tick();
 		assertEquals(0, dungeon.getEntities(EntityType.LITBOMB).size());	// the bomb should be removed after explosion
 	}
 
@@ -249,29 +252,21 @@ public class testPlayerInteraction extends testSetup {
 
 		// initialize a 3 * 1 dungeon, and add an enemy and two swords into it
 		setup(4, 1, 0, 0);
-		dungeon.addEntity(new Sword(1, 0, dungeon));
-		dungeon.addEntity(new HumanEnemy(3, 0, dungeon));
-		dungeon.addEntity(new Sword(4, 0, dungeon));
+		dungeon.addEntity(new HumanEnemy(1, 0, dungeon));
 
-		assertEquals(2, dungeon.getEntities(EntityType.SWORD).size());
 		assertEquals(1, dungeon.getEntities(EntityType.ENEMY).size());
-		assertEquals(null, dungeon.getInventory().getSword());
 
-		dungeon.movePlayer(Direction.RIGHT); // on sword grid , player collect it
-
-		assertNotEquals(null, dungeon.getInventory().getSword());
-		assertEquals(5, dungeon.getInventory().getSwordDurability());
-		assertEquals(1, dungeon.getEntities(EntityType.SWORD).size());
+		dungeon.pickUp(new Sword(0, 0, dungeon)); // player pick up a sword
 
 		// if the player with a sword collides with an enemy, the enemy would be destroyed and the sword’s durability would be reduced by 1.
-		dungeon.movePlayer(Direction.RIGHT); // collide with the enemy but the player has sword
+		dungeon.tick(); // collide with the enemy but the player has sword
 		assertEquals(0, dungeon.getEntities(EntityType.ENEMY).size());	// the player should use the sword to kill enemy
 		assertEquals(4, dungeon.getInventory().getSwordDurability());	// the durability should decrease
 
 		// Once a sword’s durability reaches 0, the sword is destroyed and removed from the player.
 		for (int i = 0; i < 4; i++)
 			dungeon.fightEnemy(new HumanEnemy(0, 0, dungeon));	// fight enemy four times
-		assertEquals(null, dungeon.getInventory().getSword()); // the sword should be broken now
+		assertFalse(dungeon.getInventory().useSword()); // the sword should be broken now
 	}
 
 	/*

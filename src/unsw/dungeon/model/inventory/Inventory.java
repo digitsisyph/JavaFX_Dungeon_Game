@@ -65,9 +65,8 @@ public class Inventory {
 	}
 
 	public boolean useBomb() {
-		if (getBombNum() < 0)
+		if (getBombNum() <= 0)
 			return false;
-
 		this.bomb.decreaseBomb();
 		return true;
 	}

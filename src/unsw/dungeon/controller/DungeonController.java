@@ -6,10 +6,13 @@ import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -81,6 +84,7 @@ public class DungeonController {
 			squares.getChildren().add(entity);
 
 		initializeInventoryInfo();
+		initializeGoalInfo();
 		gameInfo.setSpacing(50);
 	}
 
@@ -140,7 +144,26 @@ public class DungeonController {
 	private void initializeGoalInfo() {
 		Goal goal = dungeon.getGoal();
 		goalInfo.getChildren().add(new Text("Game Goal:"));
+		addGoalInfo(goal, goalInfo);
 	}
+
+	private void addGoalInfo(Goal goal, Pane pane) {
+		VBox subpane = new VBox();
+		subpane.setPadding(new Insets(0, 0, 0, 10));
+		pane.getChildren().add(subpane);
+
+		CheckBox goal_check = new CheckBox(goal.toString());
+		goal.getSatisfiedProperty().addListener((observable, oldValue, newValue) -> {
+			goal_check.setSelected(newValue);
+		});
+		subpane.getChildren().add(goal_check);
+
+		if (!goal.isLeaf()) {
+			for (Goal subgoal : goal.getSubgoals())
+				addGoalInfo(subgoal, subpane);
+		}
+	}
+
 
 	@FXML
 	public void handleKeyPress(KeyEvent event) {

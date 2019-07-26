@@ -172,16 +172,15 @@ public class Dungeon {
 	 * class
 	 */
 	public void tick() {
-		if (goalAchieved()) {
+		if (goalAchieved())
 			gameOver();
-		} else {
-			// update all all observers
-			//System.out.println("Player @ " + player.getX() + " " + player.getY());
-			goal.update();
-			inventory.updatePerMovement();
-			getEnemies().forEach(Enemy::updatePerMovement);
-			getLitBombs().forEach(LitBomb::updatePerMovement);
-		}
+
+		// update all all observers
+		//System.out.println("Player @ " + player.getX() + " " + player.getY());
+		goal.update();
+		inventory.updatePerMovement();
+		getEnemies().forEach(Enemy::updatePerMovement);
+		getLitBombs().forEach(LitBomb::updatePerMovement);
 	}
 
 	// for picking up entities

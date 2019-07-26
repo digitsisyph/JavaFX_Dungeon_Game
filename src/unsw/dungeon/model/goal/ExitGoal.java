@@ -6,36 +6,22 @@ import unsw.dungeon.model.entities.Exit;
 
 import java.util.List;
 
-public class ExitGoal implements Goal {
-
-	private Dungeon dungeon;
+public class ExitGoal extends Goal {
 
 	public ExitGoal(Dungeon dungeon) {
-		this.dungeon = dungeon;
-	}
-
-	public void add(Goal goal) {
-		System.out.println("Unsupported Operation for goal leaf!");
-	}
-
-	public void remove(Goal goal) {
-		System.out.println("Unsupported Operation for goal leaf!");
-	}
-
-	public boolean isSatisfied() {
-		List<Entity> entitiesAtPlayers = dungeon.getEntities(dungeon.getPlayer().getX(), dungeon.getPlayer().getY());
-		return entitiesAtPlayers.stream()
-				.anyMatch(entity -> entity instanceof Exit);
+		super(dungeon);
+		setIsLeaf(true);
 	}
 
 	public void update() {
-		if (this.isSatisfied()) {
-			System.out.println("Goal Achieved!");
-		}
+		List<Entity> entitiesAtPlayers = getDungeon().getEntities(getDungeon().getPlayer().getX(), getDungeon().getPlayer().getY());
+		setSatisfied(entitiesAtPlayers.stream()
+				.anyMatch(entity -> entity instanceof Exit));
 	}
 
-	public void print() {
-		System.out.println("EXIT GOAL");
+	@Override
+	public String toString() {
+		return "Go to the Exit";
 	}
 
 }
