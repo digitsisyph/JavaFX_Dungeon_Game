@@ -152,7 +152,12 @@ public class DungeonController {
 		subpane.setPadding(new Insets(0, 0, 0, 10));
 		pane.getChildren().add(subpane);
 
-		CheckBox goal_check = new CheckBox(goal.toString());
+		CheckBox goal_check = new CheckBox(goal.toString()) {
+			@Override
+			public void arm() {
+				// readonly checkbox
+			}
+		};
 		goal.getSatisfiedProperty().addListener((observable, oldValue, newValue) -> {
 			goal_check.setSelected(newValue);
 		});
@@ -169,16 +174,16 @@ public class DungeonController {
 	public void handleKeyPress(KeyEvent event) {
 
 		switch (event.getCode()) {
-		case UP:
+		case W:
 			dungeon.movePlayer(Direction.UP);
 			break;
-		case DOWN:
+		case S:
 			dungeon.movePlayer(Direction.DOWN);
 			break;
-		case LEFT:
+		case A:
 			dungeon.movePlayer(Direction.LEFT);
 			break;
-		case RIGHT:
+		case D:
 			dungeon.movePlayer(Direction.RIGHT);
 			break;
 		case U:
