@@ -14,6 +14,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import unsw.dungeon.DungeonControllerLoader;
@@ -92,7 +94,9 @@ public class DungeonController {
 	private void initializeInventoryInfo() {
 		Inventory inventory = dungeon.getInventory();
 
-		inventoryInfo.getChildren().add(new Text("Current Inventory:"));
+		Text title = new Text("Current Inventory:");
+		title.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		inventoryInfo.getChildren().add(title);
 
 		// bomb
 		Text bombInfo = new Text("- Bomb num: " + 0);
@@ -143,7 +147,11 @@ public class DungeonController {
 
 	private void initializeGoalInfo() {
 		Goal goal = dungeon.getGoal();
-		goalInfo.getChildren().add(new Text("Game Goal:"));
+
+		Text title = new Text("Game Goal:");
+		title.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		goalInfo.getChildren().add(title);
+
 		addGoalInfo(goal, goalInfo);
 	}
 
@@ -154,13 +162,12 @@ public class DungeonController {
 
 		CheckBox goal_check = new CheckBox(goal.toString()) {
 			@Override
-			public void arm() {
-				// readonly checkbox
-			}
+			public void arm() {} // readonly checkbox
 		};
-		goal.getSatisfiedProperty().addListener((observable, oldValue, newValue) -> {
-			goal_check.setSelected(newValue);
-		});
+		goal_check.setPadding(new Insets(0, 5, 5, 0));
+		goal.getSatisfiedProperty().addListener(
+				(observable, oldValue, newValue) -> goal_check.setSelected(newValue)
+		);
 		subpane.getChildren().add(goal_check);
 
 		if (!goal.isLeaf()) {
