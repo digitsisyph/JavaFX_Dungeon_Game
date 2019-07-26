@@ -1,24 +1,30 @@
 package unsw.dungeon.model.inventory;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 class InvincibleState {
 
-    private int remaining_time;
-    private Inventory inventory;
+    private IntegerProperty remaining_time;
 
-    InvincibleState(Inventory inventory, int remaining_time) {
-        this.remaining_time = remaining_time;
-        this.inventory = inventory;
+    InvincibleState() {
+        this.remaining_time = new SimpleIntegerProperty(0);
+    }
+
+    void restore() {
+        remaining_time.set(5);
     }
 
     void nextState() {
-        if (remaining_time > 1) {
-            inventory.setInvincibleState(new InvincibleState(inventory, remaining_time - 1));
-        } else {
-            inventory.setInvincibleState(null);
-        }
+        if (remaining_time.get() != 0)
+            remaining_time.set(remaining_time.get() - 1);
     }
 
     int getRemainingTime() {
-        return this.remaining_time;
+        return remaining_time.get();
+    }
+
+    IntegerProperty getRemainingTimeProperty() {
+        return remaining_time;
     }
 }

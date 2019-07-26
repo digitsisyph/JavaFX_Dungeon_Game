@@ -103,6 +103,16 @@
       "type": "player"
     },
     {
+      "x": 1,
+      "y": 2,
+      "type": "wall"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "type": "wall"
+    },
+    {
       "x": 6,
       "y": 1,
       "type": "sword"

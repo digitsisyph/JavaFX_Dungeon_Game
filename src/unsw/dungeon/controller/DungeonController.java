@@ -53,7 +53,9 @@ public class DungeonController {
 		this.timeline = new Timeline();
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.setAutoReverse(false);
-		timeline.getKeyFrames().add(new KeyFrame(Duration.millis(500), e -> this.dungeon.tick()));
+		timeline.getKeyFrames().add(
+				new KeyFrame(Duration.millis(500),
+						e -> {if (!dungeon.isGameOver()) this.dungeon.tick();}));
 		timeline.play();
 	}
 
@@ -90,7 +92,7 @@ public class DungeonController {
 
 		// bomb
 		Text bombInfo = new Text("- Bomb num: " + 0);
-		bombInfo.setVisible(false);
+		bombInfo.setVisible(false);		// invisible at first
 		inventory.getBombNumProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -98,7 +100,7 @@ public class DungeonController {
 					bombInfo.setVisible(true);
 					bombInfo.setText("- Bomb num: " + newValue);
 				} else
-					bombInfo.setVisible(true);
+					bombInfo.setVisible(false);
 			}
 		});
 
@@ -112,11 +114,27 @@ public class DungeonController {
 					swordInfo.setVisible(true);
 					swordInfo.setText("- Sword Durability: " + newValue);
 				} else
-					swordInfo.setVisible(true);
+					swordInfo.setVisible(false);
 			}
 		});
 
-		inventoryInfo.getChildren().addAll(bombInfo, swordInfo);
+		// TODO key
+
+		// invincible
+		Text invincibleInfo = new Text();
+		invincibleInfo.setVisible(false);	// invisible at first
+		inventory.getInvincibleRemainingProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				if ((int) newValue > 0) {
+					invincibleInfo.setVisible(true);
+					invincibleInfo.setText("- Remaining Invincible Time: " + newValue);
+				} else
+					invincibleInfo.setVisible(false);
+			}
+		});
+
+		inventoryInfo.getChildren().addAll(bombInfo, swordInfo, invincibleInfo);
 	}
 
 	private void initializeGoalInfo() {

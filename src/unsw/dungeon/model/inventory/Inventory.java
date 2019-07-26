@@ -15,13 +15,12 @@ public class Inventory {
 		this.treasure = new TreasureInv();
 		this.sword = new SwordInv();
 		this.key = null;
-		this.invincible = null;
+		this.invincible = new InvincibleState();
 	}
 
 	public void updatePerMovement() {
 		// decrease every step
-		if (invincible != null)
-			this.invincible.nextState();
+		this.invincible.nextState();
 	}
 
 
@@ -93,29 +92,22 @@ public class Inventory {
 	}
 
 	public int getKeyID() {
-		return this.key.getKey_id();
+		return this.key.getKeyId();
 	}
 
 
 	// --- potion part ---
 
 	public void pickPotion() {
-		setInvincibleState(new InvincibleState(this, 5));
-	}
-
-	void setInvincibleState(InvincibleState invincibleState) {
-		this.invincible = invincibleState;
+		invincible.restore();
 	}
 
 	public int getInvincStep() {
-		if (this.invincible == null)
-			return 0;
-		else
-			return this.invincible.getRemainingTime();
+		return this.invincible.getRemainingTime();
 	}
 
 	public boolean isInvincible() {
-		return invincible != null;
+		return getInvincStep() != 0;
 	}
 
 
@@ -126,7 +118,7 @@ public class Inventory {
 		}
 		System.out.println("The player has " + bomb.getNumBombs() + " bombs");
 		if (key != null) {
-			System.out.println("Player has key id: " + key.getKey_id());
+			System.out.println("Player has key id: " + key.getKeyId());
 		}
 	}
 
@@ -137,5 +129,9 @@ public class Inventory {
 
 	public IntegerProperty getSwordDurabilityProperty() {
 		return sword.getDurabilityProperty();
+	}
+
+	public IntegerProperty getInvincibleRemainingProperty() {
+		return invincible.getRemainingTimeProperty();
 	}
 }

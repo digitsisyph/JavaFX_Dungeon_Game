@@ -172,8 +172,8 @@ public class Dungeon {
 	 * class
 	 */
 	public void tick() {
-		if (gameOver) {
-			System.out.println("Game Over!");
+		if (goalAchieved()) {
+			gameOver();
 		} else {
 			// update all all observers
 			//System.out.println("Player @ " + player.getX() + " " + player.getY());
