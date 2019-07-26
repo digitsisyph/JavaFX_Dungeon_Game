@@ -124,6 +124,10 @@ public class Dungeon {
 		return inventory;
 	}
 
+	public Goal getGoal() {
+		return goal;
+	}
+
 	// functions for entities
 
 	public void addEntity(Entity entity) {
@@ -168,16 +172,15 @@ public class Dungeon {
 	 * class
 	 */
 	public void tick() {
-		if (gameOver) {
-			System.out.println("Game Over!");
-		} else {
-			// update all all observers
-			System.out.println("Player @ " + player.getX() + " " + player.getY());
-			goal.update();
-			inventory.updatePerMovement();
-			getEnemies().forEach(Enemy::updatePerMovement);
-			getLitBombs().forEach(LitBomb::updatePerMovement);
-		}
+		if (goalAchieved())
+			gameOver();
+
+		// update all all observers
+		//System.out.println("Player @ " + player.getX() + " " + player.getY());
+		goal.update();
+		inventory.updatePerMovement();
+		getEnemies().forEach(Enemy::updatePerMovement);
+		getLitBombs().forEach(LitBomb::updatePerMovement);
 	}
 
 	// for picking up entities

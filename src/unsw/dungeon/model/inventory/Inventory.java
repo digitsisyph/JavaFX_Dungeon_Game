@@ -1,25 +1,26 @@
 package unsw.dungeon.model.inventory;
 
+import javafx.beans.property.IntegerProperty;
+
 public class Inventory {
 
 	private BombInv bomb;
+	private TreasureInv treasure;
 	private SwordInv sword;
 	private KeyInv key;
-	private TreasureInv treasure;
 	private InvincibleState invincible;
 
 	public Inventory() {
 		this.bomb = new BombInv();
-		this.sword = null;
-		this.key = null;
 		this.treasure = new TreasureInv();
-		this.invincible = null;
+		this.sword = new SwordInv();
+		this.key = null;
+		this.invincible = new InvincibleState();
 	}
 
 	public void updatePerMovement() {
 		// decrease every step
-		if (invincible != null)
-			this.invincible.nextState();
+		this.invincible.nextState();
 	}
 
 
@@ -37,20 +38,14 @@ public class Inventory {
 	// --- sword part ---
 
 	public void pickSword() {
-		if (this.sword == null) {
-			this.sword = new SwordInv();
-		} else {
-			this.sword.restoreDurability();
-		}
+		this.sword.restoreDurability();
 	}
 
 	public boolean useSword() {
-		if (this.sword == null)
-			return false;
-		else
-			this.sword.use();
 		if (this.sword.broken())
-			this.sword = null;
+			return false;
+
+		this.sword.use();
 		return true;
 	}
 
@@ -70,11 +65,10 @@ public class Inventory {
 	}
 
 	public boolean useBomb() {
-		if (getBombNum() > 0) {
-			this.bomb.decreaseBomb();
-			return true;
-		} else
+		if (getBombNum() <= 0)
 			return false;
+		this.bomb.decreaseBomb();
+		return true;
 	}
 
 	public int getBombNum() {
@@ -97,29 +91,22 @@ public class Inventory {
 	}
 
 	public int getKeyID() {
-		return this.key.getKey_id();
+		return this.key.getKeyId();
 	}
 
 
 	// --- potion part ---
 
 	public void pickPotion() {
-		setInvincibleState(new InvincibleState(this, 5));
-	}
-
-	void setInvincibleState(InvincibleState invincibleState) {
-		this.invincible = invincibleState;
+		invincible.restore();
 	}
 
 	public int getInvincStep() {
-		if (this.invincible == null)
-			return 0;
-		else
-			return this.invincible.getRemainingTime();
+		return this.invincible.getRemainingTime();
 	}
 
 	public boolean isInvincible() {
-		return invincible != null;
+		return getInvincStep() != 0;
 	}
 
 
@@ -130,7 +117,20 @@ public class Inventory {
 		}
 		System.out.println("The player has " + bomb.getNumBombs() + " bombs");
 		if (key != null) {
-			System.out.println("Player has key id: " + key.getKey_id());
+			System.out.println("Player has key id: " + key.getKeyId());
 		}
+	}
+
+	// TODO for controller
+	public IntegerProperty getBombNumProperty() {
+		return bomb.getNumBombsProperty();
+	}
+
+	public IntegerProperty getSwordDurabilityProperty() {
+		return sword.getDurabilityProperty();
+	}
+
+	public IntegerProperty getInvincibleRemainingProperty() {
+		return invincible.getRemainingTimeProperty();
 	}
 }

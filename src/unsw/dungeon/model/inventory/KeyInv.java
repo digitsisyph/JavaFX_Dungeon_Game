@@ -8,7 +8,7 @@ class KeyInv {
 		this.key_id = id;
 	}
 
-	public int getKey_id() {
+	public int getKeyId() {
 		return key_id;
 	}
 

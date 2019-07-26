@@ -1,34 +1,21 @@
 package unsw.dungeon.model.goal;
 
 import unsw.dungeon.model.Dungeon;
+import unsw.dungeon.model.entities.Switch;
 
-public class SwitchGoal implements Goal {
-
-	private Dungeon dungeon;
+public class SwitchGoal extends Goal {
 
 	public SwitchGoal(Dungeon dungeon) {
-		this.dungeon = dungeon;
-	}
-
-	public void add(Goal goal) {
-		System.out.println("Unsupported Operation for goal leaf!");
-	}
-
-	public void remove(Goal goal) {
-		System.out.println("Unsupported Operation for goal leaf!");
-	}
-
-	public boolean isSatisfied() {
-		return dungeon.getSwitches().stream().allMatch(s -> s.isActivated());
+		super(dungeon);
+		setIsLeaf(true);
 	}
 
 	public void update() {
-		if (this.isSatisfied()) {
-			System.out.println("Goal Achieved!");
-		}
+		setSatisfied(getDungeon().getSwitches().stream().allMatch(Switch::isActivated));
 	}
 
-	public void print() {
-		System.out.println("BOULDER GOAL");
+	@Override
+	public String toString() {
+		return ("Place one boulder on every switch");
 	}
 }

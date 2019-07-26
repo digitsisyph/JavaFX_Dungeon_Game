@@ -1,35 +1,39 @@
 package unsw.dungeon.model.goal;
 
+import unsw.dungeon.model.Dungeon;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrGoals implements Goal {
+public class OrGoals extends Goal {
 
-	List<Goal> goals = new ArrayList<Goal>();
+	private List<Goal> subgoals = new ArrayList<Goal>();
 
-	public void add(Goal goal) {
-		goals.add(goal);
+	public OrGoals(Dungeon dungeon) {
+		super(dungeon);
+		setIsLeaf(false);
 	}
 
-	public void remove(Goal goal) {
-		goals.remove(goal);
+	public void addSubgoal(Goal goal) {
+		subgoals.add(goal);
 	}
 
-	public boolean isSatisfied() {
-		return goals.stream().anyMatch(goal -> goal.isSatisfied());
+	public void removeSubgoal(Goal goal) {
+		subgoals.remove(goal);
+	}
+
+	public List<Goal> getSubgoals()  {
+		return subgoals;
 	}
 
 	public void update() {
-		if (this.isSatisfied()) {
-			System.out.println("Goal Achieved!");
-		}
+		subgoals.forEach(Goal::update);
+		setSatisfied(subgoals.stream().anyMatch(Goal::isSatisfied));
 	}
 
-	public void print() {
-		System.out.print("OrGoals: " + goals.size());
-		for(Goal goal : goals) {
-			goal.print();
-		}
+	@Override
+	public String toString() {
+		return "OrGoals: ";
 	}
 
 }

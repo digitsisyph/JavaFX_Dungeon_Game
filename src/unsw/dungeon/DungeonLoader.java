@@ -41,53 +41,54 @@ public abstract class DungeonLoader {
 		int height = json.getInt("height");
 
 		Dungeon dungeon = new Dungeon(width, height);
-		Goal base = new AndGoals(); // base goals
-		JSONArray jsonEntities = json.getJSONArray("entities");
-		JSONObject goalConditions = json.getJSONObject("goal-condition");
-		System.out.println(goalConditions.toString());
-		loadGoal(dungeon, goalConditions, base);
 
+		// load entities
+		JSONArray jsonEntities = json.getJSONArray("entities");
 		for (int i = 0; i < jsonEntities.length(); i++) {
 			loadEntity(dungeon, jsonEntities.getJSONObject(i));
 		}
-		dungeon.setGoal(base); // give dungeon base goals
-		base.print();
+
+		// load goal
+		JSONObject goalConditions = json.getJSONObject("goal-condition");
+		System.out.println(goalConditions.toString());	// for debugging
+		dungeon.setGoal(loadGoal(goalConditions, dungeon)); // give dungeon base goals
 		return dungeon;
 	}
 
 	// add goals for the dungeon
-	private void loadGoal(Dungeon dungeon, JSONObject json, Goal base) {
-		String type = json.getString("goal");
-		switch (type) {
+	private Goal loadGoal(JSONObject json, Dungeon dungeon) {
+		String goal_type = json.getString("goal");
+		Goal goal = new AndGoals(dungeon);	// just to satisfy the compiler
+		switch (goal_type) {
 			case "exit":
-				base.add(new ExitGoal(dungeon));
+				goal = new ExitGoal(dungeon);
 				break;
 			case "enemies":
-				base.add(new EnemyGoal(dungeon));
+				goal = new EnemyGoal(dungeon);
 				break;
 			case "boulders":
-				base.add(new SwitchGoal(dungeon));
+				goal = new SwitchGoal(dungeon);
 				break;
 			case "treasure":
-				base.add(new TreasureGoal(dungeon));
+				goal = new TreasureGoal(dungeon);
 				break;
 			case "AND":
-				AndGoals childAND = new AndGoals();
-				base.add(childAND);
-				JSONArray subGoals = json.getJSONArray("subgoals");
-				for (int i = 0; i < subGoals.length(); i++) {
-					loadGoal(dungeon, subGoals.getJSONObject(i), childAND);
-				}
+				goal = new AndGoals(dungeon);
 				break;
 			case "OR":
-				OrGoals childOR = new OrGoals();
-				base.add(childOR);
-				JSONArray subGoals1 = json.getJSONArray("subgoals");
-				for (int i = 0; i < subGoals1.length(); i++) {
-					loadGoal(dungeon, subGoals1.getJSONObject(i), childOR);
-				}
+				goal = new OrGoals(dungeon);
 				break;
 		}
+
+		if (!goal.isLeaf()) {
+			JSONArray subGoalConditions = json.getJSONArray("subgoals");
+			for (int i = 0; i < subGoalConditions.length(); i++) {
+				Goal subgoal = loadGoal(subGoalConditions.getJSONObject(i), dungeon);
+				goal.addSubgoal(subgoal);
+			}
+		}
+
+		return goal;
 	}
 
 	// add entities for the dungeon

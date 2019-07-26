@@ -16,7 +16,7 @@ public class testGoals extends testSetup {
 	@Test
 	void testTreasureGoal() {
 		setup(5, 3, 1, 1);
-		baseGoal.add(new TreasureGoal(dungeon));
+		baseGoal.addSubgoal(new TreasureGoal(dungeon));
 
 		dungeon.addEntity(new Treasure(2, 1, dungeon));
 		dungeon.addEntity(new Treasure(3, 1, dungeon));
@@ -34,7 +34,7 @@ public class testGoals extends testSetup {
 	@Test
 	void testEnemyGoal() {
 		setup(5, 1, 0, 0);
-		baseGoal.add(new EnemyGoal(dungeon));
+		baseGoal.addSubgoal(new EnemyGoal(dungeon));
 		dungeon.addEntity(new HumanEnemy(1, 0, dungeon));
 
 		Sword sword = new Sword(0, 0, dungeon);
@@ -54,7 +54,7 @@ public class testGoals extends testSetup {
 	void testBouldersGoal() {
 		setup(3, 1, 0, 0);
 
-		baseGoal.add(new SwitchGoal(dungeon));
+		baseGoal.addSubgoal(new SwitchGoal(dungeon));
 
 		dungeon.addEntity(new Switch(1, 0, dungeon));
 		dungeon.addEntity(new Switch(2, 0, dungeon));
@@ -75,7 +75,7 @@ public class testGoals extends testSetup {
 	void testExitGoal() {
 		setup(5, 5, 2, 2);
 
-		baseGoal.add(new ExitGoal(dungeon));
+		baseGoal.addSubgoal(new ExitGoal(dungeon));
 
 		dungeon.addEntity(new Exit(2, 1, dungeon));
 
@@ -92,10 +92,10 @@ public class testGoals extends testSetup {
 	void testOneLevelCompositeGoal() {
 		setup(3, 1, 0, 0);
 
-		AndGoals andGoals = new AndGoals();
-		andGoals.add(new ExitGoal(dungeon));
-		andGoals.add(new TreasureGoal(dungeon));
-		baseGoal.add(andGoals);
+		AndGoals andGoals = new AndGoals(dungeon);
+		andGoals.addSubgoal(new ExitGoal(dungeon));
+		andGoals.addSubgoal(new TreasureGoal(dungeon));
+		baseGoal.addSubgoal(andGoals);
 
 		dungeon.addEntity(new Treasure(1, 0, dungeon));
 		dungeon.addEntity(new Exit(2, 0, dungeon));
@@ -114,13 +114,13 @@ public class testGoals extends testSetup {
 	void testTwoLevelCompositeGoal1() {
 		setup(5, 3, 2, 2);
 
-		AndGoals andGoals = new AndGoals();
-		andGoals.add(new ExitGoal(dungeon));
-		OrGoals orGoals = new OrGoals();
-		andGoals.add(orGoals);
-		orGoals.add(new SwitchGoal(dungeon));
-		orGoals.add(new TreasureGoal(dungeon));
-		baseGoal.add(andGoals);
+		AndGoals andGoals = new AndGoals(dungeon);
+		andGoals.addSubgoal(new ExitGoal(dungeon));
+		OrGoals orGoals = new OrGoals(dungeon);
+		andGoals.addSubgoal(orGoals);
+		orGoals.addSubgoal(new SwitchGoal(dungeon));
+		orGoals.addSubgoal(new TreasureGoal(dungeon));
+		baseGoal.addSubgoal(andGoals);
 
 
 		dungeon.addEntity(new Treasure(1, 2, dungeon));
@@ -142,13 +142,13 @@ public class testGoals extends testSetup {
 	void testTwoLevelCompositeGoal2() {
 		setup(5, 3, 2, 2);
 
-		AndGoals andGoals = new AndGoals();
-		andGoals.add(new SwitchGoal(dungeon));
-		andGoals.add(new TreasureGoal(dungeon));
-		OrGoals orGoals = new OrGoals();
-		orGoals.add(new ExitGoal(dungeon));
-		orGoals.add(andGoals);
-		baseGoal.add(orGoals);
+		AndGoals andGoals = new AndGoals(dungeon);
+		andGoals.addSubgoal(new SwitchGoal(dungeon));
+		andGoals.addSubgoal(new TreasureGoal(dungeon));
+		OrGoals orGoals = new OrGoals(dungeon);
+		orGoals.addSubgoal(new ExitGoal(dungeon));
+		orGoals.addSubgoal(andGoals);
+		baseGoal.addSubgoal(orGoals);
 
 		dungeon.addEntity(new Treasure(1, 2, dungeon));
 		dungeon.addEntity(new Boulder(3, 2, dungeon));

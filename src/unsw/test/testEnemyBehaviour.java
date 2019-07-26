@@ -1,7 +1,6 @@
 package unsw.test;
 
 import org.junit.jupiter.api.Test;
-import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.entities.Potion;
 import unsw.dungeon.model.entities.enemies.Enemy;
 import unsw.dungeon.model.entities.enemies.HoundEnemy;
@@ -61,14 +60,14 @@ public class testEnemyBehaviour extends testSetup {
 
 		int distance = enemy.getX() - player.getX(); // distance will stay the same
 
-		dungeon.movePlayer(Direction.RIGHT); // pick potion
-		assertEquals(distance, (enemy.getX() - player.getX()));
+		dungeon.tick();
+		assertEquals(distance + 1, (enemy.getX() - player.getX()));
 
-		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(distance, (enemy.getX() - player.getX()));
+		dungeon.tick();
+		assertEquals(distance + 2, (enemy.getX() - player.getX()));
 
-		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(distance, (enemy.getX() - player.getX()));
+		dungeon.tick();
+		assertEquals(distance + 3, (enemy.getX() - player.getX()));
 	}
 
 	/*
@@ -85,14 +84,14 @@ public class testEnemyBehaviour extends testSetup {
 
 		int distance = enemy.getX() - player.getX(); // distance will stay the same
 
-		dungeon.movePlayer(Direction.RIGHT); // pick potion
-		assertEquals(distance, (enemy.getX() - player.getX()));
+		dungeon.tick();
+		assertEquals(distance + 1, (enemy.getX() - player.getX()));
 
-		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(distance, (enemy.getX() - player.getX()));
+		dungeon.tick();
+		assertEquals(distance + 2, (enemy.getX() - player.getX()));
 
-		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(distance, (enemy.getX() - player.getX()));
+		dungeon.tick();
+		assertEquals(distance + 3, (enemy.getX() - player.getX()));
 	}
 
 

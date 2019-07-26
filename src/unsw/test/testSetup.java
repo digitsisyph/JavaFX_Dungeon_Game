@@ -22,7 +22,7 @@ public class testSetup {
 		dungeon.setPlayer(player);
 		dungeon.addEntity(player);
 		// set a basic goal
-		baseGoal = new AndGoals();
+		baseGoal = new AndGoals(dungeon);
 		dungeon.setGoal(baseGoal);
 	}
 
