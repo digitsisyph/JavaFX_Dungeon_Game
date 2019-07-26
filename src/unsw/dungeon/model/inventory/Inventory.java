@@ -1,18 +1,20 @@
 package unsw.dungeon.model.inventory;
 
+import javafx.beans.property.IntegerProperty;
+
 public class Inventory {
 
 	private BombInv bomb;
+	private TreasureInv treasure;
 	private SwordInv sword;
 	private KeyInv key;
-	private TreasureInv treasure;
 	private InvincibleState invincible;
 
 	public Inventory() {
 		this.bomb = new BombInv();
-		this.sword = null;
-		this.key = null;
 		this.treasure = new TreasureInv();
+		this.sword = new SwordInv();
+		this.key = null;
 		this.invincible = null;
 	}
 
@@ -37,20 +39,14 @@ public class Inventory {
 	// --- sword part ---
 
 	public void pickSword() {
-		if (this.sword == null) {
-			this.sword = new SwordInv();
-		} else {
-			this.sword.restoreDurability();
-		}
+		this.sword.restoreDurability();
 	}
 
 	public boolean useSword() {
-		if (this.sword == null)
-			return false;
-		else
-			this.sword.use();
 		if (this.sword.broken())
-			this.sword = null;
+			return false;
+
+		this.sword.use();
 		return true;
 	}
 
@@ -70,11 +66,11 @@ public class Inventory {
 	}
 
 	public boolean useBomb() {
-		if (getBombNum() > 0) {
-			this.bomb.decreaseBomb();
-			return true;
-		} else
+		if (getBombNum() < 0)
 			return false;
+
+		this.bomb.decreaseBomb();
+		return true;
 	}
 
 	public int getBombNum() {
@@ -132,5 +128,14 @@ public class Inventory {
 		if (key != null) {
 			System.out.println("Player has key id: " + key.getKey_id());
 		}
+	}
+
+	// TODO for controller
+	public IntegerProperty getBombNumProperty() {
+		return bomb.getNumBombsProperty();
+	}
+
+	public IntegerProperty getSwordDurabilityProperty() {
+		return sword.getDurabilityProperty();
 	}
 }

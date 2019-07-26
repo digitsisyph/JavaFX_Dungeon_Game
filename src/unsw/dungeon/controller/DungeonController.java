@@ -3,8 +3,9 @@ package unsw.dungeon.controller;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -16,6 +17,8 @@ import unsw.dungeon.DungeonControllerLoader;
 import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
+import unsw.dungeon.model.goal.Goal;
+import unsw.dungeon.model.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +34,12 @@ public class DungeonController {
 	@FXML
 	private GridPane squares;
 	@FXML
-	private VBox inventory;
+	private VBox gameInfo;
+	@FXML
+	private VBox inventoryInfo;
+	@FXML
+	private VBox goalInfo;
+
 	private List<ImageView> initialEntities;
 	private Dungeon dungeon;
 	private DungeonControllerLoader loader;
@@ -70,9 +78,50 @@ public class DungeonController {
 		for (ImageView entity : initialEntities)
 			squares.getChildren().add(entity);
 
-		// set the inventory
-		// TODO
-		inventory.getChildren().addAll(new Button("Cut"), new Text("Bomb * 0"));
+		initializeInventoryInfo();
+		gameInfo.setSpacing(50);
+	}
+
+	// TODO set the game info pane
+	private void initializeInventoryInfo() {
+		Inventory inventory = dungeon.getInventory();
+
+		inventoryInfo.getChildren().add(new Text("Current Inventory:"));
+
+		// bomb
+		Text bombInfo = new Text("- Bomb num: " + 0);
+		bombInfo.setVisible(false);
+		inventory.getBombNumProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				if ((int) newValue > 0) {
+					bombInfo.setVisible(true);
+					bombInfo.setText("- Bomb num: " + newValue);
+				} else
+					bombInfo.setVisible(true);
+			}
+		});
+
+		// sword
+		Text swordInfo = new Text();
+		swordInfo.setVisible(false);	// invisible at first
+		inventory.getSwordDurabilityProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				if ((int) newValue > 0) {
+					swordInfo.setVisible(true);
+					swordInfo.setText("- Sword Durability: " + newValue);
+				} else
+					swordInfo.setVisible(true);
+			}
+		});
+
+		inventoryInfo.getChildren().addAll(bombInfo, swordInfo);
+	}
+
+	private void initializeGoalInfo() {
+		Goal goal = dungeon.getGoal();
+		goalInfo.getChildren().add(new Text("Game Goal:"));
 	}
 
 	@FXML

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.layout.*?>
 <SplitPane dividerPositions="0.5" onKeyPressed="#handleKeyPress" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
 <items>
+
    <GridPane fx:id="squares" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
       <columnConstraints>
          <ColumnConstraints />
@@ -16,9 +13,18 @@
          <RowConstraints />
       </rowConstraints>
       <children>
-
       </children>
    </GridPane>
-      <VBox fx:id="inventory" prefWidth="200.0"/>
+
+   <VBox fx:id="gameInfo" prefWidth="200.0">
+      <children>
+         <VBox fx:id="inventoryInfo" prefWidth="200.0">
+
+         </VBox>
+         <VBox fx:id="goalInfo" prefWidth="200.0">
+
+         </VBox>
+      </children>
+   </VBox>
 </items>
 </SplitPane>

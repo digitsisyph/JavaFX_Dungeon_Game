@@ -1,27 +1,34 @@
 package unsw.dungeon.model.inventory;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 class SwordInv {
 
-    private int durability;
+    private IntegerProperty durability;
 
     SwordInv() {
-        this.durability = 5;
+        this.durability = new SimpleIntegerProperty(0);
     }
 
     int getDurability() {
-        return durability;
+        return durability.get();
     }
 
     void restoreDurability() {
-        this.durability = 5;
+        this.durability.set(5);
     }
 
     void use() {
-        this.durability -= 1;
+        this.durability.set(durability.get() - 1);
     }
 
     boolean broken() {
-        return this.durability <= 0;
+        return this.durability.get() <= 0;
+    }
+
+    IntegerProperty getDurabilityProperty() {
+        return durability;
     }
 
 }
