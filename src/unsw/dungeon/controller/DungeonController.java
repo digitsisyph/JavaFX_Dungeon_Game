@@ -1,21 +1,23 @@
 package unsw.dungeon.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import unsw.dungeon.DungeonControllerLoader;
 import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A JavaFX controller for the dungeon.
@@ -27,6 +29,8 @@ public class DungeonController {
 
 	@FXML
 	private GridPane squares;
+	@FXML
+	private VBox inventory;
 	private List<ImageView> initialEntities;
 	private Dungeon dungeon;
 	private DungeonControllerLoader loader;
@@ -64,6 +68,10 @@ public class DungeonController {
 		// add all the entities into the dungeon
 		for (ImageView entity : initialEntities)
 			squares.getChildren().add(entity);
+
+		// set the inventory
+		// TODO
+		inventory.getChildren().addAll(new Button("Cut"), new Button("Try"));
 	}
 
 	@FXML
