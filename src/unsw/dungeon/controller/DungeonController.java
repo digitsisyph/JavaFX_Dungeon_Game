@@ -313,7 +313,7 @@ public class DungeonController {
 		//});
 
 		VBox vbox = new VBox();
-		vbox.getChildren().addAll(info, backButton, retryButton);
+		vbox.getChildren().addAll(info, backButton);
 		vbox.setAlignment(Pos.CENTER);
 		pane.getChildren().add(vbox);
 
