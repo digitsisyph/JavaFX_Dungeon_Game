@@ -50,7 +50,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 	 * By connecting the model with the view in this way, the model requires no
 	 * knowledge of the view and changes to the position of entities in the model
 	 * will automatically be reflected in the view.
-	 * 
+	 *
 	 * @param entity
 	 * @param node
 	 */
@@ -83,7 +83,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 	/**
 	 * Create a controller that can be attached to the DungeonView with all the
 	 * loaded entities.
-	 * 
+	 *
 	 * @return
 	 * @throws FileNotFoundException
 	 */

@@ -7,7 +7,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
@@ -19,7 +18,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 import unsw.dungeon.DungeonControllerLoader;
 import unsw.dungeon.model.Direction;
@@ -258,22 +256,18 @@ public class DungeonController {
 
 	// game over
 	public void gameOver() {
-
+		timeline.stop();
 
 		Text info = new Text("Game Over \n\n" + "Press ENTER to start a new game");
 		info.setTextAlignment(TextAlignment.CENTER);
 		info.setFont(new Font(18));
 		info.setFill(Color.ALICEBLUE);
 
-		StackPane root = new StackPane();
-		root.getChildren().add(info);
+		StackPane pane = new StackPane();
+		pane.setStyle("-fx-background-color: #000000");
+		pane.getChildren().add(info);
 
-		Scene scene = new Scene(root, 320, 240, Color.BLACK);
-
-		Stage stage = new Stage();
-		stage.setTitle("Dungeon");
-		stage.setScene(scene);
-		stage.show();
+		root.getScene().setRoot(pane);
 	}
 
 
