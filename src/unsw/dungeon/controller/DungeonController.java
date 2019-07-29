@@ -288,21 +288,33 @@ public class DungeonController {
 	public void gameOver(String gameOverInfo) {
 		timeline.stop();
 
+
+
+		StackPane pane = new StackPane();
+		pane.setStyle("-fx-background-color: #000000");
+
+
 		Text info = new Text("Game Over \n\n" + gameOverInfo + "\n\n");
 		info.setTextAlignment(TextAlignment.CENTER);
 		info.setFont(new Font(18));
 		info.setFill(Color.ALICEBLUE);
 
-		Button button = new Button("Back to Menu");
-		button.setPadding(new Insets(10, 10, 10, 10));
-		button.setOnAction(event -> menuScreen.start());
+		Button backButton = new Button("Back to Menu");
+		backButton.setPadding(new Insets(10, 10, 10, 10));
+		backButton.setOnAction(event -> menuScreen.start());
+
+		//Button retryButton = new Button("Retry");
+		//retryButton.setPadding(new Insets(10, 10, 10, 10));
+		//retryButton.setOnAction(event -> {
+		//	loader.loadController(this);
+		//	pane.getScene().setRoot(root);
+		//	this.squares.getChildren().clear();
+		//	this.initialize();
+		//});
 
 		VBox vbox = new VBox();
-		vbox.getChildren().addAll(info, button);
+		vbox.getChildren().addAll(info, backButton, retryButton);
 		vbox.setAlignment(Pos.CENTER);
-
-		StackPane pane = new StackPane();
-		pane.setStyle("-fx-background-color: #000000");
 		pane.getChildren().add(vbox);
 
 		root.getScene().setRoot(pane);
