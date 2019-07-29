@@ -11,6 +11,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -48,7 +49,9 @@ public class DungeonController {
 	@FXML
 	private HBox root;
 
-	private boolean isPaused;
+	private boolean isPaused = false;
+	private boolean isFinished = false;
+
 	private List<ImageView> initialEntities;
 	private Dungeon dungeon;
 	private DungeonControllerLoader loader;
@@ -184,15 +187,15 @@ public class DungeonController {
 	@FXML
 	public void handleKeyPress(KeyEvent event) {
 		if (isPaused) {
-			switch (event.getCode()) {
-				case ESCAPE:
-					pause();
-					break;
-				default:
-					break;
-			}
+			if (event.getCode() == KeyCode.ESCAPE)
+				pause();
+			return;
+		} else if (isFinished) {
+			// TODO game over
+			initialize();
 			return;
 		}
+
 
 		switch (event.getCode()) {
 			case W:
@@ -257,6 +260,7 @@ public class DungeonController {
 	// game over
 	public void gameOver() {
 		timeline.stop();
+		this.isFinished = true;
 
 		Text info = new Text("Game Over \n\n" + "Press ENTER to start a new game");
 		info.setTextAlignment(TextAlignment.CENTER);
