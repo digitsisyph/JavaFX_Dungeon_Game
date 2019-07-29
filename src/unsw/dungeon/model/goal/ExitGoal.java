@@ -3,6 +3,7 @@ package unsw.dungeon.model.goal;
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
 import unsw.dungeon.model.entities.Exit;
+import unsw.dungeon.model.entities.Player;
 
 import java.util.List;
 
@@ -14,9 +15,14 @@ public class ExitGoal extends Goal {
 	}
 
 	public void update() {
-		List<Entity> entitiesAtPlayers = getDungeon().getEntities(getDungeon().getPlayer().getX(), getDungeon().getPlayer().getY());
-		setSatisfied(entitiesAtPlayers.stream()
-				.anyMatch(entity -> entity instanceof Exit));
+		Player player = getDungeon().getPlayer();
+		if (player == null)
+			setSatisfied(false);
+		else {
+			List<Entity> entitiesAtPlayers = getDungeon().getEntities(player.getX(), player.getY());
+			setSatisfied(entitiesAtPlayers.stream()
+					.anyMatch(entity -> entity instanceof Exit));
+		}
 	}
 
 	@Override

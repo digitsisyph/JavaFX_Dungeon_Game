@@ -7,6 +7,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
@@ -26,6 +28,7 @@ import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
+import unsw.dungeon.view.MenuScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,13 +52,19 @@ public class DungeonController {
 	@FXML
 	private HBox root;
 
+	private MenuScreen menuScreen;
+
 	private boolean isPaused = false;
-	private boolean isFinished = false;
 
 	private List<ImageView> initialEntities;
 	private Dungeon dungeon;
 	private DungeonControllerLoader loader;
-	private final Timeline timeline;
+	private Timeline timeline;
+
+
+	public DungeonController() {
+
+	}
 
 	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, DungeonControllerLoader loader) {
 		this.dungeon = dungeon;
@@ -71,6 +80,19 @@ public class DungeonController {
 				new KeyFrame(Duration.millis(500),
 						e -> {if (!dungeon.isGameOver()) this.dungeon.tick();}));
 		timeline.play();
+	}
+
+	public void setDungeon(Dungeon dungeon) {
+		this.dungeon = dungeon;
+		this.dungeon.setController(this);
+	}
+
+	public void setInitialEntities(List<ImageView> initialEntities) {
+		this.initialEntities = initialEntities;
+	}
+
+	public void setLoader(DungeonControllerLoader loader) {
+		this.loader = loader;
 	}
 
 	public GridPane getSquares() {
@@ -97,6 +119,15 @@ public class DungeonController {
 		initializeInventoryInfo();
 		initializeGoalInfo();
 		gameInfo.setSpacing(50);
+
+		// timeline
+		this.timeline = new Timeline();
+		timeline.setCycleCount(Animation.INDEFINITE);
+		timeline.setAutoReverse(false);
+		timeline.getKeyFrames().add(
+				new KeyFrame(Duration.millis(500),
+						e -> {if (!dungeon.isGameOver()) this.dungeon.tick();}));
+		timeline.play();
 	}
 
 	// TODO set the game info pane
@@ -192,12 +223,7 @@ public class DungeonController {
 			if (event.getCode() == KeyCode.ESCAPE)
 				pause();
 			return;
-		} else if (isFinished) {
-			// TODO game over
-			initialize();
-			return;
 		}
-
 
 		switch (event.getCode()) {
 			case W:
@@ -222,7 +248,6 @@ public class DungeonController {
 				break;
 		}
 	}
-
 
 
 	// game pause
@@ -260,23 +285,33 @@ public class DungeonController {
 
 
 	// game over
-	public void gameOver() {
+	public void gameOver(String gameOverInfo) {
 		timeline.stop();
-		this.isFinished = true;
 
-		Text info = new Text("Game Over \n\n" + "Press ENTER to start a new game");
+		Text info = new Text("Game Over \n\n" + gameOverInfo + "\n\n");
 		info.setTextAlignment(TextAlignment.CENTER);
 		info.setFont(new Font(18));
 		info.setFill(Color.ALICEBLUE);
 
+		Button button = new Button("Back to Menu");
+		button.setPadding(new Insets(10, 10, 10, 10));
+		button.setOnAction(event -> menuScreen.start());
+
+		VBox vbox = new VBox();
+		vbox.getChildren().addAll(info, button);
+		vbox.setAlignment(Pos.CENTER);
+
 		StackPane pane = new StackPane();
 		pane.setStyle("-fx-background-color: #000000");
-		pane.getChildren().add(info);
+		pane.getChildren().add(vbox);
 
 		root.getScene().setRoot(pane);
 	}
 
 
+	public void setMenuScreen(MenuScreen menuScreen) {
+		this.menuScreen = menuScreen;
+	}
 
 
 	// TODO maybe change?

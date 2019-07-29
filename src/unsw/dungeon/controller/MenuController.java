@@ -19,26 +19,19 @@ public class MenuController {
 
     @FXML
     public void initialize() {
-
         // initialize the dungeon list
         for (File file : readDungeons())
             dungeonChoice.getItems().add(file.getName());
-
     }
 
     private File[] readDungeons() {
         File folder = new File("dungeons/");
-        File[] fileNames = folder.listFiles();
-        for (File file : fileNames) {
-            if (fileNames.toString().contains("test"));
-        }
-        return fileNames;
+        return folder.listFiles();
     }
 
     @FXML
     public void handleStartButton(ActionEvent event) {
         try {
-
             dungeonScreen.start(dungeonChoice.getValue().toString());
         } catch (IOException e) {
             System.out.println("not existed json");

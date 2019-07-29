@@ -91,4 +91,10 @@ public class DungeonControllerLoader extends DungeonLoader {
 		return new DungeonController(load(), entities, this);
 	}
 
+	public void loadController(DungeonController controller) {
+		controller.setDungeon(load());
+		controller.setInitialEntities(entities);
+		controller.setLoader(this);
+	}
+
 }

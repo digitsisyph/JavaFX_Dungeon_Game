@@ -172,8 +172,10 @@ public class Dungeon {
 	 * class
 	 */
 	public void tick() {
-		if (goalAchieved())
+		if (goalAchieved()) {
 			gameOver();
+		}
+
 
 		// update all all observers
 		//System.out.println("Player @ " + player.getX() + " " + player.getY());
@@ -310,7 +312,10 @@ public class Dungeon {
 	private void gameOver() {
 		System.out.println("Game Over!");
 		gameOver = true;
-		controller.gameOver();
+		if (goalAchieved())
+			controller.gameOver("Congrat! You finished the game!");
+		else
+			controller.gameOver("Oppps. You failed. Please retry!");
 	}
 
 	public boolean isGameOver() {

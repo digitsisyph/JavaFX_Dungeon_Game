@@ -18,10 +18,7 @@ public class DungeonScreen {
 
     public DungeonScreen(Stage stage) {
         this.stage = stage;
-    }
-
-    public void load(String mapJson) {
-
+        this.controller = new DungeonController();
     }
 
     public void start(String mapJson) throws IOException{
@@ -29,7 +26,7 @@ public class DungeonScreen {
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(mapJson);
 
         // create a Controller from the ControllerLoader
-        this.controller = dungeonLoader.loadController();
+        dungeonLoader.loadController(this.controller);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
         loader.setController(this.controller);
 
