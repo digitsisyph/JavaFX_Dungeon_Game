@@ -62,6 +62,8 @@ public class DungeonController {
 		this.dungeon.setController(this);
 		this.loader = loader;
 		this.initialEntities = new ArrayList<>(initialEntities);
+
+		// timeline
 		this.timeline = new Timeline();
 		timeline.setCycleCount(Animation.INDEFINITE);
 		timeline.setAutoReverse(false);
@@ -75,7 +77,7 @@ public class DungeonController {
 		return squares;
 	}
 
-	public List<ImageView> entImages() {
+	public List<ImageView> getImages() {
 		return initialEntities;
 	}
 
