@@ -3,13 +3,13 @@ package unsw.dungeon;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.bomb.UnlitBomb;
 import unsw.dungeon.model.entities.door.Door;
 import unsw.dungeon.model.entities.enemies.HoundEnemy;
 import unsw.dungeon.model.entities.enemies.HumanEnemy;
 import unsw.dungeon.model.goal.*;
-import unsw.dungeon.model.Dungeon;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

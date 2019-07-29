@@ -310,6 +310,7 @@ public class Dungeon {
 	private void gameOver() {
 		System.out.println("Game Over!");
 		gameOver = true;
+		controller.gameOver();
 	}
 
 	public boolean isGameOver() {

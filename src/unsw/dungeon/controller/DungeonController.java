@@ -7,16 +7,19 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import unsw.dungeon.DungeonControllerLoader;
 import unsw.dungeon.model.Direction;
@@ -44,7 +47,10 @@ public class DungeonController {
 	private VBox inventoryInfo;
 	@FXML
 	private VBox goalInfo;
+	@FXML
+	private HBox root;
 
+	private boolean isPaused;
 	private List<ImageView> initialEntities;
 	private Dungeon dungeon;
 	private DungeonControllerLoader loader;
@@ -179,27 +185,99 @@ public class DungeonController {
 
 	@FXML
 	public void handleKeyPress(KeyEvent event) {
+		if (isPaused) {
+			switch (event.getCode()) {
+				case ESCAPE:
+					pause();
+					break;
+				default:
+					break;
+			}
+			return;
+		}
 
 		switch (event.getCode()) {
-		case W:
-			dungeon.movePlayer(Direction.UP);
-			break;
-		case S:
-			dungeon.movePlayer(Direction.DOWN);
-			break;
-		case A:
-			dungeon.movePlayer(Direction.LEFT);
-			break;
-		case D:
-			dungeon.movePlayer(Direction.RIGHT);
-			break;
-		case U:
-			dungeon.placeBomb();
-			break;
-		default:
-			break;
+			case W:
+				dungeon.movePlayer(Direction.UP);
+				break;
+			case S:
+				dungeon.movePlayer(Direction.DOWN);
+				break;
+			case A:
+				dungeon.movePlayer(Direction.LEFT);
+				break;
+			case D:
+				dungeon.movePlayer(Direction.RIGHT);
+				break;
+			case U:
+				dungeon.placeBomb();
+				break;
+			case ESCAPE:
+				pause();
+				break;
+			default:
+				break;
 		}
 	}
+
+
+
+	// game pause
+
+	private void pause() {
+		if (!isPaused)
+			pauseGame();
+		else
+			resumeGame();
+	}
+
+	private void pauseGame() {
+		timeline.stop();
+		darkleScreen();
+		this.isPaused = true;
+	}
+
+	private void resumeGame() {
+		timeline.play();
+		lightenScreen();
+		this.isPaused = false;
+	}
+
+	private void darkleScreen() {
+		ColorAdjust colorAdjust = new ColorAdjust();
+		colorAdjust.setBrightness(-0.8);
+		root.setEffect(colorAdjust);
+	}
+
+	private void lightenScreen() {
+		ColorAdjust colorAdjust = new ColorAdjust();
+		colorAdjust.setBrightness(0);
+		root.setEffect(colorAdjust);
+	}
+
+
+	// game over
+	public void gameOver() {
+
+
+		Text info = new Text("Game Over \n\n" + "Press ENTER to start a new game");
+		info.setTextAlignment(TextAlignment.CENTER);
+		info.setFont(new Font(18));
+		info.setFill(Color.ALICEBLUE);
+
+		StackPane root = new StackPane();
+		root.getChildren().add(info);
+
+		Scene scene = new Scene(root, 320, 240, Color.BLACK);
+
+		Stage stage = new Stage();
+		stage.setTitle("Dungeon");
+		stage.setScene(scene);
+		stage.show();
+	}
+
+
+
 
 	// TODO maybe change?
 	public void removeEntityImage(Entity entity) {

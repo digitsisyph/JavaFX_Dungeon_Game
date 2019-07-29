@@ -14,7 +14,6 @@ public class DungeonApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
-
 		// use ControllerLoader to load map from a json file
 		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
 		// create a Controller from the ControllerLoader
