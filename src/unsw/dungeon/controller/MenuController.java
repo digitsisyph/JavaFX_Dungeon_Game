@@ -19,16 +19,19 @@ public class MenuController {
 
     @FXML
     public void initialize() {
-        File[] files = readDungeons();
-        for (File file : files) {
+
+        // initialize the dungeon list
+        for (File file : readDungeons())
             dungeonChoice.getItems().add(file.getName());
-        }
+
     }
 
     private File[] readDungeons() {
         File folder = new File("dungeons/");
         File[] fileNames = folder.listFiles();
-
+        for (File file : fileNames) {
+            if (fileNames.toString().contains("test"));
+        }
         return fileNames;
     }
 
