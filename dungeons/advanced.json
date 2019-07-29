@@ -223,6 +223,11 @@
       "type": "bomb"
     },
     {
+      "x": 13,
+      "y": 3,
+      "type": "wizard"
+    },
+    {
       "x": 17,
       "y": 4,
       "type": "wall"
@@ -631,6 +636,9 @@
   "goal-condition": {
     "goal": "AND",
     "subgoals": [
+      {
+        "goal": "wizard"
+      },
       {
         "goal": "exit"
       },

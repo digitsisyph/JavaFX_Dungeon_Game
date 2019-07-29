@@ -72,6 +72,9 @@ public abstract class DungeonLoader {
 			case "treasure":
 				goal = new TreasureGoal(dungeon);
 				break;
+			case "wizard":
+				goal = new WizardGoal(dungeon);
+				break;
 			case "AND":
 				goal = new AndGoals(dungeon);
 				break;
@@ -151,6 +154,10 @@ public abstract class DungeonLoader {
 				break;
 			case "invincibility":
 				entity = new Potion(x, y, dungeon);
+				onLoad(entity);
+				break;
+			case "wizard":
+				entity = new Wizard(x, y, dungeon);
 				onLoad(entity);
 				break;
 		}

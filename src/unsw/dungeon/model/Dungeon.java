@@ -120,6 +120,11 @@ public class Dungeon {
 				.collect(Collectors.toList());
 	}
 
+	public List<Wizard> getWizards() {
+        return entities.stream().filter(entity -> entity.type() == EntityType.WIZARD).map(Wizard.class::cast)
+                .collect(Collectors.toList());
+    }
+
 	public Inventory getInventory() {
 		return inventory;
 	}
