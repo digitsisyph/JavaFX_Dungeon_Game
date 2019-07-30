@@ -8,9 +8,11 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -366,6 +368,16 @@ public class DungeonController {
 	public void addEntityImage(Entity entity) {
 		this.loader.onLoad(entity);
 		this.getSquares().getChildren().add(entity.getNode());
+	}
+
+	public void changePlayerColour(Node player) {
+		Glow glow = new Glow();
+		glow.setLevel(0.9);
+		player.setEffect(glow);
+		ColorAdjust colorAdjust = new ColorAdjust();
+		colorAdjust.setSaturation(1.2);
+		player.setEffect(colorAdjust);
+		//player.setEffect(null);
 	}
 
 }

@@ -246,6 +246,7 @@ public class Dungeon {
 				break;
 		}
 		removeEntity(potion);
+		controller.changePlayerColour(player.getNode());
 	}
 
 	private void pickUpKey(Key key) {
