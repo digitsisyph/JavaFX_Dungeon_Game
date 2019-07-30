@@ -9,6 +9,7 @@ import unsw.dungeon.model.entities.bomb.UnlitBomb;
 import unsw.dungeon.model.entities.door.Door;
 import unsw.dungeon.model.entities.enemies.HoundEnemy;
 import unsw.dungeon.model.entities.enemies.HumanEnemy;
+import unsw.dungeon.model.entities.enemies.StoneEnemy;
 import unsw.dungeon.model.goal.*;
 
 import java.io.FileNotFoundException;
@@ -166,6 +167,10 @@ public abstract class DungeonLoader {
 				break;
 			case "down_floor":
 				entity = new DownFloor(x, y, dungeon);
+				onLoad(entity);
+				break;
+			case "stone":
+				entity = new StoneEnemy(x, y, dungeon);
 				onLoad(entity);
 				break;
 		}

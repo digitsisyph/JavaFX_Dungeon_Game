@@ -53,6 +53,10 @@ public class Inventory {
 		return this.sword;
 	}
 
+	public void breakSword() {
+		this.sword.breakSword();
+	}
+
 	public int getSwordDurability() {
 		return this.sword.getDurability();
 	}

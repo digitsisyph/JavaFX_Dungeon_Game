@@ -23,6 +23,10 @@ class SwordInv {
         this.durability.set(durability.get() - 1);
     }
 
+    void breakSword() {
+        this.durability.set(0);
+    }
+
     boolean broken() {
         return this.durability.get() <= 0;
     }

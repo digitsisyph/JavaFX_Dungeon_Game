@@ -10,6 +10,7 @@ import unsw.dungeon.model.entities.bomb.LitBomb;
 import unsw.dungeon.model.entities.bomb.UnlitBomb;
 import unsw.dungeon.model.entities.door.Door;
 import unsw.dungeon.model.entities.enemies.Enemy;
+import unsw.dungeon.model.entities.enemies.StoneEnemy;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
 
@@ -259,6 +260,8 @@ public class Dungeon {
 			removeEntity(enemy);
 		} else if (this.getInventory().useSword()) {
 			removeEntity(enemy);
+			if (enemy instanceof StoneEnemy)
+				this.getInventory().breakSword();
 		} else {
 			killPlayer();
 		}
