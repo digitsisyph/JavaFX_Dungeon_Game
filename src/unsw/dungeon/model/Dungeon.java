@@ -348,4 +348,8 @@ public class Dungeon {
 	public void switchPrevDungeon() {
 		this.controller.switchPrevDungeon();
 	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
 }

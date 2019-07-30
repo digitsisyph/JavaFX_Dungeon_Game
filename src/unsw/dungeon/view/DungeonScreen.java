@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import unsw.dungeon.DungeonControllerLoader;
 import unsw.dungeon.controller.DungeonController;
+import unsw.dungeon.model.inventory.Inventory;
 
 import java.io.IOException;
 
@@ -40,6 +41,17 @@ public class DungeonScreen {
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
+        this.controller.start();
+    }
+
+    public void start(Inventory inventory) {
+
+        scene.getRoot().requestFocus();
+        stage.setTitle(title);
+        stage.setScene(scene);
+        stage.show();
+        this.controller.getDungeon().setInventory(inventory);
+        this.controller.start();
     }
 
     public DungeonController getController() {

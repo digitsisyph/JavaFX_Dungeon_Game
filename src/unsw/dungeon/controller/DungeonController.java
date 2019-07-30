@@ -322,6 +322,10 @@ public class DungeonController {
 		root.getScene().setRoot(pane);
 	}
 
+	public Dungeon getDungeon() {
+		return this.dungeon;
+	}
+
 
 	public void setMenuScreen(MenuScreen menuScreen) {
 		this.menuScreen = menuScreen;
@@ -338,7 +342,8 @@ public class DungeonController {
 	public void switchNextDungeon() {
 		try {
 			this.nextDungeonScreen.load("advanced2.json");
-			this.nextDungeonScreen.start();
+			this.nextDungeonScreen.start(getDungeon().getInventory());
+			this.timeline.stop();
 		} catch (IOException e) {
 			System.out.println("no such file!");
 		}
@@ -346,6 +351,10 @@ public class DungeonController {
 
 	public void switchPrevDungeon() {
 		this.prevDungeonScreen.start();
+	}
+
+	public void start() {
+		this.timeline.play();
 	}
 
 
