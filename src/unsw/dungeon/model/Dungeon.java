@@ -11,6 +11,7 @@ import unsw.dungeon.model.entities.bomb.UnlitBomb;
 import unsw.dungeon.model.entities.door.Door;
 import unsw.dungeon.model.entities.enemies.Enemy;
 import unsw.dungeon.model.entities.enemies.StoneEnemy;
+import unsw.dungeon.model.entities.potions.Potion;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
 
@@ -182,7 +183,6 @@ public class Dungeon {
 			gameOver();
 		}
 
-
 		// update all all observers
 		//System.out.println("Player @ " + player.getX() + " " + player.getY());
 		goal.update();
@@ -204,7 +204,10 @@ public class Dungeon {
 		case UNLITBOMB:
 			pickUpBomb((UnlitBomb) entity);
 			break;
-		case POTION:
+		case INVINCIBLEPOTION:
+			pickUpPotion((Potion) entity);
+			break;
+		case INVISIBLEPOTION:
 			pickUpPotion((Potion) entity);
 			break;
 		case KEY:
@@ -233,7 +236,15 @@ public class Dungeon {
 	}
 
 	private void pickUpPotion(Potion potion) {
-		this.getInventory().pickPotion();
+		System.out.println("pick up " + potion);
+		switch (potion.type()) {
+			case INVINCIBLEPOTION:
+				this.getInventory().becomeInvincible();
+				break;
+			case INVISIBLEPOTION:
+				this.getInventory().becomeInvisible();
+				break;
+		}
 		removeEntity(potion);
 	}
 

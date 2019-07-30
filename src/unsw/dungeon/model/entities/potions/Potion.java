@@ -1,13 +1,15 @@
-package unsw.dungeon.model.entities;
+package unsw.dungeon.model.entities.potions;
 
 import unsw.dungeon.model.Dungeon;
+import unsw.dungeon.model.entities.Entity;
+import unsw.dungeon.model.entities.EntityType;
+import unsw.dungeon.model.entities.Player;
 
-public class Potion extends Entity {
+public abstract class Potion extends Entity {
 
 	public Potion(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.setPassThrough(true);
-		this.setImagePath("/brilliant_blue_new.png");
 	}
 
 	public void collideWith(Entity entity) {
@@ -16,8 +18,6 @@ public class Potion extends Entity {
 	}
 
 	@Override
-	public EntityType type() {
-		return EntityType.POTION;
-	}
+	public abstract EntityType type();
 
 }

@@ -385,7 +385,7 @@
     {
       "x": 7,
       "y": 10,
-      "type": "treasure"
+      "type": "invisible"
     },
     {
       "x": 11,
@@ -558,6 +558,11 @@
       "type": "wall"
     },
     {
+      "x": 6,
+      "y": 11,
+      "type": "enemy"
+    },
+    {
       "x": 8,
       "y": 15,
       "type": "wall"
@@ -616,6 +621,9 @@
       },
       {
         "goal": "treasure"
+      },
+      {
+        "goal": "exit"
       }
     ]
   }

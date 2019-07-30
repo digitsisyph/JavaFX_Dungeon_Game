@@ -10,6 +10,8 @@ import unsw.dungeon.model.entities.door.Door;
 import unsw.dungeon.model.entities.enemies.HoundEnemy;
 import unsw.dungeon.model.entities.enemies.HumanEnemy;
 import unsw.dungeon.model.entities.enemies.StoneEnemy;
+import unsw.dungeon.model.entities.potions.InvinciblePotion;
+import unsw.dungeon.model.entities.potions.InvisiblePotion;
 import unsw.dungeon.model.goal.*;
 
 import java.io.FileNotFoundException;
@@ -154,7 +156,7 @@ public abstract class DungeonLoader {
 				onLoad(entity);
 				break;
 			case "invincibility":
-				entity = new Potion(x, y, dungeon);
+				entity = new InvinciblePotion(x, y, dungeon);
 				onLoad(entity);
 				break;
 			case "wizard":
@@ -171,6 +173,10 @@ public abstract class DungeonLoader {
 				break;
 			case "stone":
 				entity = new StoneEnemy(x, y, dungeon);
+				onLoad(entity);
+				break;
+			case "invisible":
+				entity = new InvisiblePotion(x, y, dungeon);
 				onLoad(entity);
 				break;
 		}

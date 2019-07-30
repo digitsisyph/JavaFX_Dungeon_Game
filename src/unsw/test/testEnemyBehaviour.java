@@ -1,7 +1,7 @@
 package unsw.test;
 
 import org.junit.jupiter.api.Test;
-import unsw.dungeon.model.entities.Potion;
+import unsw.dungeon.model.entities.potions.InvinciblePotion;
 import unsw.dungeon.model.entities.enemies.Enemy;
 import unsw.dungeon.model.entities.enemies.HoundEnemy;
 import unsw.dungeon.model.entities.enemies.HumanEnemy;
@@ -56,7 +56,7 @@ public class testEnemyBehaviour extends testSetup {
 		Enemy enemy = new HumanEnemy(3, 0, dungeon);
 		dungeon.addEntity(enemy);
 
-		dungeon.pickUp(new Potion(1, 0, dungeon));
+		dungeon.pickUp(new InvinciblePotion(1, 0, dungeon));
 
 		int distance = enemy.getX() - player.getX(); // distance will stay the same
 
@@ -80,7 +80,7 @@ public class testEnemyBehaviour extends testSetup {
 		Enemy enemy = new HoundEnemy(3, 0, dungeon);
 		dungeon.addEntity(enemy);
 
-		dungeon.pickUp(new Potion(1, 0, dungeon));
+		dungeon.pickUp(new InvinciblePotion(1, 0, dungeon));
 
 		int distance = enemy.getX() - player.getX(); // distance will stay the same
 

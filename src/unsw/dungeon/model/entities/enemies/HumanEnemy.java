@@ -16,7 +16,9 @@ public class HumanEnemy extends Enemy implements Movable {
 
 	public void updatePerMovement() {
 		// set strategy
-		if (getDungeon().isPlayerInvincible())
+		if (getDungeon().getInventory().isInvisible())
+			return;
+		else if (getDungeon().isPlayerInvincible())
 			this.setBehaviour(moveAway);
 		else
 			this.setBehaviour(moveClose);

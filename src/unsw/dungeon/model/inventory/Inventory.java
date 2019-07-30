@@ -9,6 +9,7 @@ public class Inventory {
 	private SwordInv sword;
 	private KeyInv key;
 	private InvincibleState invincible;
+	private InvisibleState invisible;
 
 	public Inventory() {
 		this.bomb = new BombInv();
@@ -16,11 +17,13 @@ public class Inventory {
 		this.sword = new SwordInv();
 		this.key = null;
 		this.invincible = new InvincibleState();
+		this.invisible = new InvisibleState();
 	}
 
 	public void updatePerMovement() {
 		// decrease every step
 		this.invincible.nextState();
+		this.invisible.nextState();
 	}
 
 
@@ -101,16 +104,28 @@ public class Inventory {
 
 	// --- potion part ---
 
-	public void pickPotion() {
+	public void becomeInvincible() {
 		invincible.restore();
 	}
 
-	public int getInvincStep() {
+	public int getInvincibleStep() {
 		return this.invincible.getRemainingTime();
 	}
 
 	public boolean isInvincible() {
-		return getInvincStep() != 0;
+		return getInvincibleStep() != 0;
+	}
+
+	public void becomeInvisible() {
+		invisible.restore();
+	}
+
+	public int getInvisibleStep() {
+		return this.invisible.getRemainingTime();
+	}
+
+	public boolean isInvisible() {
+		return getInvisibleStep() != 0;
 	}
 
 
