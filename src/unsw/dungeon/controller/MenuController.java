@@ -32,7 +32,8 @@ public class MenuController {
     @FXML
     public void handleStartButton(ActionEvent event) {
         try {
-            dungeonScreen.start(dungeonChoice.getValue().toString());
+            dungeonScreen.load(dungeonChoice.getValue().toString());
+            dungeonScreen.start();
         } catch (IOException e) {
             System.out.println("not existed json");
         }

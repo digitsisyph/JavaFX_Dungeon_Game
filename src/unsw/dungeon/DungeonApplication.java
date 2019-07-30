@@ -31,9 +31,13 @@ public class DungeonApplication extends Application {
 		//primaryStage.show();
 
 		MenuScreen menuScreen = new MenuScreen(primaryStage);
-		DungeonScreen dungeonScreen = new DungeonScreen(primaryStage);
-		dungeonScreen.getController().setMenuScreen(menuScreen);
-		menuScreen.getController().setDungeonScreen(dungeonScreen);
+		DungeonScreen dungeonScreen1 = new DungeonScreen(primaryStage);
+		dungeonScreen1.getController().setMenuScreen(menuScreen);
+		DungeonScreen dungeonScreen2 = new DungeonScreen(primaryStage);
+		dungeonScreen2.getController().setMenuScreen(menuScreen);
+		dungeonScreen2.getController().setPrevDungeonScreen(dungeonScreen1);
+		dungeonScreen1.getController().setNextDungeonScreen(dungeonScreen2);
+		menuScreen.getController().setDungeonScreen(dungeonScreen1);
 
 		menuScreen.start();
 	}

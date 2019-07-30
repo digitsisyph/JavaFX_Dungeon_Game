@@ -21,7 +21,7 @@ public class DungeonScreen {
         this.controller = new DungeonController();
     }
 
-    public void start(String mapJson) throws IOException{
+    public void load(String mapJson) throws IOException {
         // use ControllerLoader to load map from a json file
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(mapJson);
 
@@ -32,9 +32,11 @@ public class DungeonScreen {
 
         // get the root and set scene
         Parent root = loader.load();
-        Scene scene = new Scene(root);
-        root.requestFocus();
+        scene = new Scene(root);
+    }
 
+    public void start() {
+        scene.getRoot().requestFocus();
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();

@@ -28,8 +28,10 @@ import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
+import unsw.dungeon.view.DungeonScreen;
 import unsw.dungeon.view.MenuScreen;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +55,8 @@ public class DungeonController {
 	private HBox root;
 
 	private MenuScreen menuScreen;
+	private DungeonScreen nextDungeonScreen;
+	private DungeonScreen prevDungeonScreen;
 
 	private boolean isPaused = false;
 
@@ -288,8 +292,6 @@ public class DungeonController {
 	public void gameOver(String gameOverInfo) {
 		timeline.stop();
 
-
-
 		StackPane pane = new StackPane();
 		pane.setStyle("-fx-background-color: #000000");
 
@@ -323,6 +325,27 @@ public class DungeonController {
 
 	public void setMenuScreen(MenuScreen menuScreen) {
 		this.menuScreen = menuScreen;
+	}
+
+	public void setNextDungeonScreen(DungeonScreen nextDungeonScreen) {
+		this.nextDungeonScreen = nextDungeonScreen;
+	}
+
+	public void setPrevDungeonScreen(DungeonScreen prevDungeonScreen) {
+		this.prevDungeonScreen = prevDungeonScreen;
+	}
+
+	public void switchNextDungeon() {
+		try {
+			this.nextDungeonScreen.load("advanced2.json");
+			this.nextDungeonScreen.start();
+		} catch (IOException e) {
+			System.out.println("no such file!");
+		}
+	}
+
+	public void switchPrevDungeon() {
+		this.prevDungeonScreen.start();
 	}
 
 

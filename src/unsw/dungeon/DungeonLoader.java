@@ -160,6 +160,14 @@ public abstract class DungeonLoader {
 				entity = new Wizard(x, y, dungeon);
 				onLoad(entity);
 				break;
+			case "up_floor":
+				entity = new UpFloor(x, y, dungeon);
+				onLoad(entity);
+				break;
+			case "down_floor":
+				entity = new DownFloor(x, y, dungeon);
+				onLoad(entity);
+				break;
 		}
 		if (entity != null)
 			dungeon.addEntity(entity);

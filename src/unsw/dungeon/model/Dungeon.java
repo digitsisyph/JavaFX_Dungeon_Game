@@ -340,4 +340,12 @@ public class Dungeon {
 			gameOver();
 		}
 	}
+
+	public void switchNextDungeon() {
+		this.controller.switchNextDungeon();
+	}
+
+	public void switchPrevDungeon() {
+		this.controller.switchPrevDungeon();
+	}
 }
