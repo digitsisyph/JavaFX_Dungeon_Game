@@ -15,7 +15,7 @@ public class Inventory {
 		this.bomb = new BombInv();
 		this.treasure = new TreasureInv();
 		this.sword = new SwordInv();
-		this.key = null;
+		this.key = new KeyInv();
 		this.invincible = new InvincibleState();
 		this.invisible = new InvisibleState();
 	}
@@ -85,12 +85,12 @@ public class Inventory {
 
 	// --- key part ---
 
-	public void pickKey(int id) {
-		this.key = new KeyInv(id);
+	public boolean pickKey(int id) {
+		return this.key.pickKey(id);
 	}
 
 	public void useKey() {
-		this.key = null;
+		this.key.consumeKey();
 	}
 
 	public KeyInv getKey() {
@@ -98,7 +98,7 @@ public class Inventory {
 	}
 
 	public int getKeyID() {
-		return this.key.getKeyId();
+		return this.key.getKeyID();
 	}
 
 
@@ -136,7 +136,7 @@ public class Inventory {
 		}
 		System.out.println("The player has " + bomb.getNumBombs() + " bombs");
 		if (key != null) {
-			System.out.println("Player has key id: " + key.getKeyId());
+			System.out.println("Player has key id: " + key.getKeyID());
 		}
 	}
 
@@ -159,5 +159,9 @@ public class Inventory {
 
 	public IntegerProperty getNumTreasuresProperty() {
 		return treasure.getNumTreasuresProperty();
+	}
+
+	public IntegerProperty getKeyIDProperty() {
+		return key.getKeyIDProperty();
 	}
 }
