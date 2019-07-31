@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -178,19 +177,34 @@ public class DungeonController {
 		});
 
 		// TODO key
+
 		// invincible
-		//Text invincibleInfo = new Text();
-		//invincibleInfo.setVisible(false);	// invisible at first
-		//inventory.getInvincibleRemainingProperty().addListener(new ChangeListener<Number>() {
-		//	@Override
-		//	public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-		//		if ((int) newValue > 0) {
-		//			invincibleInfo.setVisible(true);
-		//			invincibleInfo.setText("- Remaining Invincible Time: " + newValue);
-		//		} else
-		//			invincibleInfo.setVisible(false);
-		//	}
-		//});
+		inventory.getInvincibleRemainingProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				Node player = dungeon.getPlayer().getNode();
+				if ((int) newValue > 0) {
+					ColorAdjust colorAdjust = new ColorAdjust();
+					colorAdjust.setSaturation((int) newValue * 0.2);
+					player.setEffect(colorAdjust);
+				} else
+					player.setEffect(null);
+			}
+		});
+
+		// invisible
+		inventory.getInvisibleRemainingProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				Node player = dungeon.getPlayer().getNode();
+				if ((int) newValue > 0) {
+					ColorAdjust colorAdjust = new ColorAdjust();
+					colorAdjust.setBrightness(0.3 + (int) newValue * 0.05);
+					player.setEffect(colorAdjust);
+				} else
+					player.setEffect(null);
+			}
+		});
 	}
 
 	private void initializeGoalInfo() {
@@ -365,16 +379,6 @@ public class DungeonController {
 	public void addEntityImage(Entity entity) {
 		this.loader.onLoad(entity);
 		this.getSquares().getChildren().add(entity.getNode());
-	}
-
-	public void changePlayerColour(Node player) {
-		Glow glow = new Glow();
-		glow.setLevel(0.9);
-		player.setEffect(glow);
-		ColorAdjust colorAdjust = new ColorAdjust();
-		colorAdjust.setSaturation(1.2);
-		player.setEffect(colorAdjust);
-		//player.setEffect(null);
 	}
 
 }

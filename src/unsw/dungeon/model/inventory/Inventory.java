@@ -152,4 +152,8 @@ public class Inventory {
 	public IntegerProperty getInvincibleRemainingProperty() {
 		return invincible.getRemainingTimeProperty();
 	}
+
+	public IntegerProperty getInvisibleRemainingProperty() {
+		return invisible.getRemainingTimeProperty();
+	}
 }
