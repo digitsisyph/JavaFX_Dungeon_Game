@@ -156,4 +156,8 @@ public class Inventory {
 	public IntegerProperty getInvisibleRemainingProperty() {
 		return invisible.getRemainingTimeProperty();
 	}
+
+	public IntegerProperty getNumTreasuresProperty() {
+		return treasure.getNumTreasuresProperty();
+	}
 }

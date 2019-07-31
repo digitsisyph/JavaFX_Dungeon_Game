@@ -60,7 +60,7 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="TreasureInfo" text="Treasure">
+                  <Label fx:id="treasureInfo" text="Treasure">
                      <graphic>
                         <ImageView>
                            <image>

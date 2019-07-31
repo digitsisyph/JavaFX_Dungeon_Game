@@ -60,7 +60,7 @@ public class DungeonController {
 	@FXML
 	private Label swordInfo;
 	@FXML
-	private Label TreasureInfo;
+	private Label treasureInfo;
 	@FXML
 	private Label keyInfo;
 
@@ -173,6 +173,19 @@ public class DungeonController {
 					swordInfo.setText("Sword Durability: " + newValue);
 				} else
 					swordInfo.setVisible(false);
+			}
+		});
+
+		// treasure
+		treasureInfo.setVisible(false);
+		inventory.getNumTreasuresProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				if ((int) newValue > 0) {
+					treasureInfo.setVisible(true);
+					treasureInfo.setText("Treasure: " + newValue);
+				} else
+					treasureInfo.setVisible(false);
 			}
 		});
 
