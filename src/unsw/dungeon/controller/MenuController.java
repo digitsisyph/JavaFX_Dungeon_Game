@@ -13,7 +13,9 @@ public class MenuController {
     @FXML
     private ChoiceBox dungeonChoice;
     @FXML
-    private Button startButton;
+    private Button freeStartButton;
+    @FXML
+    private Button storyStartButton;
 
     private DungeonScreen dungeonScreen;
 
@@ -30,9 +32,19 @@ public class MenuController {
     }
 
     @FXML
-    public void handleStartButton(ActionEvent event) {
+    public void handleFreeStartButton(ActionEvent event) {
         try {
             dungeonScreen.load(dungeonChoice.getValue().toString());
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        dungeonScreen.start();
+    }
+
+    @FXML
+    public void handleStoryStartButton(ActionEvent event) {
+        try {
+            dungeonScreen.load("intro.json");
             dungeonScreen.start();
         } catch (IOException e) {
             System.out.println(e);
