@@ -243,14 +243,8 @@ public class Dungeon {
 
 	private void pickUpKey(Key key) {
 		// player can only have 1 key
-		if (this.getInventory().getKey() == null) {
-			this.getInventory().pickKey(key.getId());
+		if (this.getInventory().pickKey(key.getId()))
 			removeEntity(key);
-			System.out.println("Key picked up");
-		} else {
-			System.out.println("Already has a key");
-		}
-		this.getInventory().debug();
 	}
 
 	// --- other interactions

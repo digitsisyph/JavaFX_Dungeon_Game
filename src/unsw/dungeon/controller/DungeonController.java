@@ -190,7 +190,18 @@ public class DungeonController {
 			}
 		});
 
-		// TODO key
+		// key
+		keyInfo.setVisible(false);
+		inventory.getKeyIDProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				if ((int) newValue >= 0) {
+					keyInfo.setVisible(true);
+					keyInfo.setText("Key");
+				} else
+					keyInfo.setVisible(false);
+			}
+		});
 
 		// invincible
 		inventory.getInvincibleRemainingProperty().addListener(new ChangeListener<Number>() {
