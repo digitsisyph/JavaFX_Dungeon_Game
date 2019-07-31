@@ -28,6 +28,7 @@ import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
+import unsw.dungeon.model.status.Status;
 import unsw.dungeon.view.DungeonScreen;
 import unsw.dungeon.view.MenuScreen;
 
@@ -128,6 +129,7 @@ public class DungeonController {
 
 		trackEntities();
 		trackInventory();
+		trackStatus();
 		trackGoal();
 	}
 
@@ -164,7 +166,6 @@ public class DungeonController {
 				(observable, oldValue, newValue) ->
 						treasureInfo.setText("Collected Treasures: " + newValue)
 		);
-
 		// bomb
 		inventory.getBombNumProperty().addListener(
 				(observable, oldValue, newValue) -> {
@@ -174,7 +175,6 @@ public class DungeonController {
 					} else
 						bombInfo.setVisible(false);
 				});
-
 		// sword
 		swordInfo.setVisible(false);	// invisible at first
 		inventory.getSwordDurabilityProperty().addListener(
@@ -185,7 +185,6 @@ public class DungeonController {
 					} else
 						swordInfo.setVisible(false);
 				});
-
 		// key
 		keyInfo.setVisible(false);
 		inventory.getKeyIDProperty().addListener(
@@ -196,9 +195,13 @@ public class DungeonController {
 					} else
 						keyInfo.setVisible(false);
 				});
+	}
+
+	private void trackStatus() {
+		Status status = dungeon.getStatus();
 
 		// invincible
-		inventory.getInvincibleRemainingProperty().addListener(
+		status.getInvincibleRemainingProperty().addListener(
 				(observable, oldValue, newValue) -> {
 					Node player = dungeon.getPlayer().getNode();
 					if ((int) newValue > 0) {
@@ -208,9 +211,8 @@ public class DungeonController {
 					} else
 						player.setEffect(null);
 				});
-
 		// invisible
-		inventory.getInvisibleRemainingProperty().addListener(
+		status.getInvisibleRemainingProperty().addListener(
 				(observable, oldValue, newValue) -> {
 					Node player = dungeon.getPlayer().getNode();
 					if ((int) newValue > 0) {
@@ -220,6 +222,7 @@ public class DungeonController {
 					} else
 						player.setEffect(null);
 				});
+
 	}
 
 	private void trackGoal() {

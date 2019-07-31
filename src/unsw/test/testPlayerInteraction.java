@@ -74,34 +74,34 @@ public class testPlayerInteraction extends testSetup {
 		dungeon.addEntity(new InvinciblePotion(3, 1, dungeon));
 
 		assertEquals(2, dungeon.getEntities(EntityType.INVINCIBLEPOTION).size());
-		assertEquals(false, dungeon.getInventory().isInvincible());
+		assertEquals(false, dungeon.getStatus().isInvincible());
 
 		dungeon.movePlayer(Direction.RIGHT);
 		assertEquals(1, dungeon.getEntities(EntityType.INVINCIBLEPOTION).size());
-		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
+		assertEquals(true, dungeon.getStatus().isInvincible()); // at this point he becomes invincible
 
 		dungeon.tick();
-		assertEquals(4, dungeon.getInventory().getInvincibleStep());
+		assertEquals(4, dungeon.getStatus().getInvincibleStep());
 
 		dungeon.movePlayer(Direction.RIGHT); // collects another potion
 		assertEquals(0, dungeon.getEntities(EntityType.INVINCIBLEPOTION).size());
-		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
-		assertEquals(5, dungeon.getInventory().getInvincibleStep());
+		assertEquals(true, dungeon.getStatus().isInvincible()); // at this point he becomes invincible
+		assertEquals(5, dungeon.getStatus().getInvincibleStep());
 
 		dungeon.tick();
-		assertEquals(4, dungeon.getInventory().getInvincibleStep());
+		assertEquals(4, dungeon.getStatus().getInvincibleStep());
 
 		dungeon.tick();
-		assertEquals(3, dungeon.getInventory().getInvincibleStep());
+		assertEquals(3, dungeon.getStatus().getInvincibleStep());
 
 		dungeon.tick();
-		assertEquals(2, dungeon.getInventory().getInvincibleStep());
+		assertEquals(2, dungeon.getStatus().getInvincibleStep());
 
 		dungeon.tick();
-		assertEquals(1, dungeon.getInventory().getInvincibleStep());
+		assertEquals(1, dungeon.getStatus().getInvincibleStep());
 
 		dungeon.tick();
-		assertEquals(false, dungeon.getInventory().isInvincible()); // no longer invincible
+		assertEquals(false, dungeon.getStatus().isInvincible()); // no longer invincible
 
 	}
 

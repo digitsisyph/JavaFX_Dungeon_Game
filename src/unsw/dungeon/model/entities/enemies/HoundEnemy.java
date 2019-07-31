@@ -16,7 +16,7 @@ public class HoundEnemy extends Enemy implements Movable {
 
     public void updatePerMovement() {
         // set strategy
-        if (getDungeon().getInventory().isInvisible()) {
+        if (getDungeon().getStatus().isInvisible()) {
             System.out.println("player is invisible!");
             return;
         } else if (getDungeon().isPlayerInvincible())
