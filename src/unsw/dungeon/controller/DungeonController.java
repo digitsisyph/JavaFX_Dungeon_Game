@@ -5,6 +5,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -127,8 +128,23 @@ public class DungeonController {
 		for (ImageView entity : initialEntities)
 			squares.getChildren().add(entity);
 
+		trackEntities();
 		trackInventory();
 		trackGoal();
+	}
+
+	private void trackEntities() {
+		dungeon.getEntitiesProperty().addListener(
+				new ListChangeListener<Entity>() {
+					public void onChanged(Change change) {
+						while (change.next()) {
+							for (Object remitem : change.getRemoved())
+								removeEntityImage((Entity) remitem);
+							for (Object additem : change.getAddedSubList())
+								addEntityImage((Entity) additem);
+						}
+					}
+				});
 	}
 
 
@@ -139,16 +155,14 @@ public class DungeonController {
 		// bomb
 		//Text bombInfo = new Text("- Bomb num: " + 0);
 		bombInfo.setVisible(false);		// invisible at first
-		inventory.getBombNumProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+		inventory.getBombNumProperty().addListener(
+			(observable, oldValue, newValue) -> {
 				if ((int) newValue > 0) {
 					bombInfo.setVisible(true);
 					bombInfo.setText("Bomb: " + newValue);
 				} else
 					bombInfo.setVisible(false);
-			}
-		});
+			});
 
 		// sword
 		swordInfo.setVisible(false);	// invisible at first

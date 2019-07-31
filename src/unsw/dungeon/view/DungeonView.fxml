@@ -25,7 +25,7 @@
                   <Font name="Avenir Oblique" size="15.0" />
                </font>
             </Text>
-            <VBox fx:id="inventoryInfo" prefHeight="93.0" prefWidth="180.0">
+            <VBox fx:id="inventoryInfo" prefHeight="93.0" prefWidth="180.0" spacing="10.0">
                <children>
                   <Label fx:id="bombInfo" text="Bomb">
                      <graphic>
@@ -41,9 +41,6 @@
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
                   </Label>
                   <Label fx:id="swordInfo" text="Sword">
                      <graphic>
@@ -56,9 +53,6 @@
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
                   </Label>
                   <Label fx:id="treasureInfo" text="Treasure">
                      <graphic>
@@ -74,9 +68,6 @@
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
                   </Label>
                   <Label fx:id="keyInfo" text="Key">
                      <graphic>
@@ -89,9 +80,6 @@
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="5.0" />
-                     </padding>
                   </Label>
                </children>
                <VBox.margin>
@@ -115,7 +103,7 @@
                   <Font name="Avenir Oblique" size="15.0" />
                </font>
             </Text>
-            <VBox fx:id="goalInfo" prefHeight="0.0" prefWidth="190.0" />
+            <VBox fx:id="goalInfo" prefHeight="0.0" prefWidth="190.0" spacing="10.0" />
          </children></VBox>
    </VBox>
    

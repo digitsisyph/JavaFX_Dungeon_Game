@@ -3,6 +3,9 @@
  */
 package unsw.dungeon.model;
 
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import unsw.dungeon.controller.DungeonController;
 import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.bomb.ExplodedBomb;
@@ -15,7 +18,6 @@ import unsw.dungeon.model.entities.potions.Potion;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +35,7 @@ public class Dungeon {
 
 	private DungeonController controller;
 	private final int width, height;
-	private List<Entity> entities;
+	private ListProperty<Entity> entities;
 	private Player player;
 	private Inventory inventory;
 	private Goal goal;
@@ -42,7 +44,7 @@ public class Dungeon {
 	public Dungeon(int width, int height) {
 		this.width = width;
 		this.height = height;
-		this.entities = new ArrayList<>();
+		this.entities = new SimpleListProperty<Entity>(FXCollections.observableArrayList());
 		this.player = null;
 		this.controller = null;
 		this.inventory = new Inventory();
@@ -76,6 +78,10 @@ public class Dungeon {
 
 	public Player getPlayer() {
 		return player;
+	}
+
+	public ListProperty<Entity> getEntitiesProperty() {
+		return entities;
 	}
 
 	public List<Entity> getEntities() {
@@ -143,8 +149,6 @@ public class Dungeon {
 
 	// create a new entity in the dungeon
 	public void createEntity(Entity entity) {
-		if (controller != null)
-			controller.addEntityImage(entity);
 		entities.add(entity);
 	}
 
@@ -152,9 +156,6 @@ public class Dungeon {
 		System.out.println("Remove:" + entity.toString());
 		// remove it from the dungeon
 		this.entities.remove(entity);
-		// remove its corresponding ImageView
-		if (this.controller != null)
-			this.controller.removeEntityImage(entity);
 	}
 
 	// player movement
