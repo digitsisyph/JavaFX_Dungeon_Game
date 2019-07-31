@@ -1,4 +1,4 @@
-package unsw.dungeon.model.entities.potions;
+package unsw.dungeon.model.entities.potion;
 
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.EntityType;

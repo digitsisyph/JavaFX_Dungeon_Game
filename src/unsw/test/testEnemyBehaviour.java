@@ -1,10 +1,10 @@
 package unsw.test;
 
 import org.junit.jupiter.api.Test;
-import unsw.dungeon.model.entities.potions.InvinciblePotion;
-import unsw.dungeon.model.entities.enemies.Enemy;
-import unsw.dungeon.model.entities.enemies.HoundEnemy;
-import unsw.dungeon.model.entities.enemies.HumanEnemy;
+import unsw.dungeon.model.entities.potion.InvinciblePotion;
+import unsw.dungeon.model.entities.enemy.Enemy;
+import unsw.dungeon.model.entities.enemy.HoundEnemy;
+import unsw.dungeon.model.entities.enemy.HumanEnemy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -150,7 +150,7 @@
     {
       "x": 9,
       "y": 2,
-      "type": "wall"
+      "type": "princess"
     },
     {
       "x": 12,
@@ -644,6 +644,9 @@
       },
       {
         "goal": "treasure"
+      },
+      {
+        "goal": "princess"
       }
     ]
   }
