@@ -1,6 +1,9 @@
-package unsw.dungeon.model.entities;
+package unsw.dungeon.model.entities.npc;
 
 import unsw.dungeon.model.Dungeon;
+import unsw.dungeon.model.entities.Entity;
+import unsw.dungeon.model.entities.EntityType;
+import unsw.dungeon.model.entities.Player;
 
 public class Wizard extends Entity {
 

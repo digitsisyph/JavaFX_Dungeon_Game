@@ -2,7 +2,7 @@ package unsw.dungeon.model.entities;
 
 import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.Dungeon;
-import unsw.dungeon.model.entities.enemies.Enemy;
+import unsw.dungeon.model.entities.enemy.Enemy;
 
 /**
  * The player entity

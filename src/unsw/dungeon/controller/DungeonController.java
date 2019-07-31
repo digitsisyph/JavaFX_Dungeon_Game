@@ -100,6 +100,8 @@ public class DungeonController {
 
 	public void startDungeon() {
 		if (dungeon != null) {
+			trackInventory();
+			trackStatus();
 			this.timeline.play();
 		} else {
 			System.out.println("Dungeon has not been set!");
@@ -374,8 +376,8 @@ public class DungeonController {
 		try {
 			this.nextDungeonScreen.load("advanced2.json");
 			// TODO
-			// this.nextDungeonScreen.start(getDungeon().getInventory());
-			this.nextDungeonScreen.start();
+			this.nextDungeonScreen.start(getDungeon().getInventory());
+			//this.nextDungeonScreen.start();
 			this.timeline.stop();
 		} catch (IOException e) {
 			System.out.println("no such file!");

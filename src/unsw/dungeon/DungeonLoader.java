@@ -7,11 +7,13 @@ import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.bomb.UnlitBomb;
 import unsw.dungeon.model.entities.door.Door;
-import unsw.dungeon.model.entities.enemies.HoundEnemy;
-import unsw.dungeon.model.entities.enemies.HumanEnemy;
-import unsw.dungeon.model.entities.enemies.StoneEnemy;
-import unsw.dungeon.model.entities.potions.InvinciblePotion;
-import unsw.dungeon.model.entities.potions.InvisiblePotion;
+import unsw.dungeon.model.entities.enemy.HoundEnemy;
+import unsw.dungeon.model.entities.enemy.HumanEnemy;
+import unsw.dungeon.model.entities.enemy.StoneEnemy;
+import unsw.dungeon.model.entities.npc.Princess;
+import unsw.dungeon.model.entities.npc.Wizard;
+import unsw.dungeon.model.entities.potion.InvinciblePotion;
+import unsw.dungeon.model.entities.potion.InvisiblePotion;
 import unsw.dungeon.model.goal.*;
 
 import java.io.FileNotFoundException;
@@ -77,6 +79,9 @@ public abstract class DungeonLoader {
 				break;
 			case "wizard":
 				goal = new WizardGoal(dungeon);
+				break;
+			case "princess":
+				goal = new PrincessGoal(dungeon);
 				break;
 			case "AND":
 				goal = new AndGoals(dungeon);
@@ -161,6 +166,10 @@ public abstract class DungeonLoader {
 				break;
 			case "wizard":
 				entity = new Wizard(x, y, dungeon);
+				onLoad(entity);
+				break;
+			case "princess":
+				entity = new Princess(x, y, dungeon);
 				onLoad(entity);
 				break;
 			case "up_floor":

@@ -6,9 +6,9 @@ import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.bomb.LitBomb;
 import unsw.dungeon.model.entities.bomb.UnlitBomb;
 import unsw.dungeon.model.entities.door.Door;
-import unsw.dungeon.model.entities.enemies.HoundEnemy;
-import unsw.dungeon.model.entities.enemies.HumanEnemy;
-import unsw.dungeon.model.entities.potions.InvinciblePotion;
+import unsw.dungeon.model.entities.enemy.HoundEnemy;
+import unsw.dungeon.model.entities.enemy.HumanEnemy;
+import unsw.dungeon.model.entities.potion.InvinciblePotion;
 
 import static org.junit.jupiter.api.Assertions.*;
 

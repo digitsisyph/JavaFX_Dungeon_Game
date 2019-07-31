@@ -45,7 +45,6 @@ public class DungeonScreen {
     }
 
     public void start(Inventory inventory) {
-
         scene.getRoot().requestFocus();
         stage.setTitle(title);
         stage.setScene(scene);

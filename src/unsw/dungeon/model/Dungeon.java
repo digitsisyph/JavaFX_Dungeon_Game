@@ -12,9 +12,11 @@ import unsw.dungeon.model.entities.bomb.ExplodedBomb;
 import unsw.dungeon.model.entities.bomb.LitBomb;
 import unsw.dungeon.model.entities.bomb.UnlitBomb;
 import unsw.dungeon.model.entities.door.Door;
-import unsw.dungeon.model.entities.enemies.Enemy;
-import unsw.dungeon.model.entities.enemies.StoneEnemy;
-import unsw.dungeon.model.entities.potions.Potion;
+import unsw.dungeon.model.entities.enemy.Enemy;
+import unsw.dungeon.model.entities.enemy.StoneEnemy;
+import unsw.dungeon.model.entities.npc.Princess;
+import unsw.dungeon.model.entities.npc.Wizard;
+import unsw.dungeon.model.entities.potion.Potion;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
 import unsw.dungeon.model.status.Status;
@@ -136,6 +138,11 @@ public class Dungeon {
         return entities.stream().filter(entity -> entity.type() == EntityType.WIZARD).map(Wizard.class::cast)
                 .collect(Collectors.toList());
     }
+
+    public List<Princess> getPrincess() {
+		return entities.stream().filter(entity -> entity.type() == EntityType.PRINCESS).map(Princess.class::cast)
+				.collect(Collectors.toList());
+	}
 
 	public Inventory getInventory() {
 		return inventory;
@@ -319,7 +326,6 @@ public class Dungeon {
 				break;
 			}
 		}
-
 	}
 
 	// to finish a game over
