@@ -143,29 +143,21 @@ public class Dungeon {
 
 	// functions for entities
 
+	// create a new entity in the dungeon
 	public void addEntity(Entity entity) {
 		entities.add(entity);
 	}
 
-	// create a new entity in the dungeon
-	public void createEntity(Entity entity) {
-		entities.add(entity);
-	}
-
+	// remove an entity from the dungeon
 	public void removeEntity(Entity entity) {
-		System.out.println("Remove:" + entity.toString());
-		// remove it from the dungeon
 		this.entities.remove(entity);
 	}
 
 	// player movement
 
 	public void movePlayer(Direction direction) {
-		if (player != null) {
+		if (player != null)
 			player.move(direction);
-			// observer pattern
-			// notifyPerMovement();
-		}
 	}
 
 	// helper function: check whether a grid is walkable
@@ -295,7 +287,7 @@ public class Dungeon {
 	public void placeBomb() {
 		if (getInventory().useBomb()) {
 			System.out.println("Use bomb");
-			createEntity(new LitBomb(player.getX(), player.getY(), this));
+			addEntity(new LitBomb(player.getX(), player.getY(), this));
 		} else {
 			System.out.println("No bomb to use");
 		}
@@ -303,10 +295,10 @@ public class Dungeon {
 
 	public void explodeBomb(LitBomb bomb) {
 		// put exploded Bomb
-		createEntity(new ExplodedBomb(bomb.getX() + 1, bomb.getY(), this));
-		createEntity(new ExplodedBomb(bomb.getX() - 1, bomb.getY(), this));
-		createEntity(new ExplodedBomb(bomb.getX(), bomb.getY() + 1, this));
-		createEntity(new ExplodedBomb(bomb.getX(), bomb.getY() - 1, this));
+		addEntity(new ExplodedBomb(bomb.getX() + 1, bomb.getY(), this));
+		addEntity(new ExplodedBomb(bomb.getX() - 1, bomb.getY(), this));
+		addEntity(new ExplodedBomb(bomb.getX(), bomb.getY() + 1, this));
+		addEntity(new ExplodedBomb(bomb.getX(), bomb.getY() - 1, this));
 		// kill nearby Entities
 		List<Entity> nearbyEntities = getNearbyEntities(bomb.getX(), bomb.getY());
 		nearbyEntities.addAll(getEntities(bomb.getX(), bomb.getY()));
