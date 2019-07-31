@@ -149,6 +149,7 @@ public class Dungeon {
 		return goal;
 	}
 
+
 	// functions for entities
 
 	// create a new entity in the dungeon
@@ -185,7 +186,6 @@ public class Dungeon {
 		}
 
 		// update all all observers
-		//System.out.println("Player @ " + player.getX() + " " + player.getY());
 		goal.update();
 		status.updatePerMovement();
 		getEnemies().forEach(Enemy::updatePerMovement);
