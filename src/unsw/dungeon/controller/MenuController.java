@@ -35,7 +35,7 @@ public class MenuController {
             dungeonScreen.load(dungeonChoice.getValue().toString());
             dungeonScreen.start();
         } catch (IOException e) {
-            System.out.println("not existed json");
+            System.out.println(e);
         }
     }
 

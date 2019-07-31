@@ -11,6 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -20,7 +21,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
@@ -55,6 +55,16 @@ public class DungeonController {
 	private VBox goalInfo;
 	@FXML
 	private HBox root;
+
+	@FXML
+	private Label bombInfo;
+	@FXML
+	private Label swordInfo;
+	@FXML
+	private Label TreasureInfo;
+	@FXML
+	private Label keyInfo;
+
 
 	private MenuScreen menuScreen;
 	private DungeonScreen nextDungeonScreen;
@@ -140,64 +150,51 @@ public class DungeonController {
 	private void initializeInventoryInfo() {
 		Inventory inventory = dungeon.getInventory();
 
-		Text title = new Text("Current Inventory:");
-		title.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		inventoryInfo.getChildren().add(title);
-
 		// bomb
-		Text bombInfo = new Text("- Bomb num: " + 0);
+		//Text bombInfo = new Text("- Bomb num: " + 0);
 		bombInfo.setVisible(false);		// invisible at first
 		inventory.getBombNumProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				if ((int) newValue > 0) {
 					bombInfo.setVisible(true);
-					bombInfo.setText("- Bomb num: " + newValue);
+					bombInfo.setText("Bomb: " + newValue);
 				} else
 					bombInfo.setVisible(false);
 			}
 		});
 
 		// sword
-		Text swordInfo = new Text();
 		swordInfo.setVisible(false);	// invisible at first
 		inventory.getSwordDurabilityProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				if ((int) newValue > 0) {
 					swordInfo.setVisible(true);
-					swordInfo.setText("- Sword Durability: " + newValue);
+					swordInfo.setText("Sword Durability: " + newValue);
 				} else
 					swordInfo.setVisible(false);
 			}
 		});
 
 		// TODO key
-
 		// invincible
-		Text invincibleInfo = new Text();
-		invincibleInfo.setVisible(false);	// invisible at first
-		inventory.getInvincibleRemainingProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				if ((int) newValue > 0) {
-					invincibleInfo.setVisible(true);
-					invincibleInfo.setText("- Remaining Invincible Time: " + newValue);
-				} else
-					invincibleInfo.setVisible(false);
-			}
-		});
-
-		inventoryInfo.getChildren().addAll(bombInfo, swordInfo, invincibleInfo);
+		//Text invincibleInfo = new Text();
+		//invincibleInfo.setVisible(false);	// invisible at first
+		//inventory.getInvincibleRemainingProperty().addListener(new ChangeListener<Number>() {
+		//	@Override
+		//	public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+		//		if ((int) newValue > 0) {
+		//			invincibleInfo.setVisible(true);
+		//			invincibleInfo.setText("- Remaining Invincible Time: " + newValue);
+		//		} else
+		//			invincibleInfo.setVisible(false);
+		//	}
+		//});
 	}
 
 	private void initializeGoalInfo() {
 		Goal goal = dungeon.getGoal();
-
-		Text title = new Text("Game Goal:");
-		title.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		goalInfo.getChildren().add(title);
-
 		addGoalInfo(goal, goalInfo);
 	}
 
