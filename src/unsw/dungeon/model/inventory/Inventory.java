@@ -128,19 +128,7 @@ public class Inventory {
 		return getInvisibleStep() != 0;
 	}
 
-
-	// for debug
-	public void debug() {
-		if (sword != null) {
-			System.out.println("The player has a sword, its durability is " + sword.getDurability());
-		}
-		System.out.println("The player has " + bomb.getNumBombs() + " bombs");
-		if (key != null) {
-			System.out.println("Player has key id: " + key.getKeyID());
-		}
-	}
-
-	// TODO for controller
+	// for controller
 	public IntegerProperty getBombNumProperty() {
 		return bomb.getNumBombsProperty();
 	}

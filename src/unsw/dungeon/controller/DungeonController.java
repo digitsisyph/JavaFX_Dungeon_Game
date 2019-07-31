@@ -3,8 +3,6 @@ package unsw.dungeon.controller;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -147,89 +145,81 @@ public class DungeonController {
 				});
 	}
 
+	private void removeEntityImage(Entity entity) {
+		this.squares.getChildren().remove(entity.getNode());
+	}
+
+	private void addEntityImage(Entity entity) {
+		this.loader.onLoad(entity);
+		this.squares.getChildren().add(entity.getNode());
+	}
+
 
 	// TODO set the game info pane
 	private void trackInventory() {
 		Inventory inventory = dungeon.getInventory();
 
+		// treasure
+		inventory.getNumTreasuresProperty().addListener(
+				(observable, oldValue, newValue) ->
+						treasureInfo.setText("Collected Treasures: " + newValue)
+		);
+
 		// bomb
-		//Text bombInfo = new Text("- Bomb num: " + 0);
-		bombInfo.setVisible(false);		// invisible at first
 		inventory.getBombNumProperty().addListener(
-			(observable, oldValue, newValue) -> {
-				if ((int) newValue > 0) {
-					bombInfo.setVisible(true);
-					bombInfo.setText("Bomb: " + newValue);
-				} else
-					bombInfo.setVisible(false);
-			});
+				(observable, oldValue, newValue) -> {
+					if ((int) newValue > 0) {
+						bombInfo.setVisible(true);
+						bombInfo.setText("Collected Bombs: " + newValue);
+					} else
+						bombInfo.setVisible(false);
+				});
 
 		// sword
 		swordInfo.setVisible(false);	// invisible at first
-		inventory.getSwordDurabilityProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				if ((int) newValue > 0) {
-					swordInfo.setVisible(true);
-					swordInfo.setText("Sword Durability: " + newValue);
-				} else
-					swordInfo.setVisible(false);
-			}
-		});
-
-		// treasure
-		treasureInfo.setVisible(false);
-		inventory.getNumTreasuresProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				if ((int) newValue > 0) {
-					treasureInfo.setVisible(true);
-					treasureInfo.setText("Treasure: " + newValue);
-				} else
-					treasureInfo.setVisible(false);
-			}
-		});
+		inventory.getSwordDurabilityProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					if ((int) newValue > 0) {
+						swordInfo.setVisible(true);
+						swordInfo.setText("Sword Durability: " + newValue);
+					} else
+						swordInfo.setVisible(false);
+				});
 
 		// key
 		keyInfo.setVisible(false);
-		inventory.getKeyIDProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				if ((int) newValue >= 0) {
-					keyInfo.setVisible(true);
-					keyInfo.setText("Key");
-				} else
-					keyInfo.setVisible(false);
-			}
-		});
+		inventory.getKeyIDProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					if ((int) newValue >= 0) {
+						keyInfo.setVisible(true);
+						keyInfo.setText("Key");
+					} else
+						keyInfo.setVisible(false);
+				});
 
 		// invincible
-		inventory.getInvincibleRemainingProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				Node player = dungeon.getPlayer().getNode();
-				if ((int) newValue > 0) {
-					ColorAdjust colorAdjust = new ColorAdjust();
-					colorAdjust.setSaturation((int) newValue * 0.2);
-					player.setEffect(colorAdjust);
-				} else
-					player.setEffect(null);
-			}
-		});
+		inventory.getInvincibleRemainingProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Node player = dungeon.getPlayer().getNode();
+					if ((int) newValue > 0) {
+						ColorAdjust colorAdjust = new ColorAdjust();
+						colorAdjust.setSaturation((int) newValue * 0.2);
+						player.setEffect(colorAdjust);
+					} else
+						player.setEffect(null);
+				});
 
 		// invisible
-		inventory.getInvisibleRemainingProperty().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				Node player = dungeon.getPlayer().getNode();
-				if ((int) newValue > 0) {
-					ColorAdjust colorAdjust = new ColorAdjust();
-					colorAdjust.setBrightness(0.3 + (int) newValue * 0.05);
-					player.setEffect(colorAdjust);
-				} else
-					player.setEffect(null);
-			}
-		});
+		inventory.getInvisibleRemainingProperty().addListener(
+				(observable, oldValue, newValue) -> {
+					Node player = dungeon.getPlayer().getNode();
+					if ((int) newValue > 0) {
+						ColorAdjust colorAdjust = new ColorAdjust();
+						colorAdjust.setBrightness(0.3 + (int) newValue * 0.05);
+						player.setEffect(colorAdjust);
+					} else
+						player.setEffect(null);
+				});
 	}
 
 	private void trackGoal() {
@@ -391,16 +381,6 @@ public class DungeonController {
 
 	public void switchPrevDungeon() {
 		this.prevDungeonScreen.start();
-	}
-
-	// TODO maybe change?
-	public void removeEntityImage(Entity entity) {
-		this.squares.getChildren().remove(entity.getNode());
-	}
-
-	public void addEntityImage(Entity entity) {
-		this.loader.onLoad(entity);
-		this.squares.getChildren().add(entity.getNode());
 	}
 
 }
