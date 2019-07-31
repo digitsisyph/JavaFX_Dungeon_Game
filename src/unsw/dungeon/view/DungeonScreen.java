@@ -41,7 +41,7 @@ public class DungeonScreen {
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
-        this.controller.start();
+        this.controller.startDungeon();
     }
 
     public void start(Inventory inventory) {
@@ -51,7 +51,7 @@ public class DungeonScreen {
         stage.setScene(scene);
         stage.show();
         this.controller.getDungeon().setInventory(inventory);
-        this.controller.start();
+        this.controller.startDungeon();
     }
 
     public DungeonController getController() {

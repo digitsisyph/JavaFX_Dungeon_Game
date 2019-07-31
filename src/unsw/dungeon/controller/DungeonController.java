@@ -33,7 +33,6 @@ import unsw.dungeon.view.DungeonScreen;
 import unsw.dungeon.view.MenuScreen;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,7 +63,6 @@ public class DungeonController {
 	@FXML
 	private Label keyInfo;
 
-
 	private MenuScreen menuScreen;
 	private DungeonScreen nextDungeonScreen;
 	private DungeonScreen prevDungeonScreen;
@@ -78,23 +76,13 @@ public class DungeonController {
 
 
 	public DungeonController() {
-
+		// pass
 	}
 
 	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, DungeonControllerLoader loader) {
-		this.dungeon = dungeon;
-		this.dungeon.setController(this);
-		this.loader = loader;
-		this.initialEntities = new ArrayList<>(initialEntities);
-
-		// timeline
-		this.timeline = new Timeline();
-		timeline.setCycleCount(Animation.INDEFINITE);
-		timeline.setAutoReverse(false);
-		timeline.getKeyFrames().add(
-				new KeyFrame(Duration.millis(500),
-						e -> {if (!dungeon.isGameOver()) this.dungeon.tick();}));
-		timeline.play();
+		setDungeon(dungeon);
+		setLoader(loader);
+		setInitialEntities(initialEntities);
 	}
 
 	public void setDungeon(Dungeon dungeon) {
@@ -110,16 +98,24 @@ public class DungeonController {
 		this.loader = loader;
 	}
 
-	public GridPane getSquares() {
-		return squares;
-	}
-
-	public List<ImageView> getImages() {
-		return initialEntities;
+	public void startDungeon() {
+		if (dungeon != null) {
+			this.timeline.play();
+		} else {
+			System.out.println("Dungeon has not been set!");
+		}
 	}
 
 	@FXML
 	public void initialize() {
+		// timeline
+		this.timeline = new Timeline();
+		this.timeline.setCycleCount(Animation.INDEFINITE);
+		this.timeline.setAutoReverse(false);
+		this.timeline.getKeyFrames().add(
+				new KeyFrame(Duration.millis(500),
+						e -> {if (!dungeon.isGameOver()) this.dungeon.tick();}));
+
 		// Add the ground first so it is below all other entities
 		Image ground = new Image("/dirt_0_new.png");
 		for (int x = 0; x < dungeon.getWidth(); x++) {
@@ -131,22 +127,13 @@ public class DungeonController {
 		for (ImageView entity : initialEntities)
 			squares.getChildren().add(entity);
 
-		initializeInventoryInfo();
-		initializeGoalInfo();
-		gameInfo.setSpacing(50);
-
-		// timeline
-		this.timeline = new Timeline();
-		timeline.setCycleCount(Animation.INDEFINITE);
-		timeline.setAutoReverse(false);
-		timeline.getKeyFrames().add(
-				new KeyFrame(Duration.millis(500),
-						e -> {if (!dungeon.isGameOver()) this.dungeon.tick();}));
-		timeline.play();
+		trackInventory();
+		trackGoal();
 	}
 
+
 	// TODO set the game info pane
-	private void initializeInventoryInfo() {
+	private void trackInventory() {
 		Inventory inventory = dungeon.getInventory();
 
 		// bomb
@@ -220,7 +207,7 @@ public class DungeonController {
 		});
 	}
 
-	private void initializeGoalInfo() {
+	private void trackGoal() {
 		Goal goal = dungeon.getGoal();
 		addGoalInfo(goal, goalInfo);
 	}
@@ -368,7 +355,9 @@ public class DungeonController {
 	public void switchNextDungeon() {
 		try {
 			this.nextDungeonScreen.load("advanced2.json");
-			this.nextDungeonScreen.start(getDungeon().getInventory());
+			// TODO
+			// this.nextDungeonScreen.start(getDungeon().getInventory());
+			this.nextDungeonScreen.start();
 			this.timeline.stop();
 		} catch (IOException e) {
 			System.out.println("no such file!");
@@ -379,19 +368,14 @@ public class DungeonController {
 		this.prevDungeonScreen.start();
 	}
 
-	public void start() {
-		this.timeline.play();
-	}
-
-
 	// TODO maybe change?
 	public void removeEntityImage(Entity entity) {
-		this.getSquares().getChildren().remove(entity.getNode());
+		this.squares.getChildren().remove(entity.getNode());
 	}
 
 	public void addEntityImage(Entity entity) {
 		this.loader.onLoad(entity);
-		this.getSquares().getChildren().add(entity.getNode());
+		this.squares.getChildren().add(entity.getNode());
 	}
 
 }
