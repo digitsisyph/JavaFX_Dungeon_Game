@@ -27,6 +27,21 @@
             </Text>
             <VBox fx:id="inventoryInfo" prefHeight="93.0" prefWidth="180.0" spacing="10.0">
                <children>
+                  <Label fx:id="treasureInfo" text="Treasure">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../../../../images/gold_pile.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
                   <Label fx:id="bombInfo" text="Bomb">
                      <graphic>
                         <ImageView>
@@ -53,21 +68,6 @@
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
-                  </Label>
-                  <Label fx:id="treasureInfo" text="Treasure">
-                     <graphic>
-                        <ImageView>
-                           <image>
-                              <Image url="@../../../../images/gold_pile.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
                   </Label>
                   <Label fx:id="keyInfo" text="Key">
                      <graphic>

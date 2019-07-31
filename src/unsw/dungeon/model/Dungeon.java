@@ -17,6 +17,7 @@ import unsw.dungeon.model.entities.enemies.StoneEnemy;
 import unsw.dungeon.model.entities.potions.Potion;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
+import unsw.dungeon.model.status.Status;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -33,10 +34,12 @@ import java.util.stream.Collectors;
  */
 public class Dungeon {
 
+	// TODO delete the controller
 	private DungeonController controller;
 	private final int width, height;
 	private ListProperty<Entity> entities;
 	private Player player;
+	private Status status;
 	private Inventory inventory;
 	private Goal goal;
 	private boolean gameOver;
@@ -48,6 +51,7 @@ public class Dungeon {
 		this.player = null;
 		this.controller = null;
 		this.inventory = new Inventory();
+		this.status = new Status();
 		this.goal = null;
 		this.gameOver = false;
 	}
@@ -137,9 +141,14 @@ public class Dungeon {
 		return inventory;
 	}
 
+	public Status getStatus() {
+		return status;
+	}
+
 	public Goal getGoal() {
 		return goal;
 	}
+
 
 	// functions for entities
 
@@ -177,9 +186,8 @@ public class Dungeon {
 		}
 
 		// update all all observers
-		//System.out.println("Player @ " + player.getX() + " " + player.getY());
 		goal.update();
-		inventory.updatePerMovement();
+		status.updatePerMovement();
 		getEnemies().forEach(Enemy::updatePerMovement);
 		getLitBombs().forEach(LitBomb::updatePerMovement);
 	}
@@ -232,10 +240,10 @@ public class Dungeon {
 		System.out.println("pick up " + potion);
 		switch (potion.type()) {
 			case INVINCIBLEPOTION:
-				this.getInventory().becomeInvincible();
+				this.status.becomeInvincible();
 				break;
 			case INVISIBLEPOTION:
-				this.getInventory().becomeInvisible();
+				this.status.becomeInvisible();
 				break;
 		}
 		removeEntity(potion);
@@ -250,7 +258,7 @@ public class Dungeon {
 	// --- other interactions
 
 	public boolean isPlayerInvincible() {
-		return inventory.isInvincible();
+		return status.isInvincible();
 	}
 
 	public void fightEnemy(Enemy enemy) {
