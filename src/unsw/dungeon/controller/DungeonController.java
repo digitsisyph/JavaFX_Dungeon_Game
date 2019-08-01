@@ -103,6 +103,7 @@ public class DungeonController {
 			trackInventory();
 			trackStatus();
 			this.timeline.play();
+			this.playBGM();
 		} else {
 			System.out.println("Dungeon has not been set!");
 		}
@@ -418,5 +419,13 @@ public class DungeonController {
 
 	public void explodeSound() {
 		DungeonSoundPlayer.explodeSound();
+	}
+
+	public void gameOverSound() {
+		DungeonSoundPlayer.gameOverSound();
+	}
+
+	public void playBGM() {
+		DungeonSoundPlayer.playBGM();
 	}
 }

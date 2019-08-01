@@ -355,6 +355,7 @@ public class Dungeon {
 		if (!isPlayerInvincible()) {
 			removeEntity(this.player);
 			this.player = null;
+			controller.gameOverSound();
 			gameOver();
 		}
 	}

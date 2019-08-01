@@ -11,6 +11,9 @@ public class DungeonSoundPlayer {
     private static AudioClip achieveItemSound = new AudioClip(new File("sounds/achieve_item.mp3").toURI().toString());
     private static AudioClip switchFloorSound = new AudioClip(new File("sounds/switch_floor.mp3").toURI().toString());
     private static AudioClip explodeSound = new AudioClip(new File("sounds/explosion.mp3").toURI().toString());
+    private static AudioClip gameOverSound = new AudioClip(new File("sounds/gameover.mp3").toURI().toString());
+    private static AudioClip BGM = new AudioClip(new File("sounds/bg.mp3").toURI().toString());
+
 
     public static void fightSound() {
         fightSound.play();
@@ -34,5 +37,14 @@ public class DungeonSoundPlayer {
 
     public static void explodeSound() {
         explodeSound.play();
+    }
+
+    public static void gameOverSound() {
+        gameOverSound.play();
+    }
+
+    public static void playBGM() {
+        BGM.stop();
+        BGM.play();
     }
 }
