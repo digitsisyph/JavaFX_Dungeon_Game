@@ -202,6 +202,7 @@ public class Dungeon {
 	// for picking up entities
 
 	public void pickUp(Entity entity) {
+		controller.achieveItemSound();
 		switch (entity.type()) {
 		case SWORD:
 			pickUpSword((Sword) entity);
@@ -269,6 +270,7 @@ public class Dungeon {
 	}
 
 	public void fightEnemy(Enemy enemy) {
+		controller.fightSound();
 		if (isPlayerInvincible()) {
 			removeEntity(enemy);
 		} else if (this.getInventory().useSword()) {
@@ -303,6 +305,7 @@ public class Dungeon {
 	}
 
 	public void explodeBomb(LitBomb bomb) {
+		controller.explodeSound();
 		// put exploded Bomb
 		addEntity(new ExplodedBomb(bomb.getX() + 1, bomb.getY(), this));
 		addEntity(new ExplodedBomb(bomb.getX() - 1, bomb.getY(), this));
@@ -352,15 +355,18 @@ public class Dungeon {
 		if (!isPlayerInvincible()) {
 			removeEntity(this.player);
 			this.player = null;
+			controller.gameOverSound();
 			gameOver();
 		}
 	}
 
 	public void switchNextDungeon() {
+		this.controller.switchFloorSound();
 		this.controller.switchNextDungeon();
 	}
 
 	public void switchPrevDungeon() {
+		this.controller.switchFloorSound();
 		this.controller.switchPrevDungeon();
 	}
 

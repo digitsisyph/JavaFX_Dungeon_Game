@@ -53,7 +53,6 @@ public class DungeonController {
 	private VBox goalInfo;
 	@FXML
 	private HBox root;
-
 	@FXML
 	private Label bombInfo;
 	@FXML
@@ -66,6 +65,7 @@ public class DungeonController {
 	private MenuScreen menuScreen;
 	private DungeonScreen nextDungeonScreen;
 	private DungeonScreen prevDungeonScreen;
+	private DungeonSoundPlayer dungeonSoundPlayer = new DungeonSoundPlayer();
 
 	private boolean isPaused = false;
 
@@ -103,6 +103,7 @@ public class DungeonController {
 			trackInventory();
 			trackStatus();
 			this.timeline.play();
+			this.playBGM();
 		} else {
 			System.out.println("Dungeon has not been set!");
 		}
@@ -396,4 +397,35 @@ public class DungeonController {
 		this.prevDungeonScreen.start();
 	}
 
+	public void fightSound() {
+		DungeonSoundPlayer.fightSound();
+	}
+
+	public void potionSound() {
+		DungeonSoundPlayer.potionSound();
+	}
+
+	public void doorSound() {
+		DungeonSoundPlayer.doorSound();
+	}
+
+	public void achieveItemSound() {
+		DungeonSoundPlayer.achieveItemSound();
+	}
+
+	public void switchFloorSound() {
+		DungeonSoundPlayer.switchFloorSound();
+	}
+
+	public void explodeSound() {
+		DungeonSoundPlayer.explodeSound();
+	}
+
+	public void gameOverSound() {
+		DungeonSoundPlayer.gameOverSound();
+	}
+
+	public void playBGM() {
+		DungeonSoundPlayer.playBGM();
+	}
 }
