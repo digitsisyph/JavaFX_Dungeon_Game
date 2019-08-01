@@ -400,4 +400,23 @@ public class DungeonController {
 		DungeonSoundPlayer.fightSound();
 	}
 
+	public void potionSound() {
+		DungeonSoundPlayer.potionSound();
+	}
+
+	public void doorSound() {
+		DungeonSoundPlayer.doorSound();
+	}
+
+	public void achieveItemSound() {
+		DungeonSoundPlayer.achieveItemSound();
+	}
+
+	public void switchFloorSound() {
+		DungeonSoundPlayer.switchFloorSound();
+	}
+
+	public void explodeSound() {
+		DungeonSoundPlayer.explodeSound();
+	}
 }

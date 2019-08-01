@@ -202,6 +202,7 @@ public class Dungeon {
 	// for picking up entities
 
 	public void pickUp(Entity entity) {
+		controller.achieveItemSound();
 		switch (entity.type()) {
 		case SWORD:
 			pickUpSword((Sword) entity);
@@ -304,6 +305,7 @@ public class Dungeon {
 	}
 
 	public void explodeBomb(LitBomb bomb) {
+		controller.explodeSound();
 		// put exploded Bomb
 		addEntity(new ExplodedBomb(bomb.getX() + 1, bomb.getY(), this));
 		addEntity(new ExplodedBomb(bomb.getX() - 1, bomb.getY(), this));
@@ -358,10 +360,12 @@ public class Dungeon {
 	}
 
 	public void switchNextDungeon() {
+		this.controller.switchFloorSound();
 		this.controller.switchNextDungeon();
 	}
 
 	public void switchPrevDungeon() {
+		this.controller.switchFloorSound();
 		this.controller.switchPrevDungeon();
 	}
 
