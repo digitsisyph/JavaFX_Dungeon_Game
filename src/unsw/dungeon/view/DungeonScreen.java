@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import unsw.dungeon.DungeonControllerLoader;
 import unsw.dungeon.controller.DungeonController;
-import unsw.dungeon.model.inventory.Inventory;
+import unsw.dungeon.model.Dungeon;
 
 import java.io.IOException;
 
@@ -44,12 +44,12 @@ public class DungeonScreen {
         this.controller.startDungeon();
     }
 
-    public void start(Inventory inventory) {
+    public void start(Dungeon prev_dungeon) {
         scene.getRoot().requestFocus();
         stage.setTitle(title);
         stage.setScene(scene);
         stage.show();
-        this.controller.getDungeon().setInventory(inventory);
+        this.controller.getDungeon().inheritFrom(prev_dungeon);
         this.controller.startDungeon();
     }
 

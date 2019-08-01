@@ -383,12 +383,10 @@ public class DungeonController {
 	}
 
 	public void switchNextDungeon() {
+		this.timeline.stop();
 		try {
 			this.nextDungeonScreen.load("advanced2.json");
-			// TODO
-			this.nextDungeonScreen.start(getDungeon().getInventory());
-			//this.nextDungeonScreen.start();
-			this.timeline.stop();
+			this.nextDungeonScreen.start(getDungeon());
 		} catch (IOException e) {
 			System.out.println("no such file!");
 		}

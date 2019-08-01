@@ -367,4 +367,9 @@ public class Dungeon {
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
 	}
+
+	public void inheritFrom(Dungeon prev_dungeon) {
+		this.inventory = prev_dungeon.getInventory();
+		this.status = prev_dungeon.getStatus();
+	}
 }
