@@ -16,13 +16,15 @@ public class DungeonScreen {
     private String title = "Dungeon Game";
     private DungeonController controller;
     private Scene scene;
+    private String map;
 
     public DungeonScreen(Stage stage) {
         this.stage = stage;
-        this.controller = new DungeonController();
+        this.controller = new DungeonController(this);
     }
 
     public void load(String mapJson) throws IOException {
+        this.map = mapJson;
         // use ControllerLoader to load map from a json file
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(mapJson);
 
@@ -42,6 +44,15 @@ public class DungeonScreen {
         stage.setScene(scene);
         stage.show();
         this.controller.startDungeon();
+    }
+
+    public void restart() {
+        try {
+            this.load(map);
+            this.start();
+        } catch (Exception e) {
+            System.out.println("restart fault!");
+        }
     }
 
     public void start(Dungeon prev_dungeon) {

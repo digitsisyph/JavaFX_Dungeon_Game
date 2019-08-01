@@ -63,6 +63,7 @@ public class DungeonController {
 	private Label keyInfo;
 
 	private MenuScreen menuScreen;
+	private DungeonScreen currDungeonScreen;
 	private DungeonScreen nextDungeonScreen;
 	private DungeonScreen prevDungeonScreen;
 	private DungeonSoundPlayer dungeonSoundPlayer = new DungeonSoundPlayer();
@@ -75,8 +76,8 @@ public class DungeonController {
 	private Timeline timeline;
 
 
-	public DungeonController() {
-		// pass
+	public DungeonController(DungeonScreen screen) {
+		this.currDungeonScreen = screen;
 	}
 
 	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, DungeonControllerLoader loader) {
@@ -339,7 +340,6 @@ public class DungeonController {
 		StackPane pane = new StackPane();
 		pane.setStyle("-fx-background-color: #000000");
 
-
 		Text info = new Text("Game Over \n\n" + gameOverInfo + "\n\n");
 		info.setTextAlignment(TextAlignment.CENTER);
 		info.setFont(new Font(18));
@@ -349,17 +349,14 @@ public class DungeonController {
 		backButton.setPadding(new Insets(10, 10, 10, 10));
 		backButton.setOnAction(event -> menuScreen.start());
 
-		//Button retryButton = new Button("Retry");
-		//retryButton.setPadding(new Insets(10, 10, 10, 10));
-		//retryButton.setOnAction(event -> {
-		//	loader.loadController(this);
-		//	pane.getScene().setRoot(root);
-		//	this.squares.getChildren().clear();
-		//	this.initialize();
-		//});
+		Button retryButton = new Button("Retry");
+		retryButton.setPadding(new Insets(10, 10, 10, 10));
+		retryButton.setOnAction(event -> {
+			this.currDungeonScreen.restart();
+		});
 
 		VBox vbox = new VBox();
-		vbox.getChildren().addAll(info, backButton);
+		vbox.getChildren().addAll(info, backButton, retryButton);
 		vbox.setAlignment(Pos.CENTER);
 		pane.getChildren().add(vbox);
 
