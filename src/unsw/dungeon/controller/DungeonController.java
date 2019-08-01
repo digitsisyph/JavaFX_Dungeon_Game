@@ -53,7 +53,6 @@ public class DungeonController {
 	private VBox goalInfo;
 	@FXML
 	private HBox root;
-
 	@FXML
 	private Label bombInfo;
 	@FXML
@@ -66,6 +65,7 @@ public class DungeonController {
 	private MenuScreen menuScreen;
 	private DungeonScreen nextDungeonScreen;
 	private DungeonScreen prevDungeonScreen;
+	private DungeonSoundPlayer dungeonSoundPlayer = new DungeonSoundPlayer();
 
 	private boolean isPaused = false;
 
@@ -394,6 +394,10 @@ public class DungeonController {
 
 	public void switchPrevDungeon() {
 		this.prevDungeonScreen.start();
+	}
+
+	public void fightSound() {
+		DungeonSoundPlayer.fightSound();
 	}
 
 }

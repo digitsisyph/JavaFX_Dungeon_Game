@@ -269,6 +269,7 @@ public class Dungeon {
 	}
 
 	public void fightEnemy(Enemy enemy) {
+		controller.fightSound();
 		if (isPlayerInvincible()) {
 			removeEntity(enemy);
 		} else if (this.getInventory().useSword()) {

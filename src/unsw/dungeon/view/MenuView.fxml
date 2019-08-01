@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -13,9 +15,19 @@
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
+            <ImageView fitHeight="152.0" fitWidth="200.0">
+               <image>
+                  <Image url="@../../../../images/bg.jpg" />
+               </image>
+            </ImageView>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dungeon" textAlignment="CENTER">
                <font>
                   <Font name="Courier Bold Oblique" size="40.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Presented by Ubisoft from UNSW">
+               <font>
+                  <Font name="AppleGothic Regular" size="13.0" />
                </font>
             </Text>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
@@ -38,6 +50,7 @@
                               <Font name="System Font" size="15.0" />
                            </font>
                         </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A beautiful princess is looted! You need to rescure her! " />
                         <Button fx:id="storyStartButton" mnemonicParsing="false" onAction="#handleStoryStartButton" text="Start" />
                      </children>
                   </VBox>
