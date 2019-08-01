@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.212" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
@@ -25,11 +25,12 @@
                   <Font name="Courier Bold Oblique" size="40.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Presented by Ubisoft from UNSW">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Presented by team Ubisoft from UNSW">
                <font>
                   <Font name="AppleGothic Regular" size="13.0" />
                </font>
             </Text>
+            <Text fx:id="warning" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
@@ -50,7 +51,7 @@
                               <Font name="System Font" size="15.0" />
                            </font>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A beautiful princess is looted! You need to rescure her! " />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The Princess has been kidnapped! You must rescue her!" />
                         <Button fx:id="storyStartButton" mnemonicParsing="false" onAction="#handleStoryStartButton" text="Start" />
                      </children>
                   </VBox>

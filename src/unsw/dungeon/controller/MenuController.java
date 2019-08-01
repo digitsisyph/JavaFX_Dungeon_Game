@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.text.Text;
 import unsw.dungeon.view.DungeonScreen;
 
 import java.io.File;
@@ -11,11 +12,13 @@ import java.io.IOException;
 
 public class MenuController {
     @FXML
-    private ChoiceBox dungeonChoice;
+    private ChoiceBox<String> dungeonChoice;
     @FXML
     private Button freeStartButton;
     @FXML
     private Button storyStartButton;
+    @FXML
+    private Text warning;
 
     private DungeonScreen dungeonScreen;
 
@@ -35,10 +38,11 @@ public class MenuController {
     public void handleFreeStartButton(ActionEvent event) {
         try {
             dungeonScreen.load(dungeonChoice.getValue().toString());
-        } catch (IOException e) {
-            System.out.println(e);
+            warning.setText("");
+            dungeonScreen.start();
+        } catch (Exception e) {
+            warning.setText("Choose one");
         }
-        dungeonScreen.start();
     }
 
     @FXML
