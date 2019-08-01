@@ -15,7 +15,7 @@ public class DungeonApplication extends Application {
 		//// use ControllerLoader to load map from a json file
 		//DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
 		//// create a Controller from the ControllerLoader
-		//DungeonController controller = dungeonLoader.loadController();
+		//FreeDungeonController controller = dungeonLoader.loadController();
 
 		//FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
 		//loader.setController(controller);

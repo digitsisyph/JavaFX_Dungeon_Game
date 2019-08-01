@@ -41,7 +41,7 @@ import java.util.List;
  * @author Robert Clifton-Everest
  *
  */
-public class DungeonController {
+public abstract class DungeonController {
 
 	@FXML
 	private GridPane squares;
@@ -137,7 +137,7 @@ public class DungeonController {
 		trackGoal();
 	}
 
-	private void trackEntities() {
+	void trackEntities() {
 		dungeon.getEntitiesProperty().addListener(
 				new ListChangeListener<Entity>() {
 					public void onChanged(Change change) {
@@ -320,13 +320,13 @@ public class DungeonController {
 		this.isPaused = false;
 	}
 
-	private void darkleScreen() {
+	void darkleScreen() {
 		ColorAdjust colorAdjust = new ColorAdjust();
 		colorAdjust.setBrightness(-0.8);
 		root.setEffect(colorAdjust);
 	}
 
-	private void lightenScreen() {
+	void lightenScreen() {
 		ColorAdjust colorAdjust = new ColorAdjust();
 		colorAdjust.setBrightness(0);
 		root.setEffect(colorAdjust);
@@ -335,7 +335,7 @@ public class DungeonController {
 
 	// game over
 	public void gameOver(String gameOverInfo) {
-		timeline.stop();
+		getTimeline().stop();
 
 		StackPane pane = new StackPane();
 		pane.setStyle("-fx-background-color: #000000");
@@ -351,9 +351,7 @@ public class DungeonController {
 
 		Button retryButton = new Button("Retry");
 		retryButton.setPadding(new Insets(10, 10, 10, 10));
-		retryButton.setOnAction(event -> {
-			this.currDungeonScreen.restart();
-		});
+		retryButton.setOnAction(event -> this.restart());
 
 		VBox vbox = new VBox();
 		vbox.getChildren().addAll(info, backButton, retryButton);
@@ -424,5 +422,15 @@ public class DungeonController {
 
 	public void playBGM() {
 		DungeonSoundPlayer.playBGM();
+	}
+
+	public Timeline getTimeline() {
+		return timeline;
+	}
+
+	public abstract void restart();
+
+	public DungeonScreen getCurrDungeonScreen() {
+		return currDungeonScreen;
 	}
 }
