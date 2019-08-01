@@ -6,7 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import unsw.dungeon.controller.DungeonController;
+import unsw.dungeon.controller.FreeDungeonController;
 import unsw.dungeon.model.entities.Entity;
 
 import java.io.FileNotFoundException;
@@ -87,11 +87,11 @@ public class DungeonControllerLoader extends DungeonLoader {
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	public DungeonController loadController() throws FileNotFoundException {
-		return new DungeonController(load(), entities, this);
+	public FreeDungeonController loadController() throws FileNotFoundException {
+		return new FreeDungeonController(load(), entities, this);
 	}
 
-	public void loadController(DungeonController controller) {
+	public void loadController(FreeDungeonController controller) {
 		controller.setDungeon(load());
 		controller.setInitialEntities(entities);
 		controller.setLoader(this);
