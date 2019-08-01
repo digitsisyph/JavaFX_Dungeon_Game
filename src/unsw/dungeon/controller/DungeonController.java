@@ -164,11 +164,13 @@ public class DungeonController {
 		Inventory inventory = dungeon.getInventory();
 
 		// treasure
+		treasureInfo.setText("Collected Treasures: " + inventory.getNumTreasuresProperty().get());
 		inventory.getNumTreasuresProperty().addListener(
 				(observable, oldValue, newValue) ->
 						treasureInfo.setText("Collected Treasures: " + newValue)
 		);
 		// bomb
+		bombInfo.setText("Collected Bombs: " + inventory.getBombNumProperty().get());
 		inventory.getBombNumProperty().addListener(
 				(observable, oldValue, newValue) -> {
 					if ((int) newValue > 0) {
@@ -178,7 +180,11 @@ public class DungeonController {
 						bombInfo.setVisible(false);
 				});
 		// sword
-		swordInfo.setVisible(false);	// invisible at first
+		if (inventory.getSwordDurabilityProperty().get() > 0) {
+			swordInfo.setVisible(true);
+			swordInfo.setText("Sword Durability: " + inventory.getSwordDurabilityProperty().get());
+		} else
+			swordInfo.setVisible(false);
 		inventory.getSwordDurabilityProperty().addListener(
 				(observable, oldValue, newValue) -> {
 					if ((int) newValue > 0) {
@@ -188,7 +194,11 @@ public class DungeonController {
 						swordInfo.setVisible(false);
 				});
 		// key
-		keyInfo.setVisible(false);
+		if ((int) inventory.getKeyIDProperty().get() >= 0) {
+			keyInfo.setVisible(true);
+			keyInfo.setText("Key");
+		} else
+			keyInfo.setVisible(false);
 		inventory.getKeyIDProperty().addListener(
 				(observable, oldValue, newValue) -> {
 					if ((int) newValue >= 0) {
