@@ -4,6 +4,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -60,6 +61,14 @@ public abstract class DungeonController {
 	private Label treasureInfo;
 	@FXML
 	private Label keyInfo;
+
+	@FXML
+	private Button pauseButton;
+	@FXML
+	private Button retryButton;
+	@FXML
+	private Button menuButton;
+
 
 	private MenuScreen menuScreen;
 	private DungeonScreen currDungeonScreen;
@@ -304,6 +313,9 @@ public abstract class DungeonController {
 			pauseGame();
 		else
 			resumeGame();
+		pauseButton.setText(isPaused ? "Resume" : "Pause");
+		retryButton.setVisible(isPaused);
+		menuButton.setVisible(isPaused);
 	}
 
 	private void pauseGame() {
@@ -321,13 +333,13 @@ public abstract class DungeonController {
 	void darkleScreen() {
 		ColorAdjust colorAdjust = new ColorAdjust();
 		colorAdjust.setBrightness(-0.8);
-		root.setEffect(colorAdjust);
+		squares.setEffect(colorAdjust);
 	}
 
 	void lightenScreen() {
 		ColorAdjust colorAdjust = new ColorAdjust();
 		colorAdjust.setBrightness(0);
-		root.setEffect(colorAdjust);
+		squares.setEffect(colorAdjust);
 	}
 
 
@@ -362,6 +374,22 @@ public abstract class DungeonController {
 
 	public Dungeon getDungeon() {
 		return this.dungeon;
+	}
+
+	@FXML
+	void pressPause(ActionEvent event) {
+		isPaused = false;
+		pause();
+	}
+
+	@FXML
+	void pressRetry(ActionEvent event) {
+		this.restart();
+	}
+
+	@FXML
+	void pressMenu(ActionEvent event) {
+		menuScreen.start();
 	}
 
 
