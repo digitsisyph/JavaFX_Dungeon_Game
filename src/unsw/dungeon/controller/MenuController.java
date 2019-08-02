@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.text.Text;
+import unsw.dungeon.view.DungeonMakerScreen;
 import unsw.dungeon.view.DungeonScreen;
 
 import java.io.File;
@@ -18,9 +19,12 @@ public class MenuController {
     private Button storyStartButton;
     @FXML
     private Text warning;
+    @FXML
+    private Button createButton;
 
     private DungeonScreen freeDungeonScreen;
     private DungeonScreen storyDungeonScreen;
+    private DungeonMakerScreen makerScreen;
 
     @FXML
     public void initialize() {
@@ -49,6 +53,10 @@ public class MenuController {
     public void handleStoryStartButton(ActionEvent event) {
         storyDungeonScreen.restart();
     }
+    
+    @FXML void handleCreateButton(ActionEvent event) {
+    	makerScreen.start();
+    }
 
     public void setFreeDungeonScreen(DungeonScreen dungeonScreen) {
         this.freeDungeonScreen = dungeonScreen;
@@ -58,5 +66,8 @@ public class MenuController {
         this.storyDungeonScreen = dungeonScreen;
     }
 
+    public void setMakerScreen(DungeonMakerScreen screen) {
+        this.makerScreen = screen;
+    }
 
 }

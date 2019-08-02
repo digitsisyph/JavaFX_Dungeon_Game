@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane fx:id="square" gridLinesVisible="true" layoutX="10.0" layoutY="10.0" />
+      <Button fx:id="createButton" layoutX="212.0" layoutY="434.0" mnemonicParsing="false" onAction="#handleCreateButton" text="Create" />
+      <Button fx:id="backButton" layoutX="449.0" layoutY="434.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" />
+   </children>
+</Pane>

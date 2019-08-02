@@ -3,6 +3,7 @@ package unsw.dungeon;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import unsw.dungeon.loader.DungeonLevelLoader;
+import unsw.dungeon.view.DungeonMakerScreen;
 import unsw.dungeon.view.DungeonScreen;
 import unsw.dungeon.view.MenuScreen;
 
@@ -16,23 +17,19 @@ public class DungeonApplication extends Application {
 		// create the menu screen and dungeon screen
 		MenuScreen menuScreen = new MenuScreen(primaryStage);
 		DungeonScreen freeDungeonScreen = new DungeonScreen(primaryStage);
+		DungeonMakerScreen makerScreen = new DungeonMakerScreen(primaryStage);
 
 		// create the storyDungeon screen
-		String[] levels_json = new String[] {
-				"intro.json",
-				"level1.json",
-				"level6.json",
-				"level7.json",
-				"level8.json",
-		};
+		String[] levels_json = new String[] { "intro.json", "level1.json", "level6.json", "level7.json",
+				"level8.json", };
 		DungeonScreen storyDungeonScreen = DungeonLevelLoader.loadLevels(levels_json, primaryStage, menuScreen);
 
 		// link the menu and dungeon screen
 		freeDungeonScreen.getController().setMenuScreen(menuScreen);
 		menuScreen.getController().setFreeDungeonScreen(freeDungeonScreen);
 		menuScreen.getController().setStoryDungeonScreen(storyDungeonScreen);
-
-
+		menuScreen.getController().setMakerScreen(makerScreen);
+		makerScreen.getController().setMenuScreen(menuScreen);
 		menuScreen.start();
 	}
 
