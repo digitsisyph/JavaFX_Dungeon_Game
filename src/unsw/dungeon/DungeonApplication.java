@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import unsw.dungeon.loader.DungeonLevelLoader;
 import unsw.dungeon.view.DungeonScreen;
 import unsw.dungeon.view.MenuScreen;
 
@@ -12,32 +13,25 @@ public class DungeonApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
-		//// use ControllerLoader to load map from a json file
-		//DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
-		//// create a Controller from the ControllerLoader
-		//FreeDungeonController controller = dungeonLoader.loadController();
-
-		//FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
-		//loader.setController(controller);
-
-		//// get the root and set scene
-		//Parent root = loader.load();
-		//Scene scene = new Scene(root);
-		//root.requestFocus();
-
-		//// set primary stage
-		//primaryStage.setTitle("Dungeon");
-		//primaryStage.setScene(scene);
-		//primaryStage.show();
-
+		// create the menu screen and dungeon screen
 		MenuScreen menuScreen = new MenuScreen(primaryStage);
-		DungeonScreen dungeonScreen1 = new DungeonScreen(primaryStage);
-		dungeonScreen1.getController().setMenuScreen(menuScreen);
-		DungeonScreen dungeonScreen2 = new DungeonScreen(primaryStage);
-		dungeonScreen2.getController().setMenuScreen(menuScreen);
-		dungeonScreen2.getController().setPrevDungeonScreen(dungeonScreen1);
-		dungeonScreen1.getController().setNextDungeonScreen(dungeonScreen2);
-		menuScreen.getController().setDungeonScreen(dungeonScreen1);
+		DungeonScreen freeDungeonScreen = new DungeonScreen(primaryStage);
+
+		// create the storyDungeon screen
+		String[] levels_json = new String[] {
+				"intro.json",
+				//"level1.json",
+				"level6.json",
+				"level7.json",
+				"level8.json",
+		};
+		DungeonScreen storyDungeonScreen = DungeonLevelLoader.loadLevels(levels_json, primaryStage, menuScreen);
+
+		// link the menu and dungeon screen
+		freeDungeonScreen.getController().setMenuScreen(menuScreen);
+		menuScreen.getController().setFreeDungeonScreen(freeDungeonScreen);
+		menuScreen.getController().setStoryDungeonScreen(storyDungeonScreen);
+
 
 		menuScreen.start();
 	}
@@ -45,5 +39,4 @@ public class DungeonApplication extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-
 }

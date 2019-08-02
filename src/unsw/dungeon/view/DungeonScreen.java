@@ -4,7 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import unsw.dungeon.DungeonControllerLoader;
+import unsw.dungeon.loader.DungeonControllerLoader;
 import unsw.dungeon.controller.FreeDungeonController;
 import unsw.dungeon.model.Dungeon;
 

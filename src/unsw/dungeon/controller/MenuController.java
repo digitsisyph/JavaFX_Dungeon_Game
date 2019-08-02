@@ -8,7 +8,6 @@ import javafx.scene.text.Text;
 import unsw.dungeon.view.DungeonScreen;
 
 import java.io.File;
-import java.io.IOException;
 
 public class MenuController {
     @FXML
@@ -20,7 +19,8 @@ public class MenuController {
     @FXML
     private Text warning;
 
-    private DungeonScreen dungeonScreen;
+    private DungeonScreen freeDungeonScreen;
+    private DungeonScreen storyDungeonScreen;
 
     @FXML
     public void initialize() {
@@ -37,9 +37,9 @@ public class MenuController {
     @FXML
     public void handleFreeStartButton(ActionEvent event) {
         try {
-            dungeonScreen.load(dungeonChoice.getValue().toString());
+            freeDungeonScreen.load(dungeonChoice.getValue().toString());
             warning.setText("");
-            dungeonScreen.start();
+            freeDungeonScreen.start();
         } catch (Exception e) {
             warning.setText("Choose one");
         }
@@ -47,16 +47,15 @@ public class MenuController {
 
     @FXML
     public void handleStoryStartButton(ActionEvent event) {
-        try {
-            dungeonScreen.load("intro.json");
-            dungeonScreen.start();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        storyDungeonScreen.start();
     }
 
-    public void setDungeonScreen(DungeonScreen dungeonScreen) {
-        this.dungeonScreen = dungeonScreen;
+    public void setFreeDungeonScreen(DungeonScreen dungeonScreen) {
+        this.freeDungeonScreen = dungeonScreen;
+    }
+
+    public void setStoryDungeonScreen(DungeonScreen dungeonScreen) {
+        this.storyDungeonScreen = dungeonScreen;
     }
 
 

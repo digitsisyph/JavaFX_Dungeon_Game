@@ -1,4 +1,4 @@
-package unsw.dungeon;
+package unsw.dungeon.loader;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
