@@ -1,4 +1,4 @@
-package unsw.dungeon;
+package unsw.dungeon.loader;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

@@ -22,7 +22,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
-import unsw.dungeon.DungeonControllerLoader;
+import unsw.dungeon.loader.DungeonControllerLoader;
 import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.Entity;
@@ -32,7 +32,6 @@ import unsw.dungeon.model.status.Status;
 import unsw.dungeon.view.DungeonScreen;
 import unsw.dungeon.view.MenuScreen;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -380,16 +379,12 @@ public abstract class DungeonController {
 
 	public void switchNextDungeon() {
 		this.timeline.stop();
-		try {
-			this.nextDungeonScreen.load("advanced2.json");
-			this.nextDungeonScreen.start(getDungeon());
-		} catch (IOException e) {
-			System.out.println("no such file!");
-		}
+		this.nextDungeonScreen.start(getDungeon());
 	}
 
 	public void switchPrevDungeon() {
-		this.prevDungeonScreen.start();
+		this.timeline.stop();
+		this.prevDungeonScreen.start(getDungeon());
 	}
 
 	public void fightSound() {

@@ -3,7 +3,7 @@ package unsw.dungeon.controller;
 import javafx.scene.media.AudioClip;
 import java.io.File;
 
-public class DungeonSoundPlayer {
+class DungeonSoundPlayer {
 
     private static AudioClip fightSound = new AudioClip(new File("sounds/fight.mp3").toURI().toString());
     private static AudioClip potionSound = new AudioClip(new File("sounds/potion.mp3").toURI().toString());
@@ -15,41 +15,41 @@ public class DungeonSoundPlayer {
     private static AudioClip BGM = new AudioClip(new File("sounds/bg.mp3").toURI().toString());
 
 
-    public static void fightSound() {
+    static void fightSound() {
         fightSound.play();
     }
 
-    public static void potionSound() {
+    static void potionSound() {
         potionSound.play();
     }
 
-    public static void doorSound() {
+    static void doorSound() {
         doorSound.play();
     }
 
-    public static void achieveItemSound() {
+    static void achieveItemSound() {
         achieveItemSound.play();
     }
 
-    public static void switchFloorSound() {
+    static void switchFloorSound() {
         switchFloorSound.play();
     }
 
-    public static void explodeSound() {
+    static void explodeSound() {
         explodeSound.play();
     }
 
-    public static void gameOverSound() {
+    static void gameOverSound() {
         gameOverSound.play();
     }
 
-    public static void playBGM() {
+    static void playBGM() {
         BGM.setCycleCount(AudioClip.INDEFINITE);
         BGM.stop();
         BGM.play();
     }
 
-    public static void stopBGM() {
+    static void stopBGM() {
         BGM.stop();
     }
 }

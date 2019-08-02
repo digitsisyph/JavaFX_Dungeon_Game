@@ -1,7 +1,7 @@
 package unsw.dungeon.controller;
 
 import javafx.scene.image.ImageView;
-import unsw.dungeon.DungeonControllerLoader;
+import unsw.dungeon.loader.DungeonControllerLoader;
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.view.DungeonScreen;
 import unsw.dungeon.view.MenuScreen;
