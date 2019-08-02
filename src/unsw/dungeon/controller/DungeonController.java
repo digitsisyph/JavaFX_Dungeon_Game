@@ -66,7 +66,6 @@ public abstract class DungeonController {
 	private DungeonScreen currDungeonScreen;
 	private DungeonScreen nextDungeonScreen;
 	private DungeonScreen prevDungeonScreen;
-	private DungeonSoundPlayer dungeonSoundPlayer = new DungeonSoundPlayer();
 
 	private boolean isPaused = false;
 
@@ -335,6 +334,7 @@ public abstract class DungeonController {
 
 	// game over
 	public void gameOver(String gameOverInfo) {
+		DungeonSoundPlayer.stopBGM();
 		getTimeline().stop();
 
 		StackPane pane = new StackPane();

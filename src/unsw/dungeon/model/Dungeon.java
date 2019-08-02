@@ -202,25 +202,27 @@ public class Dungeon {
 	// for picking up entities
 
 	public void pickUp(Entity entity) {
-		controller.achieveItemSound();
 		switch (entity.type()) {
 		case SWORD:
 			pickUpSword((Sword) entity);
+			controller.achieveItemSound();
 			break;
 		case TREASURE:
 			pickUpTreasure((Treasure) entity);
+			controller.achieveItemSound();
 			break;
 		case UNLITBOMB:
 			pickUpBomb((UnlitBomb) entity);
-			break;
-		case INVINCIBLEPOTION:
-			pickUpPotion((Potion) entity);
-			break;
-		case INVISIBLEPOTION:
-			pickUpPotion((Potion) entity);
+			controller.achieveItemSound();
 			break;
 		case KEY:
 			pickUpKey((Key) entity);
+			controller.achieveItemSound();
+			break;
+		case INVINCIBLEPOTION:
+		case INVISIBLEPOTION:
+			pickUpPotion((Potion) entity);
+			controller.potionSound();
 			break;
 		default:
 			break;
@@ -292,6 +294,7 @@ public class Dungeon {
 		else {
 			this.getInventory().useKey();
 			door.open();
+			this.controller.doorSound();
 		}
 	}
 

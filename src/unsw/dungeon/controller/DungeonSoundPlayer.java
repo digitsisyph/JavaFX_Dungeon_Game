@@ -44,7 +44,12 @@ public class DungeonSoundPlayer {
     }
 
     public static void playBGM() {
+        BGM.setCycleCount(AudioClip.INDEFINITE);
         BGM.stop();
         BGM.play();
+    }
+
+    public static void stopBGM() {
+        BGM.stop();
     }
 }
