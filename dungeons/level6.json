@@ -99,11 +99,6 @@
     },
     {
       "x": 1,
-      "y": 1,
-      "type": "player"
-    },
-    {
-      "x": 1,
       "y": 2,
       "type": "wall"
     },
@@ -631,6 +626,16 @@
       "x": 17,
       "y": 15,
       "type": "wall"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "type": "down_floor"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "type": "player"
     }
   ],
   "goal-condition": {

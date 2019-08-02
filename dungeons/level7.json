@@ -252,18 +252,13 @@
         {
             "x": 7,
             "y": 5,
-            "type": "bomb"
+            "type": "exit"
         },
         {
             "x": 7,
             "y": 6,
             "type": "door",
             "id": 4
-        },
-        {
-            "x": 7,
-            "y": 9,
-            "type": "player"
         },
         {
             "x": 7,
@@ -509,6 +504,16 @@
             "x": 14,
             "y": 14,
             "type": "wall"
+        },
+        {
+            "x": 7,
+            "y": 9,
+            "type": "down_floor"
+        },
+        {
+            "x": 7,
+            "y": 9,
+            "type": "player"
         }
     ],
     "width": 15,

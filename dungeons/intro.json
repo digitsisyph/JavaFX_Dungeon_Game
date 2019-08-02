@@ -49,11 +49,6 @@
     },
     {
       "x": 3,
-      "y": 6,
-      "type": "player"
-    },
-    {
-      "x": 3,
       "y": 3,
       "type": "wizard"
     },
@@ -61,6 +56,11 @@
       "x": 3,
       "y": 1,
       "type": "up_floor"
+    },
+    {
+      "x": 3,
+      "y": 6,
+      "type": "player"
     }
   ],
   "goal-condition": {

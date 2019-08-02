@@ -20,7 +20,7 @@ public class DungeonApplication extends Application {
 		// create the storyDungeon screen
 		String[] levels_json = new String[] {
 				"intro.json",
-				//"level1.json",
+				"level1.json",
 				"level6.json",
 				"level7.json",
 				"level8.json",

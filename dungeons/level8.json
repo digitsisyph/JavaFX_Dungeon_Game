@@ -114,11 +114,6 @@
             "type": "wall"
         },
         {
-            "x": 3,
-            "y": 7,
-            "type": "player"
-        },
-        {
             "x": 6,
             "y": 1,
             "type": "door",
@@ -744,6 +739,16 @@
             "x": 17,
             "y": 15,
             "type": "wall"
+        },
+        {
+            "x": 3,
+            "y": 7,
+            "type": "down_floor"
+        },
+        {
+            "x": 3,
+            "y": 7,
+            "type": "player"
         }
     ],
     "goal-condition": {
