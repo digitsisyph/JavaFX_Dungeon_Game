@@ -39,7 +39,7 @@ public class MenuController {
         try {
             freeDungeonScreen.load(dungeonChoice.getValue().toString());
             warning.setText("");
-            freeDungeonScreen.start();
+            freeDungeonScreen.restart();
         } catch (Exception e) {
             warning.setText("Choose one");
         }
@@ -47,7 +47,7 @@ public class MenuController {
 
     @FXML
     public void handleStoryStartButton(ActionEvent event) {
-        storyDungeonScreen.start();
+        storyDungeonScreen.restart();
     }
 
     public void setFreeDungeonScreen(DungeonScreen dungeonScreen) {

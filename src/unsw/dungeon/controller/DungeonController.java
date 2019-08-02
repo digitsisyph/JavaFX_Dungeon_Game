@@ -320,28 +320,25 @@ public abstract class DungeonController {
 
 	private void pauseGame() {
 		timeline.stop();
-		darkleScreen();
+		DungeonSoundPlayer.stopBGM();
+
+		ColorAdjust colorAdjust = new ColorAdjust();
+		colorAdjust.setBrightness(-0.5);
+		squares.setEffect(colorAdjust);
+
 		this.isPaused = true;
 	}
 
 	private void resumeGame() {
 		timeline.play();
-		lightenScreen();
-		this.isPaused = false;
-	}
+		DungeonSoundPlayer.playBGM();
 
-	void darkleScreen() {
-		ColorAdjust colorAdjust = new ColorAdjust();
-		colorAdjust.setBrightness(-0.8);
-		squares.setEffect(colorAdjust);
-	}
-
-	void lightenScreen() {
 		ColorAdjust colorAdjust = new ColorAdjust();
 		colorAdjust.setBrightness(0);
 		squares.setEffect(colorAdjust);
-	}
 
+		this.isPaused = false;
+	}
 
 	// game over
 	public void gameOver(String gameOverInfo) {
@@ -358,15 +355,16 @@ public abstract class DungeonController {
 
 		Button backButton = new Button("Back to Menu");
 		backButton.setPadding(new Insets(10, 10, 10, 10));
-		backButton.setOnAction(event -> menuScreen.start());
+		backButton.setOnAction(event -> backToMenu());
 
 		Button retryButton = new Button("Retry");
 		retryButton.setPadding(new Insets(10, 10, 10, 10));
-		retryButton.setOnAction(event -> this.restart());
+		retryButton.setOnAction(event -> restart());
 
 		VBox vbox = new VBox();
-		vbox.getChildren().addAll(info, backButton, retryButton);
+		vbox.getChildren().addAll(info, retryButton, backButton);
 		vbox.setAlignment(Pos.CENTER);
+		vbox.setSpacing(10);
 		pane.getChildren().add(vbox);
 
 		root.getScene().setRoot(pane);
@@ -389,6 +387,11 @@ public abstract class DungeonController {
 
 	@FXML
 	void pressMenu(ActionEvent event) {
+		backToMenu();
+	}
+
+	private void backToMenu() {
+		DungeonSoundPlayer.stopBGM();
 		menuScreen.start();
 	}
 
