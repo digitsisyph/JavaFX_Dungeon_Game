@@ -15,11 +15,9 @@ import javafx.beans.property.StringProperty;
 public class DungeonMaker {
 
 	private StringProperty[][] cell;
-	private StringProperty filename;
 
 	public DungeonMaker() {
 		cell = new StringProperty[15][15];
-		filename = new SimpleStringProperty();
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
 				cell[i][j] = new SimpleStringProperty();
@@ -33,7 +31,7 @@ public class DungeonMaker {
 		JSONArray ent_list = new JSONArray();
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
-				if (cell[i][j].getValue().isEmpty()) {
+				if (cell[i][j].getValue() == null) {
 					continue;
 				}
 				JSONObject ent = new JSONObject();
