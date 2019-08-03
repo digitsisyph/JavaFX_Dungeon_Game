@@ -8,21 +8,13 @@ public class Inventory {
 	private TreasureInv treasure;
 	private SwordInv sword;
 	private KeyInv key;
-	private InvincibleState invincible;
 
 	public Inventory() {
 		this.bomb = new BombInv();
 		this.treasure = new TreasureInv();
 		this.sword = new SwordInv();
-		this.key = null;
-		this.invincible = new InvincibleState();
+		this.key = new KeyInv();
 	}
-
-	public void updatePerMovement() {
-		// decrease every step
-		this.invincible.nextState();
-	}
-
 
 	// --- treasure part ---
 
@@ -33,7 +25,6 @@ public class Inventory {
 	public int getTreasureNum() {
 		return this.treasure.getNumTreasures();
 	}
-
 
 	// --- sword part ---
 
@@ -53,10 +44,13 @@ public class Inventory {
 		return this.sword;
 	}
 
+	public void breakSword() {
+		this.sword.breakSword();
+	}
+
 	public int getSwordDurability() {
 		return this.sword.getDurability();
 	}
-
 
 	// -- bomb part ---
 
@@ -75,15 +69,14 @@ public class Inventory {
 		return this.bomb.getNumBombs();
 	}
 
-
 	// --- key part ---
 
-	public void pickKey(int id) {
-		this.key = new KeyInv(id);
+	public boolean pickKey(int id) {
+		return this.key.pickKey(id);
 	}
 
 	public void useKey() {
-		this.key = null;
+		this.key.consumeKey();
 	}
 
 	public KeyInv getKey() {
@@ -91,37 +84,11 @@ public class Inventory {
 	}
 
 	public int getKeyID() {
-		return this.key.getKeyId();
+		return this.key.getKeyID();
 	}
 
+	// --- controller part ---
 
-	// --- potion part ---
-
-	public void pickPotion() {
-		invincible.restore();
-	}
-
-	public int getInvincStep() {
-		return this.invincible.getRemainingTime();
-	}
-
-	public boolean isInvincible() {
-		return getInvincStep() != 0;
-	}
-
-
-	// for debug
-	public void debug() {
-		if (sword != null) {
-			System.out.println("The player has a sword, its durability is " + sword.getDurability());
-		}
-		System.out.println("The player has " + bomb.getNumBombs() + " bombs");
-		if (key != null) {
-			System.out.println("Player has key id: " + key.getKeyId());
-		}
-	}
-
-	// TODO for controller
 	public IntegerProperty getBombNumProperty() {
 		return bomb.getNumBombsProperty();
 	}
@@ -130,7 +97,11 @@ public class Inventory {
 		return sword.getDurabilityProperty();
 	}
 
-	public IntegerProperty getInvincibleRemainingProperty() {
-		return invincible.getRemainingTimeProperty();
+	public IntegerProperty getNumTreasuresProperty() {
+		return treasure.getNumTreasuresProperty();
+	}
+
+	public IntegerProperty getKeyIDProperty() {
+		return key.getKeyIDProperty();
 	}
 }

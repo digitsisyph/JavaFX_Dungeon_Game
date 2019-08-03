@@ -6,8 +6,9 @@ import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.bomb.LitBomb;
 import unsw.dungeon.model.entities.bomb.UnlitBomb;
 import unsw.dungeon.model.entities.door.Door;
-import unsw.dungeon.model.entities.enemies.HoundEnemy;
-import unsw.dungeon.model.entities.enemies.HumanEnemy;
+import unsw.dungeon.model.entities.enemy.HoundEnemy;
+import unsw.dungeon.model.entities.enemy.HumanEnemy;
+import unsw.dungeon.model.entities.potion.InvinciblePotion;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -69,38 +70,38 @@ public class testPlayerInteraction extends testSetup {
 	void testPickUpPotion() {
 		setup(5, 3, 1, 1);
 
-		dungeon.addEntity(new Potion(2, 1, dungeon));
-		dungeon.addEntity(new Potion(3, 1, dungeon));
+		dungeon.addEntity(new InvinciblePotion(2, 1, dungeon));
+		dungeon.addEntity(new InvinciblePotion(3, 1, dungeon));
 
-		assertEquals(2, dungeon.getEntities(EntityType.POTION).size());
-		assertEquals(false, dungeon.getInventory().isInvincible());
+		assertEquals(2, dungeon.getEntities(EntityType.INVINCIBLEPOTION).size());
+		assertEquals(false, dungeon.getStatus().isInvincible());
 
 		dungeon.movePlayer(Direction.RIGHT);
-		assertEquals(1, dungeon.getEntities(EntityType.POTION).size());
-		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
+		assertEquals(1, dungeon.getEntities(EntityType.INVINCIBLEPOTION).size());
+		assertEquals(true, dungeon.getStatus().isInvincible()); // at this point he becomes invincible
 
 		dungeon.tick();
-		assertEquals(4, dungeon.getInventory().getInvincStep());
+		assertEquals(4, dungeon.getStatus().getInvincibleStep());
 
 		dungeon.movePlayer(Direction.RIGHT); // collects another potion
-		assertEquals(0, dungeon.getEntities(EntityType.POTION).size());
-		assertEquals(true, dungeon.getInventory().isInvincible()); // at this point he becomes invincible
-		assertEquals(5, dungeon.getInventory().getInvincStep());
+		assertEquals(0, dungeon.getEntities(EntityType.INVINCIBLEPOTION).size());
+		assertEquals(true, dungeon.getStatus().isInvincible()); // at this point he becomes invincible
+		assertEquals(5, dungeon.getStatus().getInvincibleStep());
 
 		dungeon.tick();
-		assertEquals(4, dungeon.getInventory().getInvincStep());
+		assertEquals(4, dungeon.getStatus().getInvincibleStep());
 
 		dungeon.tick();
-		assertEquals(3, dungeon.getInventory().getInvincStep());
+		assertEquals(3, dungeon.getStatus().getInvincibleStep());
 
 		dungeon.tick();
-		assertEquals(2, dungeon.getInventory().getInvincStep());
+		assertEquals(2, dungeon.getStatus().getInvincibleStep());
 
 		dungeon.tick();
-		assertEquals(1, dungeon.getInventory().getInvincStep());
+		assertEquals(1, dungeon.getStatus().getInvincibleStep());
 
 		dungeon.tick();
-		assertEquals(false, dungeon.getInventory().isInvincible()); // no longer invincible
+		assertEquals(false, dungeon.getStatus().isInvincible()); // no longer invincible
 
 	}
 
@@ -115,7 +116,6 @@ public class testPlayerInteraction extends testSetup {
 		dungeon.addEntity(new Key(3, 1, dungeon, 20));
 
 		assertEquals(2, dungeon.getEntities(EntityType.KEY).size());
-		assertEquals(null, dungeon.getInventory().getKey());
 
 		dungeon.movePlayer(Direction.RIGHT);
 		assertNotEquals(null, dungeon.getInventory().getKey());
@@ -233,7 +233,7 @@ public class testPlayerInteraction extends testSetup {
 	void testBombInvinciblePlayer() {
 		setup(2,1,0,0);
 
-		dungeon.pickUp(new Potion(0, 0, dungeon));
+		dungeon.pickUp(new InvinciblePotion(0, 0, dungeon));
 
 		LitBomb bomb = new LitBomb(1, 0, dungeon);
 		dungeon.addEntity(bomb);
@@ -291,14 +291,11 @@ public class testPlayerInteraction extends testSetup {
 
 		dungeon.tryOpenDoor(door1);		// should success
 		assertTrue(door1.canPassThrough());
-		assertNull(dungeon.getInventory().getKey());	// key should be removed
-
 
 		dungeon.pickUp(new Key(0, 0, dungeon, 2));
 
 		dungeon.tryOpenDoor(door2);		// should success
 		assertTrue(door2.canPassThrough());
-		assertNull(dungeon.getInventory().getKey());	// key should be removed
 	}
 
 
@@ -440,7 +437,7 @@ public class testPlayerInteraction extends testSetup {
 
 		Boulder boulderRight = new Boulder(3, 2, dungeon);
 		dungeon.addEntity(boulderRight);
-		dungeon.addEntity(new Potion(4, 2, dungeon));
+		dungeon.addEntity(new InvinciblePotion(4, 2, dungeon));
 
 		dungeon.movePlayer(Direction.RIGHT); // pushing
 		assertEquals(4, boulderRight.getX());

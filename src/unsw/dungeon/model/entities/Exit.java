@@ -10,7 +10,8 @@ public class Exit extends Entity {
 		this.setImagePath("/exit.png");
 	}
 
-	public void collideWith(Entity entity) {;}
+	public void collideWith(Entity entity) {
+	}
 
 	@Override
 	public EntityType type() {

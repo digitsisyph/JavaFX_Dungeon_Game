@@ -16,6 +16,6 @@ public class SwitchGoal extends Goal {
 
 	@Override
 	public String toString() {
-		return ("Place one boulder on every switch");
+		return ("Boulders on all switches");
 	}
 }

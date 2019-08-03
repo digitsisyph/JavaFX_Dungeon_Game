@@ -2,22 +2,22 @@ package unsw.dungeon.model.entities;
 
 import unsw.dungeon.model.Dungeon;
 
-public class Potion extends Entity {
+public class UpFloor extends Entity {
 
-	public Potion(int x, int y, Dungeon dungeon) {
+	public UpFloor(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.setPassThrough(true);
-		this.setImagePath("/brilliant_blue_new.png");
+		this.setImagePath("/up_floor.png");
 	}
 
 	public void collideWith(Entity entity) {
 		if (entity instanceof Player)
-			this.getDungeon().pickUp(this);
+			getDungeon().switchNextDungeon();
 	}
 
 	@Override
 	public EntityType type() {
-		return EntityType.POTION;
+		return EntityType.EXIT;
 	}
 
 }

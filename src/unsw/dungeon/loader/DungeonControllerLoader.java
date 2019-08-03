@@ -1,4 +1,4 @@
-package unsw.dungeon;
+package unsw.dungeon.loader;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -81,16 +81,9 @@ public class DungeonControllerLoader extends DungeonLoader {
 	}
 
 	/**
-	 * Create a controller that can be attached to the DungeonView with all the
+	 * set up a controller that can be attached to the DungeonView with all the
 	 * loaded entities.
-	 *
-	 * @return
-	 * @throws FileNotFoundException
 	 */
-	public DungeonController loadController() throws FileNotFoundException {
-		return new DungeonController(load(), entities, this);
-	}
-
 	public void loadController(DungeonController controller) {
 		controller.setDungeon(load());
 		controller.setInitialEntities(entities);

@@ -6,7 +6,7 @@ public class DoorOpenedState implements DoorState {
 
 	DoorOpenedState(Door door) {
 		this.door = door;
-		door.setImagePath(this.getImagePath());
+		this.door.setImagePath(this.getImagePath());
 	}
 	
 	@Override

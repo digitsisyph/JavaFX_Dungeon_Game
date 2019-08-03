@@ -120,7 +120,7 @@
     {
       "x": 17,
       "y": 1,
-      "type": "wall"
+      "type": "stone"
     },
     {
       "x": 0,
@@ -150,7 +150,7 @@
     {
       "x": 9,
       "y": 2,
-      "type": "wall"
+      "type": "princess"
     },
     {
       "x": 12,
@@ -220,7 +220,7 @@
     {
       "x": 13,
       "y": 5,
-      "type": "bomb"
+      "type": "up_floor"
     },
     {
       "x": 13,
@@ -644,6 +644,9 @@
       },
       {
         "goal": "treasure"
+      },
+      {
+        "goal": "princess"
       }
     ]
   }

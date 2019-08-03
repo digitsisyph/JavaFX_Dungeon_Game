@@ -14,7 +14,8 @@ public class LitBomb extends Entity {
 		this.setPassThrough(false);
 	}
 
-	public void collideWith(Entity entity) {;}
+	public void collideWith(Entity entity) {
+	}
 
 	@Override
 	public EntityType type() {

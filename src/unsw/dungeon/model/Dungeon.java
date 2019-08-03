@@ -3,17 +3,25 @@
  */
 package unsw.dungeon.model;
 
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.collections.FXCollections;
 import unsw.dungeon.controller.DungeonController;
+import unsw.dungeon.soundplayer.DungeonSound;
 import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.bomb.ExplodedBomb;
 import unsw.dungeon.model.entities.bomb.LitBomb;
 import unsw.dungeon.model.entities.bomb.UnlitBomb;
 import unsw.dungeon.model.entities.door.Door;
-import unsw.dungeon.model.entities.enemies.Enemy;
+import unsw.dungeon.model.entities.enemy.Enemy;
+import unsw.dungeon.model.entities.enemy.StoneEnemy;
+import unsw.dungeon.model.entities.npc.Princess;
+import unsw.dungeon.model.entities.npc.Wizard;
+import unsw.dungeon.model.entities.potion.Potion;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
+import unsw.dungeon.model.status.Status;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,10 +37,12 @@ import java.util.stream.Collectors;
  */
 public class Dungeon {
 
+	// TODO delete the controller
 	private DungeonController controller;
 	private final int width, height;
-	private List<Entity> entities;
+	private ListProperty<Entity> entities;
 	private Player player;
+	private Status status;
 	private Inventory inventory;
 	private Goal goal;
 	private boolean gameOver;
@@ -40,10 +50,11 @@ public class Dungeon {
 	public Dungeon(int width, int height) {
 		this.width = width;
 		this.height = height;
-		this.entities = new ArrayList<>();
+		this.entities = new SimpleListProperty<Entity>(FXCollections.observableArrayList());
 		this.player = null;
 		this.controller = null;
 		this.inventory = new Inventory();
+		this.status = new Status();
 		this.goal = null;
 		this.gameOver = false;
 	}
@@ -74,6 +85,10 @@ public class Dungeon {
 
 	public Player getPlayer() {
 		return player;
+	}
+
+	public ListProperty<Entity> getEntitiesProperty() {
+		return entities;
 	}
 
 	public List<Entity> getEntities() {
@@ -121,12 +136,21 @@ public class Dungeon {
 	}
 
 	public List<Wizard> getWizards() {
-        return entities.stream().filter(entity -> entity.type() == EntityType.WIZARD).map(Wizard.class::cast)
-                .collect(Collectors.toList());
-    }
+		return entities.stream().filter(entity -> entity.type() == EntityType.WIZARD).map(Wizard.class::cast)
+				.collect(Collectors.toList());
+	}
+
+	public List<Princess> getPrincess() {
+		return entities.stream().filter(entity -> entity.type() == EntityType.PRINCESS).map(Princess.class::cast)
+				.collect(Collectors.toList());
+	}
 
 	public Inventory getInventory() {
 		return inventory;
+	}
+
+	public Status getStatus() {
+		return status;
 	}
 
 	public Goal getGoal() {
@@ -135,34 +159,21 @@ public class Dungeon {
 
 	// functions for entities
 
+	// create a new entity in the dungeon
 	public void addEntity(Entity entity) {
 		entities.add(entity);
 	}
 
-	// create a new entity in the dungeon
-	public void createEntity(Entity entity) {
-		if (controller != null)
-			controller.addEntityImage(entity);
-		entities.add(entity);
-	}
-
+	// remove an entity from the dungeon
 	public void removeEntity(Entity entity) {
-		System.out.println("Remove:" + entity.toString());
-		// remove it from the dungeon
 		this.entities.remove(entity);
-		// remove its corresponding ImageView
-		if (this.controller != null)
-			this.controller.removeEntityImage(entity);
 	}
 
 	// player movement
 
 	public void movePlayer(Direction direction) {
-		if (player != null) {
+		if (player != null)
 			player.move(direction);
-			// observer pattern
-			// notifyPerMovement();
-		}
 	}
 
 	// helper function: check whether a grid is walkable
@@ -181,11 +192,9 @@ public class Dungeon {
 			gameOver();
 		}
 
-
 		// update all all observers
-		//System.out.println("Player @ " + player.getX() + " " + player.getY());
 		goal.update();
-		inventory.updatePerMovement();
+		status.updatePerMovement();
 		getEnemies().forEach(Enemy::updatePerMovement);
 		getLitBombs().forEach(LitBomb::updatePerMovement);
 	}
@@ -196,18 +205,29 @@ public class Dungeon {
 		switch (entity.type()) {
 		case SWORD:
 			pickUpSword((Sword) entity);
+			if (controller != null)
+				controller.playSound(DungeonSound.ACHIEVE_ITEM);
 			break;
 		case TREASURE:
 			pickUpTreasure((Treasure) entity);
+			if (controller != null)
+				controller.playSound(DungeonSound.ACHIEVE_ITEM);
 			break;
 		case UNLITBOMB:
 			pickUpBomb((UnlitBomb) entity);
-			break;
-		case POTION:
-			pickUpPotion((Potion) entity);
+			if (controller != null)
+				controller.playSound(DungeonSound.ACHIEVE_ITEM);
 			break;
 		case KEY:
 			pickUpKey((Key) entity);
+			if (controller != null)
+				controller.playSound(DungeonSound.ACHIEVE_ITEM);
+			break;
+		case INVINCIBLEPOTION:
+		case INVISIBLEPOTION:
+			pickUpPotion((Potion) entity);
+			if (controller != null)
+				controller.playSound(DungeonSound.POTION);
 			break;
 		default:
 			break;
@@ -232,33 +252,42 @@ public class Dungeon {
 	}
 
 	private void pickUpPotion(Potion potion) {
-		this.getInventory().pickPotion();
+		System.out.println("pick up " + potion);
+		switch (potion.type()) {
+		case INVINCIBLEPOTION:
+			this.status.becomeInvincible();
+			break;
+		case INVISIBLEPOTION:
+			this.status.becomeInvisible();
+			break;
+		default:
+			System.err.println("What potion did I pick?");
+			break;
+		}
 		removeEntity(potion);
 	}
 
 	private void pickUpKey(Key key) {
 		// player can only have 1 key
-		if (this.getInventory().getKey() == null) {
-			this.getInventory().pickKey(key.getId());
+		if (this.getInventory().pickKey(key.getId()))
 			removeEntity(key);
-			System.out.println("Key picked up");
-		} else {
-			System.out.println("Already has a key");
-		}
-		this.getInventory().debug();
 	}
 
 	// --- other interactions
 
 	public boolean isPlayerInvincible() {
-		return inventory.isInvincible();
+		return status.isInvincible();
 	}
 
 	public void fightEnemy(Enemy enemy) {
+		if (controller != null)
+			controller.playSound(DungeonSound.FIGHT);
 		if (isPlayerInvincible()) {
 			removeEntity(enemy);
 		} else if (this.getInventory().useSword()) {
 			removeEntity(enemy);
+			if (enemy instanceof StoneEnemy)
+				this.getInventory().breakSword();
 		} else {
 			killPlayer();
 		}
@@ -274,13 +303,15 @@ public class Dungeon {
 		else {
 			this.getInventory().useKey();
 			door.open();
+			if (controller != null)
+				controller.playSound(DungeonSound.OPEN_DOOR);
 		}
 	}
 
 	public void placeBomb() {
 		if (getInventory().useBomb()) {
 			System.out.println("Use bomb");
-			createEntity(new LitBomb(player.getX(), player.getY(), this));
+			addEntity(new LitBomb(player.getX(), player.getY(), this));
 		} else {
 			System.out.println("No bomb to use");
 		}
@@ -288,10 +319,10 @@ public class Dungeon {
 
 	public void explodeBomb(LitBomb bomb) {
 		// put exploded Bomb
-		createEntity(new ExplodedBomb(bomb.getX() + 1, bomb.getY(), this));
-		createEntity(new ExplodedBomb(bomb.getX() - 1, bomb.getY(), this));
-		createEntity(new ExplodedBomb(bomb.getX(), bomb.getY() + 1, this));
-		createEntity(new ExplodedBomb(bomb.getX(), bomb.getY() - 1, this));
+		addEntity(new ExplodedBomb(bomb.getX() + 1, bomb.getY(), this));
+		addEntity(new ExplodedBomb(bomb.getX() - 1, bomb.getY(), this));
+		addEntity(new ExplodedBomb(bomb.getX(), bomb.getY() + 1, this));
+		addEntity(new ExplodedBomb(bomb.getX(), bomb.getY() - 1, this));
 		// kill nearby Entities
 		List<Entity> nearbyEntities = getNearbyEntities(bomb.getX(), bomb.getY());
 		nearbyEntities.addAll(getEntities(bomb.getX(), bomb.getY()));
@@ -311,16 +342,20 @@ public class Dungeon {
 			}
 		}
 
+		if (controller != null)
+			controller.playSound(DungeonSound.EXPLOSION);
 	}
 
 	// to finish a game over
 	private void gameOver() {
 		System.out.println("Game Over!");
 		gameOver = true;
-		if (goalAchieved())
-			controller.gameOver("Congrat! You finished the game!");
-		else
-			controller.gameOver("Oppps. You failed. Please retry!");
+		if (controller != null) {
+			if (goalAchieved())
+				controller.gameOver("Congrat! You finished the game!");
+			else
+				controller.gameOver("Oppps. You failed. Please retry!");
+		}
 	}
 
 	public boolean isGameOver() {
@@ -337,7 +372,28 @@ public class Dungeon {
 		if (!isPlayerInvincible()) {
 			removeEntity(this.player);
 			this.player = null;
+			if (controller != null)
+				controller.playSound(DungeonSound.GAME_OVER);
 			gameOver();
 		}
+	}
+
+	public void switchNextDungeon() {
+		if (controller != null) {
+			controller.playSound(DungeonSound.SWITCH_FLOOR);
+			this.controller.switchNextDungeon();
+		}
+	}
+
+	public void switchPrevDungeon() {
+		if (controller != null) {
+			controller.playSound(DungeonSound.SWITCH_FLOOR);
+			this.controller.switchPrevDungeon();
+		}
+	}
+
+	public void inheritFrom(Dungeon prev_dungeon) {
+		this.inventory = prev_dungeon.getInventory();
+		this.status = prev_dungeon.getStatus();
 	}
 }

@@ -1,4 +1,4 @@
-package unsw.dungeon.model.entities.enemies;
+package unsw.dungeon.model.entities.enemy;
 
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.model.entities.*;
@@ -16,7 +16,9 @@ public class HumanEnemy extends Enemy implements Movable {
 
 	public void updatePerMovement() {
 		// set strategy
-		if (getDungeon().isPlayerInvincible())
+		if (getDungeon().getStatus().isInvisible())
+			return;
+		else if (getDungeon().isPlayerInvincible())
 			this.setBehaviour(moveAway);
 		else
 			this.setBehaviour(moveClose);

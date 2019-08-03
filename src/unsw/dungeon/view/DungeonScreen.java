@@ -4,44 +4,71 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import unsw.dungeon.DungeonControllerLoader;
 import unsw.dungeon.controller.DungeonController;
+import unsw.dungeon.loader.DungeonControllerLoader;
+import unsw.dungeon.model.Dungeon;
 
 import java.io.IOException;
 
 public class DungeonScreen {
 
-    private Stage stage;
-    private String title = "Dungeon Game";
-    private DungeonController controller;
-    private Scene scene;
+	private Stage stage;
+	private String title = "Dungeon Game";
+	private DungeonController controller;
+	private Scene scene;
+	private String map;
 
-    public DungeonScreen(Stage stage) {
-        this.stage = stage;
-        this.controller = new DungeonController();
-    }
+	public DungeonScreen(Stage stage) {
+		this.stage = stage;
+	}
 
-    public void start(String mapJson) throws IOException{
-        // use ControllerLoader to load map from a json file
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(mapJson);
+	public void setDungeonController(DungeonController controller) {
+		this.controller = controller;
+	}
 
-        // create a Controller from the ControllerLoader
-        dungeonLoader.loadController(this.controller);
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
-        loader.setController(this.controller);
+	public void load(String mapJson) throws IOException {
+		this.map = mapJson;
+		// use ControllerLoader to load map from a json file
+		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader(mapJson);
 
-        // get the root and set scene
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        root.requestFocus();
+		// create a Controller from the ControllerLoader
+		dungeonLoader.loadController(this.controller);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
+		loader.setController(this.controller);
 
-        stage.setTitle(title);
-        stage.setScene(scene);
-        stage.show();
-    }
+		// get the root and set scene
+		Parent root = loader.load();
+		scene = new Scene(root);
+	}
 
-    public DungeonController getController() {
-        return controller;
-    }
+	public void start() {
+		scene.getRoot().requestFocus();
+		stage.setTitle(title);
+		stage.setScene(scene);
+		stage.show();
+		this.controller.startDungeon();
+	}
+
+	public void restart() {
+		try {
+			this.load(map);
+			this.start();
+		} catch (Exception e) {
+			System.out.println("restart fault!");
+		}
+	}
+
+	public void start(Dungeon prev_dungeon) {
+		scene.getRoot().requestFocus();
+		stage.setTitle(title);
+		stage.setScene(scene);
+		stage.show();
+		this.controller.getDungeon().inheritFrom(prev_dungeon);
+		this.controller.startDungeon();
+	}
+
+	public DungeonController getController() {
+		return controller;
+	}
 
 }

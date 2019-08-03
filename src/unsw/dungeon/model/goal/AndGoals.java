@@ -38,5 +38,5 @@ public class AndGoals extends Goal {
 	public String toString() {
 		return "AndGoals: ";
 	}
-	
+
 }
