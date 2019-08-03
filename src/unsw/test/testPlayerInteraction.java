@@ -116,7 +116,6 @@ public class testPlayerInteraction extends testSetup {
 		dungeon.addEntity(new Key(3, 1, dungeon, 20));
 
 		assertEquals(2, dungeon.getEntities(EntityType.KEY).size());
-		assertEquals(null, dungeon.getInventory().getKey());
 
 		dungeon.movePlayer(Direction.RIGHT);
 		assertNotEquals(null, dungeon.getInventory().getKey());
@@ -292,14 +291,11 @@ public class testPlayerInteraction extends testSetup {
 
 		dungeon.tryOpenDoor(door1);		// should success
 		assertTrue(door1.canPassThrough());
-		assertNull(dungeon.getInventory().getKey());	// key should be removed
-
 
 		dungeon.pickUp(new Key(0, 0, dungeon, 2));
 
 		dungeon.tryOpenDoor(door2);		// should success
 		assertTrue(door2.canPassThrough());
-		assertNull(dungeon.getInventory().getKey());	// key should be removed
 	}
 
 

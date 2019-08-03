@@ -340,10 +340,12 @@ public class Dungeon {
 	private void gameOver() {
 		System.out.println("Game Over!");
 		gameOver = true;
-		if (goalAchieved())
-			controller.gameOver("Congrat! You finished the game!");
-		else
-			controller.gameOver("Oppps. You failed. Please retry!");
+		if (controller != null) {
+			if (goalAchieved())
+				controller.gameOver("Congrat! You finished the game!");
+			else
+				controller.gameOver("Oppps. You failed. Please retry!");
+		}
 	}
 
 	public boolean isGameOver() {
