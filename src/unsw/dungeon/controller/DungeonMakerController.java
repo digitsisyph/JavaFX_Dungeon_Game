@@ -1,14 +1,17 @@
 package unsw.dungeon.controller;
 
+import java.io.IOException;
+import java.util.Arrays;
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import unsw.dungeon.maker.DungeonMaker;
 import unsw.dungeon.view.MenuScreen;
-import java.util.Arrays;
 
 public class DungeonMakerController {
 	@FXML
@@ -17,6 +20,12 @@ public class DungeonMakerController {
 	private Button backButton;
 	@FXML
 	private Button createButton;
+	@FXML
+	private ComboBox<String> actionBox;
+	@FXML
+	private TextField fileNameTextBox;
+	@FXML
+	private ComboBox<String> goal;
 
 	private DungeonMaker maker;
 
@@ -33,12 +42,21 @@ public class DungeonMakerController {
 
 	@FXML
 	public void handleCreateButton(ActionEvent event) {
-		maker.create();
+		if (fileNameTextBox.getText() != null) {
+			maker.writeToFile(fileNameTextBox.getText());
+		}
 	}
 
 	@FXML
 	public void handleApplyButton(ActionEvent event) {
-		System.out.println("Apply action");
+		if (actionBox.getValue() == null) {
+			return;
+		}
+		if (actionBox.getValue().equals("Clear")) {
+			maker.clearDungeon();
+		} else if (actionBox.getValue().equals("Walls on 4 sides")) {
+			maker.addSurroundingWalls();
+		}
 	}
 
 	public void setMenuScreen(MenuScreen screen) {
@@ -61,5 +79,11 @@ public class DungeonMakerController {
 				square.add(box, i, j);
 			}
 		}
+		// Options to action box
+		actionBox.getItems().addAll("Clear", "Walls on 4 sides");
+		// Options to goal box
+		goal.getItems().addAll("exit", "enemies", "boulders", "treasure", "wizard", "princess");
+		goal.getSelectionModel().select(0);
+		maker.getGoalProperty().bind(goal.valueProperty());
 	}
 }
