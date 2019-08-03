@@ -1,0 +1,1257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.3" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="unsw.dungeon.controller.DungeonController" project="project" 
+    file="/project/src/unsw/dungeon/controller/DungeonController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1190" y="436"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="unsw.dungeon.controller.MenuController" project="project" 
+    file="/project/src/unsw/dungeon/controller/MenuController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="962" y="1432"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="unsw.dungeon.controller.FreeDungeonController" project="project" 
+    file="/project/src/unsw/dungeon/controller/FreeDungeonController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="317" y="817"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="unsw.dungeon.controller.DungeonMakerController" project="project" 
+    file="/project/src/unsw/dungeon/controller/DungeonMakerController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="394" y="1238"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="unsw.dungeon.controller.StoryDungeonController" project="project" 
+    file="/project/src/unsw/dungeon/controller/StoryDungeonController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="596" y="134"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="unsw.dungeon.DungeonApplication" project="project" 
+    file="/project/src/unsw/dungeon/DungeonApplication.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3965" y="-45"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="unsw.dungeon.loader.DungeonScreenLoader" project="project" 
+    file="/project/src/unsw/dungeon/loader/DungeonScreenLoader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1098" y="1093"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="unsw.dungeon.loader.DungeonControllerLoader" project="project" 
+    file="/project/src/unsw/dungeon/loader/DungeonControllerLoader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1568" y="742"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="unsw.dungeon.loader.DungeonLoader" project="project" 
+    file="/project/src/unsw/dungeon/loader/DungeonLoader.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1568" y="189"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="unsw.dungeon.maker.DungeonMaker" project="project" 
+    file="/project/src/unsw/dungeon/maker/DungeonMaker.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="299" y="1632"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="11" language="java" name="unsw.dungeon.model.Direction" project="project" 
+    file="/project/src/unsw/dungeon/model/Direction.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4370" y="-33"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="12" language="java" name="unsw.dungeon.model.Dungeon" project="project" 
+    file="/project/src/unsw/dungeon/model/Dungeon.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2017" y="444"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="13" language="java" name="unsw.dungeon.model.entities.EntityType" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/EntityType.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4171" y="-7"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="14" language="java" name="unsw.dungeon.model.entities.Exit" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/Exit.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2377" y="889"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="unsw.dungeon.model.entities.UpFloor" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/UpFloor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2395" y="1097"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="unsw.dungeon.model.entities.Wall" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/Wall.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2465" y="1458"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="unsw.dungeon.model.entities.Switch" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/Switch.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2498" y="1664"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="unsw.dungeon.model.entities.Boulder" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/Boulder.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3566" y="1206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="unsw.dungeon.model.entities.Treasure" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/Treasure.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2780" y="1473"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="unsw.dungeon.model.entities.DownFloor" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/DownFloor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3107" y="1387"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="unsw.dungeon.model.entities.Sword" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/Sword.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3069" y="1542"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="unsw.dungeon.model.entities.Player" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/Player.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3210" y="547"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="unsw.dungeon.model.entities.Entity" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/Entity.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2792" y="930"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="unsw.dungeon.model.entities.Movement" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/Movement.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3376" y="783"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="unsw.dungeon.model.entities.Key" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/Key.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2836" y="1640"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="unsw.dungeon.model.entities.bomb.LitBomb" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/bomb/LitBomb.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2590" y="1901"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="unsw.dungeon.model.entities.bomb.LitBombState3" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/bomb/LitBombState3.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2430" y="2371"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="unsw.dungeon.model.entities.bomb.LitBombState4" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/bomb/LitBombState4.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2825" y="2368"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="unsw.dungeon.model.entities.bomb.LitBombState1" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/bomb/LitBombState1.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2239" y="2368"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="unsw.dungeon.model.entities.bomb.ExplodedBomb" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/bomb/ExplodedBomb.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2921" y="2218"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="unsw.dungeon.model.entities.bomb.LitBombState2" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/bomb/LitBombState2.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2628" y="2372"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="unsw.dungeon.model.entities.bomb.UnlitBomb" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/bomb/UnlitBomb.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2389" y="1261"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="unsw.dungeon.model.entities.door.DoorOpenedState" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/door/DoorOpenedState.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3377" y="2158"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="unsw.dungeon.model.entities.door.DoorClosedState" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/door/DoorClosedState.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3142" y="2167"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="unsw.dungeon.model.entities.door.Door" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/door/Door.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3076" y="1791"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="unsw.dungeon.model.entities.enemy.EnemyMoveClose" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/enemy/EnemyMoveClose.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3970" y="1435"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="unsw.dungeon.model.entities.enemy.EnemyMoveCloseStupid" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/enemy/EnemyMoveCloseStupid.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4235" y="1455"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="unsw.dungeon.model.entities.enemy.EnemyMoveAway" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/enemy/EnemyMoveAway.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4479" y="1457"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="unsw.dungeon.model.entities.enemy.HoundEnemy" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/enemy/HoundEnemy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3887" y="1113"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="unsw.dungeon.model.entities.enemy.HumanEnemy" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/enemy/HumanEnemy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4437" y="768"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="unsw.dungeon.model.entities.enemy.StoneEnemy" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/enemy/StoneEnemy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4369" y="562"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="unsw.dungeon.model.entities.npc.Wizard" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/npc/Wizard.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3724" y="1762"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="unsw.dungeon.model.entities.npc.Princess" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/npc/Princess.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3912" y="1762"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="unsw.dungeon.model.entities.potion.InvisiblePotion" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/potion/InvisiblePotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3691" y="2252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="unsw.dungeon.model.entities.potion.Potion" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/potion/Potion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3790" y="2104"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="unsw.dungeon.model.entities.potion.InvinciblePotion" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/potion/InvinciblePotion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3906" y="2252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="unsw.dungeon.model.goal.AndGoals" project="project" 
+    file="/project/src/unsw/dungeon/model/goal/AndGoals.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2819" y="-202"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="unsw.dungeon.model.goal.WizardGoal" project="project" 
+    file="/project/src/unsw/dungeon/model/goal/WizardGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2656" y="326"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="unsw.dungeon.model.goal.SwitchGoal" project="project" 
+    file="/project/src/unsw/dungeon/model/goal/SwitchGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2829" y="326"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="unsw.dungeon.model.goal.EnemyGoal" project="project" 
+    file="/project/src/unsw/dungeon/model/goal/EnemyGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3001" y="326"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="unsw.dungeon.model.goal.PrincessGoal" project="project" 
+    file="/project/src/unsw/dungeon/model/goal/PrincessGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3177" y="326"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="unsw.dungeon.model.goal.Goal" project="project" 
+    file="/project/src/unsw/dungeon/model/goal/Goal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2976" y="79"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="unsw.dungeon.model.goal.TreasureGoal" project="project" 
+    file="/project/src/unsw/dungeon/model/goal/TreasureGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3359" y="326"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="unsw.dungeon.model.goal.ExitGoal" project="project" 
+    file="/project/src/unsw/dungeon/model/goal/ExitGoal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3521" y="270"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="unsw.dungeon.model.goal.OrGoals" project="project" 
+    file="/project/src/unsw/dungeon/model/goal/OrGoals.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3122" y="-198"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="unsw.dungeon.model.inventory.KeyInv" project="project" 
+    file="/project/src/unsw/dungeon/model/inventory/KeyInv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1603" y="1780"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="57" language="java" name="unsw.dungeon.model.inventory.InvisibleState" project="project" 
+    file="/project/src/unsw/dungeon/model/inventory/InvisibleState.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4139" y="270"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="58" language="java" name="unsw.dungeon.model.inventory.BombInv" project="project" 
+    file="/project/src/unsw/dungeon/model/inventory/BombInv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1803" y="1818"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="59" language="java" name="unsw.dungeon.model.inventory.Inventory" project="project" 
+    file="/project/src/unsw/dungeon/model/inventory/Inventory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2033" y="1369"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="unsw.dungeon.model.inventory.SwordInv" project="project" 
+    file="/project/src/unsw/dungeon/model/inventory/SwordInv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1961" y="1905"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="61" language="java" name="unsw.dungeon.model.inventory.InvincibleState" project="project" 
+    file="/project/src/unsw/dungeon/model/inventory/InvincibleState.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3911" y="252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="62" language="java" name="unsw.dungeon.model.inventory.TreasureInv" project="project" 
+    file="/project/src/unsw/dungeon/model/inventory/TreasureInv.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2164" y="1850"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="unsw.dungeon.model.status.InvincibleState" project="project" 
+    file="/project/src/unsw/dungeon/model/status/InvincibleState.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1427" y="1392"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="64" language="java" name="unsw.dungeon.model.status.InvisibleState" project="project" 
+    file="/project/src/unsw/dungeon/model/status/InvisibleState.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1695" y="1396"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="65" language="java" name="unsw.dungeon.model.status.Status" project="project" 
+    file="/project/src/unsw/dungeon/model/status/Status.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1612" y="1067"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="66" language="java" name="unsw.dungeon.soundplayer.DungeonSoundPlayer" project="project" 
+    file="/project/src/unsw/dungeon/soundplayer/DungeonSoundPlayer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3522" y="-27"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="67" language="java" name="unsw.dungeon.soundplayer.DungeonSound" project="project" 
+    file="/project/src/unsw/dungeon/soundplayer/DungeonSound.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3758" y="-37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="68" language="java" name="unsw.dungeon.view.DungeonMakerScreen" project="project" 
+    file="/project/src/unsw/dungeon/view/DungeonMakerScreen.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="654" y="1571"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="69" language="java" name="unsw.dungeon.view.DungeonScreen" project="project" 
+    file="/project/src/unsw/dungeon/view/DungeonScreen.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="251" y="492"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="70" language="java" name="unsw.dungeon.view.MenuScreen" project="project" 
+    file="/project/src/unsw/dungeon/view/MenuScreen.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="761" y="873"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="71" language="java" name="unsw.dungeon.model.entities.bomb.LitBombState" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/bomb/LitBombState.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2241" y="2059"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="72" language="java" name="unsw.dungeon.model.entities.Movable" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/Movable.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3787" y="457"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="73" language="java" name="unsw.dungeon.model.entities.door.DoorState" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/door/DoorState.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3347" y="1789"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="74" language="java" name="unsw.dungeon.model.entities.enemy.Enemy" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/enemy/Enemy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4064" y="831"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="75" language="java" name="unsw.dungeon.model.entities.enemy.EnemyBehaviour" project="project" 
+    file="/project/src/unsw/dungeon/model/entities/enemy/EnemyBehaviour.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4316" y="1133"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="false" protected="true" private="true" static="true"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <generalization id="76">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="77">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <generalization id="78">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="26"/>  
+  </generalization>  
+  <association id="79">    
+    <end type="SOURCE" refId="1" navigable="false" variant="ASSOCIATION">      
+      <attribute id="80" name="loader"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="22" navigable="false" variant="ASSOCIATION">      
+      <attribute id="83" name="movement"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="85">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="75"/>  
+  </realization>  
+  <association id="86">    
+    <end type="SOURCE" refId="69" navigable="false" variant="ASSOCIATION">      
+      <attribute id="87" name="controller"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="89">    
+    <end type="SOURCE" refId="54"/>    
+    <end type="TARGET" refId="52"/>  
+  </generalization>  
+  <generalization id="90">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="74"/>  
+  </generalization>  
+  <generalization id="91">    
+    <end type="SOURCE" refId="51"/>    
+    <end type="TARGET" refId="52"/>  
+  </generalization>  
+  <realization id="92">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="72"/>  
+  </realization>  
+  <association id="93">    
+    <end type="SOURCE" refId="12" navigable="false" variant="ASSOCIATION">      
+      <attribute id="94" name="goal"/>      
+      <multiplicity id="95" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="52" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="96">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="74"/>  
+  </generalization>  
+  <association id="97">    
+    <end type="SOURCE" refId="74" navigable="false" variant="ASSOCIATION">      
+      <attribute id="98" name="movement"/>      
+      <multiplicity id="99" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="24" navigable="false" variant="ASSOCIATION">      
+      <attribute id="101" name="entity"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="72" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="12" navigable="false" variant="ASSOCIATION">      
+      <attribute id="104" name="inventory"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="59" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="23" navigable="false" variant="ASSOCIATION">      
+      <attribute id="107" name="dungeon"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <end type="SOURCE" refId="12" navigable="false" variant="ASSOCIATION">      
+      <attribute id="110" name="status"/>      
+      <multiplicity id="111" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="65" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <end type="SOURCE" refId="65" navigable="false" variant="ASSOCIATION">      
+      <attribute id="113" name="invincible"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="63" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="115">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <generalization id="116">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <realization id="117">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="72"/>  
+  </realization>  
+  <generalization id="118">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="119">    
+    <end type="SOURCE" refId="4" navigable="false" variant="ASSOCIATION">      
+      <attribute id="120" name="menu"/>      
+      <multiplicity id="121" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="70" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="122">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="52"/>  
+  </generalization>  
+  <association id="123">    
+    <end type="SOURCE" refId="40" navigable="false" variant="ASSOCIATION">      
+      <attribute id="124" name="moveClose"/>      
+      <multiplicity id="125" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="126">    
+    <end type="SOURCE" refId="48"/>    
+    <end type="TARGET" refId="52"/>  
+  </generalization>  
+  <generalization id="127">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <realization id="128">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="71"/>  
+  </realization>  
+  <association id="129">    
+    <end type="SOURCE" refId="59" navigable="false" variant="ASSOCIATION">      
+      <attribute id="130" name="sword"/>      
+      <multiplicity id="131" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="60" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="132">    
+    <end type="SOURCE" refId="28" navigable="false" variant="ASSOCIATION">      
+      <attribute id="133" name="bomb"/>      
+      <multiplicity id="134" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="135">    
+    <end type="SOURCE" refId="12" navigable="false" variant="ASSOCIATION">      
+      <attribute id="136" name="controller"/>      
+      <multiplicity id="137" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="138">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <generalization id="139">    
+    <end type="SOURCE" refId="42"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="140">    
+    <end type="SOURCE" refId="1" navigable="false" variant="ASSOCIATION">      
+      <attribute id="141" name="dungeon"/>      
+      <multiplicity id="142" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="143">    
+    <end type="SOURCE" refId="33" navigable="false" variant="ASSOCIATION">      
+      <attribute id="144" name="door"/>      
+      <multiplicity id="145" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="146">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="73"/>  
+  </realization>  
+  <association id="147">    
+    <end type="SOURCE" refId="5" navigable="false" variant="ASSOCIATION">      
+      <attribute id="148" name="nextDungeonScreen"/>      
+      <multiplicity id="149" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="69" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="150">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <generalization id="151">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <generalization id="152">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="153">    
+    <end type="SOURCE" refId="26" navigable="false" variant="ASSOCIATION">      
+      <attribute id="154" name="state"/>      
+      <multiplicity id="155" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="71" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="156">    
+    <end type="SOURCE" refId="59" navigable="false" variant="ASSOCIATION">      
+      <attribute id="157" name="bomb"/>      
+      <multiplicity id="158" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="58" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="159">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="72"/>  
+  </realization>  
+  <generalization id="160">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="161">    
+    <end type="SOURCE" refId="35" navigable="false" variant="ASSOCIATION">      
+      <attribute id="162" name="state"/>      
+      <multiplicity id="163" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="73" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="164">    
+    <end type="SOURCE" refId="7" navigable="false" variant="ASSOCIATION">      
+      <attribute id="165" name="menuScreen"/>      
+      <multiplicity id="166" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="70" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="167">    
+    <end type="SOURCE" refId="12" navigable="false" variant="ASSOCIATION">      
+      <attribute id="168" name="player"/>      
+      <multiplicity id="169" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="170">    
+    <end type="SOURCE" refId="55"/>    
+    <end type="TARGET" refId="52"/>  
+  </generalization>  
+  <realization id="171">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="72"/>  
+  </realization>  
+  <association id="172">    
+    <end type="SOURCE" refId="59" navigable="false" variant="ASSOCIATION">      
+      <attribute id="173" name="treasure"/>      
+      <multiplicity id="174" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="62" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="175">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="176">    
+    <end type="SOURCE" refId="74" navigable="false" variant="ASSOCIATION">      
+      <attribute id="177" name="behaviour"/>      
+      <multiplicity id="178" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="179">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="71"/>  
+  </realization>  
+  <association id="180">    
+    <end type="SOURCE" refId="2" navigable="false" variant="ASSOCIATION">      
+      <attribute id="181" name="makerScreen"/>      
+      <multiplicity id="182" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="68" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="183">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="184">    
+    <end type="SOURCE" refId="29" navigable="false" variant="ASSOCIATION">      
+      <attribute id="185" name="bomb"/>      
+      <multiplicity id="186" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="187">    
+    <end type="SOURCE" refId="1" navigable="false" variant="ASSOCIATION">      
+      <attribute id="188" name="currDungeonScreen"/>      
+      <multiplicity id="189" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="69" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="190">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <realization id="191">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="71"/>  
+  </realization>  
+  <association id="192">    
+    <end type="SOURCE" refId="65" navigable="false" variant="ASSOCIATION">      
+      <attribute id="193" name="invisible"/>      
+      <multiplicity id="194" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="64" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="195">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="75"/>  
+  </realization>  
+  <realization id="196">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="71"/>  
+  </realization>  
+  <realization id="197">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="72"/>  
+  </realization>  
+  <association id="198">    
+    <end type="SOURCE" refId="39" navigable="false" variant="ASSOCIATION">      
+      <attribute id="199" name="moveClose"/>      
+      <multiplicity id="200" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="201">    
+    <end type="SOURCE" refId="55" navigable="false" variant="ASSOCIATION">      
+      <attribute id="202" name="subgoals"/>      
+      <multiplicity id="203" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="52" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="204">    
+    <end type="SOURCE" refId="1" navigable="false" variant="ASSOCIATION">      
+      <attribute id="205" name="menuScreen"/>      
+      <multiplicity id="206" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="70" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="207">    
+    <end type="SOURCE" refId="68" navigable="false" variant="ASSOCIATION">      
+      <attribute id="208" name="controller"/>      
+      <multiplicity id="209" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="210">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="75"/>  
+  </realization>  
+  <association id="211">    
+    <end type="SOURCE" refId="24" navigable="false" variant="ASSOCIATION">      
+      <attribute id="212" name="dungeon"/>      
+      <multiplicity id="213" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="214">    
+    <end type="SOURCE" refId="47" navigable="false" variant="ASSOCIATION">      
+      <attribute id="215" name="subgoals"/>      
+      <multiplicity id="216" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="52" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="217">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="218">    
+    <end type="SOURCE" refId="5" navigable="false" variant="ASSOCIATION">      
+      <attribute id="219" name="prevDungeonScreen"/>      
+      <multiplicity id="220" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="69" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="221">    
+    <end type="SOURCE" refId="45"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <generalization id="222">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="52"/>  
+  </generalization>  
+  <generalization id="223">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="74"/>  
+  </generalization>  
+  <association id="224">    
+    <end type="SOURCE" refId="70" navigable="false" variant="ASSOCIATION">      
+      <attribute id="225" name="controller"/>      
+      <multiplicity id="226" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="227">    
+    <end type="SOURCE" refId="31" navigable="false" variant="ASSOCIATION">      
+      <attribute id="228" name="bomb"/>      
+      <multiplicity id="229" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="230">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="73"/>  
+  </realization>  
+  <generalization id="231">    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="45"/>  
+  </generalization>  
+  <generalization id="232">    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="45"/>  
+  </generalization>  
+  <generalization id="233">    
+    <end type="SOURCE" refId="49"/>    
+    <end type="TARGET" refId="52"/>  
+  </generalization>  
+  <association id="234">    
+    <end type="SOURCE" refId="52" navigable="false" variant="ASSOCIATION">      
+      <attribute id="235" name="dungeon"/>      
+      <multiplicity id="236" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="237">    
+    <end type="SOURCE" refId="74"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="238">    
+    <end type="SOURCE" refId="12" navigable="false" variant="ASSOCIATION">      
+      <attribute id="239" name="entities"/>      
+      <multiplicity id="240" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="241">    
+    <end type="SOURCE" refId="27" navigable="false" variant="ASSOCIATION">      
+      <attribute id="242" name="bomb"/>      
+      <multiplicity id="243" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="244">    
+    <end type="SOURCE" refId="34" navigable="false" variant="ASSOCIATION">      
+      <attribute id="245" name="door"/>      
+      <multiplicity id="246" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="247">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="248">    
+    <end type="SOURCE" refId="4" navigable="false" variant="ASSOCIATION">      
+      <attribute id="249" name="maker"/>      
+      <multiplicity id="250" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <generalization id="251">    
+    <end type="SOURCE" refId="53"/>    
+    <end type="TARGET" refId="52"/>  
+  </generalization>  
+  <generalization id="252">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="23"/>  
+  </generalization>  
+  <association id="253">    
+    <end type="SOURCE" refId="59" navigable="false" variant="ASSOCIATION">      
+      <attribute id="254" name="key"/>      
+      <multiplicity id="255" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="56" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="256">    
+    <end type="SOURCE" refId="18" navigable="false" variant="ASSOCIATION">      
+      <attribute id="257" name="movement"/>      
+      <multiplicity id="258" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="259">    
+    <end type="SOURCE" refId="39" navigable="false" variant="ASSOCIATION">      
+      <attribute id="260" name="moveAway"/>      
+      <multiplicity id="261" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <association id="262">    
+    <end type="SOURCE" refId="40" navigable="false" variant="ASSOCIATION">      
+      <attribute id="263" name="moveAway"/>      
+      <multiplicity id="264" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="75" navigable="true" variant="ASSOCIATION"/>    
+    <display labels="false" multiplicity="true"/>  
+  </association>  
+  <realization id="265">    
+    <end type="SOURCE" refId="74"/>    
+    <end type="TARGET" refId="72"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="false" protected="true" private="true" static="true"/>    
+    <operations public="true" package="false" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="false" multiplicity="true"/>
+</class-diagram>
