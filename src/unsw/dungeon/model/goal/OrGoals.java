@@ -22,7 +22,7 @@ public class OrGoals extends Goal {
 		subgoals.remove(goal);
 	}
 
-	public List<Goal> getSubgoals()  {
+	public List<Goal> getSubgoals() {
 		return subgoals;
 	}
 

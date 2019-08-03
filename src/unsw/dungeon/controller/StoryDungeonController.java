@@ -1,5 +1,7 @@
 package unsw.dungeon.controller;
 
+import java.util.List;
+
 import javafx.scene.image.ImageView;
 import unsw.dungeon.DungeonApplication;
 import unsw.dungeon.loader.DungeonControllerLoader;
@@ -7,11 +9,8 @@ import unsw.dungeon.loader.DungeonScreenLoader;
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.view.DungeonScreen;
 
-import java.util.List;
-
 public class StoryDungeonController extends DungeonController {
 
-	private DungeonScreen currDungeonScreen;
 	private DungeonScreen nextDungeonScreen;
 	private DungeonScreen prevDungeonScreen;
 

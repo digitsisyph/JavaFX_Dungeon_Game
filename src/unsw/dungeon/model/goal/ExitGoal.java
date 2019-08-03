@@ -20,8 +20,7 @@ public class ExitGoal extends Goal {
 			setSatisfied(false);
 		else {
 			List<Entity> entitiesAtPlayers = getDungeon().getEntities(player.getX(), player.getY());
-			setSatisfied(entitiesAtPlayers.stream()
-					.anyMatch(entity -> entity instanceof Exit));
+			setSatisfied(entitiesAtPlayers.stream().anyMatch(entity -> entity instanceof Exit));
 		}
 	}
 

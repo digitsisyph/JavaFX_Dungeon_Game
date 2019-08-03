@@ -50,11 +50,12 @@ public abstract class Goal {
 		System.out.println("Unsupported Operation for goal leaf!");
 	}
 
-	public List<Goal> getSubgoals()  {
+	public List<Goal> getSubgoals() {
 		System.out.println("Unsupported Operation for goal leaf!");
 		return null;
 	}
 
 	public abstract void update();
+
 	public abstract String toString();
 }

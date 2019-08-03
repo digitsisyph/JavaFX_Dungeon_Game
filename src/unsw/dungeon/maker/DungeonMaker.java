@@ -73,10 +73,10 @@ public class DungeonMaker {
 			}
 		}
 		obj.put("entities", ent_list);
-		
+
 		JSONObject goal = new JSONObject();
 		obj.put("goal-condition", goal.put("goal", _goal.getValue()));
-		
+
 		System.out.println(obj.toString(2));
 		return obj;
 	}
@@ -112,7 +112,7 @@ public class DungeonMaker {
 	public StringProperty cellProperty(int x, int y) {
 		return cell[x][y];
 	}
-	
+
 	public StringProperty getGoalProperty() {
 		return _goal;
 	}

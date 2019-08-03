@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-
 public class DungeonScreenLoader {
 
 	private static Stage primaryStage;
@@ -50,7 +49,8 @@ public class DungeonScreenLoader {
 			}
 			levels.add(curr_screen);
 
-			if (levels.size() == 1) 	continue;
+			if (levels.size() == 1)
+				continue;
 			DungeonScreen prev_screen = levels.get(levels.size() - 2);
 			prev_screen.getController().setNextDungeonScreen(curr_screen);
 			curr_screen.getController().setPrevDungeonScreen(prev_screen);

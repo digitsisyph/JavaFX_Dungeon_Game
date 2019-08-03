@@ -136,11 +136,11 @@ public class Dungeon {
 	}
 
 	public List<Wizard> getWizards() {
-        return entities.stream().filter(entity -> entity.type() == EntityType.WIZARD).map(Wizard.class::cast)
-                .collect(Collectors.toList());
-    }
+		return entities.stream().filter(entity -> entity.type() == EntityType.WIZARD).map(Wizard.class::cast)
+				.collect(Collectors.toList());
+	}
 
-    public List<Princess> getPrincess() {
+	public List<Princess> getPrincess() {
 		return entities.stream().filter(entity -> entity.type() == EntityType.PRINCESS).map(Princess.class::cast)
 				.collect(Collectors.toList());
 	}
@@ -156,7 +156,6 @@ public class Dungeon {
 	public Goal getGoal() {
 		return goal;
 	}
-
 
 	// functions for entities
 
@@ -206,24 +205,29 @@ public class Dungeon {
 		switch (entity.type()) {
 		case SWORD:
 			pickUpSword((Sword) entity);
-			if (controller != null) controller.playSound(DungeonSound.ACHIEVE_ITEM);
+			if (controller != null)
+				controller.playSound(DungeonSound.ACHIEVE_ITEM);
 			break;
 		case TREASURE:
 			pickUpTreasure((Treasure) entity);
-			if (controller != null) controller.playSound(DungeonSound.ACHIEVE_ITEM);
+			if (controller != null)
+				controller.playSound(DungeonSound.ACHIEVE_ITEM);
 			break;
 		case UNLITBOMB:
 			pickUpBomb((UnlitBomb) entity);
-			if (controller != null) controller.playSound(DungeonSound.ACHIEVE_ITEM);
+			if (controller != null)
+				controller.playSound(DungeonSound.ACHIEVE_ITEM);
 			break;
 		case KEY:
 			pickUpKey((Key) entity);
-			if (controller != null) controller.playSound(DungeonSound.ACHIEVE_ITEM);
+			if (controller != null)
+				controller.playSound(DungeonSound.ACHIEVE_ITEM);
 			break;
 		case INVINCIBLEPOTION:
 		case INVISIBLEPOTION:
 			pickUpPotion((Potion) entity);
-			if (controller != null) controller.playSound(DungeonSound.POTION);
+			if (controller != null)
+				controller.playSound(DungeonSound.POTION);
 			break;
 		default:
 			break;
@@ -250,12 +254,15 @@ public class Dungeon {
 	private void pickUpPotion(Potion potion) {
 		System.out.println("pick up " + potion);
 		switch (potion.type()) {
-			case INVINCIBLEPOTION:
-				this.status.becomeInvincible();
-				break;
-			case INVISIBLEPOTION:
-				this.status.becomeInvisible();
-				break;
+		case INVINCIBLEPOTION:
+			this.status.becomeInvincible();
+			break;
+		case INVISIBLEPOTION:
+			this.status.becomeInvisible();
+			break;
+		default:
+			System.err.println("What potion did I pick?");
+			break;
 		}
 		removeEntity(potion);
 	}
@@ -273,7 +280,8 @@ public class Dungeon {
 	}
 
 	public void fightEnemy(Enemy enemy) {
-		if (controller != null) controller.playSound(DungeonSound.FIGHT);
+		if (controller != null)
+			controller.playSound(DungeonSound.FIGHT);
 		if (isPlayerInvincible()) {
 			removeEntity(enemy);
 		} else if (this.getInventory().useSword()) {
@@ -295,7 +303,8 @@ public class Dungeon {
 		else {
 			this.getInventory().useKey();
 			door.open();
-			if (controller != null) controller.playSound(DungeonSound.OPEN_DOOR);
+			if (controller != null)
+				controller.playSound(DungeonSound.OPEN_DOOR);
 		}
 	}
 
@@ -333,7 +342,8 @@ public class Dungeon {
 			}
 		}
 
-		if (controller != null) controller.playSound(DungeonSound.EXPLOSION);
+		if (controller != null)
+			controller.playSound(DungeonSound.EXPLOSION);
 	}
 
 	// to finish a game over
@@ -362,7 +372,8 @@ public class Dungeon {
 		if (!isPlayerInvincible()) {
 			removeEntity(this.player);
 			this.player = null;
-			if (controller != null) controller.playSound(DungeonSound.GAME_OVER);
+			if (controller != null)
+				controller.playSound(DungeonSound.GAME_OVER);
 			gameOver();
 		}
 	}

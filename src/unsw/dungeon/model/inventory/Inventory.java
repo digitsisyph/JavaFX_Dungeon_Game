@@ -26,7 +26,6 @@ public class Inventory {
 		return this.treasure.getNumTreasures();
 	}
 
-
 	// --- sword part ---
 
 	public void pickSword() {
@@ -53,7 +52,6 @@ public class Inventory {
 		return this.sword.getDurability();
 	}
 
-
 	// -- bomb part ---
 
 	public void pickBomb() {
@@ -70,7 +68,6 @@ public class Inventory {
 	public int getBombNum() {
 		return this.bomb.getNumBombs();
 	}
-
 
 	// --- key part ---
 
@@ -89,7 +86,6 @@ public class Inventory {
 	public int getKeyID() {
 		return this.key.getKeyID();
 	}
-
 
 	// --- controller part ---
 
