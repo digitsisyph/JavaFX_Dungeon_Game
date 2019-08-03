@@ -17,21 +17,25 @@
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
-            <ImageView fitHeight="152.0" fitWidth="200.0">
-               <image>
-                  <Image url="@../../../../images/bg.jpg" />
-               </image>
-            </ImageView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dungeon" textAlignment="CENTER">
-               <font>
-                  <Font name="Courier Bold Oblique" size="40.0" />
-               </font>
-            </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Presented by team Ubisoft from UNSW">
-               <font>
-                  <Font name="AppleGothic Regular" size="13.0" />
-               </font>
-            </Text>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+               <children>
+                  <ImageView fitHeight="152.0" fitWidth="200.0">
+                     <image>
+                        <Image url="@../../../../images/bg.jpg" />
+                     </image>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dungeon" textAlignment="CENTER">
+                     <font>
+                        <Font name="Courier Bold Oblique" size="40.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Presented by team Ubisoft from UNSW">
+                     <font>
+                        <Font name="AppleGothic Regular" size="13.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="92.0" prefWidth="134.0" spacing="10.0">
@@ -69,36 +73,57 @@
                   <Insets left="50.0" right="50.0" />
                </padding>
             </HBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Config" textAlignment="CENTER">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Text>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <padding>
-                  <Insets left="50.0" right="50.0" />
-               </padding>
+            <VBox alignment="CENTER" prefHeight="89.0" prefWidth="520.0" spacing="10.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sound" textAlignment="CENTER">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Config" textAlignment="CENTER">
                      <font>
                         <Font name="Arial Bold" size="15.0" />
                      </font>
                   </Text>
-                  <Text fx:id="soundInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="50 / 100" textAlignment="CENTER">
-                     <font>
-                        <Font name="Arial" size="13.0" />
-                     </font>
-                  </Text>
-                  <Slider fx:id="soundSlider" value="50.0" />
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="17.0" prefWidth="282.0" spacing="20.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sound Volume" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Arial Bold" size="15.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="soundInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="50 / 100" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Arial" size="13.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Text>
+                              <Slider fx:id="soundSlider" prefHeight="16.0" prefWidth="200.0" value="50.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="17.0" prefWidth="282.0" spacing="20.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Difficulty" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Arial Bold" size="15.0" />
+                                 </font>
+                              </Text>
+                              <ChoiceBox fx:id="difficultyChoice" prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
-            </HBox>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
+            </VBox>
          </children>
          <StackPane.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </StackPane.margin>
       </VBox>
    </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
 </StackPane>

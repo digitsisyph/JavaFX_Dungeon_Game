@@ -9,9 +9,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,6 +21,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+import unsw.dungeon.DungeonApplication;
+import unsw.dungeon.controller.soundplayer.DungeonSound;
+import unsw.dungeon.controller.soundplayer.DungeonSoundPlayer;
 import unsw.dungeon.loader.DungeonControllerLoader;
 import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.Dungeon;
@@ -30,8 +31,6 @@ import unsw.dungeon.model.entities.Entity;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
 import unsw.dungeon.model.status.Status;
-import unsw.dungeon.controller.soundplayer.DungeonSoundPlayer;
-import unsw.dungeon.controller.soundplayer.DungeonSound;
 import unsw.dungeon.view.DungeonScreen;
 import unsw.dungeon.view.MenuScreen;
 
@@ -70,6 +69,10 @@ public abstract class DungeonController {
 	private Button retryButton;
 	@FXML
 	private Button menuButton;
+	@FXML
+	private VBox config;
+	@FXML
+	private Slider soundSlider;
 
 
 	private MenuScreen menuScreen;
@@ -109,6 +112,13 @@ public abstract class DungeonController {
 		if (dungeon != null) {
 			trackInventory();
 			trackStatus();
+			// timeline
+			this.timeline = new Timeline();
+			this.timeline.setCycleCount(Animation.INDEFINITE);
+			this.timeline.setAutoReverse(false);
+			this.timeline.getKeyFrames().add(
+					new KeyFrame(Duration.millis(DungeonApplication.getGameSpeed() * 10),
+							e -> { if (!dungeon.isGameOver()) this.dungeon.tick();}));
 			this.timeline.play();
 			this.playBGM();
 		} else {
@@ -118,14 +128,6 @@ public abstract class DungeonController {
 
 	@FXML
 	public void initialize() {
-		// timeline
-		this.timeline = new Timeline();
-		this.timeline.setCycleCount(Animation.INDEFINITE);
-		this.timeline.setAutoReverse(false);
-		this.timeline.getKeyFrames().add(
-				new KeyFrame(Duration.millis(500),
-						e -> {if (!dungeon.isGameOver()) this.dungeon.tick();}));
-
 		// Add the ground first so it is below all other entities
 		Image ground = new Image("/dirt_0_new.png");
 		for (int x = 0; x < dungeon.getWidth(); x++) {
@@ -141,6 +143,10 @@ public abstract class DungeonController {
 		trackInventory();
 		trackStatus();
 		trackGoal();
+
+		// track the volume
+		soundSlider.valueProperty().addListener(
+				(ov, old_val, new_val) -> DungeonApplication.setGameVolume(new_val.intValue()));
 	}
 
 	void trackEntities() {
@@ -242,7 +248,6 @@ public abstract class DungeonController {
 					} else
 						player.setEffect(null);
 				});
-
 	}
 
 	private void trackGoal() {
@@ -315,6 +320,7 @@ public abstract class DungeonController {
 		pauseButton.setText(isPaused ? "Resume" : "Pause");
 		retryButton.setVisible(isPaused);
 		menuButton.setVisible(isPaused);
+		config.setVisible(isPaused);
 	}
 
 	private void pauseGame() {
@@ -375,7 +381,6 @@ public abstract class DungeonController {
 
 	@FXML
 	void pressPause(ActionEvent event) {
-		isPaused = false;
 		pause();
 	}
 

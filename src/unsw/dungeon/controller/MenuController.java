@@ -20,10 +20,14 @@ public class MenuController {
     private Button freeStartButton;
     @FXML
     private Button storyStartButton;
+
+    // config part
     @FXML
     private Text soundInfo;
     @FXML
     private Slider soundSlider;
+    @FXML
+    private ChoiceBox difficultyChoice;
 
     @FXML
     public void initialize() {
@@ -31,10 +35,27 @@ public class MenuController {
         for (File file : readDungeons())
             dungeonChoice.getItems().add(file.getName());
 
-        // track the soundSlider
+        // track the config
         soundSlider.valueProperty().addListener((ov, old_val, new_val) -> {
             soundInfo.setText(new_val.intValue() + " / 100");
             DungeonApplication.setGameVolume(new_val.intValue());
+        });
+
+        difficultyChoice.getItems().addAll("Easy", "Medium", "Hard");
+        difficultyChoice.getSelectionModel().selectedItemProperty()
+                .addListener(
+                (ov, old_val, new_val) -> {
+                    switch ((String) new_val) {
+                        case "Easy":
+                            DungeonApplication.setGameSpeed(75);
+                            break;
+                        case "Medium":
+                            DungeonApplication.setGameSpeed(50);
+                            break;
+                        case "Hard":
+                            DungeonApplication.setGameSpeed(25);
+                            break;
+                    }
         });
     }
 

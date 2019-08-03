@@ -11,8 +11,8 @@ public class DungeonApplication extends Application {
 
 
 	// Global config
-	private static int game_speed;
-	private static int game_volume = 10;
+	private static int game_speed = 50;
+	private static int game_volume = 50;
 	private static String[] levels_json = new String[] {
 			"intro.json",
 			"level1.json",
@@ -31,6 +31,10 @@ public class DungeonApplication extends Application {
 
 	public static void setGameVolume(int volume) {
 		game_volume = volume;
+	}
+
+	public static void setGameSpeed(int speed) {
+		game_speed = speed;
 	}
 
 	public static String[] getLevelsJson() {
