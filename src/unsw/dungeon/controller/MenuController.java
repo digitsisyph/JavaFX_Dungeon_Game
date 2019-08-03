@@ -83,12 +83,15 @@ public class MenuController {
 	void handleCreateButton(ActionEvent event) {
 		makerScreen.start();
 	}
+
 	@FXML
 	void handleRefreshButton(ActionEvent event) {
 		this.refreshDungeonList();
 	}
 
 	public void startFreeDungeonScreen() {
+		if (dungeonChoice.getValue() == null)
+			return;
 		DungeonScreen freeScreen = DungeonScreenLoader.loadFreeScreen(dungeonChoice.getValue().toString());
 		if (freeScreen != null)
 			freeScreen.start();

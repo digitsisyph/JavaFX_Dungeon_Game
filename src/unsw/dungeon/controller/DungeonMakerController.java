@@ -1,6 +1,5 @@
 package unsw.dungeon.controller;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 import javafx.collections.FXCollections;

@@ -152,7 +152,8 @@ public abstract class DungeonController {
 	void trackEntities() {
 		dungeon.getEntitiesProperty().addListener(
 				new ListChangeListener<Entity>() {
-					public void onChanged(Change change) {
+					@Override
+					public void onChanged(Change<? extends Entity> change) {
 						while (change.next()) {
 							for (Object remitem : change.getRemoved())
 								removeEntityImage((Entity) remitem);
