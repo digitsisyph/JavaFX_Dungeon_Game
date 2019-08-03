@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Slider;
+import javafx.scene.text.Text;
 import unsw.dungeon.DungeonApplication;
 import unsw.dungeon.loader.DungeonScreenLoader;
 import unsw.dungeon.view.DungeonScreen;
@@ -18,12 +20,22 @@ public class MenuController {
     private Button freeStartButton;
     @FXML
     private Button storyStartButton;
+    @FXML
+    private Text soundInfo;
+    @FXML
+    private Slider soundSlider;
 
     @FXML
     public void initialize() {
         // initialize the dungeon list
         for (File file : readDungeons())
             dungeonChoice.getItems().add(file.getName());
+
+        // track the soundSlider
+        soundSlider.valueProperty().addListener((ov, old_val, new_val) -> {
+            soundInfo.setText(new_val.intValue() + " / 100");
+            DungeonApplication.setGameVolume(new_val.intValue());
+        });
     }
 
     private File[] readDungeons() {

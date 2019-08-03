@@ -29,6 +29,10 @@ public class DungeonApplication extends Application {
 		return game_volume;
 	}
 
+	public static void setGameVolume(int volume) {
+		game_volume = volume;
+	}
+
 	public static String[] getLevelsJson() {
 		return levels_json;
 	}

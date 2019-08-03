@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -11,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.212" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
@@ -30,28 +32,32 @@
                   <Font name="AppleGothic Regular" size="13.0" />
                </font>
             </Text>
-            <Text fx:id="warning" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                  <VBox alignment="CENTER" prefHeight="92.0" prefWidth="134.0" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Free Mode" textAlignment="CENTER">
                            <font>
-                              <Font name="System Font" size="15.0" />
+                              <Font name="Arial Bold" size="15.0" />
                            </font>
                         </Text>
                         <ChoiceBox fx:id="dungeonChoice" prefWidth="150.0" />
                         <Button fx:id="freeStartButton" mnemonicParsing="false" onAction="#handleFreeStartButton" text="Start" />
                      </children>
                   </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Story Mode" textAlignment="CENTER">
                            <font>
-                              <Font name="System Font" size="15.0" />
+                              <Font name="Arial Bold" size="15.0" />
                            </font>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The Princess has been kidnapped! You must rescue her!" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The Princess has been kidnapped! You must rescue her!" textAlignment="CENTER" wrappingWidth="150.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
                         <Button fx:id="storyStartButton" mnemonicParsing="false" onAction="#handleStoryStartButton" text="Start" />
                      </children>
                   </VBox>
@@ -63,7 +69,36 @@
                   <Insets left="50.0" right="50.0" />
                </padding>
             </HBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Config" textAlignment="CENTER">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
+               </font>
+            </Text>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="50.0" right="50.0" />
+               </padding>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sound" textAlignment="CENTER">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="soundInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="50 / 100" textAlignment="CENTER">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                  </Text>
+                  <Slider fx:id="soundSlider" value="50.0" />
+               </children>
+            </HBox>
          </children>
+         <StackPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </StackPane.margin>
       </VBox>
    </children>
 </StackPane>

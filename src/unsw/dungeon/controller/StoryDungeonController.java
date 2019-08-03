@@ -45,6 +45,6 @@ public class StoryDungeonController extends DungeonController {
 	public void restart() {
 		DungeonScreen dungeonScreen = DungeonScreenLoader.loadStoryScreen(DungeonApplication.getLevelsJson());
 		if (dungeonScreen != null)
-			dungeonScreen.start();dw
+			dungeonScreen.start();
 	}
 }
