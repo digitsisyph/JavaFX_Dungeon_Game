@@ -30,6 +30,7 @@ public class MenuScreen {
     public void start() {
         stage.setTitle(title);
         stage.setScene(scene);
+        controller.refreshDungeonList();
         stage.show();
     }
 
