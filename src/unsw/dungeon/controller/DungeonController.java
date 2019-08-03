@@ -74,9 +74,6 @@ public abstract class DungeonController {
 
 	private MenuScreen menuScreen;
 	private DungeonScreen currDungeonScreen;
-	private DungeonScreen nextDungeonScreen;
-	private DungeonScreen prevDungeonScreen;
-
 	private boolean isPaused = false;
 
 	private List<ImageView> initialEntities;
@@ -394,37 +391,18 @@ public abstract class DungeonController {
 
 	private void backToMenu() {
 		DungeonSoundPlayer.stopBGM();
-		menuScreen.start();
+		getMenuScreen().start();
 	}
-
 
 	public void setMenuScreen(MenuScreen menuScreen) {
 		this.menuScreen = menuScreen;
-	}
-
-	public void setNextDungeonScreen(DungeonScreen nextDungeonScreen) {
-		this.nextDungeonScreen = nextDungeonScreen;
-	}
-
-	public void setPrevDungeonScreen(DungeonScreen prevDungeonScreen) {
-		this.prevDungeonScreen = prevDungeonScreen;
-	}
-
-	public void switchNextDungeon() {
-		this.timeline.stop();
-		this.nextDungeonScreen.start(getDungeon());
-	}
-
-	public void switchPrevDungeon() {
-		this.timeline.stop();
-		this.prevDungeonScreen.start(getDungeon());
 	}
 
 	public void playSound(DungeonSound dungeonSound) {
 		DungeonSoundPlayer.playSoundEffect(dungeonSound);
 	}
 
-	void playBGM() {
+	public void playBGM() {
 		DungeonSoundPlayer.playBGM();
 	}
 
@@ -432,9 +410,17 @@ public abstract class DungeonController {
 		return timeline;
 	}
 
-	public abstract void restart();
-
 	public DungeonScreen getCurrDungeonScreen() {
 		return currDungeonScreen;
 	}
+
+	public MenuScreen getMenuScreen() {
+		return menuScreen;
+	}
+
+	public abstract void setNextDungeonScreen(DungeonScreen s);
+	public abstract void setPrevDungeonScreen(DungeonScreen s);
+	public abstract void switchNextDungeon();
+	public abstract void switchPrevDungeon();
+	public abstract void restart();
 }

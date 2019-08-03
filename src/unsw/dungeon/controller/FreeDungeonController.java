@@ -21,6 +21,11 @@ public class FreeDungeonController extends DungeonController {
 		super(dungeon, initialEntities, loader);
 	}
 
+	public void setNextDungeonScreen(DungeonScreen s) {};
+	public void setPrevDungeonScreen(DungeonScreen s) {};
+	public void switchNextDungeon() {};
+	public void switchPrevDungeon() {};
+
 	@Override
 	public void restart() {
 		getCurrDungeonScreen().restart();

@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import unsw.dungeon.controller.FreeDungeonController;
 import unsw.dungeon.loader.DungeonLevelLoader;
 import unsw.dungeon.view.DungeonScreen;
 import unsw.dungeon.view.MenuScreen;
@@ -12,9 +13,8 @@ public class DungeonApplication extends Application {
 
 
 	// Global config
-
 	private static int game_speed;
-	private static int game_volume = 50;
+	private static int game_volume = 10;
 
 	public static int getGameSpeed() {
 		return game_speed;
@@ -31,6 +31,7 @@ public class DungeonApplication extends Application {
 		// create the menu screen and dungeon screen
 		MenuScreen menuScreen = new MenuScreen(primaryStage);
 		DungeonScreen freeDungeonScreen = new DungeonScreen(primaryStage);
+		freeDungeonScreen.setDungeonController(new FreeDungeonController(freeDungeonScreen));
 
 		// create the storyDungeon screen
 		String[] levels_json = new String[] {

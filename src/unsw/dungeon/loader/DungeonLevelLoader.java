@@ -1,6 +1,7 @@
 package unsw.dungeon.loader;
 
 import javafx.stage.Stage;
+import unsw.dungeon.controller.StoryDungeonController;
 import unsw.dungeon.view.DungeonScreen;
 import unsw.dungeon.view.MenuScreen;
 
@@ -15,6 +16,7 @@ public class DungeonLevelLoader {
 		List<DungeonScreen> levels = new LinkedList<DungeonScreen>();
 		for (String level_json : levels_json) {
 			DungeonScreen curr_screen = new DungeonScreen(primaryStage);
+			curr_screen.setDungeonController(new StoryDungeonController(curr_screen));
 			curr_screen.getController().setMenuScreen(menuScreen);
 			try {
 				curr_screen.load(level_json);

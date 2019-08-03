@@ -36,6 +36,15 @@ public class MenuController {
 
     @FXML
     public void handleFreeStartButton(ActionEvent event) {
+        startFreeDungeonScreen();
+    }
+
+    @FXML
+    public void handleStoryStartButton(ActionEvent event) {
+        startStoryDungeonScreen();
+    }
+
+    public void startFreeDungeonScreen() {
         try {
             freeDungeonScreen.load(dungeonChoice.getValue().toString());
             warning.setText("");
@@ -45,8 +54,7 @@ public class MenuController {
         }
     }
 
-    @FXML
-    public void handleStoryStartButton(ActionEvent event) {
+    public void startStoryDungeonScreen() {
         storyDungeonScreen.restart();
     }
 
