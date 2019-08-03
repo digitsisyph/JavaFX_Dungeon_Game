@@ -30,6 +30,8 @@ import unsw.dungeon.model.entities.Entity;
 import unsw.dungeon.model.goal.Goal;
 import unsw.dungeon.model.inventory.Inventory;
 import unsw.dungeon.model.status.Status;
+import unsw.dungeon.controller.soundplayer.DungeonSoundPlayer;
+import unsw.dungeon.controller.soundplayer.DungeonSound;
 import unsw.dungeon.view.DungeonScreen;
 import unsw.dungeon.view.MenuScreen;
 
@@ -418,35 +420,11 @@ public abstract class DungeonController {
 		this.prevDungeonScreen.start(getDungeon());
 	}
 
-	public void fightSound() {
-		DungeonSoundPlayer.fightSound();
+	public void playSound(DungeonSound dungeonSound) {
+		DungeonSoundPlayer.playSoundEffect(dungeonSound);
 	}
 
-	public void potionSound() {
-		DungeonSoundPlayer.potionSound();
-	}
-
-	public void doorSound() {
-		DungeonSoundPlayer.doorSound();
-	}
-
-	public void achieveItemSound() {
-		DungeonSoundPlayer.achieveItemSound();
-	}
-
-	public void switchFloorSound() {
-		DungeonSoundPlayer.switchFloorSound();
-	}
-
-	public void explodeSound() {
-		DungeonSoundPlayer.explodeSound();
-	}
-
-	public void gameOverSound() {
-		DungeonSoundPlayer.gameOverSound();
-	}
-
-	public void playBGM() {
+	void playBGM() {
 		DungeonSoundPlayer.playBGM();
 	}
 

@@ -10,6 +10,21 @@ import java.io.IOException;
 
 public class DungeonApplication extends Application {
 
+
+	// Global config
+
+	private static int game_speed;
+	private static int game_volume = 50;
+
+	public static int getGameSpeed() {
+		return game_speed;
+	}
+
+	public static int getGameVolume() {
+		return game_volume;
+	}
+
+
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
