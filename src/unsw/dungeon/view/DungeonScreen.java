@@ -4,8 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import unsw.dungeon.controller.DungeonController;
 import unsw.dungeon.loader.DungeonControllerLoader;
-import unsw.dungeon.controller.FreeDungeonController;
 import unsw.dungeon.model.Dungeon;
 
 import java.io.IOException;
@@ -14,13 +14,16 @@ public class DungeonScreen {
 
     private Stage stage;
     private String title = "Dungeon Game";
-    private FreeDungeonController controller;
+    private DungeonController controller;
     private Scene scene;
     private String map;
 
     public DungeonScreen(Stage stage) {
         this.stage = stage;
-        this.controller = new FreeDungeonController(this);
+    }
+
+    public void setDungeonController(DungeonController controller) {
+        this.controller = controller;
     }
 
     public void load(String mapJson) throws IOException {
@@ -64,7 +67,7 @@ public class DungeonScreen {
         this.controller.startDungeon();
     }
 
-    public FreeDungeonController getController() {
+    public DungeonController getController() {
         return controller;
     }
 

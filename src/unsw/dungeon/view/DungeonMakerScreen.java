@@ -19,7 +19,7 @@ public class DungeonMakerScreen {
     	this.stage = stage;
     	
     	controller = new DungeonMakerController();
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("Maker.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonMakerView.fxml"));
         loader.setController(controller);
 
         // load into a Parent node called root

@@ -9,9 +9,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,6 +21,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+import unsw.dungeon.DungeonApplication;
+import unsw.dungeon.soundplayer.DungeonSound;
+import unsw.dungeon.soundplayer.DungeonSoundPlayer;
 import unsw.dungeon.loader.DungeonControllerLoader;
 import unsw.dungeon.model.Direction;
 import unsw.dungeon.model.Dungeon;
@@ -68,13 +69,14 @@ public abstract class DungeonController {
 	private Button retryButton;
 	@FXML
 	private Button menuButton;
+	@FXML
+	private VBox config;
+	@FXML
+	private Slider soundSlider;
 
 
 	private MenuScreen menuScreen;
 	private DungeonScreen currDungeonScreen;
-	private DungeonScreen nextDungeonScreen;
-	private DungeonScreen prevDungeonScreen;
-
 	private boolean isPaused = false;
 
 	private List<ImageView> initialEntities;
@@ -110,6 +112,13 @@ public abstract class DungeonController {
 		if (dungeon != null) {
 			trackInventory();
 			trackStatus();
+			// timeline
+			this.timeline = new Timeline();
+			this.timeline.setCycleCount(Animation.INDEFINITE);
+			this.timeline.setAutoReverse(false);
+			this.timeline.getKeyFrames().add(
+					new KeyFrame(Duration.millis(DungeonApplication.getGameSpeed() * 10),
+							e -> { if (!dungeon.isGameOver()) this.dungeon.tick();}));
 			this.timeline.play();
 			this.playBGM();
 		} else {
@@ -119,14 +128,6 @@ public abstract class DungeonController {
 
 	@FXML
 	public void initialize() {
-		// timeline
-		this.timeline = new Timeline();
-		this.timeline.setCycleCount(Animation.INDEFINITE);
-		this.timeline.setAutoReverse(false);
-		this.timeline.getKeyFrames().add(
-				new KeyFrame(Duration.millis(500),
-						e -> {if (!dungeon.isGameOver()) this.dungeon.tick();}));
-
 		// Add the ground first so it is below all other entities
 		Image ground = new Image("/dirt_0_new.png");
 		for (int x = 0; x < dungeon.getWidth(); x++) {
@@ -142,6 +143,10 @@ public abstract class DungeonController {
 		trackInventory();
 		trackStatus();
 		trackGoal();
+
+		// track the volume
+		soundSlider.valueProperty().addListener(
+				(ov, old_val, new_val) -> DungeonApplication.setGameVolume(new_val.intValue()));
 	}
 
 	void trackEntities() {
@@ -243,7 +248,6 @@ public abstract class DungeonController {
 					} else
 						player.setEffect(null);
 				});
-
 	}
 
 	private void trackGoal() {
@@ -316,6 +320,7 @@ public abstract class DungeonController {
 		pauseButton.setText(isPaused ? "Resume" : "Pause");
 		retryButton.setVisible(isPaused);
 		menuButton.setVisible(isPaused);
+		config.setVisible(isPaused);
 	}
 
 	private void pauseGame() {
@@ -376,7 +381,6 @@ public abstract class DungeonController {
 
 	@FXML
 	void pressPause(ActionEvent event) {
-		isPaused = false;
 		pause();
 	}
 
@@ -392,58 +396,15 @@ public abstract class DungeonController {
 
 	private void backToMenu() {
 		DungeonSoundPlayer.stopBGM();
-		menuScreen.start();
+		getMenuScreen().start();
 	}
-
 
 	public void setMenuScreen(MenuScreen menuScreen) {
 		this.menuScreen = menuScreen;
 	}
 
-	public void setNextDungeonScreen(DungeonScreen nextDungeonScreen) {
-		this.nextDungeonScreen = nextDungeonScreen;
-	}
-
-	public void setPrevDungeonScreen(DungeonScreen prevDungeonScreen) {
-		this.prevDungeonScreen = prevDungeonScreen;
-	}
-
-	public void switchNextDungeon() {
-		this.timeline.stop();
-		this.nextDungeonScreen.start(getDungeon());
-	}
-
-	public void switchPrevDungeon() {
-		this.timeline.stop();
-		this.prevDungeonScreen.start(getDungeon());
-	}
-
-	public void fightSound() {
-		DungeonSoundPlayer.fightSound();
-	}
-
-	public void potionSound() {
-		DungeonSoundPlayer.potionSound();
-	}
-
-	public void doorSound() {
-		DungeonSoundPlayer.doorSound();
-	}
-
-	public void achieveItemSound() {
-		DungeonSoundPlayer.achieveItemSound();
-	}
-
-	public void switchFloorSound() {
-		DungeonSoundPlayer.switchFloorSound();
-	}
-
-	public void explodeSound() {
-		DungeonSoundPlayer.explodeSound();
-	}
-
-	public void gameOverSound() {
-		DungeonSoundPlayer.gameOverSound();
+	public void playSound(DungeonSound dungeonSound) {
+		DungeonSoundPlayer.playSoundEffect(dungeonSound);
 	}
 
 	public void playBGM() {
@@ -454,9 +415,17 @@ public abstract class DungeonController {
 		return timeline;
 	}
 
-	public abstract void restart();
-
 	public DungeonScreen getCurrDungeonScreen() {
 		return currDungeonScreen;
 	}
+
+	public MenuScreen getMenuScreen() {
+		return menuScreen;
+	}
+
+	public abstract void setNextDungeonScreen(DungeonScreen s);
+	public abstract void setPrevDungeonScreen(DungeonScreen s);
+	public abstract void switchNextDungeon();
+	public abstract void switchPrevDungeon();
+	public abstract void restart();
 }

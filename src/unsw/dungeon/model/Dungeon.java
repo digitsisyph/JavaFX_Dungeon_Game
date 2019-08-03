@@ -7,6 +7,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import unsw.dungeon.controller.DungeonController;
+import unsw.dungeon.soundplayer.DungeonSound;
 import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.bomb.ExplodedBomb;
 import unsw.dungeon.model.entities.bomb.LitBomb;
@@ -205,24 +206,24 @@ public class Dungeon {
 		switch (entity.type()) {
 		case SWORD:
 			pickUpSword((Sword) entity);
-			controller.achieveItemSound();
+			if (controller != null) controller.playSound(DungeonSound.ACHIEVE_ITEM);
 			break;
 		case TREASURE:
 			pickUpTreasure((Treasure) entity);
-			controller.achieveItemSound();
+			if (controller != null) controller.playSound(DungeonSound.ACHIEVE_ITEM);
 			break;
 		case UNLITBOMB:
 			pickUpBomb((UnlitBomb) entity);
-			controller.achieveItemSound();
+			if (controller != null) controller.playSound(DungeonSound.ACHIEVE_ITEM);
 			break;
 		case KEY:
 			pickUpKey((Key) entity);
-			controller.achieveItemSound();
+			if (controller != null) controller.playSound(DungeonSound.ACHIEVE_ITEM);
 			break;
 		case INVINCIBLEPOTION:
 		case INVISIBLEPOTION:
 			pickUpPotion((Potion) entity);
-			controller.potionSound();
+			if (controller != null) controller.playSound(DungeonSound.POTION);
 			break;
 		default:
 			break;
@@ -272,7 +273,7 @@ public class Dungeon {
 	}
 
 	public void fightEnemy(Enemy enemy) {
-		controller.fightSound();
+		if (controller != null) controller.playSound(DungeonSound.FIGHT);
 		if (isPlayerInvincible()) {
 			removeEntity(enemy);
 		} else if (this.getInventory().useSword()) {
@@ -294,7 +295,7 @@ public class Dungeon {
 		else {
 			this.getInventory().useKey();
 			door.open();
-			this.controller.doorSound();
+			if (controller != null) controller.playSound(DungeonSound.OPEN_DOOR);
 		}
 	}
 
@@ -308,7 +309,6 @@ public class Dungeon {
 	}
 
 	public void explodeBomb(LitBomb bomb) {
-		controller.explodeSound();
 		// put exploded Bomb
 		addEntity(new ExplodedBomb(bomb.getX() + 1, bomb.getY(), this));
 		addEntity(new ExplodedBomb(bomb.getX() - 1, bomb.getY(), this));
@@ -332,6 +332,8 @@ public class Dungeon {
 				break;
 			}
 		}
+
+		if (controller != null) controller.playSound(DungeonSound.EXPLOSION);
 	}
 
 	// to finish a game over
@@ -358,23 +360,23 @@ public class Dungeon {
 		if (!isPlayerInvincible()) {
 			removeEntity(this.player);
 			this.player = null;
-			controller.gameOverSound();
+			if (controller != null) controller.playSound(DungeonSound.GAME_OVER);
 			gameOver();
 		}
 	}
 
 	public void switchNextDungeon() {
-		this.controller.switchFloorSound();
-		this.controller.switchNextDungeon();
+		if (controller != null) {
+			controller.playSound(DungeonSound.SWITCH_FLOOR);
+			this.controller.switchNextDungeon();
+		}
 	}
 
 	public void switchPrevDungeon() {
-		this.controller.switchFloorSound();
-		this.controller.switchPrevDungeon();
-	}
-
-	public void setInventory(Inventory inventory) {
-		this.inventory = inventory;
+		if (controller != null) {
+			controller.playSound(DungeonSound.SWITCH_FLOOR);
+			this.controller.switchPrevDungeon();
+		}
 	}
 
 	public void inheritFrom(Dungeon prev_dungeon) {
