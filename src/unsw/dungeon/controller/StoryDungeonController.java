@@ -1,7 +1,9 @@
 package unsw.dungeon.controller;
 
 import javafx.scene.image.ImageView;
+import unsw.dungeon.DungeonApplication;
 import unsw.dungeon.loader.DungeonControllerLoader;
+import unsw.dungeon.loader.DungeonScreenLoader;
 import unsw.dungeon.model.Dungeon;
 import unsw.dungeon.view.DungeonScreen;
 
@@ -41,6 +43,8 @@ public class StoryDungeonController extends DungeonController {
 
 	@Override
 	public void restart() {
-		getMenuScreen().getController().startStoryDungeonScreen();
+		DungeonScreen dungeonScreen = DungeonScreenLoader.loadStoryScreen(DungeonApplication.getLevelsJson());
+		if (dungeonScreen != null)
+			dungeonScreen.start();dw
 	}
 }

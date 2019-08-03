@@ -1,6 +1,7 @@
 package unsw.dungeon.loader;
 
 import javafx.stage.Stage;
+import unsw.dungeon.controller.FreeDungeonController;
 import unsw.dungeon.controller.StoryDungeonController;
 import unsw.dungeon.view.DungeonScreen;
 import unsw.dungeon.view.MenuScreen;
@@ -10,9 +11,33 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class DungeonLevelLoader {
+public class DungeonScreenLoader {
 
-	public static DungeonScreen loadLevels(String[] levels_json, Stage primaryStage, MenuScreen menuScreen) {
+	private static Stage primaryStage;
+	private static MenuScreen menuScreen;
+
+	public static void setPrimaryStage(Stage stage) {
+		primaryStage = stage;
+	}
+
+	public static void setMenuScreen(MenuScreen screen) {
+		menuScreen = screen;
+	}
+
+	public static DungeonScreen loadFreeScreen(String dungeonChoice) {
+		DungeonScreen freeDungeonScreen = new DungeonScreen(primaryStage);
+		freeDungeonScreen.setDungeonController(new FreeDungeonController(freeDungeonScreen));
+		freeDungeonScreen.getController().setMenuScreen(menuScreen);
+		try {
+			freeDungeonScreen.load(dungeonChoice);
+		} catch (Exception e) {
+			System.out.println("The map json does not exist!");
+		}
+
+		return freeDungeonScreen;
+	}
+
+	public static DungeonScreen loadStoryScreen(String[] levels_json) {
 		List<DungeonScreen> levels = new LinkedList<DungeonScreen>();
 		for (String level_json : levels_json) {
 			DungeonScreen curr_screen = new DungeonScreen(primaryStage);
@@ -36,5 +61,4 @@ public class DungeonLevelLoader {
 		else
 			return null;
 	}
-
 }
