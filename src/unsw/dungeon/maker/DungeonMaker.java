@@ -15,6 +15,8 @@ import javafx.beans.property.StringProperty;
 public class DungeonMaker {
 
 	private StringProperty[][] cell;
+	private int keyID = 0;
+	private int doorID = 0;
 
 	public DungeonMaker() {
 		cell = new StringProperty[15][15];
@@ -24,7 +26,9 @@ public class DungeonMaker {
 			}
 		}
 	}
+
 	public void create() {
+		resetID();
 		JSONObject obj = new JSONObject();
 		obj.put("width", 15);
 		obj.put("height", 15);
@@ -38,6 +42,15 @@ public class DungeonMaker {
 				ent.put("x", i);
 				ent.put("y", j);
 				ent.put("type", cell[i][j].getValue());
+				if (cell[i][j].getValue().equals("door")) {
+					ent.put("id", doorID);
+					doorID++;
+				}
+				if (cell[i][j].getValue().equals("key")) {
+					ent.put("id", keyID);
+					keyID++;
+				}
+
 				ent_list.put(ent);
 			}
 		}
@@ -45,6 +58,10 @@ public class DungeonMaker {
 		System.out.println(obj.toString(2));
 	}
 
+	private void resetID() {
+		keyID = 0;
+		doorID = 0;
+	}
 	public StringProperty cellProperty(int x, int y) {
 		return cell[x][y];
 	}
