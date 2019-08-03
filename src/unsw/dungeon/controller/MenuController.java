@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.text.Text;
+import unsw.dungeon.view.DungeonMakerScreen;
 import unsw.dungeon.DungeonApplication;
 import unsw.dungeon.loader.DungeonScreenLoader;
 import unsw.dungeon.view.DungeonScreen;
@@ -20,7 +21,10 @@ public class MenuController {
     private Button freeStartButton;
     @FXML
     private Button storyStartButton;
-
+    @FXML
+    private Text warning;
+    @FXML
+    private Button createButton;
     // config part
     @FXML
     private Text soundInfo;
@@ -28,6 +32,8 @@ public class MenuController {
     private Slider soundSlider;
     @FXML
     private ChoiceBox difficultyChoice;
+
+    private DungeonMakerScreen makerScreen;
 
     @FXML
     public void initialize() {
@@ -42,6 +48,7 @@ public class MenuController {
         });
 
         difficultyChoice.getItems().addAll("Easy", "Medium", "Hard");
+        difficultyChoice.setValue("Medium");
         difficultyChoice.getSelectionModel().selectedItemProperty()
                 .addListener(
                 (ov, old_val, new_val) -> {
@@ -73,6 +80,10 @@ public class MenuController {
     public void handleStoryStartButton(ActionEvent event) {
         startStoryDungeonScreen();
     }
+    
+    @FXML void handleCreateButton(ActionEvent event) {
+    	makerScreen.start();
+    }
 
     public void startFreeDungeonScreen() {
         DungeonScreen freeScreen = DungeonScreenLoader.loadFreeScreen(dungeonChoice.getValue().toString());
@@ -84,6 +95,10 @@ public class MenuController {
         DungeonScreen storyScreen = DungeonScreenLoader.loadStoryScreen(DungeonApplication.getLevelsJson());
         if (storyScreen != null)
             storyScreen.start();
+    }
+
+    public void setMakerScreen(DungeonMakerScreen screen) {
+        this.makerScreen = screen;
     }
 
 }

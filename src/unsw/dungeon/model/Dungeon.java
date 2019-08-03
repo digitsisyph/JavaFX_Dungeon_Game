@@ -7,7 +7,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import unsw.dungeon.controller.DungeonController;
-import unsw.dungeon.controller.soundplayer.DungeonSound;
+import unsw.dungeon.soundplayer.DungeonSound;
 import unsw.dungeon.model.entities.*;
 import unsw.dungeon.model.entities.bomb.ExplodedBomb;
 import unsw.dungeon.model.entities.bomb.LitBomb;

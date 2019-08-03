@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import unsw.dungeon.view.DungeonMakerScreen;
 import unsw.dungeon.loader.DungeonScreenLoader;
 import unsw.dungeon.view.MenuScreen;
 
@@ -47,6 +48,11 @@ public class DungeonApplication extends Application {
 
 		// create the menu screen and dungeon screen
 		MenuScreen menuScreen = new MenuScreen(primaryStage);
+
+		// dungeon maker screen
+		DungeonMakerScreen makerScreen = new DungeonMakerScreen(primaryStage);
+		makerScreen.getController().setMenuScreen(menuScreen);
+		menuScreen.getController().setMakerScreen(makerScreen);
 
 		// create the storyDungeon screen
 		DungeonScreenLoader.setPrimaryStage(primaryStage);

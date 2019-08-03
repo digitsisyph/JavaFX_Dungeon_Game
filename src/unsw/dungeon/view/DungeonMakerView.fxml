@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0">
+         <children>
+            <GridPane fx:id="square" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </GridPane>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0">
+               <children>
+                  <Button fx:id="createButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleCreateButton" text="Create" />
+                  <ComboBox editable="true" prefWidth="150.0" promptText="Select Action" />
+                  <Button fx:id="apply" mnemonicParsing="false" onAction="#handleApplyButton" text="Apply" />
+                  <Button fx:id="backButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleBackButton" text="Back to Menu" textAlignment="CENTER" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</Pane>

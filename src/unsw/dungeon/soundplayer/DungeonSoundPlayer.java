@@ -1,4 +1,4 @@
-package unsw.dungeon.controller.soundplayer;
+package unsw.dungeon.soundplayer;
 
 import javafx.scene.media.AudioClip;
 import unsw.dungeon.DungeonApplication;

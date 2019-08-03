@@ -24,7 +24,7 @@ public class MenuScreen {
 
         // load into a Parent node called root
         Parent root = loader.load();
-        scene = new Scene(root, 600, 400);
+        scene = new Scene(root, 800, 400);
     }
 
     public void start() {
