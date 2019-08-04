@@ -69,6 +69,4 @@ public class testPlayerMovement extends testSetup {
 		assertEquals(startY, player.getY());
 	}
 
-
-
 }

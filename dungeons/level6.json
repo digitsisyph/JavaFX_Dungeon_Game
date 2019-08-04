@@ -413,6 +413,11 @@
       "type": "invincibility"
     },
     {
+      "x": 10,
+      "y": 10,
+      "type": "invisible"
+    },
+    {
       "x": 11,
       "y": 14,
       "type": "exit"
