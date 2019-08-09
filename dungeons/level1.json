@@ -373,7 +373,21 @@
     ],
     "width": 15,
     "height": 15,
-    "goal-condition": {
-        "goal": "exit"
-    }
+    "goal-condition": [
+        {
+            "goal": "enemies"
+        },
+        {
+            "goal": "treasure"
+        },
+        {
+            "goal": "boulders"
+        },
+        {
+            "goal": "wizard"
+        },
+        {
+            "goal": "princess"
+        }
+    ]
 }

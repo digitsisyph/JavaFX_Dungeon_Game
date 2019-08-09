@@ -67,7 +67,19 @@
     "goal": "AND",
     "subgoals": [
       {
+        "goal": "enemies"
+      },
+      {
+        "goal": "treasure"
+      },
+      {
+        "goal": "boulders"
+      },
+      {
         "goal": "wizard"
+      },
+      {
+        "goal": "princess"
       }
     ]
   }
