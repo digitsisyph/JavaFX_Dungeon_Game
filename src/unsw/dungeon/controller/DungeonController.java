@@ -388,6 +388,7 @@ public abstract class DungeonController {
 	@FXML
 	void pressRetry(ActionEvent event) {
 		this.restart();
+		resumeGame();
 	}
 
 	@FXML

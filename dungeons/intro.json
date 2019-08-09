@@ -68,6 +68,9 @@
     "subgoals": [
       {
         "goal": "wizard"
+      },
+      {
+        "goal": "exit"
       }
     ]
   }
