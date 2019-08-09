@@ -524,12 +524,6 @@
             },
             {
                 "goal": "boulders"
-            },
-            {
-                "goal": "wizard"
-            },
-            {
-                "goal": "princess"
             }
         ]
     }

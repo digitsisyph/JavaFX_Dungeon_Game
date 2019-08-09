@@ -243,16 +243,6 @@
       "type": "hound"
     },
     {
-      "x": 5,
-      "y": 6,
-      "type": "hound"
-    },
-    {
-      "x": 6,
-      "y": 6,
-      "type": "hound"
-    },
-    {
       "x": 8,
       "y": 5,
       "type": "wall"
@@ -657,16 +647,13 @@
     "goal": "AND",
     "subgoals": [
       {
-        "goal": "enemies"
+        "goal": "wizard"
+      },
+      {
+        "goal": "exit"
       },
       {
         "goal": "treasure"
-      },
-      {
-        "goal": "boulders"
-      },
-      {
-        "goal": "wizard"
       },
       {
         "goal": "princess"
